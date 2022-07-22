@@ -88,308 +88,498 @@
             </ul>
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
-                    <div class="row g-4">
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-1.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
+                    <div id="carouselExampleDark1" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-bs-interval="10000">
+                                <div class="row g-4">
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-1.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-2.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-3.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-4.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" data-bs-interval="10000">
+                                <div class="row g-4">
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-1.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-2.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-3.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-4.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" ata-bs-interval="10000">
+                                <div class="row g-4">
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-1.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-2.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-3.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-4.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-2.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-3.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-4.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-5.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-6.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-7.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-8.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
+                        <button class="carousel-control-prev carousel-control" type="button" data-bs-target="#carouselExampleDark1" data-bs-slide="prev">
+                            <img class="carousel-control-icon" src="resources/img/prev.svg"/>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next carousel-control" type="button" data-bs-target="#carouselExampleDark1" data-bs-slide="next">
+                            <img class="carousel-control-icon" src="resources/img/next.svg"/>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
                 <div id="tab-2" class="tab-pane fade show p-0">
-                    <div class="row g-4">
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-1.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
+                    <div id="carouselExampleDark2" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-bs-interval="10000">
+                                <div class="row g-4">
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-1.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-2.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-3.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-4.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" data-bs-interval="10000">
+                                <div class="row g-4">
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-1.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-2.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-3.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-4.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" ata-bs-interval="10000">
+                                <div class="row g-4">
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-1.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-2.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-3.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-4.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-2.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-3.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-4.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-5.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-6.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-7.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-8.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
+                        <button class="carousel-control-prev carousel-control" type="button" data-bs-target="#carouselExampleDark2" data-bs-slide="prev">
+                            <img class="carousel-control-icon" src="resources/img/prev.svg"/>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next carousel-control" type="button" data-bs-target="#carouselExampleDark2" data-bs-slide="next">
+                            <img class="carousel-control-icon" src="resources/img/next.svg"/>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
                 <div id="tab-3" class="tab-pane fade show p-0">
-                    <div class="row g-4">
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-1.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
+                    <div id="carouselExampleDark3" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-bs-interval="10000">
+                                <div class="row g-4">
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-1.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-2.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-3.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-4.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" data-bs-interval="10000">
+                                <div class="row g-4">
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-1.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-2.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-3.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-4.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" ata-bs-interval="10000">
+                                <div class="row g-4">
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-1.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-2.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-3.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
+                                        <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="resources/img/menu-4.png" alt="...">
+                                            <div class="card-body ps-0">
+                                                <h5 class="fw-bold text-1000 text-truncate mb-1">Cheese Burger</h5>
+                                                <div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">Burger Arena</span></div><span class="text-1000 fw-bold">$3.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-2.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-3.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-4.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-5.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-6.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-7.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid rounded" src="resources/img/menu-8.jpg" alt="" style="width: 80px;">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                        <span>Chicken Burger</span>
-                                        <span class="text-primary">$115</span>
-                                    </h5>
-                                    <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                </div>
-                            </div>
-                        </div>
+                        <button class="carousel-control-prev carousel-control" type="button" data-bs-target="#carouselExampleDark3" data-bs-slide="prev">
+                            <img class="carousel-control-icon" src="resources/img/prev.svg"/>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next carousel-control" type="button" data-bs-target="#carouselExampleDark3" data-bs-slide="next">
+                            <img class="carousel-control-icon" src="resources/img/next.svg"/>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- Menu End -->
 <!-- Testimonial Start -->

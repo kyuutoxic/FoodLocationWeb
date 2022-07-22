@@ -20,9 +20,8 @@ public class UserController {
         return "login";
     }
     
-//    @GetMapping("/register")
-//    public String registerView(Model model) {
-//        model.addAttribute("user", new User());
-//        return "register";
-//    }
+    @GetMapping("/register")
+    public String registerView() {
+        return "register";
+    }
 }

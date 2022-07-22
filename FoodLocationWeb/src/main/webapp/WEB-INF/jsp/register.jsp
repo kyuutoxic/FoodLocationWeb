@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            Login
+            Register
         </title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -41,34 +41,8 @@
                                 <label class="form-label" for="form1Example23">Password</label>
                             </div>
 
-                            <div class="d-flex justify-content-around align-items-center mb-4">
-                                <!-- Checkbox -->
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                                    <label class="form-check-label" for="form1Example3"> Remember me </label>
-                                </div>
-                                <a href="#!">Forgot password?</a>
-                            </div>
-
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-lg btn-block btn-in-login">Sign in</button>
-
-                            <div class="divider d-flex align-items-center my-4">
-                                <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-                            </div>
-
-                            <a class="btn btn-primary btn-lg btn-block btn-in-login" style="background-color: #3b5998" href="#!"
-                               role="button">
-                                <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
-                            </a>
-                            <a class="btn btn-primary btn-lg btn-block btn-in-login" style="background-color: #55acee" href="#!"
-                               role="button">
-                                <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>
-
-                            <div class="d-flex align-items-center justify-content-center pb-4 btn-in-login">
-                                <p class="mb-0 me-2">Don't have an account?</p>
-                                <a class="btn btn-outline-danger btn-block" href="/FoodLocationWeb/register">Create new</a>
-                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block btn-in-login">Register</button>
 
                         </form>
                     </div>

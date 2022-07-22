@@ -39,12 +39,25 @@
             <div class="container-xxl py-5 bg-dark hero-header mb-5">
                 <div class="container my-5 py-5">
                     <div class="row align-items-center g-5">
-                        <div class="col-lg-6 text-center text-lg-start">
-                            <h1 class="display-3 text-white animated slideInLeft">Enjoy Our<br>Delicious Meal</h1>
-                            <p class="text-white animated slideInLeft mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                            <a href="" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Book A Table</a>
-                        </div>
-                        <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+                        <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
+                            <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light">Are you starving?</h1>
+                            <h1 class="text-800 mb-5 fs-4 text-light">Within a few clicks, find meals that<br class="d-none d-xxl-block">are accessible near you</h1>
+                            <div class="card w-xxl-75">
+                              <div class="card-body">
+                                <div class="tab-content mt-3" id="nav-tabContent">
+                                  <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <form class="row gx-2 gy-2 align-items-center">
+                                      <div class="col">
+                                        <div class="input-group-icon"><i class="fas fa-map-marker-alt text-danger input-box-icon"></i><label class="visually-hidden" for="inputDelivery">Address</label><input class="form-control input-box form-foodwagon-control" id="inputDelivery" type="text" placeholder="Enter Your Address"></div>
+                                      </div>
+                                      <div class="d-grid gap-3 col-sm-auto"><button class="btn btn-danger" type="submit">Find Food</button></div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <div class="col-md-5 col-lg-6 text-center text-lg-end overflow-hidden">
                             <img class="img-fluid" src="resources/img/hero.png" alt="">
                         </div>
                     </div>
