@@ -30,7 +30,11 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
+<<<<<<< HEAD
  * @author Admin
+=======
+ * @author Copeoshihi
+>>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
  */
 @Entity
 @Table(name = "order")
