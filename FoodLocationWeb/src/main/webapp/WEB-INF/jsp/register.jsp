@@ -4,6 +4,8 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,23 +30,48 @@
                              class="img-fluid" alt="Phone image">
                     </div>
                     <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                        <form>
-                            <!-- Email input -->
+                        <c:if test="${errMsg != null}">
+                            <div class="alert alert-danger">
+                                ${errMsg}
+                            </div>
+                        </c:if>
+
+                        <c:url value="/register" var="action" />
+
+                        <form:form method="post" action="${action}" modelAttribute="user" enctype="multipart/form-data">
                             <div class="form-outline mb-4">
-                                <input type="email" id="form1Example13" class="form-control form-control-lg" />
-                                <label class="form-label" for="form1Example13">Email address</label>
+                                <form:input type="text" id="form1Example13" class="form-control form-control-lg" path="username"/>
+                                <label class="form-label" for="form1Example13">User name</label>
                             </div>
 
-                            <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <input type="password" id="form1Example23" class="form-control form-control-lg" />
+                                <form:input type="password" id="form1Example23" class="form-control form-control-lg" path="password"/>
                                 <label class="form-label" for="form1Example23">Password</label>
                             </div>
 
-                            <!-- Submit button -->
+                            <div class="form-outline mb-4">
+                                <form:input type="password" id="form1Example123" class="form-control form-control-lg" path="confirmPassword"/>
+                                <label class="form-label" for="form1Example123">Confirm Password</label>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <form:input type="text" id="form1Example1234" class="form-control form-control-lg" path="firstName"/>
+                                <label class="form-label" for="form1Example1234">First name</label>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <form:input type="text" id="form1Example1235" class="form-control form-control-lg" path="lastName"/>
+                                <label class="form-label" for="form1Example1235">Last name</label>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <form:input type="file" id="form1Example12356" class="form-control form-control-lg" path="file"/>
+                                <label class="form-label" for="form1Example12356">Avatar</label>
+                            </div>
+
                             <button type="submit" class="btn btn-primary btn-lg btn-block btn-in-login">Register</button>
 
-                        </form>
+                        </form:form>
                     </div>
                 </div>
             </div>
