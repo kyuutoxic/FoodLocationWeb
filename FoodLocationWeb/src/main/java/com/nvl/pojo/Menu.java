@@ -30,11 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
-<<<<<<< HEAD
  * @author Admin
-=======
- * @author Copeoshihi
->>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
  */
 @Entity
 @Table(name = "menu")
@@ -92,11 +88,6 @@ public class Menu implements Serializable {
     private Date updateDate;
     @OneToMany(mappedBy = "idMenu")
     private Collection<Rating> ratingCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMenu")
-    private Collection<Comment> commentCollection;
-    @JoinColumn(name = "id_time_frame", referencedColumnName = "id_time_frame")
-    @ManyToOne(optional = false)
-    private TimeFrame idTimeFrame;
     @JoinColumn(name = "id_store", referencedColumnName = "id_user")
     @ManyToOne(optional = false)
     private User idStore;
@@ -200,23 +191,6 @@ public class Menu implements Serializable {
 
     public void setRatingCollection(Collection<Rating> ratingCollection) {
         this.ratingCollection = ratingCollection;
-    }
-
-    @XmlTransient
-    public Collection<Comment> getCommentCollection() {
-        return commentCollection;
-    }
-
-    public void setCommentCollection(Collection<Comment> commentCollection) {
-        this.commentCollection = commentCollection;
-    }
-
-    public TimeFrame getIdTimeFrame() {
-        return idTimeFrame;
-    }
-
-    public void setIdTimeFrame(TimeFrame idTimeFrame) {
-        this.idTimeFrame = idTimeFrame;
     }
 
     public User getIdStore() {

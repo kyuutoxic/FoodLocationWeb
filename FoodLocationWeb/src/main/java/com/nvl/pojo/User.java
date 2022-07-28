@@ -14,33 +14,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-<<<<<<< HEAD
 import javax.persistence.Transient;
-=======
->>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-<<<<<<< HEAD
 import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
  * @author Admin
-=======
-
-/**
- *
- * @author Copeoshihi
->>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
  */
 @Entity
 @Table(name = "user")
@@ -48,11 +37,7 @@ import org.springframework.web.multipart.MultipartFile;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByIdUser", query = "SELECT u FROM User u WHERE u.idUser = :idUser"),
-<<<<<<< HEAD
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
-=======
-    @NamedQuery(name = "User.findByUserName", query = "SELECT u FROM User u WHERE u.userName = :userName"),
->>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByNamesStore", query = "SELECT u FROM User u WHERE u.namesStore = :namesStore"),
     @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
@@ -61,18 +46,14 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address"),
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
+    @NamedQuery(name = "User.findByAvartar", query = "SELECT u FROM User u WHERE u.avartar = :avartar"),
     @NamedQuery(name = "User.findByCreatedDate", query = "SELECT u FROM User u WHERE u.createdDate = :createdDate"),
     @NamedQuery(name = "User.findByUpdateDate", query = "SELECT u FROM User u WHERE u.updateDate = :updateDate")})
 public class User implements Serializable {
 
-<<<<<<< HEAD
-  
-
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String USER = "ROLE_USER";
-    
-=======
->>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,19 +63,11 @@ public class User implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 25)
-<<<<<<< HEAD
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 225)
-=======
-    @Column(name = "user_name")
-    private String userName;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 25)
->>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
     @Column(name = "password")
     private String password;
     @Size(max = 45)
@@ -119,23 +92,12 @@ public class User implements Serializable {
     private String userRole;
     @Column(name = "active")
     private Short active;
-    @Lob
-    @Size(max = 2147483647)
+    @Size(max = 125)
     @Column(name = "avartar")
     private String avartar;
-<<<<<<< HEAD
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-=======
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "created_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-    @Basic(optional = false)
-    @NotNull
->>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
     @Column(name = "update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
@@ -144,10 +106,6 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private Collection<Rating> ratingCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore")
-    private Collection<Comment> commentCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Comment> commentCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore")
     private Collection<Menu> menuCollection;
     @OneToMany(mappedBy = "idStore")
     private Collection<Picture> pictureCollection;
@@ -155,13 +113,10 @@ public class User implements Serializable {
     private Collection<Order1> order1Collection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private Collection<Order1> order1Collection1;
-<<<<<<< HEAD
-    @Transient
-    private String confirmPassword;
     @Transient
     private MultipartFile file;
-=======
->>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
+    @Transient
+    private String confirmPassword;
 
     public User() {
     }
@@ -170,21 +125,11 @@ public class User implements Serializable {
         this.idUser = idUser;
     }
 
-<<<<<<< HEAD
     public User(Integer idUser, String username, String password, String userRole) {
         this.idUser = idUser;
         this.username = username;
         this.password = password;
         this.userRole = userRole;
-=======
-    public User(Integer idUser, String userName, String password, String userRole, Date createdDate, Date updateDate) {
-        this.idUser = idUser;
-        this.userName = userName;
-        this.password = password;
-        this.userRole = userRole;
-        this.createdDate = createdDate;
-        this.updateDate = updateDate;
->>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
     }
 
     public Integer getIdUser() {
@@ -195,21 +140,12 @@ public class User implements Serializable {
         this.idUser = idUser;
     }
 
-<<<<<<< HEAD
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-=======
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
->>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
     }
 
     public String getPassword() {
@@ -319,24 +255,6 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Comment> getCommentCollection() {
-        return commentCollection;
-    }
-
-    public void setCommentCollection(Collection<Comment> commentCollection) {
-        this.commentCollection = commentCollection;
-    }
-
-    @XmlTransient
-    public Collection<Comment> getCommentCollection1() {
-        return commentCollection1;
-    }
-
-    public void setCommentCollection1(Collection<Comment> commentCollection1) {
-        this.commentCollection1 = commentCollection1;
-    }
-
-    @XmlTransient
     public Collection<Menu> getMenuCollection() {
         return menuCollection;
     }
@@ -396,22 +314,8 @@ public class User implements Serializable {
     public String toString() {
         return "com.nvl.pojo.User[ idUser=" + idUser + " ]";
     }
-    
-<<<<<<< HEAD
-     /**
-     * @return the confirmPassword
-     */
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
 
     /**
-     * @param confirmPassword the confirmPassword to set
-     */
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-      /**
      * @return the file
      */
     public MultipartFile getFile() {
@@ -424,6 +328,19 @@ public class User implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-=======
->>>>>>> dbed2fb3b52ac42832f141df85b6ec94d3d0d8ef
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
 }
