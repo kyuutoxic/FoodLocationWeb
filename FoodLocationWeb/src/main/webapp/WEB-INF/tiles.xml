@@ -23,9 +23,36 @@ and open the template in the editor.
         <put-attribute name="title" value="Dang nhap" />
         <put-attribute name="content" value="/WEB-INF/jsp/login.jsp" />
     </definition>
+    <definition name="chooseRegister" template="/WEB-INF/jsp/choose-register.jsp">
+        <put-attribute name="title" value="Chon kieu tai khoan" />
+        <put-attribute name="content" value="/WEB-INF/jsp/choose-register.jsp" />
+    </definition>
     <definition name="register" template="/WEB-INF/jsp/register.jsp">
         <put-attribute name="title" value="Dang ky" />
         <put-attribute name="content" value="/WEB-INF/jsp/register.jsp" />
+    </definition>
+    
+    <definition name="adminBaseLayout" template="/WEB-INF/layout/admin-base.jsp">
+        <put-attribute name="title" value="..." />
+        <put-attribute name="admin-header" value="/WEB-INF/layout/admin-header.jsp" />
+        <put-attribute name="admin-footer" value="/WEB-INF/layout/admin-footer.jsp" />
+        <put-attribute name="admin-content" value="..." />
+    </definition>
+    <definition name="admin" extends="adminBaseLayout">
+        <put-attribute name="title" value="ADMIN" />
+        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-index.jsp" />
+    </definition>
+    <definition name="adminMenuView" extends="adminBaseLayout">
+        <put-attribute name="title" value="MENU VIEW"/>
+        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-menu.jsp" />
+    </definition>
+    <definition name="adminAddMenuView" extends="adminBaseLayout">
+        <put-attribute name="title" value="ADD PRODUCT" />
+        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-add-menu.jsp" />
+    </definition>
+    <definition name="product" extends="baseLayout">
+        <put-attribute name="title" value="Product" />
+        <put-attribute name="content" value="/WEB-INF/jsp/product.jsp" />
     </definition>
     <!--
     <definition name="register" extends="baseLayout">

@@ -46,11 +46,15 @@ public class UserServiceImpl implements UserService {
             user.setUserRole(User.USER);
             user.setFirstName(user.getFirstName());
             user.setLastName(user.getLastName());
+            user.setEmail(user.getEmail());
+            user.setPhone(user.getPhone());
+
             user.setCreatedDate(new Date());
             user.setUpdateDate(new Date());
+            user.setActive(Boolean.TRUE);
             Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(),
                     ObjectUtils.asMap("resource_type", "auto"));
-            user.setAvartar((String) r.get("secure_url"));
+            user.setAvatar((String) r.get("secure_url"));
 
             return this.userRepository.addUser(user);
         } catch (IOException ex) {

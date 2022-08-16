@@ -81,7 +81,7 @@
 
                             <div class="d-flex align-items-center justify-content-center pb-4 btn-in-login">
                                 <p class="mb-0 me-2">Don't have an account?</p>
-                                <a class="btn btn-outline-danger btn-block" href="<c:url value="/register" />">Create new</a>
+                                <a class="btn btn-outline-danger btn-block" href="<c:url value="/choose-register" />">Create new</a>
                             </div>
 
                         </form>

@@ -4,6 +4,7 @@
  */
 package com.nvl.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -29,7 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author Admin
+ * @author kyuut
  */
 @Entity
 @Table(name = "user")
@@ -39,20 +40,22 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByIdUser", query = "SELECT u FROM User u WHERE u.idUser = :idUser"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
-    @NamedQuery(name = "User.findByNamesStore", query = "SELECT u FROM User u WHERE u.namesStore = :namesStore"),
+    @NamedQuery(name = "User.findByNameStore", query = "SELECT u FROM User u WHERE u.nameStore = :nameStore"),
     @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
     @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
-    @NamedQuery(name = "User.findByNumber", query = "SELECT u FROM User u WHERE u.number = :number"),
+    @NamedQuery(name = "User.findByPhone", query = "SELECT u FROM User u WHERE u.phone = :phone"),
     @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address"),
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
-    @NamedQuery(name = "User.findByAvartar", query = "SELECT u FROM User u WHERE u.avartar = :avartar"),
+    @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByCreatedDate", query = "SELECT u FROM User u WHERE u.createdDate = :createdDate"),
-    @NamedQuery(name = "User.findByUpdateDate", query = "SELECT u FROM User u WHERE u.updateDate = :updateDate")})
+    @NamedQuery(name = "User.findByUpdateDate", query = "SELECT u FROM User u WHERE u.updateDate = :updateDate"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")})
 public class User implements Serializable {
 
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String USER = "ROLE_USER";
+    public static final String STORE = "ROLE_STORE";
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -71,17 +74,24 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
     @Size(max = 45)
-    @Column(name = "names_store")
-    private String namesStore;
-    @Size(max = 45)
+    @Column(name = "name_store")
+    private String nameStore;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "first_name")
     private String firstName;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "last_name")
     private String lastName;
-    @Size(max = 11)
-    @Column(name = "number")
-    private String number;
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 11)
+    @Column(name = "phone")
+    private String phone;
     @Size(max = 100)
     @Column(name = "address")
     private String address;
@@ -91,32 +101,30 @@ public class User implements Serializable {
     @Column(name = "user_role")
     private String userRole;
     @Column(name = "active")
-    private Short active;
+    private Boolean active;
     @Size(max = 125)
-    @Column(name = "avartar")
-    private String avartar;
+    @Column(name = "avatar")
+    private String avatar;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     @Column(name = "update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
-    @OneToMany(mappedBy = "idStore")
-    private Collection<Rating> ratingCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Rating> ratingCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore")
-    private Collection<Menu> menuCollection;
-    @OneToMany(mappedBy = "idStore")
-    private Collection<Picture> pictureCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore")
-    private Collection<Order1> order1Collection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Order1> order1Collection1;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Transient
+    @JsonIgnore
     private MultipartFile file;
     @Transient
+    @JsonIgnore
     private String confirmPassword;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "email")
+    private String email;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore")
+    private Collection<Menu> menuCollection;
 
     public User() {
     }
@@ -125,11 +133,15 @@ public class User implements Serializable {
         this.idUser = idUser;
     }
 
-    public User(Integer idUser, String username, String password, String userRole) {
+    public User(Integer idUser, String username, String password, String firstName, String lastName, String phone, String userRole, String email) {
         this.idUser = idUser;
         this.username = username;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
         this.userRole = userRole;
+        this.email = email;
     }
 
     public Integer getIdUser() {
@@ -156,12 +168,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getNamesStore() {
-        return namesStore;
+    public String getNameStore() {
+        return nameStore;
     }
 
-    public void setNamesStore(String namesStore) {
-        this.namesStore = namesStore;
+    public void setNameStore(String nameStore) {
+        this.nameStore = nameStore;
     }
 
     public String getFirstName() {
@@ -180,12 +192,12 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getNumber() {
-        return number;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {
@@ -204,20 +216,20 @@ public class User implements Serializable {
         this.userRole = userRole;
     }
 
-    public Short getActive() {
+    public Boolean getActive() {
         return active;
     }
 
-    public void setActive(Short active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 
-    public String getAvartar() {
-        return avartar;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvartar(String avartar) {
-        this.avartar = avartar;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public Date getCreatedDate() {
@@ -236,22 +248,12 @@ public class User implements Serializable {
         this.updateDate = updateDate;
     }
 
-    @XmlTransient
-    public Collection<Rating> getRatingCollection() {
-        return ratingCollection;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRatingCollection(Collection<Rating> ratingCollection) {
-        this.ratingCollection = ratingCollection;
-    }
-
-    @XmlTransient
-    public Collection<Rating> getRatingCollection1() {
-        return ratingCollection1;
-    }
-
-    public void setRatingCollection1(Collection<Rating> ratingCollection1) {
-        this.ratingCollection1 = ratingCollection1;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @XmlTransient
@@ -261,33 +263,6 @@ public class User implements Serializable {
 
     public void setMenuCollection(Collection<Menu> menuCollection) {
         this.menuCollection = menuCollection;
-    }
-
-    @XmlTransient
-    public Collection<Picture> getPictureCollection() {
-        return pictureCollection;
-    }
-
-    public void setPictureCollection(Collection<Picture> pictureCollection) {
-        this.pictureCollection = pictureCollection;
-    }
-
-    @XmlTransient
-    public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
-    }
-
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
-    }
-
-    @XmlTransient
-    public Collection<Order1> getOrder1Collection1() {
-        return order1Collection1;
-    }
-
-    public void setOrder1Collection1(Collection<Order1> order1Collection1) {
-        this.order1Collection1 = order1Collection1;
     }
 
     @Override

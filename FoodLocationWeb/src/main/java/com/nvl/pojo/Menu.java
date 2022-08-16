@@ -4,11 +4,10 @@
  */
 package com.nvl.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,18 +18,18 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author Admin
+ * @author kyuut
  */
 @Entity
 @Table(name = "menu")
@@ -46,6 +45,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Menu.findByCreatedDate", query = "SELECT m FROM Menu m WHERE m.createdDate = :createdDate"),
     @NamedQuery(name = "Menu.findByUpdateDate", query = "SELECT m FROM Menu m WHERE m.updateDate = :updateDate")})
 public class Menu implements Serializable {
+
+    
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -69,13 +70,17 @@ public class Menu implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "status")
-    private short status;
+    private boolean status;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "from")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date from;
+//    @Temporal(TemporalType.TIMESTAMP)
+    private String from;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "to")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date to;
+//    @Temporal(TemporalType.TIMESTAMP)
+    private String to;
     @Basic(optional = false)
     @NotNull
     @Column(name = "created_date")
@@ -86,15 +91,24 @@ public class Menu implements Serializable {
     @Column(name = "update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
-    @OneToMany(mappedBy = "idMenu")
-    private Collection<Rating> ratingCollection;
+    @Transient
+    @JsonIgnore
+    private int typeId;
+    @Transient
+    @JsonIgnore
+    private MultipartFile file;
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Size(min = 1, max = 2147483647)
+    @Column(name = "image")
+    private String image;
+    @JoinColumn(name = "id_type", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Type idType;
     @JoinColumn(name = "id_store", referencedColumnName = "id_user")
     @ManyToOne(optional = false)
     private User idStore;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMenu")
-    private Collection<OrderDetail> orderDetailCollection;
-    @OneToMany(mappedBy = "idMenu")
-    private Collection<Picture> pictureCollection;
 
     public Menu() {
     }
@@ -103,13 +117,16 @@ public class Menu implements Serializable {
         this.idMenu = idMenu;
     }
 
-    public Menu(Integer idMenu, String name, float price, short status, Date createdDate, Date updateDate) {
+    public Menu(Integer idMenu, String name, float price, boolean status, String from, String to, Date createdDate, Date updateDate, String image) {
         this.idMenu = idMenu;
         this.name = name;
         this.price = price;
         this.status = status;
+        this.from = from;
+        this.to = to;
         this.createdDate = createdDate;
         this.updateDate = updateDate;
+        this.image = image;
     }
 
     public Integer getIdMenu() {
@@ -144,27 +161,27 @@ public class Menu implements Serializable {
         this.note = note;
     }
 
-    public short getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(short status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
-    public Date getFrom() {
+    public String getFrom() {
         return from;
     }
 
-    public void setFrom(Date from) {
+    public void setFrom(String from) {
         this.from = from;
     }
 
-    public Date getTo() {
+    public String getTo() {
         return to;
     }
 
-    public void setTo(Date to) {
+    public void setTo(String to) {
         this.to = to;
     }
 
@@ -184,13 +201,20 @@ public class Menu implements Serializable {
         this.updateDate = updateDate;
     }
 
-    @XmlTransient
-    public Collection<Rating> getRatingCollection() {
-        return ratingCollection;
+    public String getImage() {
+        return image;
     }
 
-    public void setRatingCollection(Collection<Rating> ratingCollection) {
-        this.ratingCollection = ratingCollection;
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Type getIdType() {
+        return idType;
+    }
+
+    public void setIdType(Type idType) {
+        this.idType = idType;
     }
 
     public User getIdStore() {
@@ -199,24 +223,6 @@ public class Menu implements Serializable {
 
     public void setIdStore(User idStore) {
         this.idStore = idStore;
-    }
-
-    @XmlTransient
-    public Collection<OrderDetail> getOrderDetailCollection() {
-        return orderDetailCollection;
-    }
-
-    public void setOrderDetailCollection(Collection<OrderDetail> orderDetailCollection) {
-        this.orderDetailCollection = orderDetailCollection;
-    }
-
-    @XmlTransient
-    public Collection<Picture> getPictureCollection() {
-        return pictureCollection;
-    }
-
-    public void setPictureCollection(Collection<Picture> pictureCollection) {
-        this.pictureCollection = pictureCollection;
     }
 
     @Override
@@ -242,6 +248,33 @@ public class Menu implements Serializable {
     @Override
     public String toString() {
         return "com.nvl.pojo.Menu[ idMenu=" + idMenu + " ]";
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+    /**
+     * @return the typeId
+     */
+    public int getTypeId() {
+        return typeId;
+    }
+
+    /**
+     * @param typeId the typeId to set
+     */
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
     
 }

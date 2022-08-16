@@ -27,6 +27,11 @@ public class UserController {
     public String login() {
         return "login";
     }
+    
+    @GetMapping("/choose-register")
+    public String chooserRegisterView(Model model) {
+        return "chooseRegister";
+    }
 
     @GetMapping("/register")
     public String registerView(Model model) {

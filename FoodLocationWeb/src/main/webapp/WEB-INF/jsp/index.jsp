@@ -5,7 +5,21 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Service Start -->
+<div class="container-xxl py-5 bg-dark hero-header mb-5" id="banner-home">
+    <div class="container my-5 py-5">
+        <div class="row align-items-center g-5">
+            <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
+                <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light">Are you starving?</h1>
+                <h1 class="text-800 mb-5 fs-4 text-light">Within a few clicks, find meals that<br class="d-none d-xxl-block">are accessible near you</h1>
+            </div>
+            <div class="col-md-5 col-lg-6 text-center text-lg-end overflow-hidden">
+                <img class="img-fluid" src="resources/img/hero.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-4">
@@ -105,7 +119,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -116,7 +130,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -127,7 +141,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -138,7 +152,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -153,7 +167,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -164,7 +178,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -175,7 +189,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -186,7 +200,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -201,7 +215,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -212,7 +226,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -223,7 +237,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -234,7 +248,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -268,7 +282,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -279,7 +293,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -290,7 +304,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -301,7 +315,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -316,7 +330,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -327,7 +341,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -338,7 +352,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -349,7 +363,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -364,7 +378,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -375,7 +389,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -386,7 +400,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -397,7 +411,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -431,7 +445,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -442,7 +456,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -453,7 +467,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -464,7 +478,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -479,7 +493,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -490,7 +504,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -501,7 +515,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -512,7 +526,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -527,7 +541,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -538,7 +552,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -549,7 +563,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-md-4 col-xl mb-5 h-100">
@@ -560,7 +574,7 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2">
-                                            <a class="btn btn-lg btn-danger" href="#!" role="button">Order now</a>
+                                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -582,6 +596,194 @@
 </div>
 </div>
 <!-- Menu End -->
+<!--Store list start-->
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="text-center">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Best Store</h5>
+            <h1 class="mb-5">Most Popular Store</h1>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card mb-5" style="width: 18rem;">
+                    <img class="card-img-top" src="resources/img/menu-1.png" alt="Card image cap">
+                    <div class="card-body">
+                        <a href="<c:url value="/product"/>">Link neh</a>
+                        <p>Dia chi neh</p>
+                        <p class="card-text">Avartar comment gi gi do</p>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-chat-fill"></i>
+                            <span>9</span>
+                        </a>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-camera-fill"></i>
+                            <span>12</span>
+                        </a>
+                        <a style="float: right">
+                            <i class="bi bi-bookmark-fill"></i> Luu
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-5" style="width: 18rem;">
+                    <img class="card-img-top" src="resources/img/menu-2.png" alt="Card image cap">
+                    <div class="card-body">
+                        <a href="<c:url value="/product"/>">Link neh</a>
+                        <p>Dia chi neh</p>
+                        <p class="card-text">Avartar comment gi gi do</p>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-chat-fill"></i>
+                            <span>9</span>
+                        </a>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-camera-fill"></i>
+                            <span>12</span>
+                        </a>
+                        <a style="float: right">
+                            <i class="bi bi-bookmark-fill"></i> Luu
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-5" style="width: 18rem;">
+                    <img class="card-img-top" src="resources/img/menu-3.png" alt="Card image cap">
+                    <div class="card-body">
+                        <a href="<c:url value="/product"/>">Link neh</a>
+                        <p>Dia chi neh</p>
+                        <p class="card-text">Avartar comment gi gi do</p>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-chat-fill"></i>
+                            <span>9</span>
+                        </a>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-camera-fill"></i>
+                            <span>12</span>
+                        </a>
+                        <a style="float: right">
+                            <i class="bi bi-bookmark-fill"></i> Luu
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-5" style="width: 18rem;">
+                    <img class="card-img-top" src="resources/img/menu-4.png" alt="Card image cap">
+                    <div class="card-body">
+                        <a href="<c:url value="/product"/>">Link neh</a>
+                        <p>Dia chi neh</p>
+                        <p class="card-text">Avartar comment gi gi do</p>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-chat-fill"></i>
+                            <span>9</span>
+                        </a>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-camera-fill"></i>
+                            <span>12</span>
+                        </a>
+                        <a style="float: right">
+                            <i class="bi bi-bookmark-fill"></i> Luu
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-5" style="width: 18rem;">
+                    <img class="card-img-top" src="resources/img/menu-5.png" alt="Card image cap">
+                    <div class="card-body">
+                        <a href="<c:url value="/product"/>">Link neh</a>
+                        <p>Dia chi neh</p>
+                        <p class="card-text">Avartar comment gi gi do</p>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-chat-fill"></i>
+                            <span>9</span>
+                        </a>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-camera-fill"></i>
+                            <span>12</span>
+                        </a>
+                        <a style="float: right">
+                            <i class="bi bi-bookmark-fill"></i> Luu
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-5" style="width: 18rem;">
+                    <img class="card-img-top" src="resources/img/menu-6.png" alt="Card image cap">
+                    <div class="card-body">
+                        <a href="<c:url value="/product"/>">Link neh</a>
+                        <p>Dia chi neh</p>
+                        <p class="card-text">Avartar comment gi gi do</p>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-chat-fill"></i>
+                            <span>9</span>
+                        </a>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-camera-fill"></i>
+                            <span>12</span>
+                        </a>
+                        <a style="float: right">
+                            <i class="bi bi-bookmark-fill"></i> Luu
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-5" style="width: 18rem;">
+                    <img class="card-img-top" src="resources/img/menu-7.png" alt="Card image cap">
+                    <div class="card-body">
+                        <a href="<c:url value="/product"/>">Link neh</a>
+                        <p>Dia chi neh</p>
+                        <p class="card-text">Avartar comment gi gi do</p>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-chat-fill"></i>
+                            <span>9</span>
+                        </a>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-camera-fill"></i>
+                            <span>12</span>
+                        </a>
+                        <a style="float: right">
+                            <i class="bi bi-bookmark-fill"></i> Luu
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-5" style="width: 18rem;">
+                    <img class="card-img-top" src="resources/img/menu-8.png" alt="Card image cap">
+                    <div class="card-body">
+                        <a href="<c:url value="/product"/>">Link neh</a>
+                        <p>Dia chi neh</p>
+                        <p class="card-text">Avartar comment gi gi do</p>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-chat-fill"></i>
+                            <span>9</span>
+                        </a>
+                        <a style="margin-right: 5px">
+                            <i class="bi bi-camera-fill"></i>
+                            <span>12</span>
+                        </a>
+                        <a style="float: right">
+                            <i class="bi bi-bookmark-fill"></i> Luu
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Store list end-->
 <!-- Testimonial Start -->
 <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container">
