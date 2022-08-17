@@ -12,7 +12,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  *
  * @author Admin
  */
-public interface UserService extends UserDetailsService{
+public interface UserService extends UserDetailsService {
+
     boolean addUser(User user);
+
+    boolean addUserStore(User user);
+
+    boolean activeUserStore(User user);
+
     List<User> getUser(String username);
+
+    List<User> getUserStore();
+
+    User getUserById(int userId);
+
 }

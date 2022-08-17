@@ -659,6 +659,7 @@
 
 .avatar {
     border-radius: 50%;
+    width: 45px;
     height: 45px;
     margin-right: 5px;
 }

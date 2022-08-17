@@ -35,12 +35,12 @@ public class UserRepositoryImpl implements UserRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             session.save(user);
-            
+
             return true;
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
         }
-        
+
         return false;
     }
 
@@ -51,14 +51,36 @@ public class UserRepositoryImpl implements UserRepository {
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root root = query.from(User.class);
         query = query.select(root);
-        
+
         if (!username.isEmpty()) {
             Predicate p = builder.equal(root.get("username").as(String.class), username.trim());
             query = query.where(p);
         }
-        
+
         Query q = session.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public List<User> getUserStore() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+
+        Predicate p = builder.equal(root.get("userRole").as(String.class), "ROLE_STORE");
+        query = query.where(p);
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public User getUserById(int idUser) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        return session.get(User.class, idUser);
     }
 
 }

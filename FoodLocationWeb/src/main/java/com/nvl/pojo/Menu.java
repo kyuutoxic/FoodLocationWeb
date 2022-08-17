@@ -37,16 +37,14 @@ import org.springframework.web.multipart.MultipartFile;
 @NamedQueries({
     @NamedQuery(name = "Menu.findAll", query = "SELECT m FROM Menu m"),
     @NamedQuery(name = "Menu.findByIdMenu", query = "SELECT m FROM Menu m WHERE m.idMenu = :idMenu"),
-    @NamedQuery(name = "Menu.findByName", query = "SELECT m FROM Menu m WHERE m.name = :name"),
+    @NamedQuery(name = "Menu.findByMenuName", query = "SELECT m FROM Menu m WHERE m.menuName = :menuName"),
     @NamedQuery(name = "Menu.findByPrice", query = "SELECT m FROM Menu m WHERE m.price = :price"),
-    @NamedQuery(name = "Menu.findByStatus", query = "SELECT m FROM Menu m WHERE m.status = :status"),
-    @NamedQuery(name = "Menu.findByFrom", query = "SELECT m FROM Menu m WHERE m.from = :from"),
-    @NamedQuery(name = "Menu.findByTo", query = "SELECT m FROM Menu m WHERE m.to = :to"),
+    @NamedQuery(name = "Menu.findByMenuStatus", query = "SELECT m FROM Menu m WHERE m.menuStatus = :menuStatus"),
+    @NamedQuery(name = "Menu.findByMenuFrom", query = "SELECT m FROM Menu m WHERE m.menuFrom = :menuFrom"),
+    @NamedQuery(name = "Menu.findByMenuTo", query = "SELECT m FROM Menu m WHERE m.menuTo = :menuTo"),
     @NamedQuery(name = "Menu.findByCreatedDate", query = "SELECT m FROM Menu m WHERE m.createdDate = :createdDate"),
     @NamedQuery(name = "Menu.findByUpdateDate", query = "SELECT m FROM Menu m WHERE m.updateDate = :updateDate")})
 public class Menu implements Serializable {
-
-    
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,30 +55,30 @@ public class Menu implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "name")
-    private String name;
+    @Column(name = "menu_name")
+    private String menuName;
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
     private float price;
     @Lob
     @Size(max = 2147483647)
-    @Column(name = "note")
-    private String note;
+    @Column(name = "menu_note")
+    private String menuNote;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "status")
-    private boolean status;
+    @Column(name = "menu_status")
+    private boolean menuStatus;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "from")
-//    @Temporal(TemporalType.TIMESTAMP)
-    private String from;
+    @Size(min = 1, max = 5)
+    @Column(name = "menu_from")
+    private String menuFrom;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "to")
-//    @Temporal(TemporalType.TIMESTAMP)
-    private String to;
+    @Size(min = 1, max = 5)
+    @Column(name = "menu_to")
+    private String menuTo;
     @Basic(optional = false)
     @NotNull
     @Column(name = "created_date")
@@ -91,23 +89,23 @@ public class Menu implements Serializable {
     @Column(name = "update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
-    @Transient
-    @JsonIgnore
-    private int typeId;
-    @Transient
-    @JsonIgnore
-    private MultipartFile file;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 2147483647)
     @Column(name = "image")
     private String image;
+    @Transient
+    @JsonIgnore
+    private int typeId;
+    @Transient
+    @JsonIgnore
+    private MultipartFile file;
     @JoinColumn(name = "id_type", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Type idType;
     @JoinColumn(name = "id_store", referencedColumnName = "id_user")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private User idStore;
 
     public Menu() {
@@ -117,13 +115,13 @@ public class Menu implements Serializable {
         this.idMenu = idMenu;
     }
 
-    public Menu(Integer idMenu, String name, float price, boolean status, String from, String to, Date createdDate, Date updateDate, String image) {
+    public Menu(Integer idMenu, String menuName, float price, boolean menuStatus, String menuFrom, String menuTo, Date createdDate, Date updateDate, String image) {
         this.idMenu = idMenu;
-        this.name = name;
+        this.menuName = menuName;
         this.price = price;
-        this.status = status;
-        this.from = from;
-        this.to = to;
+        this.menuStatus = menuStatus;
+        this.menuFrom = menuFrom;
+        this.menuTo = menuTo;
         this.createdDate = createdDate;
         this.updateDate = updateDate;
         this.image = image;
@@ -137,12 +135,12 @@ public class Menu implements Serializable {
         this.idMenu = idMenu;
     }
 
-    public String getName() {
-        return name;
+    public String getMenuName() {
+        return menuName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 
     public float getPrice() {
@@ -153,36 +151,36 @@ public class Menu implements Serializable {
         this.price = price;
     }
 
-    public String getNote() {
-        return note;
+    public String getMenuNote() {
+        return menuNote;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setMenuNote(String menuNote) {
+        this.menuNote = menuNote;
     }
 
-    public boolean getStatus() {
-        return status;
+    public boolean getMenuStatus() {
+        return menuStatus;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setMenuStatus(boolean menuStatus) {
+        this.menuStatus = menuStatus;
     }
 
-    public String getFrom() {
-        return from;
+    public String getMenuFrom() {
+        return menuFrom;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setMenuFrom(String menuFrom) {
+        this.menuFrom = menuFrom;
     }
 
-    public String getTo() {
-        return to;
+    public String getMenuTo() {
+        return menuTo;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setMenuTo(String menuTo) {
+        this.menuTo = menuTo;
     }
 
     public Date getCreatedDate() {
@@ -251,19 +249,6 @@ public class Menu implements Serializable {
     }
 
     /**
-     * @return the file
-     */
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    /**
-     * @param file the file to set
-     */
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
-    /**
      * @return the typeId
      */
     public int getTypeId() {
@@ -275,6 +260,20 @@ public class Menu implements Serializable {
      */
     public void setTypeId(int typeId) {
         this.typeId = typeId;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
     
 }

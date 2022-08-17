@@ -45,11 +45,7 @@ public class MenuServiceImpl implements MenuService {
     public boolean addMenu(Menu menu, User user) {
         Type t = this.typeRepository.getTypeById(menu.getTypeId());
         try {
-            menu.setName(menu.getName());
-            menu.setPrice(menu.getPrice());
-            menu.setStatus(Boolean.TRUE);
-            menu.setFrom(menu.getFrom());
-            menu.setTo(menu.getTo());
+            menu.setMenuStatus(Boolean.TRUE);
             menu.setCreatedDate(new Date());
             menu.setUpdateDate(new Date());
             menu.setIdType(t);

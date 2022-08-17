@@ -12,7 +12,13 @@ import java.util.List;
  * @author Admin
  */
 public interface UserRepository {
+
     boolean addUser(User user);
+
     List<User> getUser(String username);
-    
+
+    User getUserById(int idUser);
+
+    List<User> getUserStore();
+
 }

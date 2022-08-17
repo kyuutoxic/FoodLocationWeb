@@ -29,7 +29,7 @@
             <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <img src="resources/img/testimonial-1.jpg" class="avatar" alt="alt"/>
+                        <img src="${currentUser.avatar}" class="avatar" alt="alt"/>
                     </a>
                     <div class="dropdown-menu m-0">
                         <a href="testimonial.html" class="dropdown-item">User Account</a>

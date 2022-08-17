@@ -84,4 +84,52 @@ public class UserServiceImpl implements UserService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), auth);
     }
 
+    @Override
+    public boolean addUserStore(User user) {
+        try {
+            String pass = user.getPassword();
+            user.setPassword(this.passwordEncoder.encode(pass));
+            user.setUserRole(User.STORE);
+            user.setFirstName(user.getFirstName());
+            user.setLastName(user.getLastName());
+            user.setEmail(user.getEmail());
+            user.setPhone(user.getPhone());
+            user.setAddress(user.getAddress());
+
+            user.setCreatedDate(new Date());
+            user.setUpdateDate(new Date());
+            user.setActive(Boolean.FALSE);
+            Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+                    ObjectUtils.asMap("resource_type", "auto"));
+            user.setAvatar((String) r.get("secure_url"));
+
+            return this.userRepository.addUser(user);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public List<User> getUserStore() {
+        return this.userRepository.getUserStore();
+    }
+
+    @Override
+    public User getUserById(int userId) {
+        return this.userRepository.getUserById(userId);
+
+    }
+
+    @Override
+    public boolean activeUserStore(User user) {
+        if (user != null) {
+            user.setActive(Boolean.TRUE);
+            return this.userRepository.addUser(user);
+        }
+
+        return false;
+    }
+
 }

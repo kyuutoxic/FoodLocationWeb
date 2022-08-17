@@ -13,7 +13,7 @@
         <form:form method="post" action="${a}" modelAttribute="menu" enctype="multipart/form-data">
             <div class="position-relative form-group">
                 <label for="name" class="">Name</label>
-                <form:input id="name" type="text" class="form-control" path="name" />
+                <form:input id="name" type="text" class="form-control" path="menuName" />
             </div>
             <div class="position-relative form-group">
                 <label for="price" class="">Price</label>
@@ -21,15 +21,15 @@
             </div>  
             <div class="position-relative form-group">
                 <label for="exampleText" class="">Note</label>
-                <form:textarea id="note" class="form-control" path="note"/>
+                <form:textarea id="note" class="form-control" path="menuNote"/>
             </div>
             <div class="position-relative form-group">
                 <label for="from" class="">From</label>
-                <form:input id="from" type="time" class="form-control" path="from" />
-            </div><!--
-            -->            <div class="position-relative form-group">
+                <form:input id="from" type="time" class="form-control" path="menuFrom" />
+            </div>
+            <div class="position-relative form-group">
                 <label for="to" class="">To</label>
-                <form:input id="to" type="time" class="form-control" path="to" />
+                <form:input id="to" type="time" class="form-control" path="menuTo" />
             </div>
             <div class="position-relative form-group">
                 <label for="typeMenu" class="">Type Menu</label>
@@ -42,8 +42,8 @@
             </div>
 
             <div class="position-relative form-group">
-                <label for="image" class="">Image</label>
-                <form:input type="file" class="form-control-file" path="image" />
+            <label for="image" class="">Image</label>
+            <form:input type="file" class="form-control-file" path="file" />
             </div>
             <button type="submit" class="btn btn-primary btn-lg btn-block btn-in-login">Them</button>
 

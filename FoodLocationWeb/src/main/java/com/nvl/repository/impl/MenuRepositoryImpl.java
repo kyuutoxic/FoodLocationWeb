@@ -22,10 +22,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class MenuRepositoryImpl implements MenuRepository{
+public class MenuRepositoryImpl implements MenuRepository {
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
-    
+
     @Override
     public List<Menu> getMenu() {
         Session s = this.sessionFactory.getObject().getCurrentSession();
@@ -36,7 +37,7 @@ public class MenuRepositoryImpl implements MenuRepository{
     @Override
     public boolean addMenu(Menu menu) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+
         try {
             session.save(menu);
             return true;
@@ -45,5 +46,5 @@ public class MenuRepositoryImpl implements MenuRepository{
             return false;
         }
     }
-    
+
 }

@@ -54,4 +54,26 @@ public class UserController {
         
         return "register";
     }
+    
+    @GetMapping("/register-store")
+    public String registerStoreView(Model model) {
+        model.addAttribute("user", new User());
+        return "registerStore";
+    }
+    
+    @PostMapping("/register-store")
+    public String registerStore(Model model, @ModelAttribute(value = "user") User user) {
+        if (user.getPassword().isEmpty() 
+                || !user.getPassword().equals(user.getConfirmPassword())) 
+            model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
+        else {
+            if (this.userDetailsService.addUserStore(user) == true) {
+                return "redirect:/login";
+            }
+            
+            model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
+        }
+        
+        return "registerStore";
+    }
 }
