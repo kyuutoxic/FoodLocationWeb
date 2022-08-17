@@ -25,8 +25,12 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication a) throws IOException, ServletException {
        User user = this.userDetailsService.getUser(a.getName()).get(0);
-       request.getSession().setAttribute("currentUser", user);
-       response.sendRedirect("/FoodLocationWeb");
+       if(user.getActive() == Boolean.TRUE){
+           request.getSession().setAttribute("currentUser", user);
+           response.sendRedirect("/FoodLocationWeb");
+       } else {
+           response.sendRedirect("/FoodLocationWeb/login?error");
+       }
     }
     
 }

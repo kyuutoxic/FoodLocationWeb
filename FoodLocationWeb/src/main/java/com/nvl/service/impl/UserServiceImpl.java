@@ -123,10 +123,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean activeUserStore(User user) {
-        if (user != null) {
-            user.setActive(Boolean.TRUE);
-            return this.userRepository.addUser(user);
+    public boolean activeUserStore(int id) {
+        if (id != -1) {
+            return this.userRepository.activeUser(id);
         }
 
         return false;

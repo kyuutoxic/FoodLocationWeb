@@ -18,7 +18,7 @@ public interface UserService extends UserDetailsService {
 
     boolean addUserStore(User user);
 
-    boolean activeUserStore(User user);
+    boolean activeUserStore(int id);
 
     List<User> getUser(String username);
 

@@ -42,8 +42,7 @@ public class AdminController {
 
     @PostMapping("/admin/active-user-store/{idUser}")
     public String active(Model model, @PathVariable(value = "idUser") int idUser, HttpSession session) {
-        User u = (User) this.userDetailsService.getUserById(idUser);
-        if (this.userDetailsService.activeUserStore(u) == true) {
+        if (this.userDetailsService.activeUserStore(idUser) == true) {
             return "redirect:/admin";
         }
         return "activeUserStore";
