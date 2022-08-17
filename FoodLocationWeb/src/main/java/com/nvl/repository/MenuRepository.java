@@ -7,6 +7,7 @@ package com.nvl.repository;
 import com.nvl.pojo.Menu;
 import com.nvl.pojo.User;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.util.List;
  */
 
 public interface MenuRepository {
-    List<Menu> getMenu();
     boolean addMenu(Menu menu);
+    List<Menu> getMenus(Map<String, String> params, int page);
+    int countMenu();
 }

@@ -7,6 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container-xxl" style="padding-top: 100px; position: relative;" data-spy="scroll" id="list-home">
+    <h1>${menuCounter}</h1>
+    <h1>${menus}</h1>
     <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000"></div>
     <div class="row" style="margin: 15px 0; height: 400px">
         <div class="col-5" style="text-align: center;">

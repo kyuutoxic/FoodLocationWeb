@@ -8,13 +8,14 @@ import com.nvl.pojo.Menu;
 import com.nvl.pojo.Type;
 import com.nvl.pojo.User;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author kyuut
  */
 public interface MenuService {
-    List<Menu> getMenu();
-
+    List<Menu> getMenus(Map<String, String> params, int page);
+    int countMenu();
     boolean addMenu(Menu menu, User user);
 }

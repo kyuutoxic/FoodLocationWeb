@@ -37,8 +37,13 @@ public class MenuServiceImpl implements MenuService {
     private TypeRepository typeRepository;
 
     @Override
-    public List<Menu> getMenu() {
-        return this.menuRepository.getMenu();
+    public List<Menu> getMenus(Map<String, String> params, int page) {
+        return this.menuRepository.getMenus(params, page);
+    }
+    
+    @Override
+    public int countMenu() {
+        return this.menuRepository.countMenu();
     }
 
     @Override

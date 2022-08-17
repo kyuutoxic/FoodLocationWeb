@@ -58,9 +58,9 @@ and open the template in the editor.
         <put-attribute name="title" value="ACTIVE USER STORE" />
         <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-actice-user-store.jsp" />
     </definition>
-    <definition name="product" extends="baseLayout">
-        <put-attribute name="title" value="Product" />
-        <put-attribute name="content" value="/WEB-INF/jsp/product.jsp" />
+    <definition name="menu" extends="baseLayout">
+        <put-attribute name="title" value="Menu" />
+        <put-attribute name="content" value="/WEB-INF/jsp/menu.jsp" />
     </definition>
     <!--
     <definition name="register" extends="baseLayout">
