@@ -7,11 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container-xxl" style="padding-top: 100px; position: relative;" data-spy="scroll" id="list-home">
-    <h1>${menu}</h1>
     <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000"></div>
     <div class="row" style="margin: 15px 0; height: 400px">
-        <div class="col-5" style="text-align: center;">
-            <img src="resources/img/menu-1.png" alt="alt" style="max-height: 100%"/>
+        <div class="col-5" style="text-align: center;height: 400px;">
+            <img src="${store.avatar}" alt="alt" style="max-height: 100%;"/>
         </div>
         <div class="col-7">
             <div aria-label="breadcrumb" style="--bs-breadcrumb-divider: '>';">
@@ -59,7 +58,7 @@
             <div class="info-store">
                 <div>
                     <span class="fa fa-location-arrow locationicon"></span>
-                    <span>418/4A Trần Phú, P. 7,  Quận 5, TP. HCM</span>
+                    <span>${store.address}</span>
                     <span class="fa fa-map"></span>
                 </div>
                 <div>
@@ -146,7 +145,7 @@
             <div id="list-menu">
                 <h1>Menu</h1>
                 <div class="list-menu">
-                    <c:forEach items="menu" var="m">
+                    <c:forEach items="${menu}" var="m">
                         <div class="menu-list">
                             <img src="<c:url value="${m.image}"/>" alt="alt"/>
                             <div class="menu-name">${m.menuName}</div>

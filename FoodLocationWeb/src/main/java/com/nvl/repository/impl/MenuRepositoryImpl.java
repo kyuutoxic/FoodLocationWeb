@@ -108,14 +108,14 @@ public class MenuRepositoryImpl implements MenuRepository {
     }
 
     @Override
-    public List<Menu> getMenuByIdStore(User Store) {
+    public List<Menu> getMenuByIdStore(int idStore) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Menu> query = builder.createQuery(Menu.class);
         Root root = query.from(Menu.class);
         query = query.select(root);
 
-        Predicate p = builder.equal(root.get("idStore"), Store);
+        Predicate p = builder.equal(root.get("idStore"), idStore);
         query = query.where(p);
 
         Query q = session.createQuery(query);

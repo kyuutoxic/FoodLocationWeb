@@ -19,7 +19,7 @@ public interface MenuRepository {
 
     List<Menu> getMenus(Map<String, String> params, int page);
 
-    List<Menu> getMenuByIdStore(User Store);
+    List<Menu> getMenuByIdStore(int idStore);
 
     Menu getMenuById(int idMenu);
 

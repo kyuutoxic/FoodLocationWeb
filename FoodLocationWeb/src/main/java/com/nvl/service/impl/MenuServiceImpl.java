@@ -76,8 +76,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> getMenuByIdStore(int idStore) {
-        User u = (User) this.userRepository.getUserById(idStore);
-        return this.menuRepository.getMenuByIdStore(u);
+        return this.menuRepository.getMenuByIdStore(idStore);
     }
 
 }

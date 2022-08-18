@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="app-main__outer">
+    <h1>${userStore}</h1>
     <div class="app-main__inner">
         <div class="app-page-title">
             <div class="page-title-wrapper">

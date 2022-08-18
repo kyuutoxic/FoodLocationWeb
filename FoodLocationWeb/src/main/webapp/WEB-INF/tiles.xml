@@ -19,9 +19,9 @@ and open the template in the editor.
         <put-attribute name="title" value="TRANG CHU" />
         <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
     </definition> 
-    <definition name="menu" extends="baseLayout">
-        <put-attribute name="title" value="Menu" />
-        <put-attribute name="content" value="/WEB-INF/jsp/menu.jsp" />
+    <definition name="storec" extends="baseLayout">
+        <put-attribute name="title" value="STOREC" />
+        <put-attribute name="content" value="/WEB-INF/jsp/storec.jsp" />
     </definition>
     <definition name="login" template="/WEB-INF/jsp/login.jsp">
         <put-attribute name="title" value="Dang nhap" />
@@ -54,26 +54,43 @@ and open the template in the editor.
         <put-attribute name="title" value="MENU VIEW"/>
         <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-menu.jsp" />
     </definition>
-    <definition name="adminAddMenuView" extends="adminBaseLayout">
-        <put-attribute name="title" value="ADD PRODUCT" />
-        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-add-menu.jsp" />
-    </definition>
-    <definition name="activeUserStore" extends="adminBaseLayout">
-        <put-attribute name="title" value="ACTIVE USER STORE" />
-        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-actice-user-store.jsp" />
-    </definition>
-    <definition name="activeUserStore" extends="adminBaseLayout">
-        <put-attribute name="title" value="ACTIVE USER STORE" />
-        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-actice-user-store.jsp" />
-    </definition>
-    <definition name="detailMenu" extends="adminBaseLayout">
+    <definition name="adminDetailMenu" extends="adminBaseLayout">
         <put-attribute name="title" value="DETAIL MENU" />
-        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-detail-menu.jsp" />
+        <put-attribute name="admin-content" value="/WEB-INF/jsp/detail-menu.jsp" />
     </definition>
-    <!--admin-detail-user-store.jsp
-    <definition name="register" extends="baseLayout">
-        <put-attribute name="title" value="Dang ky" />
-        <put-attribute name="content" value="/WEB-INF/jsp/register.jsp" />
-    </definition> -->
+    <definition name="adminAddMenuView" extends="adminBaseLayout">
+        <put-attribute name="title" value="STORE ADD MENU" />
+        <put-attribute name="admin-content" value="/WEB-INF/jsp/store-add-menu.jsp" />
+    </definition>
+    <definition name="activeUserStore" extends="adminBaseLayout">
+        <put-attribute name="title" value="ACTIVE USER STORE" />
+        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-actice-user-store.jsp" />
+    </definition>
+    <definition name="activeUserStore" extends="adminBaseLayout">
+        <put-attribute name="title" value="ACTIVE USER STORE" />
+        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-actice-user-store.jsp" />
+    </definition>
+    <definition name="storeBaseLayout" template="/WEB-INF/layout/store-base.jsp">
+        <put-attribute name="title" value="..." />
+        <put-attribute name="store-header" value="/WEB-INF/layout/store-header.jsp" />
+        <put-attribute name="store-footer" value="/WEB-INF/layout/store-footer.jsp" />
+        <put-attribute name="store-content" value="..." />
+    </definition>
+    <definition name="store" extends="storeBaseLayout">
+        <put-attribute name="title" value="STORE" />
+        <put-attribute name="store-content" value="/WEB-INF/jsp/store-index.jsp" />
+    </definition>
+    <definition name="storeAddMenuView" extends="storeBaseLayout">
+        <put-attribute name="title" value="STORE ADD MENU" />
+        <put-attribute name="store-content" value="/WEB-INF/jsp/store-add-menu.jsp" />
+    </definition>
+    <definition name="storeMenuView" extends="storeBaseLayout">
+        <put-attribute name="title" value="STORE MENU VIEW"/>
+        <put-attribute name="store-content" value="/WEB-INF/jsp/store-menu.jsp" />
+    </definition>
+    <definition name="storeDetailMenu" extends="storeBaseLayout">
+        <put-attribute name="title" value="DETAIL MENU" />
+        <put-attribute name="store-content" value="/WEB-INF/jsp/detail-menu.jsp" />
+    </definition>
 
 </tiles-definitions>

@@ -41,7 +41,9 @@ function loadMenu(endpoint, idmenu) {
             msg += `
             <div class="col">
                 <div class="card mb-5" style="width: 18rem;">
-                    <img class="card-img-top" src="${data[i].avatar}" alt="Card image cap">
+                    <a href="${idmenu}${data[i].idUser}">
+                        <img class="card-img-top" src="${data[i].avatar}" alt="Card image cap">
+                    </a>
                     <div class="card-body">
                         <a href="${idmenu}${data[i].idUser}">${data[i].nameStore}</a>
                         <p>${data[i].address}</p>

@@ -8,6 +8,7 @@ import com.nvl.pojo.Menu;
 import com.nvl.pojo.User;
 import com.nvl.service.MenuService;
 import com.nvl.service.TypeService;
+import com.nvl.service.UserService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,54 +20,66 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
- * @author kyuut
+ * @author Copeoshihi
  */
 @Controller
-public class AdminMenuController {
-
+public class StoreController {
+    
     @Autowired
-    private MenuService menuService;
-
+    private UserService userDetailsService;
+    
     @Autowired
     private TypeService typeService;
     
-    @GetMapping("/admin/menu")
-    public String adminMenuView() {
-        return "adminMenuView";
+    @Autowired
+    private MenuService menuService;
+    
+    @GetMapping("/store")
+    public String storeView(Model model) {
+        model.addAttribute("userStore", this.userDetailsService.getUserStoreNotActive());
+
+        return "store";
     }
     
-    @GetMapping("/admin/add-menu")
+    @GetMapping("/store/menu")
+    public String storeMenuView() {
+        return "storeMenuView";
+    }
+    
+    @GetMapping("/store/add-menu")
     public String addMenuView(Model model) {
         model.addAttribute("menu", new Menu());
         model.addAttribute("type", this.typeService.getType());
 
-        return "adminAddMenuView";
+        return "storeAddMenuView";
     }
 
-    @PostMapping(value = "/admin/add-menu")
+    @PostMapping(value = "/store/add-menu")
     public String addMenu(@ModelAttribute(value = "menu") Menu menu, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
         if (this.menuService.addMenu(menu, u) == true) {
-            return "redirect:/admin/menu";
+            return "redirect:/store/menu";
         }
 
-        return "adminAddMenuView";
+        return "storeAddMenuView";
     }
-
-    @GetMapping("/admin/detail-menu/{idMenu}")
+    
+    @GetMapping("/store/detail-menu/{idMenu}")
     public String detailMenuView(Model model, @PathVariable(value = "idMenu") int idMenu) {
+//        khuc nay phai chan thang store nay coi store khac(lay cai idMenu ma trung voi id menu cua store hien tai moi cho vao)
         model.addAttribute("menu", this.menuService.getMenuById(idMenu));
         model.addAttribute("type", this.typeService.getType());
-        return "adminDetailMenu";
+        return "detailMenu";
     }
 
-    @PostMapping(value = "/admin/detail-menu/{idMenu}")
+    @PostMapping(value = "/store/detail-menu/{idMenu}")
     public String detailMenu(Model model, @PathVariable(value = "idMenu") int idMenu, HttpSession session) {
 //        User u = (User) session.getAttribute("currentUser");
 //        if (this.menuService.addMenu(menu, u) == true) {
 //            return "redirect:/admin/menu";
 //        }
 
-        return "adminDetailMenu";
+        return "detailMenu";
     }
+    
 }

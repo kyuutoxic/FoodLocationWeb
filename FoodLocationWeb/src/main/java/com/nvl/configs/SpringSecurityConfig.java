@@ -92,20 +92,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
+        
+        http.authorizeRequests().antMatchers("/").permitAll()
+                .antMatchers("/store/**").access("hasRole('ROLE_STORE')");
 
         http.csrf().disable();
     }
-
-    private static final String[] AUTH_WHITELIST = {
-        "/swagger-resources/**",
-        "/swagger-ui.html",
-        "/v2/api-docs",
-        "/webjars/**"
-    };
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(AUTH_WHITELIST);
-    }
-
 }

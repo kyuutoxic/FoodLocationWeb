@@ -668,7 +668,7 @@
 <script src="<c:url value="/js/menu.js" />"></script>
 <script>
     <c:url value="/api/store" var="endpoint" />
-    <c:url value="/store/" var="idmenu" />
+    <c:url value="/storec/" var="idmenu" />
 
 
     window.onload = function () {

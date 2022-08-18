@@ -28,6 +28,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
        if(user.getActive() == Boolean.TRUE){
            request.getSession().setAttribute("currentUser", user);
            response.sendRedirect("/FoodLocationWeb");
+//           if(user.getUserRole() == "ROLE_ADMIN"){
+//               response.sendRedirect("/FoodLocationWeb/admin");
+//           } else if (user.getUserRole() == "ROLE_STORE"){
+//               response.sendRedirect("/FoodLocationWeb/store");
+//           } else if (user.getUserRole() == "ROLE_USER") {
+//               response.sendRedirect("/FoodLocationWeb");
+//           }
        } else {
            response.sendRedirect("/FoodLocationWeb/login?error");
        }

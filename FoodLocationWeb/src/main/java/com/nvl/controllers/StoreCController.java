@@ -11,18 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MenuController {
+public class StoreCController {
 
     @Autowired
     private MenuService menuService;
     @Autowired
     private UserService userDetailsService;
 
-    @GetMapping("/store/{idStore}")
+    @GetMapping("/storec/{idStore}")
     public String product(Model model, @PathVariable(value = "idStore") int idStore) {
-//        int page = Integer.parseInt(params.getOrDefault("page", "1"));
         model.addAttribute("store", this.userDetailsService.getUserById(idStore));
         model.addAttribute("menu", this.menuService.getMenuByIdStore(idStore));
-        return "menu";
+        return "storec";
     }
 }
