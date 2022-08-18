@@ -51,4 +51,21 @@ public class AdminMenuController {
 
         return "adminAddMenuView";
     }
+    
+    @GetMapping("/admin/detail-menu")
+    public String detailMenuView(Model model) {
+        model.addAttribute("menu", new Menu());
+        model.addAttribute("type", this.typeService.getType());
+        return "detailMenu";
+    }
+    
+    @PostMapping(value= "/admin/detail-menu")
+    public String detailMenu(@ModelAttribute(value = "menu") Menu menu, HttpSession session) {
+//        User u = (User) session.getAttribute("currentUser");
+//        if (this.menuService.addMenu(menu, u) == true) {
+//            return "redirect:/admin/menu";
+//        }
+
+        return "detailMenu";
+    }
 }

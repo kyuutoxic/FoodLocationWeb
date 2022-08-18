@@ -19,6 +19,10 @@ and open the template in the editor.
         <put-attribute name="title" value="TRANG CHU" />
         <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
     </definition> 
+    <definition name="menu" extends="baseLayout">
+        <put-attribute name="title" value="Menu" />
+        <put-attribute name="content" value="/WEB-INF/jsp/menu.jsp" />
+    </definition>
     <definition name="login" template="/WEB-INF/jsp/login.jsp">
         <put-attribute name="title" value="Dang nhap" />
         <put-attribute name="content" value="/WEB-INF/jsp/login.jsp" />
@@ -58,11 +62,15 @@ and open the template in the editor.
         <put-attribute name="title" value="ACTIVE USER STORE" />
         <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-actice-user-store.jsp" />
     </definition>
-    <definition name="menu" extends="baseLayout">
-        <put-attribute name="title" value="Menu" />
-        <put-attribute name="content" value="/WEB-INF/jsp/menu.jsp" />
+    <definition name="activeUserStore" extends="adminBaseLayout">
+        <put-attribute name="title" value="ACTIVE USER STORE" />
+        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-actice-user-store.jsp" />
     </definition>
-    <!--
+    <definition name="detailMenu" extends="adminBaseLayout">
+        <put-attribute name="title" value="DETAIL MENU" />
+        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-detail-menu.jsp" />
+    </definition>
+    <!--admin-detail-user-store.jsp
     <definition name="register" extends="baseLayout">
         <put-attribute name="title" value="Dang ky" />
         <put-attribute name="content" value="/WEB-INF/jsp/register.jsp" />

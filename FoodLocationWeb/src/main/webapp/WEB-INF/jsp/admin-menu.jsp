@@ -36,7 +36,7 @@
                     <td>TO1</td>
                     <td>TYPE1</td>
                     <td>
-                        <button type="button" class="btn btn-primary">Detail</button>
+                        <a href="<c:url value="/admin/detail-menu/"/>"><button type="button" class="btn btn-primary">Detail</button></a>
                         <button type="button" class="btn btn-primary">Delete</button>
                     </td>
                 </tr>
