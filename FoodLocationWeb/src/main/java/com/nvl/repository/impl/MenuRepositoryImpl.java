@@ -5,14 +5,15 @@
 package com.nvl.repository.impl;
 
 import com.nvl.pojo.Menu;
-import com.nvl.pojo.Type;
 import com.nvl.pojo.User;
 import com.nvl.repository.MenuRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class MenuRepositoryImpl implements MenuRepository {
-    
+
     @Autowired
     private Environment env;
 
@@ -56,34 +57,28 @@ public class MenuRepositoryImpl implements MenuRepository {
         Root root = q.from(Menu.class);
         q.select(root);
 
-//        if (params != null) {
-//            List<Predicate> predicates = new ArrayList<>();
-//            String kw = params.get("kw");
-//            if (kw != null && !kw.isEmpty()) {
-//                Predicate p = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
-//                predicates.add(p);
-//            }
-//
-//            String fp = params.get("fromPrice");
-//            if (fp != null) {
-//                Predicate p = b.greaterThanOrEqualTo(root.get("price").as(Long.class), Long.parseLong(fp));
-//                predicates.add(p);
-//            }
-//
-//            String tp = params.get("toPrice");
-//            if (tp != null) {
-//                Predicate p = b.lessThanOrEqualTo(root.get("price").as(Long.class), Long.parseLong(tp));
-//                predicates.add(p);
-//            }
-//
-//            String cateId = params.get("cateId");
-//            if (cateId != null) {
-//                Predicate p = b.equal(root.get("categoryId"), Integer.parseInt(cateId));
-//                predicates.add(p);
-//            }
-//
-//            q.where(predicates.toArray(Predicate[]::new));
-//        }
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                Predicate p = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
+                predicates.add(p);
+            }
+
+            String fp = params.get("fromPrice");
+            if (fp != null) {
+                Predicate p = b.greaterThanOrEqualTo(root.get("price").as(Long.class), Long.parseLong(fp));
+                predicates.add(p);
+            }
+
+            String tp = params.get("toPrice");
+            if (tp != null) {
+                Predicate p = b.lessThanOrEqualTo(root.get("price").as(Long.class), Long.parseLong(tp));
+                predicates.add(p);
+            }
+
+            q.where(predicates.toArray(Predicate[]::new));
+        }
 
         Query query = session.createQuery(q);
         if (page > 0) {
@@ -91,6 +86,7 @@ public class MenuRepositoryImpl implements MenuRepository {
             int start = (page - 1) * size;
             query.setFirstResult(start);
             query.setMaxResults(size);
+
         }
 
         return query.getResultList();
@@ -102,6 +98,28 @@ public class MenuRepositoryImpl implements MenuRepository {
         Query q = session.createQuery("SELECT COUNT(*) FROM Menu");
 
         return Integer.parseInt(q.getSingleResult().toString());
+    }
+
+    @Override
+    public Menu getMenuById(int idMenu) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        return session.get(Menu.class, idMenu);
+    }
+
+    @Override
+    public List<Menu> getMenuByIdStore(User Store) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Menu> query = builder.createQuery(Menu.class);
+        Root root = query.from(Menu.class);
+        query = query.select(root);
+
+        Predicate p = builder.equal(root.get("idStore"), Store);
+        query = query.where(p);
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
 
 }

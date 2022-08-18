@@ -603,183 +603,8 @@
             <h5 class="section-title ff-secondary text-center text-primary fw-normal">Best Store</h5>
             <h1 class="mb-5">Most Popular Store</h1>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="card mb-5" style="width: 18rem;">
-                    <img class="card-img-top" src="resources/img/menu-1.png" alt="Card image cap">
-                    <div class="card-body">
-                        <a href="<c:url value="/product"/>">Link neh</a>
-                        <p>Dia chi neh</p>
-                        <p class="card-text">Avartar comment gi gi do</p>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-chat-fill"></i>
-                            <span>9</span>
-                        </a>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-camera-fill"></i>
-                            <span>12</span>
-                        </a>
-                        <a style="float: right">
-                            <i class="bi bi-bookmark-fill"></i> Luu
-                        </a>
+        <div class="row" id="listmenu">
 
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card mb-5" style="width: 18rem;">
-                    <img class="card-img-top" src="resources/img/menu-2.png" alt="Card image cap">
-                    <div class="card-body">
-                        <a href="<c:url value="/product"/>">Link neh</a>
-                        <p>Dia chi neh</p>
-                        <p class="card-text">Avartar comment gi gi do</p>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-chat-fill"></i>
-                            <span>9</span>
-                        </a>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-camera-fill"></i>
-                            <span>12</span>
-                        </a>
-                        <a style="float: right">
-                            <i class="bi bi-bookmark-fill"></i> Luu
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card mb-5" style="width: 18rem;">
-                    <img class="card-img-top" src="resources/img/menu-3.png" alt="Card image cap">
-                    <div class="card-body">
-                        <a href="<c:url value="/product"/>">Link neh</a>
-                        <p>Dia chi neh</p>
-                        <p class="card-text">Avartar comment gi gi do</p>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-chat-fill"></i>
-                            <span>9</span>
-                        </a>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-camera-fill"></i>
-                            <span>12</span>
-                        </a>
-                        <a style="float: right">
-                            <i class="bi bi-bookmark-fill"></i> Luu
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card mb-5" style="width: 18rem;">
-                    <img class="card-img-top" src="resources/img/menu-4.png" alt="Card image cap">
-                    <div class="card-body">
-                        <a href="<c:url value="/product"/>">Link neh</a>
-                        <p>Dia chi neh</p>
-                        <p class="card-text">Avartar comment gi gi do</p>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-chat-fill"></i>
-                            <span>9</span>
-                        </a>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-camera-fill"></i>
-                            <span>12</span>
-                        </a>
-                        <a style="float: right">
-                            <i class="bi bi-bookmark-fill"></i> Luu
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card mb-5" style="width: 18rem;">
-                    <img class="card-img-top" src="resources/img/menu-5.png" alt="Card image cap">
-                    <div class="card-body">
-                        <a href="<c:url value="/product"/>">Link neh</a>
-                        <p>Dia chi neh</p>
-                        <p class="card-text">Avartar comment gi gi do</p>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-chat-fill"></i>
-                            <span>9</span>
-                        </a>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-camera-fill"></i>
-                            <span>12</span>
-                        </a>
-                        <a style="float: right">
-                            <i class="bi bi-bookmark-fill"></i> Luu
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card mb-5" style="width: 18rem;">
-                    <img class="card-img-top" src="resources/img/menu-6.png" alt="Card image cap">
-                    <div class="card-body">
-                        <a href="<c:url value="/product"/>">Link neh</a>
-                        <p>Dia chi neh</p>
-                        <p class="card-text">Avartar comment gi gi do</p>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-chat-fill"></i>
-                            <span>9</span>
-                        </a>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-camera-fill"></i>
-                            <span>12</span>
-                        </a>
-                        <a style="float: right">
-                            <i class="bi bi-bookmark-fill"></i> Luu
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card mb-5" style="width: 18rem;">
-                    <img class="card-img-top" src="resources/img/menu-7.png" alt="Card image cap">
-                    <div class="card-body">
-                        <a href="<c:url value="/product"/>">Link neh</a>
-                        <p>Dia chi neh</p>
-                        <p class="card-text">Avartar comment gi gi do</p>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-chat-fill"></i>
-                            <span>9</span>
-                        </a>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-camera-fill"></i>
-                            <span>12</span>
-                        </a>
-                        <a style="float: right">
-                            <i class="bi bi-bookmark-fill"></i> Luu
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card mb-5" style="width: 18rem;">
-                    <img class="card-img-top" src="resources/img/menu-8.png" alt="Card image cap">
-                    <div class="card-body">
-                        <a href="<c:url value="/product"/>">Link neh</a>
-                        <p>Dia chi neh</p>
-                        <p class="card-text">Avartar comment gi gi do</p>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-chat-fill"></i>
-                            <span>9</span>
-                        </a>
-                        <a style="margin-right: 5px">
-                            <i class="bi bi-camera-fill"></i>
-                            <span>12</span>
-                        </a>
-                        <a style="float: right">
-                            <i class="bi bi-bookmark-fill"></i> Luu
-                        </a>
-
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -840,5 +665,14 @@
     </div>
 </div>
 <!-- Testimonial End -->
+<script src="<c:url value="/js/menu.js" />"></script>
+<script>
+    <c:url value="/api/store" var="endpoint" />
+    <c:url value="/store/" var="idmenu" />
 
+
+    window.onload = function () {
+        loadMenu('${endpoint}','${idmenu}');
+    }
+</script>
 

@@ -33,10 +33,10 @@
         <link href="resources/ib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="resources/css/style.css" rel="stylesheet">
+        <link href="<c:url value="/css/style.css" />" rel="stylesheet">
 
     </head>
     <body>
@@ -64,8 +64,8 @@
         <script src="resources/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
         <!-- Template Javascript -->
-        <script src="resources/js/main.js"></script>
-        <script src="resources/js/custom.js"></script>
+        <script src="<c:url value="/js/main.js" />"></script>
+        <script src="<c:url value="/js/custom.js" />"></script>
 
     </body>
 </html>

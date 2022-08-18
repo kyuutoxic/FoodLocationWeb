@@ -15,7 +15,15 @@ import java.util.Map;
  * @author kyuut
  */
 public interface MenuService {
+
     List<Menu> getMenus(Map<String, String> params, int page);
+
     int countMenu();
+
+    Menu getMenuById(int idMenu);
+
     boolean addMenu(Menu menu, User user);
+
+    List<Menu> getMenuByIdStore(int idStore);
+
 }

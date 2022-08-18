@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -103,9 +104,11 @@ public class Menu implements Serializable {
     private MultipartFile file;
     @JoinColumn(name = "id_type", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private Type idType;
     @JoinColumn(name = "id_store", referencedColumnName = "id_user")
     @ManyToOne
+    @JsonIgnore
     private User idStore;
 
     public Menu() {
@@ -275,5 +278,5 @@ public class Menu implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-    
+
 }

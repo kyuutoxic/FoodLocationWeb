@@ -32,15 +32,15 @@ public class MenuServiceImpl implements MenuService {
     @Autowired
     private Cloudinary cloudinary;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private TypeRepository typeRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<Menu> getMenus(Map<String, String> params, int page) {
         return this.menuRepository.getMenus(params, page);
     }
-    
+
     @Override
     public int countMenu() {
         return this.menuRepository.countMenu();
@@ -66,6 +66,18 @@ public class MenuServiceImpl implements MenuService {
         }
 
         return false;
+    }
+
+    @Override
+    public Menu getMenuById(int idMenu) {
+        return this.menuRepository.getMenuById(idMenu);
+
+    }
+
+    @Override
+    public List<Menu> getMenuByIdStore(int idStore) {
+        User u = (User) this.userRepository.getUserById(idStore);
+        return this.menuRepository.getMenuByIdStore(u);
     }
 
 }

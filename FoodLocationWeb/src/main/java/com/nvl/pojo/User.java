@@ -123,6 +123,7 @@ public class User implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore")
     private Collection<Menu> menuCollection;
 

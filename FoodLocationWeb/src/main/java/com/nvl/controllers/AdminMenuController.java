@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -25,7 +26,7 @@ public class AdminMenuController {
 
     @Autowired
     private MenuService menuService;
-    
+
     @Autowired
     private TypeService typeService;
 
@@ -42,7 +43,7 @@ public class AdminMenuController {
         return "adminAddMenuView";
     }
 
-    @PostMapping(value= "/admin/add-menu")
+    @PostMapping(value = "/admin/add-menu")
     public String addMenu(@ModelAttribute(value = "menu") Menu menu, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
         if (this.menuService.addMenu(menu, u) == true) {
@@ -51,16 +52,16 @@ public class AdminMenuController {
 
         return "adminAddMenuView";
     }
-    
-    @GetMapping("/admin/detail-menu")
-    public String detailMenuView(Model model) {
-        model.addAttribute("menu", new Menu());
+
+    @GetMapping("/admin/detail-menu/{idMenu}")
+    public String detailMenuView(Model model, @PathVariable(value = "idMenu") int idMenu) {
+        model.addAttribute("menu", this.menuService.getMenuById(idMenu));
         model.addAttribute("type", this.typeService.getType());
         return "detailMenu";
     }
-    
-    @PostMapping(value= "/admin/detail-menu")
-    public String detailMenu(@ModelAttribute(value = "menu") Menu menu, HttpSession session) {
+
+    @PostMapping(value = "/admin/detail-menu/{idMenu}")
+    public String detailMenu(Model model, @PathVariable(value = "idMenu") int idMenu, HttpSession session) {
 //        User u = (User) session.getAttribute("currentUser");
 //        if (this.menuService.addMenu(menu, u) == true) {
 //            return "redirect:/admin/menu";

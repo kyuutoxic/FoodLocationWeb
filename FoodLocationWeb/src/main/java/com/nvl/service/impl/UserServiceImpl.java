@@ -112,8 +112,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUserStore() {
-        return this.userRepository.getUserStore();
+    public List<User> getUserStoreNotActive() {
+        return this.userRepository.getUserStoreNotActive();
     }
 
     @Override
@@ -129,6 +129,11 @@ public class UserServiceImpl implements UserService {
         }
 
         return false;
+    }
+
+    @Override
+    public List<User> getUserStore() {
+        return this.userRepository.getUserStore();
     }
 
 }

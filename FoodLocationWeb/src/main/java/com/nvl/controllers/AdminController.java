@@ -28,14 +28,14 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String adminView(Model model) {
-        model.addAttribute("userStore", this.userDetailsService.getUserStore());
+        model.addAttribute("userStore", this.userDetailsService.getUserStoreNotActive());
 
         return "admin";
     }
 
     @GetMapping("/admin/active-user-store/{idUser}")
     public String activeView(Model model, @PathVariable(value = "idUser") int idUser) {
-        model.addAttribute("userStore", this.userDetailsService.getUserById(idUser));
+        model.addAttribute("userStoreNotActive", this.userDetailsService.getUserById(idUser));
 
         return "activeUserStore";
     }

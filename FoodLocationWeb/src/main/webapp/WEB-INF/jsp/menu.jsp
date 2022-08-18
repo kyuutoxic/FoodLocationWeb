@@ -7,8 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container-xxl" style="padding-top: 100px; position: relative;" data-spy="scroll" id="list-home">
-    <h1>${menuCounter}</h1>
-    <h1>${menus}</h1>
+    <h1>${menu}</h1>
     <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000"></div>
     <div class="row" style="margin: 15px 0; height: 400px">
         <div class="col-5" style="text-align: center;">
@@ -22,7 +21,7 @@
                     <li class="breadcrumb-item active" aria-current="page">Khu vực cầu Nguyễn Tri Phương</li>
                 </ol>
             </div>
-            <h4>Cơm Chay Đại Thế Giới</h4>
+            <h4>${store.nameStore}</h4>
             <div class="category">
                 <div>Ăn chay</div>
                 <div>- Món Việt</div>
@@ -79,9 +78,9 @@
         <div class="col-3">
             <div class="list-group store-info-scroll" id="list-tab">
                 <a class="list-group-item list-group-item-action active" href="#list-home">Home</a>
+                <a class="list-group-item list-group-item-action" href="#list-menu">Menu</a>
                 <a class="list-group-item list-group-item-action" href="#list-pic">Picture & Video</a>
                 <a class="list-group-item list-group-item-action" href="#list-cmt">Comment</a>
-                <a class="list-group-item list-group-item-action" href="#list-menu">Menu</a>
                 <a class="list-group-item list-group-item-action" href="#list-map">Map</a>
             </div>
         </div>
@@ -142,6 +141,21 @@
                         <span class="fa fa-share-alt"></span>
                         <span>Chia sẻ</span>
                     </a>
+                </div>
+            </div>
+            <div id="list-menu">
+                <h1>Menu</h1>
+                <div class="list-menu">
+                    <c:forEach items="menu" var="m">
+                        <div class="menu-list">
+                            <img src="<c:url value="${m.image}"/>" alt="alt"/>
+                            <div class="menu-name">${m.menuName}</div>
+                            <div class="menu-cost">
+                                ${m.price}
+                                <button class="menu-order">+</button>
+                            </div>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
             <div id="list-pic">
@@ -305,43 +319,6 @@
                         <i class="bi bi-heart-fill">Like</i>
                         <i class="bi bi-chat-fill">Comment</i>
                         <i class="bi bi-exclamation-triangle-fill">Report</i>
-                    </div>
-                </div>
-            </div>
-            <div id="list-menu">
-                <h1>Menu</h1>
-                <div class="list-menu">
-                    <div class="menu-list">
-                        <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
-                        <div class="menu-name">Udon siu ngon</div>
-                        <div class="menu-cost">
-                            17,000
-                            <button class="menu-order">+</button>
-                        </div>
-                    </div>
-                    <div class="menu-list">
-                        <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
-                        <div class="menu-name">Udon siu ngon</div>
-                        <div class="menu-cost">
-                            17,000
-                            <button class="menu-order">+</button>
-                        </div>
-                    </div>
-                    <div class="menu-list">
-                        <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
-                        <div class="menu-name">Udon siu ngon</div>
-                        <div class="menu-cost">
-                            17,000
-                            <button class="menu-order">+</button>
-                        </div>
-                    </div>
-                    <div class="menu-list">
-                        <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
-                        <div class="menu-name">Udon siu ngon</div>
-                        <div class="menu-cost">
-                            17,000
-                            <button class="menu-order">+</button>
-                        </div>
                     </div>
                 </div>
             </div>

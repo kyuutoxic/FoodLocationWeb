@@ -8,7 +8,7 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body"><h5 class="card-title">Grid Rows</h5>
                         <c:url value="/admin/active-user-store/${idUser}" var="action"/>
-                        <form:form class="" action="${action}" method="post" modelAttribute="userStore">
+                        <form:form class="" action="${action}" method="post" modelAttribute="userStoreNotActive">
                             <input type="hidden" name="_method" value="PUT">
                             <div class="form-row">
                                 <div class="col-md-6">

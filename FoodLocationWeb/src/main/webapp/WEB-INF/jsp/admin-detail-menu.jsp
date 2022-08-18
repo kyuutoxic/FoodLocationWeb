@@ -13,11 +13,11 @@
         <form:form method="post" action="${a}" modelAttribute="menu" enctype="multipart/form-data">
             <div class="position-relative form-group">
                 <label for="name" class="">Name</label>
-                <form:input value="Cocaconcac" id="name" type="text" class="form-control" path="menuName" />
+                <form:input value="${menu.menuName}" id="name" type="text" class="form-control" path="menuName" />
             </div>
             <div class="position-relative form-group">
                 <label for="price" class="">Price</label>
-                <form:input value="12k" id="price" type="text" class="form-control" path="price" />
+                <form:input value="${menu.price}" id="price" type="text" class="form-control" path="price" />
             </div>  
             <div class="position-relative form-group">
                 <label for="note" class="">Note</label>
@@ -53,11 +53,11 @@
             </div>
             <div class="position-relative form-group">
                 <label for="from" class="">From</label>
-                <form:input value="22:22" id="from" type="time" class="form-control" path="menuFrom" />
+                <form:input value="${menu.menuFrom}" id="from" type="time" class="form-control" path="menuFrom" />
             </div>
             <div class="position-relative form-group">
                 <label for="to" class="">To</label>
-                <form:input value="11:11" id="to" type="time" class="form-control" path="menuTo" />
+                <form:input value="${menu.menuTo}" id="to" type="time" class="form-control" path="menuTo" />
             </div>
             <div class="position-relative form-group">
                 <label for="typeMenu" class="">Type Menu</label>
@@ -65,7 +65,7 @@
                     <%--<form:option value="currentID">haha</form:option>--%>
                     <c:forEach var="t" items="${type}">
                         <c:choose>
-                            <c:when test="${t.id eq '2'}">
+                            <c:when test="${t.id eq '1'}">
                                 <form:option selected="true" value="${t.id}">${t.name}</form:option>
                             </c:when>
                             <c:otherwise>

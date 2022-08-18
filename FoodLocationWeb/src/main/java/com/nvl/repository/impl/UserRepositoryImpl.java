@@ -6,6 +6,7 @@ package com.nvl.repository.impl;
 
 import com.nvl.pojo.User;
 import com.nvl.repository.UserRepository;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -62,15 +63,19 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> getUserStore() {
+    public List<User> getUserStoreNotActive() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root root = query.from(User.class);
         query = query.select(root);
 
-        Predicate p = builder.equal(root.get("userRole").as(String.class), "ROLE_STORE");
-        query = query.where(p);
+        List<Predicate> predicates = new ArrayList<>();
+
+        predicates.add(builder.equal(root.get("userRole").as(String.class), "ROLE_STORE"));
+        predicates.add(builder.equal(root.get("active"), Boolean.FALSE));
+
+        query = query.where(predicates.toArray(new Predicate[] {}));
 
         Query q = session.createQuery(query);
         return q.getResultList();
@@ -79,7 +84,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User getUserById(int idUser) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+
         return session.get(User.class, idUser);
     }
 
@@ -97,6 +102,25 @@ public class UserRepositoryImpl implements UserRepository {
         }
 
         return false;
+    }
+
+    @Override
+    public List<User> getUserStore() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        predicates.add(builder.equal(root.get("userRole").as(String.class), "ROLE_STORE"));
+        predicates.add(builder.equal(root.get("active"), Boolean.TRUE));
+
+        query = query.where(predicates.toArray(new Predicate[] {}));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
 
 }
