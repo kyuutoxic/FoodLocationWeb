@@ -31,7 +31,6 @@ function loadAdminMenu(endpoint, menudetail) {
 
 function loadMenu(endpoint, idmenu) {
     fetch(endpoint).then(function (res) {
-        console.log(res.json());
         return res.json();
     }).then(function (data) {
         console.log(data);
@@ -66,4 +65,66 @@ function loadMenu(endpoint, idmenu) {
         let d = document.getElementById("listmenu");
         d.innerHTML = msg;
     })
+}
+
+function addToCart(id, name, price) {
+    event.preventDefault();
+    console.log("hihi");
+    fetch("/FoodLocationWeb/api/cart", {
+        method: 'post',
+        body: JSON.stringify({
+            "menuId": id,
+            "menuName": name,
+            "price": price,
+            "quantity": 1
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function(res) {
+        return res.json();
+    }).then(function(data) {
+        let counter = document.getElementById("cartCounter").value = data
+        counter.value = data
+    })
+}
+
+function deleteCart(productId) {
+    if (confirm("Ban chac chan xoa item nay khong?") == true) {
+        fetch(`/FoodLocationWeb/api/cart/${productId}`, {
+            method: "delete"
+        }).then(function(res) {
+            return res.json()
+        }).then(function(data) {
+            let counter = document.getElementById("cartCounter")
+            counter.innerText = data.counter
+            let amount = document.getElementById("amountCart")
+            amount.innerText = data.amount
+    //        location.reload()
+            let row = document.getElementById(`product${productId}`)
+            row.style.display = "none"
+        }) 
+    }
+}
+
+function updateCart(obj, productId) {
+    fetch("/FoodLocationWeb/api/cart", {
+        method: "put",
+        body: JSON.stringify({
+            "menuId": productId,
+            "menuName": "",
+            "price": 0,
+            "quantity": obj.value
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function(res) {
+        return res.json()
+    }).then(function(data) {
+        let counter = document.getElementById("cartCounter")
+        counter.innerText = data.counter
+        let amount = document.getElementById("amountCart")
+        amount.innerText = data.amount
+    }) 
 }

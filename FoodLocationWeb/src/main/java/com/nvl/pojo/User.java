@@ -6,7 +6,6 @@ package com.nvl.pojo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -53,7 +52,8 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByCreatedDate", query = "SELECT u FROM User u WHERE u.createdDate = :createdDate"),
     @NamedQuery(name = "User.findByUpdateDate", query = "SELECT u FROM User u WHERE u.updateDate = :updateDate"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")})
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
+    @NamedQuery(name = "User.findByShipPrice", query = "SELECT u FROM User u WHERE u.shipPrice = :shipPrice")})
 public class User implements Serializable {
 
     public static final String ADMIN = "ROLE_ADMIN";
@@ -115,20 +115,26 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "email")
+    private String email;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "ship_price")
+    private Float shipPrice;
     @Transient
     @JsonIgnore
     private MultipartFile file;
     @Transient
     @JsonIgnore
     private String confirmPassword;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "email")
-    private String email;
     @JsonBackReference
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore", fetch=FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore", fetch = FetchType.EAGER)
     private Collection<Menu> menuCollection;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    private Collection<Order1> order1Collection;
 
     public User() {
     }
@@ -260,6 +266,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public Float getShipPrice() {
+        return shipPrice;
+    }
+
+    public void setShipPrice(Float shipPrice) {
+        this.shipPrice = shipPrice;
+    }
+
     @XmlTransient
     public Collection<Menu> getMenuCollection() {
         return menuCollection;
@@ -267,6 +281,15 @@ public class User implements Serializable {
 
     public void setMenuCollection(Collection<Menu> menuCollection) {
         this.menuCollection = menuCollection;
+    }
+
+    @XmlTransient
+    public Collection<Order1> getOrder1Collection() {
+        return order1Collection;
+    }
+
+    public void setOrder1Collection(Collection<Order1> order1Collection) {
+        this.order1Collection = order1Collection;
     }
 
     @Override

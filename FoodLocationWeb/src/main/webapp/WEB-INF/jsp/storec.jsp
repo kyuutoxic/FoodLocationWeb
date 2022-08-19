@@ -151,7 +151,7 @@
                             <div class="menu-name">${m.menuName}</div>
                             <div class="menu-cost">
                                 ${m.price}
-                                <button class="menu-order">+</button>
+                                <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price});">+</button>
                             </div>
                         </div>
                     </c:forEach>
@@ -333,3 +333,4 @@
         </div>
     </div>
 </div>
+<script src="<c:url value="/js/menu.js" />"></script>

@@ -42,8 +42,8 @@
             </c:if>
             <div class="d-flex justify-content-center" style="width: 10%" id="nav-cart">
                 <div class="cart">
-                    <a href="" class="ml-3 p-0 align-items-center ">
-                        <i class="bi bi-basket fa-2x total-count" value="5"></i>
+                    <a href="<c:url value="/cart" />" class="ml-3 p-0 align-items-center ">
+                        <i class="bi bi-basket fa-2x total-count" id="cartCounter" value="${cartCounter}"></i>
                     </a>
                     <div class="collapse cart-detail" style="height: 80vh">
                         <section class="h-100" style="background-color: #eee; overflow: scroll;">
@@ -58,79 +58,37 @@
                                                             class="fas fa-angle-down mt-1"></i></a></p>
                                             </div>
                                         </div>
+                                        <%--<c:if test="${cart != null}">--%>
+                                            <%--<c:forEach items="${cart}" var="c">--%>
 
-                                        <div class="card rounded-3 mb-4">
-                                            <div class="card-body p-4">
-                                                <div class="row d-flex justify-content-between align-items-center">
-                                                    <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
-                                                        <img
-                                                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
+<!--                                                <div class="card rounded-3 mb-4" id="product${c.menuId}">
+                                                    <div class="card-body p-4">
+                                                        <div class="row d-flex justify-content-between align-items-center">
+                                                            <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
+                                                                <img
+                                                                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                                                    class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                            </div>
+                                                            <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
+                                                                <p class="lead mb-2" style="width: 100%">${c.menuName}</p>
+                                                                <p><span class="text-muted">Quantity: </span>${c.quantity}<span class="text-muted">Color: </span>Grey</p>
+                                                            </div>
+                                                            <div class="col-md-1 col-lg-1 col-xl-1 d-flex m-0 p-0">
+                                                                <span>5</span>
+                                                            </div>
+                                                            <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
+                                                                <span class="mb-0" style="width: 100%">${c.price}</span>
+                                                            </div>
+                                                            <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
+                                                                <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
-                                                        <p class="lead mb-2" style="width: 100%">Basic T-shirt</p>
-                                                        <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 d-flex m-0 p-0">
-                                                        <span>5</span>
-                                                    </div>
-                                                    <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                                                        <span class="mb-0" style="width: 100%">$499.00</span>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
-                                                        <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card rounded-3 mb-4">
-                                            <div class="card-body p-4">
-                                                <div class="row d-flex justify-content-between align-items-center">
-                                                    <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
-                                                        <img
-                                                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                                    </div>
-                                                    <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
-                                                        <p class="lead mb-2" style="width: 100%">Basic T-shirt</p>
-                                                        <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 d-flex m-0 p-0">
-                                                        <span>5</span>
-                                                    </div>
-                                                    <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                                                        <span class="mb-0" style="width: 100%">$499.00</span>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
-                                                        <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card rounded-3 mb-4">
-                                            <div class="card-body p-4">
-                                                <div class="row d-flex justify-content-between align-items-center">
-                                                    <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
-                                                        <img
-                                                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                                    </div>
-                                                    <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
-                                                        <p class="lead mb-2" style="width: 100%">Basic T-shirt</p>
-                                                        <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 d-flex m-0 p-0">
-                                                        <span>5</span>
-                                                    </div>
-                                                    <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                                                        <span class="mb-0" style="width: 100%">$499.00</span>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
-                                                        <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                </div>-->
+                                            <%--</c:forEach>--%>
+
+                                        <%--</c:if>--%>
+
                                         <div class="card">
                                             <div class="card-body "style="margin: auto">
                                                 <button type="button" class="btn btn-warning btn-block btn-lg" >Proceed to Pay</button>
@@ -156,8 +114,8 @@
             </form>
             <div class="d-flex justify-content-center" style="width: 20%">
                 <div class="cart">
-                    <a href="" class="ml-3 p-0 align-items-center ">
-                        <i class="bi bi-basket fa-2x total-count" value="5"></i>
+                    <a href="<c:url value="/cart" />" class="ml-3 p-0 align-items-center ">
+                        <i class="bi bi-basket fa-2x total-count" id="cartCounter" value="${cartCounter}"></i>
                     </a>
                     <div class="collapse cart-detail" style="height: 80vh">
                         <section class="h-100" style="background-color: #eee; overflow: scroll;">
@@ -197,54 +155,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card rounded-3 mb-4">
-                                            <div class="card-body p-4">
-                                                <div class="row d-flex justify-content-between align-items-center">
-                                                    <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
-                                                        <img
-                                                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                                    </div>
-                                                    <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
-                                                        <p class="lead mb-2" style="width: 100%">Basic T-shirt</p>
-                                                        <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 d-flex m-0 p-0">
-                                                        <span>5</span>
-                                                    </div>
-                                                    <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                                                        <span class="mb-0" style="width: 100%">$499.00</span>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
-                                                        <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card rounded-3 mb-4">
-                                            <div class="card-body p-4">
-                                                <div class="row d-flex justify-content-between align-items-center">
-                                                    <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
-                                                        <img
-                                                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                                    </div>
-                                                    <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
-                                                        <p class="lead mb-2" style="width: 100%">Basic T-shirt</p>
-                                                        <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 d-flex m-0 p-0">
-                                                        <span>5</span>
-                                                    </div>
-                                                    <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                                                        <span class="mb-0" style="width: 100%">$499.00</span>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
-                                                        <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                         <div class="card">
                                             <div class="card-body "style="margin: auto">
                                                 <button type="button" class="btn btn-warning btn-block btn-lg" >Proceed to Pay</button>

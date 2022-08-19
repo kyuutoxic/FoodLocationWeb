@@ -4,15 +4,15 @@
  */
 package com.nvl.pojo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +21,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,6 +29,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -104,16 +106,16 @@ public class Menu implements Serializable {
     @Transient
     @JsonIgnore
     private MultipartFile file;
-    @JsonManagedReference
     @JoinColumn(name = "id_type", referencedColumnName = "id")
     @ManyToOne(optional = false)
-//    @JsonIgnore
-    private Type idType;
     @JsonManagedReference
+    private Type idType;
     @JoinColumn(name = "id_store", referencedColumnName = "id_user")
     @ManyToOne
-//    @JsonIgnore
+    @JsonManagedReference
     private User idStore;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMenu")
+    private Collection<OrderDetail> orderDetailCollection;
 
     public Menu() {
     }
@@ -230,6 +232,15 @@ public class Menu implements Serializable {
         this.idStore = idStore;
     }
 
+    @XmlTransient
+    public Collection<OrderDetail> getOrderDetailCollection() {
+        return orderDetailCollection;
+    }
+
+    public void setOrderDetailCollection(Collection<OrderDetail> orderDetailCollection) {
+        this.orderDetailCollection = orderDetailCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -282,5 +293,5 @@ public class Menu implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-
+    
 }
