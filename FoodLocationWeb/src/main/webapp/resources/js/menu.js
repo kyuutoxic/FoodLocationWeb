@@ -1,10 +1,9 @@
 
 function loadAdminMenu(endpoint, menudetail) {
     fetch(endpoint).then(function (res) {
-        console.log("NGU");
         return res.json();
     }).then(function (data) {
-        console.log("NGU");
+        console.log(data);
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             msg += `
@@ -13,11 +12,11 @@ function loadAdminMenu(endpoint, menudetail) {
                     <td>${data[i].idMenu}</td>
                     <td>${data[i].menuName}</td>
                     <td>${data[i].price}</td>
-                    <td>${data[i].idStore}</td>
+                    <td>${data[i].idStore.nameStore}</td>
                     <td>${data[i].menuNote}</td>
                     <td>${data[i].menuFrom}</td>
                     <td>${data[i].menuTo}</td>
-                    <td>${data[i].idType}</td>
+                    <td>${data[i].idType.name}</td>
                     <td>
                         <a href="${menudetail}${data[i].idMenu}"><button type="button" class="btn btn-primary">Detail</button></a>
                         <button type="button" class="btn btn-primary">Delete</button>
@@ -32,10 +31,10 @@ function loadAdminMenu(endpoint, menudetail) {
 
 function loadMenu(endpoint, idmenu) {
     fetch(endpoint).then(function (res) {
-        console.log("NGU");
+        console.log(res.json());
         return res.json();
     }).then(function (data) {
-        console.log("NGU");
+        console.log(data);
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             msg += `

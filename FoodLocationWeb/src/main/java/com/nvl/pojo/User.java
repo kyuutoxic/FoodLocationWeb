@@ -4,7 +4,9 @@
  */
 package com.nvl.pojo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -12,6 +14,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -123,8 +126,8 @@ public class User implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore")
+    @JsonBackReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore", fetch=FetchType.EAGER)
     private Collection<Menu> menuCollection;
 
     public User() {

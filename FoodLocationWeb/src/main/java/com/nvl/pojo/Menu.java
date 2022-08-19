@@ -4,7 +4,9 @@
  */
 package com.nvl.pojo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -102,13 +104,15 @@ public class Menu implements Serializable {
     @Transient
     @JsonIgnore
     private MultipartFile file;
+    @JsonManagedReference
     @JoinColumn(name = "id_type", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Type idType;
+    @JsonManagedReference
     @JoinColumn(name = "id_store", referencedColumnName = "id_user")
     @ManyToOne
-    @JsonIgnore
+//    @JsonIgnore
     private User idStore;
 
     public Menu() {
