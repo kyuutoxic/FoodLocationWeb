@@ -23,6 +23,16 @@ and open the template in the editor.
         <put-attribute name="title" value="STOREC" />
         <put-attribute name="content" value="/WEB-INF/jsp/storec.jsp" />
     </definition>
+    <definition name="cart" extends="baseLayout">
+        <put-attribute name="title" value="CART" />
+        <put-attribute name="content" value="/WEB-INF/jsp/cart.jsp" />
+    </definition>
+    <definition name="menu" extends="baseLayout">
+        <put-attribute name="title" value="MENU" />
+        <put-attribute name="content" value="/WEB-INF/jsp/menu.jsp" />
+    </definition>
+    
+    
     <definition name="login" template="/WEB-INF/jsp/login.jsp">
         <put-attribute name="title" value="Dang nhap" />
         <put-attribute name="content" value="/WEB-INF/jsp/login.jsp" />
@@ -38,10 +48,6 @@ and open the template in the editor.
     <definition name="registerStore" template="/WEB-INF/jsp/register-store.jsp">
         <put-attribute name="title" value="Dang ky" />
         <put-attribute name="content" value="/WEB-INF/jsp/register-store.jsp" />
-    </definition>
-    <definition name="cart" extends="baseLayout">
-        <put-attribute name="title" value="CART" />
-        <put-attribute name="content" value="/WEB-INF/jsp/cart.jsp" />
     </definition>
     
     <definition name="adminBaseLayout" template="/WEB-INF/layout/admin-base.jsp">

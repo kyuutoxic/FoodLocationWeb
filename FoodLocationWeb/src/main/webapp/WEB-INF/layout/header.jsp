@@ -43,7 +43,7 @@
             <div class="d-flex justify-content-center" style="width: 10%" id="nav-cart">
                 <div class="cart">
                     <a href="<c:url value="/cart" />" class="ml-3 p-0 align-items-center ">
-                        <i class="bi bi-basket fa-2x total-count" id="cartCounter" value="${cartCounter}"></i>
+                        <i class="bi bi-basket fa-2x total-count" id="cartCounter1" value="${cartCounter}"></i>
                     </a>
                     <div class="collapse cart-detail" style="height: 80vh">
                         <section class="h-100" style="background-color: #eee; overflow: scroll;">
@@ -115,7 +115,7 @@
             <div class="d-flex justify-content-center" style="width: 20%">
                 <div class="cart">
                     <a href="<c:url value="/cart" />" class="ml-3 p-0 align-items-center ">
-                        <i class="bi bi-basket fa-2x total-count" id="cartCounter" value="${cartCounter}"></i>
+                        <i class="bi bi-basket fa-2x total-count" id="cartCounter2" value="${cartCounter}"></i>
                     </a>
                     <div class="collapse cart-detail" style="height: 80vh">
                         <section class="h-100" style="background-color: #eee; overflow: scroll;">

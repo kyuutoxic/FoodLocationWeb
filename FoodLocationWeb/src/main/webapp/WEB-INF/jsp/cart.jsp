@@ -36,25 +36,37 @@
                                                                 <button class="btn-plus-quantity">+</button>-->
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="${c.menuId}">
-                                            <span class="glyphicon glyphicon-minus"></span>
+                                        <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="${c.menuId}">
+                                            <lord-icon
+                                                src="https://cdn.lordicon.com/ymerwkwd.json"
+                                                trigger="loop-on-hover"
+                                                colors="primary:#ffffff,secondary:#fea116"
+                                                scale="50"
+                                                style="width:30px;height:30px">
+                                            </lord-icon>
                                         </button>
                                     </span>
-                                    <input type="text" name="${c.menuId}" class="form-control input-number" value="${c.quantity}" min="1" max="10" onblur="updateCart(this, ${c.menuId})">
+                                    <input id="${c.menuId}" type="text" name="${c.menuId}" class="form-control input-number" value="${c.quantity}" min="1" max="10" onblur="updateCart(${c.menuId})">
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="${c.menuId}">
-                                            <span class="glyphicon glyphicon-plus"></span>
+                                            <lord-icon
+                                                src="https://cdn.lordicon.com/xzksbhzh.json"
+                                                trigger="hover"
+                                                colors="primary:#ffffff,secondary:#fea116"
+                                                scale="50"
+                                                style="width:30px;height:30px">
+                                            </lord-icon>
                                         </button>
                                     </span>
                                 </div>
                             </td>
-                            <td><button class="btn-delete-cart" onclick="deleteCart(${c.menuId})">Delete</button></td>                    
+                            <td style="padding: 1rem 1rem;"><button class="btn-delete-cart" onclick="deleteCart(${c.menuId})">Delete</button></td>                    
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
             <div class="payment-field">
-                <h1 id="amountCart">Total: ${cartStats.amount}VNÐ</h1>
+                <div style="display: flex"><h1>Total:&nbsp;&nbsp;</h1><h1 id="amountCart">${cartStats.amount}</h1><h1>&nbsp;VNÐ</h1></div>
                 <button class="btn-pay">Pay</button>
             </div>
         </c:if>
@@ -62,6 +74,6 @@
     </section>
 
 </div>
-<script src="<c:url value="/js/menu.js" />"></script>
+<script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
 
 
