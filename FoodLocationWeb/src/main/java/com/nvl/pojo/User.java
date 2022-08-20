@@ -56,6 +56,9 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByShipPrice", query = "SELECT u FROM User u WHERE u.shipPrice = :shipPrice")})
 public class User implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    private Collection<MenuOrder> menuOrderCollection;
+
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String USER = "ROLE_USER";
     public static final String STORE = "ROLE_STORE";
@@ -134,7 +137,7 @@ public class User implements Serializable {
     private Collection<Menu> menuCollection;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Order1> order1Collection;
+    private Collection<MenuOrder> order1Collection;
 
     public User() {
     }
@@ -284,11 +287,11 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Order1> getOrder1Collection() {
+    public Collection<MenuOrder> getOrder1Collection() {
         return order1Collection;
     }
 
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
+    public void setOrder1Collection(Collection<MenuOrder> order1Collection) {
         this.order1Collection = order1Collection;
     }
 

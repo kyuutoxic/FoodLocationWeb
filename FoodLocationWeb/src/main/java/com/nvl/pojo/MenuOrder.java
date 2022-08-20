@@ -33,14 +33,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author kyuut
  */
 @Entity
-@Table(name = "order")
+@Table(name = "menu_order")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o"),
-    @NamedQuery(name = "Order1.findByIdOrder", query = "SELECT o FROM Order1 o WHERE o.idOrder = :idOrder"),
-    @NamedQuery(name = "Order1.findByTotal", query = "SELECT o FROM Order1 o WHERE o.total = :total"),
-    @NamedQuery(name = "Order1.findByCreatedDate", query = "SELECT o FROM Order1 o WHERE o.createdDate = :createdDate")})
-public class Order1 implements Serializable {
+    @NamedQuery(name = "MenuOrder.findAll", query = "SELECT m FROM MenuOrder m"),
+    @NamedQuery(name = "MenuOrder.findByIdOrder", query = "SELECT m FROM MenuOrder m WHERE m.idOrder = :idOrder"),
+    @NamedQuery(name = "MenuOrder.findByTotal", query = "SELECT m FROM MenuOrder m WHERE m.total = :total"),
+    @NamedQuery(name = "MenuOrder.findByCreatedDate", query = "SELECT m FROM MenuOrder m WHERE m.createdDate = :createdDate")})
+public class MenuOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -61,20 +61,20 @@ public class Order1 implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrder")
-    private Collection<OrderDetail> orderDetailCollection;
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     @ManyToOne(optional = false)
     private User idUser;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrder")
+    private Collection<OrderDetail> orderDetailCollection;
 
-    public Order1() {
+    public MenuOrder() {
     }
 
-    public Order1(Integer idOrder) {
+    public MenuOrder(Integer idOrder) {
         this.idOrder = idOrder;
     }
 
-    public Order1(Integer idOrder, float total, Date createdDate) {
+    public MenuOrder(Integer idOrder, float total, Date createdDate) {
         this.idOrder = idOrder;
         this.total = total;
         this.createdDate = createdDate;
@@ -112,6 +112,14 @@ public class Order1 implements Serializable {
         this.createdDate = createdDate;
     }
 
+    public User getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(User idUser) {
+        this.idUser = idUser;
+    }
+
     @XmlTransient
     public Collection<OrderDetail> getOrderDetailCollection() {
         return orderDetailCollection;
@@ -119,14 +127,6 @@ public class Order1 implements Serializable {
 
     public void setOrderDetailCollection(Collection<OrderDetail> orderDetailCollection) {
         this.orderDetailCollection = orderDetailCollection;
-    }
-
-    public User getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(User idUser) {
-        this.idUser = idUser;
     }
 
     @Override
@@ -139,10 +139,10 @@ public class Order1 implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Order1)) {
+        if (!(object instanceof MenuOrder)) {
             return false;
         }
-        Order1 other = (Order1) object;
+        MenuOrder other = (MenuOrder) object;
         if ((this.idOrder == null && other.idOrder != null) || (this.idOrder != null && !this.idOrder.equals(other.idOrder))) {
             return false;
         }
@@ -151,7 +151,7 @@ public class Order1 implements Serializable {
 
     @Override
     public String toString() {
-        return "com.nvl.pojo.Order1[ idOrder=" + idOrder + " ]";
+        return "com.nvl.pojo.MenuOrder[ idOrder=" + idOrder + " ]";
     }
     
 }

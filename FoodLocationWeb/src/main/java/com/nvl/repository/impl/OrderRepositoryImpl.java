@@ -6,12 +6,11 @@
 package com.nvl.repository.impl;
 
 import com.nvl.pojo.Cart;
-import com.nvl.pojo.Order1;
+import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.OrderDetail;
 import com.nvl.pojo.User;
 import com.nvl.repository.MenuRepository;
 import com.nvl.repository.OrderRepository;
-import com.nvl.repository.UserRepository;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
 import com.nvl.utils.Utils;
@@ -40,7 +39,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         try {
             Session session = this.sessionFactory.getObject().getCurrentSession();
         
-            Order1 order = new Order1();
+            MenuOrder order = new MenuOrder();
             order.setIdUser(user);
             order.setCreatedDate(new Date());
 

@@ -172,6 +172,7 @@ function addToCart(id, name, price) {
     }).then(function (data) {
         $('#cartCounter1').attr('value', data);
         $('#cartCounter2').attr('value', data);
+        loadMiniCart();
     });
 }
 
@@ -185,8 +186,10 @@ function deleteCart(productId) {
             $('#cartCounter1').attr('value', data.counter);
             $('#cartCounter2').attr('value', data.counter);
             $("#amountCart").html(data.amount);
-            let row = document.getElementById(`product${productId}`)
-            row.style.display = "none"
+            let row = document.getElementById(`product${productId}`);
+            row.style.display = "none";
+            console.log(row);
+            loadMiniCart();
         })
     }
 }
@@ -210,11 +213,67 @@ function updateCart(productId) {
         $('#cartCounter1').attr('value', data.counter);
         $('#cartCounter2').attr('value', data.counter);
         $("#amountCart").html(data.amount);
+        loadMiniCart();
     })
 }
 
+function loadMiniCart() {
+    fetch("/FoodLocationWeb/api/cart").then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        console.log(data);
+        let d = document.getElementById("minicart");
+        let c = document.getElementById("minicart2");
 
+        d.innerHTML = "";
+        c.innerHTML = "";
 
+        let msg = "";
+        let result = [];
+        for (var key in data) {
+            result.push(data[key]);
+        }
+        for (let i = 0; i < result.length; i++) {
+            console.log("NGU");
+            msg += `
+            <div class="card rounded-3 mb-4" id="product${result[i].menuId}">
+                <div class="card-body p-4">
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
+                            <img
+                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                class="img-fluid rounded-3" alt="Cotton T-shirt">
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
+                            <p class="lead mb-2" style="width: 100%">${result[i].menuName}</p>
+                            <p><span class="text-muted">Quantity: </span>${result[i].quantity}</p>
+                        </div>
+                        <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
+                            <span class="mb-0" style="width: 100%">${result[i].price}</span>
+                        </div>
+                        <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
+                            <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg" onclick="deleteCart(${result[i].menuId})"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+        d.innerHTML += msg;
+        c.innerHTML += msg;
 
-//plugin bootstrap minus and plus
-//http://jsfiddle.net/laelitenetwork/puJ6G/
+    })
+}
+
+function pay() {
+    if (confirm("Ban chac chan thanh toan?") == true) {
+        fetch("/FoodLocationWeb/api/pay", {
+            method: "post"
+        }).then(function(res) {
+            return res.json();
+        }).then(function(code) {
+            console.info(code);
+            location.reload();
+        })
+    }
+}

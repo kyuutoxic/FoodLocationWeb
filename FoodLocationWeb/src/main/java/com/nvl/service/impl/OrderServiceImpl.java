@@ -22,14 +22,11 @@ import org.springframework.stereotype.Service;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
-    @Autowired
-    private UserRepository userRepository;
 
     @Override
-    public boolean addReceipt(Map<Integer, Cart> cart, int idUser) {
-        User u = (User) this.userRepository.getUserById(idUser);
+    public boolean addReceipt(Map<Integer, Cart> cart, User user) {
         if (cart != null)
-            return this.orderRepository.addReceipt(cart,u);
+            return this.orderRepository.addReceipt(cart,user);
         
         return false;
     }

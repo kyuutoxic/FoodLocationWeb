@@ -58,36 +58,33 @@
                                                             class="fas fa-angle-down mt-1"></i></a></p>
                                             </div>
                                         </div>
-                                        <%--<c:if test="${cart != null}">--%>
-                                            <%--<c:forEach items="${cart}" var="c">--%>
-
-<!--                                                <div class="card rounded-3 mb-4" id="product${c.menuId}">
-                                                    <div class="card-body p-4">
-                                                        <div class="row d-flex justify-content-between align-items-center">
-                                                            <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
-                                                                <img
-                                                                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                                                    class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                                            </div>
-                                                            <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
-                                                                <p class="lead mb-2" style="width: 100%">${c.menuName}</p>
-                                                                <p><span class="text-muted">Quantity: </span>${c.quantity}<span class="text-muted">Color: </span>Grey</p>
-                                                            </div>
-                                                            <div class="col-md-1 col-lg-1 col-xl-1 d-flex m-0 p-0">
-                                                                <span>5</span>
-                                                            </div>
-                                                            <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                                                                <span class="mb-0" style="width: 100%">${c.price}</span>
-                                                            </div>
-                                                            <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
-                                                                <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                                        <div id="minicart">
+                                            <c:if test="${cart != null}">
+                                                <c:forEach items="${cart}" var="m">
+                                                    <div class="card rounded-3 mb-4" id="product${m.value.menuId}">
+                                                        <div class="card-body p-4">
+                                                            <div class="row d-flex justify-content-between align-items-center">
+                                                                <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
+                                                                    <img
+                                                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                                                        class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                                </div>
+                                                                <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
+                                                                    <p class="lead mb-2" style="width: 100%">${m.value.menuName}</p>
+                                                                    <p><span class="text-muted">Quantity: </span>${m.value.quantity}</p>
+                                                                </div>
+                                                                <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
+                                                                    <span class="mb-0" style="width: 100%">${m.value.price}</span>
+                                                                </div>
+                                                                <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
+                                                                    <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg" onclick="deleteCart(${m.value.menuId})"></i></a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>-->
-                                            <%--</c:forEach>--%>
-
-                                        <%--</c:if>--%>
+                                                </c:forEach>
+                                            </c:if>
+                                        </div>
 
                                         <div class="card">
                                             <div class="card-body "style="margin: auto">
@@ -130,31 +127,38 @@
                                                             class="fas fa-angle-down mt-1"></i></a></p>
                                             </div>
                                         </div>
+                                        <div id="minicart2">
+                                            <c:if test="${cart != null}">
+                                                <c:forEach items="${cart}" var="m">
 
-                                        <div class="card rounded-3 mb-4">
-                                            <div class="card-body p-4">
-                                                <div class="row d-flex justify-content-between align-items-center">
-                                                    <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
-                                                        <img
-                                                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                    <div class="card rounded-3 mb-4" id="product${m.value.menuId}">
+                                                        <div class="card-body p-4">
+                                                            <div class="row d-flex justify-content-between align-items-center">
+                                                                <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
+                                                                    <img
+                                                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                                                        class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                                </div>
+                                                                <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
+                                                                    <p class="lead mb-2" style="width: 100%">${m.value.menuName}</p>
+                                                                    <p><span class="text-muted">Quantity: </span>${m.value.quantity}</p>
+                                                                </div>
+                                                                <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
+                                                                    <span class="mb-0" style="width: 100%">${m.value.price}</span>
+                                                                </div>
+                                                                <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
+                                                                    <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
-                                                        <p class="lead mb-2" style="width: 100%">Basic T-shirt</p>
-                                                        <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 d-flex m-0 p-0">
-                                                        <span>5</span>
-                                                    </div>
-                                                    <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                                                        <span class="mb-0" style="width: 100%">$499.00</span>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
-                                                        <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                </c:forEach>
+                                            </c:if>
+                                            <c:if test="${cart == null}">
+                                                <h1>Chua co san pham trong gio hang</h1>
+                                            </c:if>
                                         </div>
+
 
                                         <div class="card">
                                             <div class="card-body "style="margin: auto">

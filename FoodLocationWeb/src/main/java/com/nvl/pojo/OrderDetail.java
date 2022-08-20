@@ -52,7 +52,7 @@ public class OrderDetail implements Serializable {
     private Menu idMenu;
     @JoinColumn(name = "id_order", referencedColumnName = "id_order")
     @ManyToOne(optional = false)
-    private Order1 idOrder;
+    private MenuOrder idOrder;
 
     public OrderDetail() {
     }
@@ -99,11 +99,11 @@ public class OrderDetail implements Serializable {
         this.idMenu = idMenu;
     }
 
-    public Order1 getIdOrder() {
+    public MenuOrder getIdOrder() {
         return idOrder;
     }
 
-    public void setIdOrder(Order1 idOrder) {
+    public void setIdOrder(MenuOrder idOrder) {
         this.idOrder = idOrder;
     }
 

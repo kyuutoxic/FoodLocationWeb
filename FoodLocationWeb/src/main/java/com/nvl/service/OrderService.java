@@ -6,6 +6,7 @@
 package com.nvl.service;
 
 import com.nvl.pojo.Cart;
+import com.nvl.pojo.User;
 import java.util.Map;
 
 /**
@@ -13,5 +14,5 @@ import java.util.Map;
  * @author duonghuuthanh
  */
 public interface OrderService {
-    boolean addReceipt(Map<Integer, Cart> cart, int idUser);
+    boolean addReceipt(Map<Integer, Cart> cart, User user);
 }
