@@ -36,8 +36,6 @@ $(document).ready(function () {
     $(this).scrollTop(0);
 });
 
-var toastID = 0;
-
 function toast(){
     const main = document.getElementById("toast-container");
     if (main) {
@@ -55,14 +53,15 @@ function toast(){
         };
         const delay = (6000 / 1000).toFixed(2);
 
-//        toast.classList.add("toast", `toast--${type}`);
-        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
+        toast.classList.add(`toast--success`);
         
-        toast.style.backgroundColor = `white`;
+        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
         
         toast.style.marginBottom = `10px`;
         
         toast.style.cursor = `pointer`;
+        
+       toast.style.backgroundColor = `white`;
 
         toast.innerHTML = `
         <div class="toast-header">

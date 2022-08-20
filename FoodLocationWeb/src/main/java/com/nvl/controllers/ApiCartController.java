@@ -31,9 +31,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ApiCartController {
 
-    @Autowired
-    private OrderService orderService;
-
     @GetMapping("/api/cart")
     public ResponseEntity<Map<Integer, Cart>> getCart(HttpSession session) {
         Map<Integer, Cart> cart = (Map<Integer, Cart>) session.getAttribute("cart");
@@ -88,16 +85,5 @@ public class ApiCartController {
         }
 
         return new ResponseEntity<>(Utils.cartStats(cart), HttpStatus.OK);
-    }
-   @PostMapping("/api/pay")
-    public HttpStatus pay(HttpSession session) {
-        User u = (User) session.getAttribute("currentUser");
-
-        if (this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u) == true) {
-            session.removeAttribute("cart");
-            return HttpStatus.OK;
-        }
-        
-        return HttpStatus.BAD_REQUEST;
     }
 }

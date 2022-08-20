@@ -26,7 +26,7 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${carts}" var="c">
-                        <tr id="product${c.menuId}">
+                        <tr id="cart${c.menuId}">
                             <th scope="row">1</th>
                             <td>${c.menuName}</td>
                             <td>${c.price} VNÐ</td>
@@ -67,13 +67,12 @@
             </table>
             <div class="payment-field">
                 <div style="display: flex"><h1>Total:&nbsp;&nbsp;</h1><h1 id="amountCart">${cartStats.amount}</h1><h1>&nbsp;VNÐ</h1></div>
-                        <c:if test="${currentUser != null}">
-                    <button class="btn-pay" onclick="pay()">Pay</button>
-                </c:if>
-                <c:if test="${currentUser == null}">
-                    <h4><a href="<c:url value="/login" />">Vui long dang nhap</a></h4>
-                </c:if>
-
+                    <c:if test="${currentUser != null}">
+                        <a href="<c:url value="/payment" />"><button class="btn-pay">Continue to Pay</button></a>
+                    </c:if>
+                    <c:if test="${currentUser == null}">
+                        <h4><a href="<c:url value="/login" />">Vui long dang nhap</a></h4>
+                    </c:if>
             </div>
         </c:if>
 

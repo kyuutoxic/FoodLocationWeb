@@ -35,16 +35,14 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public boolean addReceipt(Map<Integer, Cart> cart, User user) {
+    public boolean addReceipt(Map<Integer, Cart> cart, User user, float total) {
         try {
             Session session = this.sessionFactory.getObject().getCurrentSession();
         
             MenuOrder order = new MenuOrder();
             order.setIdUser(user);
             order.setCreatedDate(new Date());
-
-            Map<String, String> stats = Utils.cartStats(cart);
-            order.setTotal(Long.parseLong(stats.get("amount")));
+            order.setTotal(total);
 
             session.save(order);
 

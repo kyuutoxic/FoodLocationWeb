@@ -114,6 +114,7 @@ public class Menu implements Serializable {
     @ManyToOne
     @JsonManagedReference
     private User idStore;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMenu")
     private Collection<OrderDetail> orderDetailCollection;
 

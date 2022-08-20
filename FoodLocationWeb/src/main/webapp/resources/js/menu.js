@@ -45,11 +45,11 @@ function loadMenu(endpoint, idmenu) {
                     <div class="card-body">
                         <a href="${idmenu}${data[i].idUser}">${data[i].nameStore}</a>
                         <p>${data[i].address}</p>
-                        <a style="margin-right: 5px">
+                        <a style="margin-right: 5px;float: left;">
                             <i class="bi bi-chat-fill"></i>
                             <span>9</span>
                         </a>
-                        <a style="margin-right: 5px">
+                        <a style="margin-right: 5px;float: left;">
                             <i class="bi bi-camera-fill"></i>
                             <span>12</span>
                         </a>
@@ -64,6 +64,31 @@ function loadMenu(endpoint, idmenu) {
         }
         let d = document.getElementById("listmenu");
         d.innerHTML = msg;
+    });
+}
+
+function loadStoreInCart() {
+    fetch(`http://localhost:8080/FoodLocationWeb/api/storeInCart`).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        console.log(data);
+        data.forEach(function(e){
+            $('#store'+e.idUser).text(e.nameStore);
+            let ship = document.getElementById('ship');
+            ship.innerHTML += `
+                <div>Store:&nbsp;${e.nameStore}</div>
+                <span>${e.shipPrice}</span>
+                <span>&nbsp;VNÐ</span>
+            `;
+        });
+    });
+}
+
+function loadStoreByMenuId(id) {
+    fetch(`http://localhost:8080/FoodLocationWeb/api/storeByMenuID/${id}`).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        $('#store'+id).text(data[0].nameStore);
     });
 }
 
@@ -186,9 +211,9 @@ function deleteCart(productId) {
             $('#cartCounter1').attr('value', data.counter);
             $('#cartCounter2').attr('value', data.counter);
             $("#amountCart").html(data.amount);
-            let row = document.getElementById(`product${productId}`);
-            row.style.display = "none";
-            console.log(row);
+            $('#cart'+productId).attr('display', 'none');
+            $('#product1'+productId).attr('display', 'none');
+            $('#product2'+productId).attr('display', 'none');
             loadMiniCart();
         })
     }
@@ -221,7 +246,6 @@ function loadMiniCart() {
     fetch("/FoodLocationWeb/api/cart").then(function (res) {
         return res.json();
     }).then(function (data) {
-        console.log(data);
         let d = document.getElementById("minicart");
         let c = document.getElementById("minicart2");
 
@@ -267,12 +291,13 @@ function loadMiniCart() {
 
 function pay() {
     if (confirm("Ban chac chan thanh toan?") == true) {
-        fetch("/FoodLocationWeb/api/pay", {
-            method: "post"
-        }).then(function(res) {
+        let total = $('#total').text();
+        total = total.slice(0,total.indexOf(' '));
+        fetch(`/FoodLocationWeb/api/pay/${total}`, {
+        method: "post"
+        }).then(function (res) {
             return res.json();
-        }).then(function(code) {
-            console.info(code);
+        }).then(function (code) {
             location.reload();
         })
     }

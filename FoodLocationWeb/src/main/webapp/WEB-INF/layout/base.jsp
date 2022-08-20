@@ -28,15 +28,27 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link href="resources/lib/animate/animate.min.css" rel="stylesheet">
-        <link href="resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-        <link href="resources/ib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        <link href="<c:url value="/resources/lib/animate/animate.min.css" />" rel="stylesheet">
+        <link href="<c:url value="/resources/lib/owlcarousel/assets/owl.carousel.min.css" />" rel="stylesheet">
+        <link href="<c:url value="/resources/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" />" rel="stylesheet" />
 
         <!-- Customized Bootstrap Stylesheet -->
         <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
 
         <!-- Template Stylesheet -->
         <link href="<c:url value="/css/style.css" />" rel="stylesheet">
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="<c:url value="/resources/lib/wow/wow.min.js" />"></script>
+        <script src="<c:url value="/resources/lib/easing/easing.min.js" />"></script>
+        <script src="<c:url value="/resources/lib/waypoints/waypoints.min.js" />"></script>
+        <script src="<c:url value="/resources/lib/counterup/counterup.min.js" />"></script>
+        <script src="<c:url value="/resources/lib/owlcarousel/owl.carousel.min.js" />"></script>
+        <script src="<c:url value="/resources/lib/tempusdominus/js/moment.min.js" />"></script>
+        <script src="<c:url value="/resources/lib/tempusdominus/js/moment-timezone.min.js" />"></script>
+        <script src="<c:url value="/resources/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js" />"></script>
 
     </head>
     <body>
@@ -51,17 +63,7 @@
         <!-- FOOTER -->
         <tiles:insertAttribute name="footer" />
 
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="resources/lib/wow/wow.min.js"></script>
-        <script src="resources/lib/easing/easing.min.js"></script>
-        <script src="resources/lib/waypoints/waypoints.min.js"></script>
-        <script src="resources/lib/counterup/counterup.min.js"></script>
-        <script src="resources/lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="resources/lib/tempusdominus/js/moment.min.js"></script>
-        <script src="resources/lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="resources/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        
 
         <!-- Template Javascript -->
         <script src="<c:url value="/js/main.js" />"></script>

@@ -24,9 +24,9 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Override
-    public boolean addReceipt(Map<Integer, Cart> cart, User user) {
+    public boolean addReceipt(Map<Integer, Cart> cart, User user, float total) {
         if (cart != null)
-            return this.orderRepository.addReceipt(cart,user);
+            return this.orderRepository.addReceipt(cart,user,total);
         
         return false;
     }

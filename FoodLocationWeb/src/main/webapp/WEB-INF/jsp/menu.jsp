@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%--<c:url value="resources/img/hero.png"/>--%>
 <!--style="background: url('');"-->
+<div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000"></div>
 <div >
 <div class="row g-4" style="padding: 120px 20px; margin: 0.5px 0;">
     <div>

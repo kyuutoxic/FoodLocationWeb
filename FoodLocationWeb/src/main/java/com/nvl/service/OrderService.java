@@ -14,5 +14,5 @@ import java.util.Map;
  * @author duonghuuthanh
  */
 public interface OrderService {
-    boolean addReceipt(Map<Integer, Cart> cart, User user);
+    boolean addReceipt(Map<Integer, Cart> cart, User user, float total);
 }

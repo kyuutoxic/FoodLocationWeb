@@ -61,7 +61,7 @@
                                         <div id="minicart">
                                             <c:if test="${cart != null}">
                                                 <c:forEach items="${cart}" var="m">
-                                                    <div class="card rounded-3 mb-4" id="product${m.value.menuId}">
+                                                    <div class="card rounded-3 mb-4" id="product1${m.value.menuId}">
                                                         <div class="card-body p-4">
                                                             <div class="row d-flex justify-content-between align-items-center">
                                                                 <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
@@ -131,7 +131,7 @@
                                             <c:if test="${cart != null}">
                                                 <c:forEach items="${cart}" var="m">
 
-                                                    <div class="card rounded-3 mb-4" id="product${m.value.menuId}">
+                                                    <div class="card rounded-3 mb-4" id="product2${m.value.menuId}">
                                                         <div class="card-body p-4">
                                                             <div class="row d-flex justify-content-between align-items-center">
                                                                 <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
