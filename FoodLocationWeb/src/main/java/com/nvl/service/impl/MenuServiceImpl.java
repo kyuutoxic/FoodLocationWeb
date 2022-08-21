@@ -37,8 +37,8 @@ public class MenuServiceImpl implements MenuService {
     private UserRepository userRepository;
 
     @Override
-    public List<Menu> getMenus(Map<String, String> params, int page) {
-        return this.menuRepository.getMenus(params, page);
+    public List<Menu> getMenus(String kw, int page) {
+        return this.menuRepository.getMenus(kw, page);
     }
 
     @Override

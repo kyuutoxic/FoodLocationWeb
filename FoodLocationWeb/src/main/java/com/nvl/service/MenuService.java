@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public interface MenuService {
 
-    List<Menu> getMenus(Map<String, String> params, int page);
+    List<Menu> getMenus(String kw, int page);
 
     int countMenu();
 

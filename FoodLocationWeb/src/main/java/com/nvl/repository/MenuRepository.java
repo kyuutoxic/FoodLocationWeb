@@ -17,7 +17,7 @@ public interface MenuRepository {
 
     boolean addMenu(Menu menu);
 
-    List<Menu> getMenus(Map<String, String> params, int page);
+    List<Menu> getMenus(String kw, int page);
 
     List<Menu> getMenuByIdStore(int idStore);
 

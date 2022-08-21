@@ -104,8 +104,8 @@
             <a href="" class="navbar-brand p-3" style="margin-right: 4%" id="brand-nd">
                 <h2 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h2>
             </a>
-            <form class="d-flex bg-white p-0  w-50">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+            <form class="d-flex bg-white p-0  w-50" action="<c:url value="/menu" />">
+                <input name="kw" class="form-control me-2" type="text" placeholder="Search" aria-label="Search"
                        style="border: none;">
                 <button class="btn btn-danger" type="submit">Search</button>
             </form>

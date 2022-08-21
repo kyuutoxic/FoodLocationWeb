@@ -41,32 +41,32 @@
             </thead>
             <tbody>
                 <c:forEach items="${carts}" var="c">
-                    <script>loadStoreByMenuId(${c.menuId})</script>
-                    <tr id="product${c.menuId}">
-                        <th scope="row">${c.menuName}</td>
-                        <td id="store${c.menuId}"></td>
-                        <td>${c.price} VNÐ</td>
-                        <td>${c.quantity}</td>
-                        <td>${c.price * c.quantity} VNÐ</td>
-                    </tr>
-                </c:forEach>
+                <script>loadStoreByMenuId(${c.menuId})</script>
+                <tr id="product${c.menuId}">
+                    <th scope="row">${c.menuName}</td>
+                    <td id="store${c.menuId}"></td>
+                    <td>${c.price} VNÐ</td>
+                    <td>${c.quantity}</td>
+                    <td>${c.price * c.quantity} VNÐ</td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
         <div class="row" style="padding: 0 50px; margin: 20px 0;">
             <div class="col">
-                    <strong>SUBTOTAL:&nbsp;</strong>
-                    <div>${cartStats.amount} VNÐ</div>
+                <strong>SUBTOTAL:&nbsp;</strong>
+                <div>${cartStats.amount} VNÐ</div>
             </div>
             <div class="col" style="text-align: center">
-                    <strong>SHIP:&nbsp;</strong>
-                    <div id="ship"></div>
+                <strong>SHIP:&nbsp;</strong>
+                <div id="ship"></div>
             </div>
-                <div class="col" style="text-align: center">
-                    <strong>TOTAL:&nbsp;</strong>
-                    <div id="total">
-                        <span>${cartStats.amount}</span>
-                        <span>&nbsp;VNÐ</span>
-                    </div>
+            <div class="col" style="text-align: center">
+                <strong>TOTAL:&nbsp;</strong>
+                <div >
+                    <span id="total">${cartStats.amount}</span>
+                    <span>&nbsp;VNÐ</span>
+                </div>
             </div>
         </div>
         <div class="payment-field" style="justify-content: flex-end;">
@@ -83,9 +83,9 @@
 </div>
 <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
 <script>
-    $(document).ready(function(){
-        loadStoreInCart();
-    });
+                    $(document).ready(function () {
+                        loadStoreInCart();
+                    });
 </script>
 
 

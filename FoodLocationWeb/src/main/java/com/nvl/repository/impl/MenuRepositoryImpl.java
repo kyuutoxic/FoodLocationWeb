@@ -50,32 +50,17 @@ public class MenuRepositoryImpl implements MenuRepository {
     }
 
     @Override
-    public List<Menu> getMenus(Map<String, String> params, int page) {
+    public List<Menu> getMenus(String kw, int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Menu> q = b.createQuery(Menu.class);
         Root root = q.from(Menu.class);
         q.select(root);
 
-        if (params != null) {
+        if (kw != null) {
             List<Predicate> predicates = new ArrayList<>();
-            String kw = params.get("kw");
-            if (kw != null && !kw.isEmpty()) {
-                Predicate p = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
-                predicates.add(p);
-            }
-
-            String fp = params.get("fromPrice");
-            if (fp != null) {
-                Predicate p = b.greaterThanOrEqualTo(root.get("price").as(Long.class), Long.parseLong(fp));
-                predicates.add(p);
-            }
-
-            String tp = params.get("toPrice");
-            if (tp != null) {
-                Predicate p = b.lessThanOrEqualTo(root.get("price").as(Long.class), Long.parseLong(tp));
-                predicates.add(p);
-            }
+            Predicate p = b.like(root.get("menuName").as(String.class), String.format("%%%s%%", kw));
+            predicates.add(p);
 
             q.where(predicates.toArray(Predicate[]::new));
         }

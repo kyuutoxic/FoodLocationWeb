@@ -4,8 +4,15 @@
  */
 package com.nvl.controllers;
 
+import com.nvl.repository.MenuRepository;
+import com.nvl.service.MenuService;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -13,8 +20,18 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class MenuController {
+
+    @Autowired
+    private MenuService menuService;
+    
     @GetMapping("/menu")
-    public String login() {
+    public String menuView(Model model,
+            @RequestParam(required = false) Map<String, String> params,
+            HttpSession session) {
+        String kw = params.getOrDefault("kw", null);
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        model.addAttribute("products", this.menuService.getMenus(kw, page));
+
         return "menu";
     }
 }

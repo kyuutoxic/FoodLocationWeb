@@ -293,6 +293,7 @@ function pay() {
     if (confirm("Ban chac chan thanh toan?") == true) {
         let total = $('#total').text();
         total = total.slice(0,total.indexOf(' '));
+        console.log(total);
         fetch(`/FoodLocationWeb/api/pay/${total}`, {
         method: "post"
         }).then(function (res) {
