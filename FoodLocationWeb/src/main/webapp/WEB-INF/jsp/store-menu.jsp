@@ -7,11 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="app-main__outer">
     <div class="app-main__inner">
-        <c:url value="/api/menu" var="endpoint" />
-        <c:url value="/admin/detail-menu/" var="menudetail"/>
-        <a class="btn btn-primary" href="<c:url value="/admin/add-menu" />">Them mon an</a>
-        <a class="btn btn-primary" href="javascript:;" onclick="loadAdminMenu('${endpoint}', '${menudetail}')">Load mon an</a>
-
+        <a class="btn btn-primary" href="<c:url value="/store/add-menu" />">Them mon an</a>
+        
         <table class="table" style="margin-top: 20px">
             <thead>
                 <tr>
@@ -31,6 +28,12 @@
             <tbody id="adminProd">
             </tbody>
         </table>
+        
     </div>
 </div>
 <script src="<c:url value="/js/menu.js" />"></script>
+<script>
+    <c:url value="/api/store/menu" var="endpoint" />
+    <c:url value="/store/detail-menu/" var="menudetail"/>
+    window.addEventListener('load', loadAdminMenu('${endpoint}', '${menudetail}'));
+</script>

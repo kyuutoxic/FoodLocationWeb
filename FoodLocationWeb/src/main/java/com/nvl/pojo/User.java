@@ -71,7 +71,7 @@ public class User implements Serializable {
     private Integer idUser;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 25)
+    @Size(min = 1, max = 255)
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
@@ -79,7 +79,7 @@ public class User implements Serializable {
     @Size(min = 1, max = 225)
     @Column(name = "password")
     private String password;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "name_store")
     private String nameStore;
     @Basic(optional = false)
@@ -98,7 +98,7 @@ public class User implements Serializable {
     @Size(min = 1, max = 11)
     @Column(name = "phone")
     private String phone;
-    @Size(max = 100)
+    @Size(max = 255)
     @Column(name = "address")
     private String address;
     @Basic(optional = false)
@@ -108,7 +108,7 @@ public class User implements Serializable {
     private String userRole;
     @Column(name = "active")
     private Boolean active;
-    @Size(max = 125)
+    @Size(max = 255)
     @Column(name = "avatar")
     private String avatar;
     @Column(name = "created_date")

@@ -59,7 +59,7 @@ public class Menu implements Serializable {
     private Integer idMenu;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 255)
     @Column(name = "menu_name")
     private String menuName;
     @Basic(optional = false)

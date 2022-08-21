@@ -28,9 +28,9 @@
             </div>
         </div>
         <c:forEach var="p" items="${products}">
-            <div class="col-lg-2 col-sm-6 col-md-4 col-xl mb-5 h-100">
-                <div class="card card-span h-100 rounded-3"><img class="img-fluid rounded-3 h-100" src="${p.image}" alt="...">
-                    <div class="card-body ps-0">
+            <div class="col-lg-2 col-sm-6 col-md-4 mb-5">
+                <div class="card card-span rounded-3"><img class="img-fluid rounded-3 " src="${p.image}" alt="...">
+                    <div class="card-body ps-0" style="min-height: 130px">
                         <h5 class="fw-bold text-1000 text-truncate mb-1">${p.menuName}</h5>
                         <a href="<c:url value="/storec/${p.idStore.idUser}" />"><div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">${p.idStore.nameStore}</span></div><span class="text-1000 fw-bold">${p.price}</span></a>
                     </div>

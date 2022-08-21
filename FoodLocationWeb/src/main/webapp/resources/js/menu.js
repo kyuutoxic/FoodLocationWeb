@@ -37,26 +37,27 @@ function loadMenu(endpoint, idmenu) {
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             msg += `
-            <div class="col">
-                <div class="card mb-5" style="width: 18rem;">
+            <div class="col-3">
+                <div class="card mb-5">
                     <a href="${idmenu}${data[i].idUser}">
                         <img class="card-img-top" src="${data[i].avatar}" alt="Card image cap">
                     </a>
-                    <div class="card-body">
+                    <div class="card-body" style="height: 168px; max-height: 168px;">
                         <a href="${idmenu}${data[i].idUser}">${data[i].nameStore}</a>
                         <p>${data[i].address}</p>
-                        <a style="margin-right: 5px;float: left;">
-                            <i class="bi bi-chat-fill"></i>
-                            <span>9</span>
-                        </a>
-                        <a style="margin-right: 5px;float: left;">
-                            <i class="bi bi-camera-fill"></i>
-                            <span>12</span>
-                        </a>
-                        <a style="float: right">
-                            <i class="bi bi-bookmark-fill"></i> Luu
-                        </a>
-
+                        <div style="position: absolute;bottom: 0;margin-bottom: 15px;width:100%;">
+                            <a style="margin-right: 5px;float: left;">
+                                <i class="bi bi-chat-fill"></i>
+                                <span>9</span>
+                            </a>
+                            <a style="margin-right: 5px;float: left;">
+                                <i class="bi bi-camera-fill"></i>
+                                <span>12</span>
+                            </a>
+                            <a style="float: right; margin-right: 20px;">
+                                <i class="bi bi-bookmark-fill"></i> Luu
+                            </a>
+                        </div>    
                     </div>
                 </div>
             </div>
@@ -72,8 +73,8 @@ function loadStoreInCart() {
         return res.json();
     }).then(function (data) {
         console.log(data);
-        data.forEach(function(e){
-            $('#store'+e.idUser).text(e.nameStore);
+        data.forEach(function (e) {
+            $('#store' + e.idUser).text(e.nameStore);
             let ship = document.getElementById('ship');
             ship.innerHTML += `
                 <div>Store:&nbsp;${e.nameStore}</div>
@@ -88,7 +89,7 @@ function loadStoreByMenuId(id) {
     fetch(`http://localhost:8080/FoodLocationWeb/api/storeByMenuID/${id}`).then(function (res) {
         return res.json();
     }).then(function (data) {
-        $('#store'+id).text(data[0].nameStore);
+        $('#store' + id).text(data[0].nameStore);
     });
 }
 
@@ -211,9 +212,9 @@ function deleteCart(productId) {
             $('#cartCounter1').attr('value', data.counter);
             $('#cartCounter2').attr('value', data.counter);
             $("#amountCart").html(data.amount);
-            $('#cart'+productId).attr('display', 'none');
-            $('#product1'+productId).attr('display', 'none');
-            $('#product2'+productId).attr('display', 'none');
+            $('#cart' + productId).attr('display', 'none');
+            $('#product1' + productId).attr('display', 'none');
+            $('#product2' + productId).attr('display', 'none');
             loadMiniCart();
         })
     }
@@ -292,10 +293,10 @@ function loadMiniCart() {
 function pay() {
     if (confirm("Ban chac chan thanh toan?") == true) {
         let total = $('#total').text();
-        total = total.slice(0,total.indexOf(' '));
+        total = total.slice(0, total.indexOf(' '));
         console.log(total);
         fetch(`/FoodLocationWeb/api/pay/${total}`, {
-        method: "post"
+            method: "post"
         }).then(function (res) {
             return res.json();
         }).then(function (code) {

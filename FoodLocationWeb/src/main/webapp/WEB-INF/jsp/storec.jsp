@@ -6,11 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000"></div>
 <div class="container-xxl" style="padding-top: 100px; position: relative;" data-spy="scroll" id="list-home">
-    <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000"></div>
     <div class="row" style="margin: 15px 0; height: 400px">
         <div class="col-5" style="text-align: center;height: 400px;">
-            <img src="${store.avatar}" alt="alt" style="max-height: 100%;"/>
+            <img src="${store.avatar}" alt="alt" style="max-height: 100%;max-width: 100%;"/>
         </div>
         <div class="col-7">
             <div aria-label="breadcrumb" style="--bs-breadcrumb-divider: '>';">
@@ -98,17 +98,17 @@
                     </a>
                 </div>
                 <div class="col-2">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#add-cmt">
+                    <a href="#" class="showModal" datatarget="add-cmt-form">
                         <span class="fa fa-comment"></span>
                         <span>Bình luận</span>
                     </a>
                 </div>
-                <div class="modal fade" id="add-cmt" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="myModal" id="add-cmt-form">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" aria-label="Close" datatarget="add-cmt-form" dataaction="close"></button>
                             </div>
                             <div class="modal-body">
                                 <form>
@@ -123,8 +123,8 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Send</button>
+                                <button type="button" class="btn btn-secondary" datatarget="add-cmt-form" dataaction="close">Close</button>
+                                <button type="button" class="btn btn-primary" datatarget="add-cmt-form" dataaction="send">Send</button>
                             </div>
                         </div>
                     </div>
@@ -144,14 +144,14 @@
             </div>
             <div id="list-menu">
                 <h1>Menu</h1>
-                <div class="list-menu">
+                <div class="list-menu row">
                     <c:forEach items="${menu}" var="m">
-                        <div class="menu-list">
+                        <div class="menu-list col-6">
                             <img src="<c:url value="${m.image}"/>" alt="alt"/>
                             <div class="menu-name">${m.menuName}</div>
                             <div class="menu-cost">
                                 ${m.price}
-                                <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price})">+</button>
+                                <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price});toast();">+</button>
                             </div>
                         </div>
                     </c:forEach>

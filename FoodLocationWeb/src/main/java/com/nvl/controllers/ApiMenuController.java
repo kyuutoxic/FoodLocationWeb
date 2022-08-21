@@ -5,9 +5,11 @@
 package com.nvl.controllers;
 
 import com.nvl.pojo.Menu;
+import com.nvl.pojo.User;
 import com.nvl.service.MenuService;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,5 +31,11 @@ public class ApiMenuController {
     @GetMapping("/menu")
     public ResponseEntity<List<Menu>> getMenu() {
         return new ResponseEntity<>(this.menuService.getMenus(null, 0), HttpStatus.OK);
+    }
+    
+    @GetMapping("/store/menu")
+    public ResponseEntity<List<Menu>> getStoreMenu(HttpSession session) {
+        User u = (User) session.getAttribute("currentUser");
+        return new ResponseEntity<>(this.menuService.getMenuByIdStore(u.getIdUser()), HttpStatus.OK);
     }
 }

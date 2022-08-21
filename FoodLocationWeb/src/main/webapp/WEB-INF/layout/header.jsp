@@ -32,7 +32,7 @@
                         <img src="${currentUser.avatar}" class="avatar" alt="alt"/>
                     </a>
                     <div class="dropdown-menu m-0">
-                        <a href="testimonial.html" class="dropdown-item">User Account</a>
+                        <a href="#" class="dropdown-item">User Account</a>
                         <a href="<c:url value="/logout"/>" class="py-2 px-4">LogOut</a>
                     </div>
                 </div>
