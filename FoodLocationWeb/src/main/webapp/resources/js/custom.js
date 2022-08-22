@@ -91,7 +91,6 @@ function toast(){
 
 $('.showModal').click((event)=>{
     event.preventDefault();
-    console.log('hihi');
     let target = $('.showModal').attr('datatarget');
     $('#' + target).attr("style", "display: block !important");
 });
@@ -134,7 +133,6 @@ $('.showModal').click((event)=>{
 $('button').click(function(){
     let target = $(this).attr('datatarget');
     let action = $(this).attr('dataaction');
-    console.log(target);
     if (action === 'close'){
         $('#' + target).attr("style", "");
     }else{

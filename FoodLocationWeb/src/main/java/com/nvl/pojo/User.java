@@ -6,6 +6,7 @@ package com.nvl.pojo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -75,6 +76,7 @@ public class User implements Serializable {
     @NotNull
     @Size(min = 1, max = 225)
     @Column(name = "password")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @Size(max = 255)
     @Column(name = "name_store")

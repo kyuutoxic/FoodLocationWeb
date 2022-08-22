@@ -93,6 +93,45 @@ function loadStoreByMenuId(id) {
     });
 }
 
+function manageOrderDetail(idOrderDetail, type){
+    $('#btn-orderDetail' + idOrderDetail).html(`
+        <div class="spinner-border text-warning" role="status">
+            <span class="visually-hidden"></span>
+        </div>
+    `);
+    fetch(`http://localhost:8080/FoodLocationWeb/api/store/${type}/${idOrderDetail}`).then(function(res){
+        return res;
+    }).then(function(data){
+        if(data.status == 200){
+            loadOrderDetailByStoreId();
+//            $('#orderDetail' + idOrderDetail).attr("style", "display: none !important");
+        }
+    });
+}
+
+function loadOrderDetailByStoreId(){
+    fetch(`http://localhost:8080/FoodLocationWeb/api/store/order`).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        let id = 0;
+        $('#order-check-area').text('');
+        data.forEach(e => {
+            $('#order-check-area').append(
+            `<tr id="orderDetail${e[0]}">
+                <td class="text-center text-muted">${++id}</td>
+                <td>${e[2].menuName}</td>
+                <td class="text-center">${e[1].idUser.address}</td>
+                <td class="text-center">${e[1].idUser.phone}</td>  
+                <td class="text-center">Uncheck</td> 
+                <td id="btn-orderDetail${e[0]}" class="text-center">
+                    <button class="btn btn-success" onclick="manageOrderDetail(${e[0]}, 'accept')">Accept Order</button>
+                    <button class="btn btn-danger" onclick="manageOrderDetail(${e[0]}, 'deny')">Deny Order</button>
+                </td>
+            </tr>`);
+        });
+    });
+}
+
 function comparison(currentVal, id) {
     if (currentVal <= $("#" + id).attr('min')) {
         $(".btn-number[data-type='minus'][data-field='" + id + "']").attr('disabled', true);
@@ -305,7 +344,8 @@ function pay() {
     }
 }
 
-function addComment(productId) {
+function addComment(productId, userId) {
+    if(userId == undefined)  {alert('Please sign in before comment!!')}  else {
     fetch("/FoodLocationWeb/api/add-comment", {
         method: 'post',
         body: JSON.stringify({
@@ -351,5 +391,5 @@ function addComment(productId) {
                         </div>
                     </div>  
         ` + area.innerHTML
-    })
+    })};
 }

@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" datatarget="add-cmt-form" dataaction="close">Close</button>
-                                        <button type="button" class="btn btn-primary" datatarget="add-cmt-form" dataaction="send" onclick="addComment(${store.idUser})">Send</button>
+                                        <button type="button" class="btn btn-primary" datatarget="add-cmt-form" dataaction="send" onclick="addComment(${store.idUser},${currentUser.idUser})">Send</button>
                                     </div>
                                 </form>
                             </div>

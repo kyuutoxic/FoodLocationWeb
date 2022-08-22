@@ -34,6 +34,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OrderDetail.findByUnitPrice", query = "SELECT o FROM OrderDetail o WHERE o.unitPrice = :unitPrice")})
 public class OrderDetail implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "status_order")
+    private short statusOrder;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +55,7 @@ public class OrderDetail implements Serializable {
     private float unitPrice;
     @JoinColumn(name = "id_menu", referencedColumnName = "id_menu")
     @ManyToOne(optional = false)
+    @JsonManagedReference
     private Menu idMenu;
     @JoinColumn(name = "id_order", referencedColumnName = "id_order")
     @ManyToOne(optional = false)
@@ -132,6 +138,14 @@ public class OrderDetail implements Serializable {
     @Override
     public String toString() {
         return "com.nvl.pojo.OrderDetail[ idOrderDetail=" + idOrderDetail + " ]";
+    }
+
+    public short getStatusOrder() {
+        return statusOrder;
+    }
+
+    public void setStatusOrder(short statusOrder) {
+        this.statusOrder = statusOrder;
     }
     
 }

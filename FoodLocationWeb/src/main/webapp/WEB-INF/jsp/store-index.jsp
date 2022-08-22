@@ -212,7 +212,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="order-check-area">
                                 <c:forEach var="u" items="${userStore}">
                                 <tr>
                                     <td class="text-center text-muted">${u.idUser}</td>
@@ -246,4 +246,10 @@
         </div>
     </div>
 <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="<c:url value="/js/menu.js" />"></script>
+<script>
+    $(document).ready(function(){
+        loadOrderDetailByStoreId();
+    });
+</script>
 </div>
