@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
             user.setLastName(user.getLastName());
             user.setEmail(user.getEmail());
             user.setPhone(user.getPhone());
+            user.setAddress("");
 
             user.setCreatedDate(new Date());
             user.setUpdateDate(new Date());

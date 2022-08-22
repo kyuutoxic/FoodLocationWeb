@@ -68,7 +68,7 @@ public class MenuOrder implements Serializable {
     @ManyToOne(optional = false)
     @JsonManagedReference
     private User idUser;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrder", fetch=FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrder")
     @JsonBackReference
     private Collection<OrderDetail> orderDetailCollection;
 

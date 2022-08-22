@@ -112,23 +112,25 @@
                             </div>
                             <div class="modal-body">
                                 <form>
-                                    <div class="mb-3" style="text-align: left">
-                                        <label for="recipient-name">Nhan xet chung:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
-                                    </div>
+                                    <!--                                    <div class="mb-3" style="text-align: left">
+                                                                            <label for="recipient-name">Nhan xet chung:</label>
+                                                                            <input type="text" class="form-control" id="recipient-name">
+                                                                        </div>-->
                                     <div class="mb-3" style="text-align: left">
                                         <label for="message-text">Nhan xet:</label>
                                         <textarea class="form-control" id="message-text"></textarea>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" datatarget="add-cmt-form" dataaction="close">Close</button>
+                                        <button type="button" class="btn btn-primary" datatarget="add-cmt-form" dataaction="send" onclick="addComment(${store.idUser})">Send</button>
+                                    </div>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" datatarget="add-cmt-form" dataaction="close">Close</button>
-                                <button type="button" class="btn btn-primary" datatarget="add-cmt-form" dataaction="send">Send</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
+
                 <div class="col-2">
                     <a href="#">
                         <span class="fa fa-camera"></span>
@@ -236,90 +238,37 @@
                 </div>
             </div>
             <div id="list-cmt" >
-                <div class="cmt-list">
-                    <div class="info-comment">
-                        <div class="info-comment-info">
-                            <img src="<c:url value="/resources/img/testimonial-1.jpg"/>" alt="alt" class="avatar"/>
-                            <div>
-                                <div style="font-weight: 500; color: black;">Ann Truong</div>
-                                <div>18/8/2022 11:41</div>
+                <c:forEach items="${comments}" var="comment">
+
+                    <div class="cmt-list">
+                        <div class="info-comment">
+                            <div class="info-comment-info">
+                                <img src="<c:url value="${comment.idUser.avatar}"/>" alt="alt" class="avatar"/>
+                                <div>
+                                    <div style="font-weight: 500; color: black;">${comment.idUser.firstName} ${comment.idUser.lastName}</div>
+                                    <div>${comment.createdDate}</div>
+                                </div>
+                            </div>
+                            <div class="avg-point">9.3</div>
+                        </div>
+                        <div class="content-comment">
+                            <div class="header-content">${comment.content}</div>
+<!--                            <div class="body-content">
+                                Cà phê brewing hand drip chuẩn vị Nhật nhưng hay hết món lắm, 2 loại bánh mà t thích cũng vậy (bánh bơ tỏi và việt quất). Dãy bàn ghế êm thích hợp học tập làm việc (thi thoảng có nhóm khách đi đông thì ồn). Máy cà thẻ đôi khi hay bị hư nên khá bất tiện cho người ko có Momo và tiền mặt (dạo này hình như đỡ rồi).
+                                PS. Hình chụp em mèo ko biết của quán hay sao nữa
+                            </div>-->
+                            <div class="media-content">
+                                <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
+                                <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
                             </div>
                         </div>
-                        <div class="avg-point">9.3</div>
-                    </div>
-                    <div class="content-comment">
-                        <div class="header-content">Menu khá ít & hơi đắt nhưng đúng với chất lượng</div>
-                        <div class="body-content">
-                            Cà phê brewing hand drip chuẩn vị Nhật nhưng hay hết món lắm, 2 loại bánh mà t thích cũng vậy (bánh bơ tỏi và việt quất). Dãy bàn ghế êm thích hợp học tập làm việc (thi thoảng có nhóm khách đi đông thì ồn). Máy cà thẻ đôi khi hay bị hư nên khá bất tiện cho người ko có Momo và tiền mặt (dạo này hình như đỡ rồi).
-                            PS. Hình chụp em mèo ko biết của quán hay sao nữa
-                        </div>
-                        <div class="media-content">
-                            <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
-                            <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
+                        <div class="interaction-comment">
+                            <i class="bi bi-heart-fill">Like</i>
+                            <i class="bi bi-chat-fill">Comment</i>
+                            <i class="bi bi-exclamation-triangle-fill">Report</i>
                         </div>
                     </div>
-                    <div class="interaction-comment">
-                        <i class="bi bi-heart-fill">Like</i>
-                        <i class="bi bi-chat-fill">Comment</i>
-                        <i class="bi bi-exclamation-triangle-fill">Report</i>
-                    </div>
-                </div>
-                <div class="cmt-list">
-                    <div class="info-comment">
-                        <div class="info-comment-info">
-                            <img src="<c:url value="/resources/img/testimonial-1.jpg"/>" alt="alt" class="avatar"/>
-                            <div>
-                                <div style="font-weight: 500; color: black;">Ann Truong</div>
-                                <div>18/8/2022 11:41</div>
-                            </div>
-                        </div>
-                        <div class="avg-point">9.3</div>
-                    </div>
-                    <div class="content-comment">
-                        <div class="header-content">Menu khá ít & hơi đắt nhưng đúng với chất lượng</div>
-                        <div class="body-content">
-                            Cà phê brewing hand drip chuẩn vị Nhật nhưng hay hết món lắm, 2 loại bánh mà t thích cũng vậy (bánh bơ tỏi và việt quất). Dãy bàn ghế êm thích hợp học tập làm việc (thi thoảng có nhóm khách đi đông thì ồn). Máy cà thẻ đôi khi hay bị hư nên khá bất tiện cho người ko có Momo và tiền mặt (dạo này hình như đỡ rồi).
-                            PS. Hình chụp em mèo ko biết của quán hay sao nữa
-                        </div>
-                        <div class="media-content">
-                            <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
-                            <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
-                        </div>
-                    </div>
-                    <div class="interaction-comment">
-                        <i class="bi bi-heart-fill">Like</i>
-                        <i class="bi bi-chat-fill">Comment</i>
-                        <i class="bi bi-exclamation-triangle-fill">Report</i>
-                    </div>
-                </div>
-                <div class="cmt-list">
-                    <div class="info-comment">
-                        <div class="info-comment-info">
-                            <img src="<c:url value="/resources/img/testimonial-1.jpg"/>" alt="alt" class="avatar"/>
-                            <div>
-                                <div style="font-weight: 500; color: black;">Ann Truong</div>
-                                <div>18/8/2022 11:41</div>
-                            </div>
-                        </div>
-                        <div class="avg-point">9.3</div>
-                    </div>
-                    <div class="content-comment">
-                        <div class="header-content">Menu khá ít & hơi đắt nhưng đúng với chất lượng</div>
-                        <div class="body-content">
-                            Cà phê brewing hand drip chuẩn vị Nhật nhưng hay hết món lắm, 2 loại bánh mà t thích cũng vậy (bánh bơ tỏi và việt quất). Dãy bàn ghế êm thích hợp học tập làm việc (thi thoảng có nhóm khách đi đông thì ồn). Máy cà thẻ đôi khi hay bị hư nên khá bất tiện cho người ko có Momo và tiền mặt (dạo này hình như đỡ rồi).
-                            PS. Hình chụp em mèo ko biết của quán hay sao nữa
-                        </div>
-                        <div class="media-content">
-                            <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
-                            <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
-                        </div>
-                    </div>
-                    <div class="interaction-comment">
-                        <i class="bi bi-heart-fill">Like</i>
-                        <i class="bi bi-chat-fill">Comment</i>
-                        <i class="bi bi-exclamation-triangle-fill">Report</i>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
             <div id="list-map">
                 <h1>Map</h1>

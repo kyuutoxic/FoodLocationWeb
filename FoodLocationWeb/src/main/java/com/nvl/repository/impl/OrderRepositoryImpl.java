@@ -6,6 +6,7 @@
 package com.nvl.repository.impl;
 
 import com.nvl.pojo.Cart;
+import com.nvl.pojo.Menu;
 import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.OrderDetail;
 import com.nvl.pojo.User;
@@ -14,7 +15,14 @@ import com.nvl.repository.OrderRepository;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
 import com.nvl.utils.Utils;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 public class OrderRepositoryImpl implements OrderRepository {
+
     @Autowired
     private MenuRepository menuRepository;
     @Autowired
@@ -38,7 +47,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     public boolean addReceipt(Map<Integer, Cart> cart, User user, float total) {
         try {
             Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+
             MenuOrder order = new MenuOrder();
             order.setIdUser(user);
             order.setCreatedDate(new Date());
@@ -46,7 +55,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
             session.save(order);
 
-            for (Cart c: cart.values()) {
+            for (Cart c : cart.values()) {
                 OrderDetail d = new OrderDetail();
                 d.setIdOrder(order);
                 d.setIdMenu(this.menuRepository.getMenuById(c.getMenuId()));
@@ -55,12 +64,12 @@ public class OrderRepositoryImpl implements OrderRepository {
 
                 session.save(d);
             }
-            
+
             return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
-        
+
         return false;
     }
 
@@ -103,5 +112,24 @@ public class OrderRepositoryImpl implements OrderRepository {
 //        return q.getResultList();
 //
 //    }
-    
+    @Override
+    public List<MenuOrder> getOrder(int storeId) {
+//        Session session = this.sessionFactory.getObject().getCurrentSession();
+//        CriteriaBuilder b = session.getCriteriaBuilder();
+//        CriteriaQuery<Menu> q = b.createQuery(Menu.class);
+//        Root root = q.from(Menu.class);
+//        q.select(root);
+//
+//        List<Predicate> predicates = new ArrayList<>();
+//        Predicate p = b.like(root.get("").as(String.class), String.format("%%%s%%", kw));
+//        predicates.add(p);
+//
+//        q.where(predicates.toArray(Predicate[]::new));
+//
+//        Query query = session.createQuery(q);
+//
+//        return query.getResultList();
+        return null;
+    }
+
 }

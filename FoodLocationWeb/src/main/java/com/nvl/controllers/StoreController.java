@@ -69,7 +69,7 @@ public class StoreController {
 //        khuc nay phai chan thang store nay coi store khac(lay cai idMenu ma trung voi id menu cua store hien tai moi cho vao)
         model.addAttribute("menu", this.menuService.getMenuById(idMenu));
         model.addAttribute("type", this.typeService.getType());
-        return "detailMenu";
+        return "storeDetailMenu";
     }
 
     @PostMapping(value = "/store/detail-menu/{idMenu}")
@@ -79,7 +79,7 @@ public class StoreController {
 //            return "redirect:/admin/menu";
 //        }
 
-        return "detailMenu";
+        return "storeDetailMenu";
     }
     
 }

@@ -304,3 +304,52 @@ function pay() {
         })
     }
 }
+
+function addComment(productId) {
+    fetch("/FoodLocationWeb/api/add-comment", {
+        method: 'post',
+        body: JSON.stringify({
+            "content": document.getElementById("message-text").value,
+            "storeId": productId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {
+        console.info(res)
+        return res.json()
+    }).then(function (data) {
+        console.info(data);
+        console.info("THANH CONG");
+
+        let area = document.getElementById("list-cmt");
+//        
+        area.innerHTML = `
+            <div class="cmt-list">
+                        <div class="info-comment">
+                            <div class="info-comment-info">
+                                <img src="${data.idUser.avatar}" alt="alt" class="avatar"/>
+                                <div>
+                                    <div style="font-weight: 500; color: black;">${data.idUser.firstName} ${data.idUser.lastName}</div>
+                                    <div>${data.createdDate}</div>
+                                </div>
+                            </div>
+                            <div class="avg-point">9.3</div>
+                        </div>
+                        <div class="content-comment">
+                            <div class="header-content">${data.content}</div>
+<!--                            <div class="body-content">
+                                Cà phê brewing hand drip chuẩn vị Nhật nhưng hay hết món lắm, 2 loại bánh mà t thích cũng vậy (bánh bơ tỏi và việt quất). Dãy bàn ghế êm thích hợp học tập làm việc (thi thoảng có nhóm khách đi đông thì ồn). Máy cà thẻ đôi khi hay bị hư nên khá bất tiện cho người ko có Momo và tiền mặt (dạo này hình như đỡ rồi).
+                                PS. Hình chụp em mèo ko biết của quán hay sao nữa
+                            </div>
+                            
+                        </div>
+                        <div class="interaction-comment">
+                            <i class="bi bi-heart-fill">Like</i>
+                            <i class="bi bi-chat-fill">Comment</i>
+                            <i class="bi bi-exclamation-triangle-fill">Report</i>
+                        </div>
+                    </div>  
+        ` + area.innerHTML
+    })
+}

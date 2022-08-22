@@ -56,9 +56,6 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByShipPrice", query = "SELECT u FROM User u WHERE u.shipPrice = :shipPrice")})
 public class User implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<MenuOrder> menuOrderCollection;
-
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String USER = "ROLE_USER";
     public static final String STORE = "ROLE_STORE";
@@ -106,8 +103,6 @@ public class User implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "user_role")
     private String userRole;
-    @Column(name = "active")
-    private Boolean active;
     @Size(max = 255)
     @Column(name = "avatar")
     private String avatar;
@@ -138,6 +133,15 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private Collection<MenuOrder> order1Collection;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "active")
+    private boolean active;
+    @JsonBackReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    private Collection<Comment> commentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    private Collection<MenuOrder> menuOrderCollection;
 
     public User() {
     }
@@ -227,14 +231,6 @@ public class User implements Serializable {
 
     public void setUserRole(String userRole) {
         this.userRole = userRole;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
     }
 
     public String getAvatar() {
@@ -346,6 +342,23 @@ public class User implements Serializable {
      */
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    @XmlTransient
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
+    }
+
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
     }
 
 }

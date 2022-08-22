@@ -28,4 +28,9 @@ public class ApiStoreController {
     public ResponseEntity<List<User>> getStore() {
         return new ResponseEntity<>(this.userDetailsService.getUserStore(), HttpStatus.OK);
     }
+    
+    @GetMapping("/order-store")
+    public ResponseEntity<List<User>> getOrder() {
+        return new ResponseEntity<>(this.userDetailsService.getUserStore(), HttpStatus.OK);
+    }
 }
