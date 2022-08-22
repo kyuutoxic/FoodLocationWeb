@@ -4,6 +4,7 @@
  */
 package com.nvl.pojo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -52,6 +53,7 @@ public class OrderDetail implements Serializable {
     private Menu idMenu;
     @JoinColumn(name = "id_order", referencedColumnName = "id_order")
     @ManyToOne(optional = false)
+    @JsonManagedReference
     private MenuOrder idOrder;
 
     public OrderDetail() {

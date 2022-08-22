@@ -4,6 +4,8 @@
  */
 package com.nvl.pojo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -11,6 +13,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -63,8 +66,10 @@ public class MenuOrder implements Serializable {
     private Date createdDate;
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     @ManyToOne(optional = false)
+    @JsonManagedReference
     private User idUser;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrder")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrder", fetch=FetchType.EAGER)
+    @JsonBackReference
     private Collection<OrderDetail> orderDetailCollection;
 
     public MenuOrder() {

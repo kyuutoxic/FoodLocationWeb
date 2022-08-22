@@ -7882,7 +7882,8 @@ a,button,.btn{
 }
 .app-header .app-header__content .app-header-left{
     display:flex;
-    align-items:center
+    align-items:center;
+    margin-left: 90px;
 }
 .app-header .app-header__content .header-menu .nav-link{
     color:#6c757d
@@ -8759,7 +8760,8 @@ a,button,.btn{
     top:9px
 }
 .search-wrapper.active{
-    width:330px
+    width:330px;
+    margin-left: 30px;
 }
 .search-wrapper.active .input-holder{
     width:290px;

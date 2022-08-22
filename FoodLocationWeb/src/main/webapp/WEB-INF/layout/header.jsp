@@ -32,7 +32,16 @@
                         <img src="${currentUser.avatar}" class="avatar" alt="alt"/>
                     </a>
                     <div class="dropdown-menu m-0">
-                        <a href="#" class="dropdown-item">User Account</a>
+                        <c:if test="${currentUser.userRole == 'ROLE_STORE'}">
+                            <a href="<c:url value="/store"/>" class="dropdown-item">Manage Store</a>
+                        </c:if>
+                        <c:if test="${currentUser.userRole == 'ROLE_ADMIN'}">
+                            <a href="<c:url value="/admin"/>" class="dropdown-item">Admin Page</a>
+                        </c:if>
+                        <c:if test="${currentUser.userRole == 'ROLE_USER'}">
+                            <a href="#" class="dropdown-item">User Account</a>
+                        </c:if>
+                        
                         <a href="<c:url value="/logout"/>" class="py-2 px-4">LogOut</a>
                     </div>
                 </div>
