@@ -136,4 +136,32 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getUserStore();
     }
 
+    @Override
+    public boolean updateUser(int idUser, User user) {
+        User u = (User) this.userRepository.getUserById(idUser);
+
+        try {
+            if (user != null) {
+                u.setFirstName(user.getFirstName());
+                u.setLastName(user.getLastName());
+                u.setEmail(user.getEmail());
+                u.setPhone(user.getPhone());
+                u.setAddress(user.getAddress());
+
+                u.setUpdateDate(new Date());
+                if (user.getFile() != null) {
+                    Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+                            ObjectUtils.asMap("resource_type", "auto"));
+                    u.setAvatar((String) r.get("secure_url"));
+                }
+
+            }
+            return this.userRepository.addUser(u);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
 }

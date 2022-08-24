@@ -21,7 +21,7 @@
             </div>  
             <div class="position-relative form-group">
                 <label for="note" class="">Note</label>
-                <form:textarea placeholder="Concacduma" id="note" class="form-control" path="menuNote"/>
+                <form:textarea placeholder="${menu.menuNote}" id="note" class="form-control" path="menuNote"/>
             </div>
             <div class="position-relative form-group">
                 <label for="exampleText" class="">Store</label>

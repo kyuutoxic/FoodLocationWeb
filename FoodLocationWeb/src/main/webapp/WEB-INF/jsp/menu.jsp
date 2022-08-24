@@ -40,8 +40,10 @@
                 </div>
             </div>
         </c:forEach>
-
-
-
+        <ul class="pagination">
+            <c:forEach begin="1" end="${Math.ceil(productCounter/9)}" var="page">
+                <li class="page-item"><a class="page-link" href="<c:url value="/menu" />?page=${page}">${page}</a></li>
+                </c:forEach>
+        </ul>
     </div>
 </div>

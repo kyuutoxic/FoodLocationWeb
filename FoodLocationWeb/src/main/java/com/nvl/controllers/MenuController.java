@@ -31,6 +31,7 @@ public class MenuController {
         String kw = params.getOrDefault("kw", null);
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         model.addAttribute("products", this.menuService.getMenus(kw, page));
+        model.addAttribute("productCounter", this.menuService.countMenu());
 
         return "menu";
     }
