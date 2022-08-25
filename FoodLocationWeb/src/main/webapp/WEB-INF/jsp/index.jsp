@@ -18,11 +18,10 @@
                     <div class="card-body">
                         <div class="tab-content mt-3" id="nav-tabContent">
                             <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <form class="row gx-2 gy-2 align-items-center">
-                                    <div class="col">
-                                        <div class="input-group-icon"><i class="fas fa-map-marker-alt text-danger input-box-icon"></i><label class="visually-hidden" for="inputDelivery">Address</label><input class="form-control input-box form-foodwagon-control" id="inputDelivery" type="text" placeholder="Enter Your Address"></div>
-                                    </div>
-                                    <div class="d-grid gap-3 col-sm-auto"><button class="btn btn-danger" type="submit">Find Food</button></div>
+                                <form class="d-flex bg-white p-0" action="<c:url value="/menu" />">
+                                    <input name="kw" class="form-control me-2" type="text" placeholder="Search" aria-label="Search"
+                                           style="border: none;">
+                                    <button class="btn btn-danger" type="submit">Search</button>
                                 </form>
                             </div>
                         </div>

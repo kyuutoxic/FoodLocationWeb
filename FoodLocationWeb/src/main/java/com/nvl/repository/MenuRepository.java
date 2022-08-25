@@ -17,11 +17,11 @@ public interface MenuRepository {
 
     boolean addMenu(Menu menu);
 
-    List<Menu> getMenus(String kw, int page);
+    List<Menu> getMenus(String kw, int page, String sort, String type);
 
     List<Menu> getMenuByIdStore(int idStore);
 
     Menu getMenuById(int idMenu);
 
-    int countMenu();
+    int countMenu(String kw);
 }

@@ -251,9 +251,9 @@ function deleteCart(productId) {
             $('#cartCounter1').attr('value', data.counter);
             $('#cartCounter2').attr('value', data.counter);
             $("#amountCart").html(data.amount);
-            $('#cart' + productId).attr('display', 'none');
-            $('#product1' + productId).attr('display', 'none');
-            $('#product2' + productId).attr('display', 'none');
+            $('#cart' + productId).attr('style', 'display: none');
+            $('#product1' + productId).attr('style', 'display: none');
+            $('#product2' + productId).attr('style', 'display: none');
             loadMiniCart();
         })
     }

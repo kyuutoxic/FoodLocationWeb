@@ -3,10 +3,7 @@
 
 <div class="app-header header-shadow">
     <div class="app-header__logo">
-        <!--        <div class="logo-src">
-                    Ahihi do ngok
-                </div>-->
-        <a href="<c:url value="/store"/>"><h4><strong>Store Manage Page</strong></h4></a>
+        <a href="<c:url value="/store"/>"><div class="logo-src"></div></a>
         <div class="header__pane ml-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -50,17 +47,11 @@
                         Statistics
                     </a>
                 </li>
-                <li class="btn-group nav-item">
-                    <a href="javascript:void(0);" class="nav-link">
-                        <i class="nav-link-icon fa fa-edit"></i>
-                        Projects
-                    </a>
-                </li>
                 <li class="dropdown nav-item">
-                    <a href="javascript:void(0);" class="nav-link">
+                    <button id="TooltipDemo" class="btn-open-options nav-link" style="border: none">
                         <i class="nav-link-icon fa fa-cog"></i>
                         Settings
-                    </a>
+                    </button>
                 </li>
             </ul>        </div>
         <div class="app-header-right">
@@ -380,7 +371,7 @@
 <div class="app-main">
     <div class="app-sidebar sidebar-shadow">
         <div class="app-header__logo">
-            <div class="logo-src"></div>
+            <a href="<c:url value="/store"/>"><div class="logo-src"></div></a>
             <div class="header__pane ml-auto">
                 <div>
                     <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">

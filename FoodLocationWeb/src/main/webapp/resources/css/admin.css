@@ -7883,7 +7883,6 @@ a,button,.btn{
 .app-header .app-header__content .app-header-left{
     display:flex;
     align-items:center;
-    margin-left: 90px;
 }
 .app-header .app-header__content .header-menu .nav-link{
     color:#6c757d

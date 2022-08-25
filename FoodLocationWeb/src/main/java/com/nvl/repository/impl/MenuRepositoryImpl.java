@@ -5,6 +5,7 @@
 package com.nvl.repository.impl;
 
 import com.nvl.pojo.Menu;
+import com.nvl.pojo.Type;
 import com.nvl.pojo.User;
 import com.nvl.repository.MenuRepository;
 import java.util.ArrayList;
@@ -13,10 +14,12 @@ import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -27,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author kyuut
  */
 @Repository
+@PropertySource("classpath:databases.properties")
 @Transactional
 public class MenuRepositoryImpl implements MenuRepository {
 
@@ -50,35 +54,78 @@ public class MenuRepositoryImpl implements MenuRepository {
     }
 
     @Override
-    public List<Menu> getMenus(String kw, int page) {
+    public List<Menu> getMenus(String kw, int page, String sort, String type) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Menu> q = b.createQuery(Menu.class);
-        Root root = q.from(Menu.class);
-        q.select(root);
+        Root rM = q.from(Menu.class);
+        Root rS = q.from(User.class);
+        Root rT = q.from(Type.class);
+        q.select(rM);
+        
+        List<Predicate> predicates = new ArrayList<>();
 
         if (kw != null) {
-            List<Predicate> predicates = new ArrayList<>();
-            Predicate p = b.like(root.get("menuName").as(String.class), String.format("%%%s%%", kw));
+            Predicate p = b.or(b.like(rM.get("menuName").as(String.class), String.format("%%%s%%", kw))
+                    ,b.like(rM.get("price").as(String.class), String.format("%%%s%%", kw))
+                    ,b.and(b.like(rS.get("nameStore").as(String.class), String.format("%%%s%%", kw))
+                    ,b.equal(rS.get("idUser"),rM.get("idStore")))
+                );
             predicates.add(p);
-
-            q.where(predicates.toArray(Predicate[]::new));
         }
+        
+        if (type != null) {
+            switch ( type ) {
+                case  "All day":
+                    Predicate pd = b.and(b.equal(rT.get("name"), type)
+                          ,b.equal(rT.get("name"), "All day")
+                          ,b.equal(rM.get("idType"), rT.get("id"))
+                        );
+                    predicates.add(pd);
+                    break;
+                case  "Night":
+                    Predicate pr = b.and(b.equal(rT.get("name"), type)
+                          ,b.equal(rM.get("idType"), rT.get("id"))
+                        );
+                    predicates.add(pr);
+                    break;
+                default:
+                    Predicate pre = b.or(b.and(b.equal(rT.get("name"), type),b.equal(rM.get("idType"), rT.get("id")))
+                                        ,b.and(b.equal(rT.get("name"), "All day"),b.equal(rM.get("idType"), rT.get("id")))
+                                        );
+                    predicates.add(pre);
+            }
+        }
+        
+        q.where(predicates.toArray(Predicate[]::new));
+        
+        q.groupBy(rM.get("idMenu"));
+        
+        if (sort != null) {
+            if (sort.equals("asc")) {
+                q.orderBy(b.asc(rM.get("price")));
+            }
+
+            if (sort.equals("desc")){
+                q.orderBy(b.desc(rM.get("price")));
+            }
+        }
+//        q.multiselect(rM.get("idMenu"),rM.get("menuName"),rM.get("price"),rM.get("menuStatus"),rM.get("image"),rM.get("idStore"),rM.get("menuStatus"));
 
         Query query = session.createQuery(q);
+        
         if (page > 0) {
             int size = Integer.parseInt(env.getProperty("page.size").toString());
             int start = (page - 1) * size;
             query.setFirstResult(start);
             query.setMaxResults(size);
-
         }
 
         return query.getResultList();
     }
 
     @Override
-    public int countMenu() {
+    public int countMenu(String kw) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("SELECT COUNT(*) FROM Menu");
 

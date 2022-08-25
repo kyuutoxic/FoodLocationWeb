@@ -30,9 +30,10 @@ public class MenuController {
             HttpSession session) {
         String kw = params.getOrDefault("kw", null);
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        model.addAttribute("products", this.menuService.getMenus(kw, page));
-        model.addAttribute("productCounter", this.menuService.countMenu());
-
+        String sort = params.get("sort");
+        String type = params.getOrDefault("type", null);
+        model.addAttribute("products", this.menuService.getMenus(kw, page, sort, type));
+        model.addAttribute("productCounter", this.menuService.countMenu(kw));
         return "menu";
     }
 }

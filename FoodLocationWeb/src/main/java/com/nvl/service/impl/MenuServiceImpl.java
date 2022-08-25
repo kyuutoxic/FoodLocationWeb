@@ -37,13 +37,13 @@ public class MenuServiceImpl implements MenuService {
     private UserRepository userRepository;
 
     @Override
-    public List<Menu> getMenus(String kw, int page) {
-        return this.menuRepository.getMenus(kw, page);
+    public List<Menu> getMenus(String kw, int page, String sort, String type) {
+        return this.menuRepository.getMenus(kw, page, sort, type);
     }
 
     @Override
-    public int countMenu() {
-        return this.menuRepository.countMenu();
+    public int countMenu(String kw) {
+        return this.menuRepository.countMenu(kw);
     }
 
     @Override

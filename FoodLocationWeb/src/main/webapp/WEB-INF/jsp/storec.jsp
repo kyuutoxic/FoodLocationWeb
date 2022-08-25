@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>  
 <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000"></div>
 <div class="container-xxl" style="padding-top: 100px; position: relative;" data-spy="scroll" id="list-home">
     <div class="row" style="margin: 15px 0; height: 400px">
@@ -147,14 +148,25 @@
             <div id="list-menu">
                 <h1>Menu</h1>
                 <div class="list-menu row">
+                    <fmt:formatDate type="time" timeStyle="short" value="<%=new java.util.Date()%>" timeZone="GMT+7" pattern="HH:mm" var="now"/>
                     <c:forEach items="${menu}" var="m">
                         <div class="menu-list col-6">
                             <img src="<c:url value="${m.image}"/>" alt="alt"/>
                             <div class="menu-name">${m.menuName}</div>
-                            <div class="menu-cost">
-                                ${m.price}
-                                <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price});toast();">+</button>
-                            </div>
+                            <c:choose>
+                                <c:when test="${m.menuStatus == true && m.menuFrom le now && m.menuTo ge now}">
+                                    <div class="menu-cost">
+                                        ${m.price}
+                                        <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price});toast();">+</button>
+                                    </div>
+                                </c:when>    
+                                <c:otherwise>
+                                    <div class="menu-cost">
+                                        ${m.price}
+                                        <p>Served from ${m.menuFrom} to ${m.menuTo}</p>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </c:forEach>
                 </div>
@@ -253,10 +265,10 @@
                         </div>
                         <div class="content-comment">
                             <div class="header-content">${comment.content}</div>
-<!--                            <div class="body-content">
-                                Cà phê brewing hand drip chuẩn vị Nhật nhưng hay hết món lắm, 2 loại bánh mà t thích cũng vậy (bánh bơ tỏi và việt quất). Dãy bàn ghế êm thích hợp học tập làm việc (thi thoảng có nhóm khách đi đông thì ồn). Máy cà thẻ đôi khi hay bị hư nên khá bất tiện cho người ko có Momo và tiền mặt (dạo này hình như đỡ rồi).
-                                PS. Hình chụp em mèo ko biết của quán hay sao nữa
-                            </div>-->
+                            <!--                            <div class="body-content">
+                                                            Cà phê brewing hand drip chuẩn vị Nhật nhưng hay hết món lắm, 2 loại bánh mà t thích cũng vậy (bánh bơ tỏi và việt quất). Dãy bàn ghế êm thích hợp học tập làm việc (thi thoảng có nhóm khách đi đông thì ồn). Máy cà thẻ đôi khi hay bị hư nên khá bất tiện cho người ko có Momo và tiền mặt (dạo này hình như đỡ rồi).
+                                                            PS. Hình chụp em mèo ko biết của quán hay sao nữa
+                                                        </div>-->
                             <div class="media-content">
                                 <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>
                                 <img src="<c:url value="/resources/img/menu-1.png"/>" alt="alt"/>

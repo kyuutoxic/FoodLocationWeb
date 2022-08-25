@@ -32,11 +32,11 @@ $(".cart").mouseleave(function () {
 
 
 
-$(document).ready(function () {
-    $(this).scrollTop(0);
-});
+//$(document).ready(function () {
+//    $(this).scrollTop(0);
+//});
 
-function toast(){
+function toast() {
     const main = document.getElementById("toast-container");
     if (main) {
         const toast = document.createElement("div");
@@ -48,20 +48,20 @@ function toast(){
 
         // Remove toast when clicked
         toast.onclick = function () {
-                main.removeChild(toast);
-                clearTimeout(autoRemoveId);
+            main.removeChild(toast);
+            clearTimeout(autoRemoveId);
         };
         const delay = (6000 / 1000).toFixed(2);
 
         toast.classList.add(`toast--success`);
-        
+
         toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
-        
+
         toast.style.marginBottom = `10px`;
-        
+
         toast.style.cursor = `pointer`;
-        
-       toast.style.backgroundColor = `white`;
+
+        toast.style.backgroundColor = `white`;
 
         toast.innerHTML = `
         <div class="toast-header">
@@ -74,7 +74,8 @@ function toast(){
         </div>`;
         main.appendChild(toast);
     }
-};
+}
+;
 
 //$('.btn-minus-quantity').click(function(){
 //    let quantity = $('#quantity').val();
@@ -89,7 +90,7 @@ function toast(){
 //    $('#quantity').val(quantity);
 //});
 
-$('.showModal').click((event)=>{
+$('.showModal').click((event) => {
     event.preventDefault();
     let target = $('.showModal').attr('datatarget');
     $('#' + target).attr("style", "display: block !important");
@@ -130,15 +131,37 @@ $('.showModal').click((event)=>{
     </div>
 </div>`;
 
-$('button').click(function(){
+$('button').click(function () {
     let target = $(this).attr('datatarget');
     let action = $(this).attr('dataaction');
-    if (action === 'close'){
+    if (action === 'close') {
         $('#' + target).attr("style", "");
-    }else{
+    } else {
         $('#' + target).attr("style", ""); //send do some ajax here
     }
 });
+
+function addPageParameter(value) {
+    var searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("page", value);
+    window.location.search = searchParams.toString();
+    console.log(window.location.search);
+}
+
+function addSortParameter(value) {
+    var searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("sort", value);
+    window.location.search = searchParams.toString();
+    console.log(window.location.search);
+}
+
+function addTypeParameter() {
+    let value = $('input[name="type"]:checked').val();
+    var searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("type", value);
+    window.location.search = searchParams.toString();
+    console.log(window.location.search);
+}
 
 var scrollSpy = new bootstrap.ScrollSpy(document.body, {
     target: '#list-tab', offset: 0, method: 'offset'
