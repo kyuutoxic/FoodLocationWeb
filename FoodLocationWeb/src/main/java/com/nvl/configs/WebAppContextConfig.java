@@ -32,7 +32,8 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = {
     "com.nvl.controllers",
     "com.nvl.repository",
-    "com.nvl.service"
+    "com.nvl.service",
+    "com.nvl.validator"
 })
 public class WebAppContextConfig implements WebMvcConfigurer {
 
@@ -100,4 +101,5 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         
         return m;
     }
+
 }

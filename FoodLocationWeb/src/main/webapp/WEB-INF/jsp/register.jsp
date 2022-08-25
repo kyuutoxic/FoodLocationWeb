@@ -30,11 +30,7 @@
                              class="img-fluid" alt="Phone image">
                     </div>
                     <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                        <c:if test="${errMsg != null}">
-                            <div class="alert alert-danger">
-                                ${errMsg}
-                            </div>
-                        </c:if>
+
 
                         <c:url value="/register" var="action" />
 
@@ -43,29 +39,43 @@
                                 <label class="form-label" for="form1Example1234">First name</label>
 
                                 <form:input type="text" id="form1Example1234" class="form-control form-control-lg" path="firstName"/>
+                                <form:errors path="firstName" cssClass="alert alert-danger" element="div" />
+
                             </div>
 
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example1235">Last name</label>
 
                                 <form:input type="text" id="form1Example1235" class="form-control form-control-lg" path="lastName"/>
+                                <form:errors path="lastName" cssClass="alert alert-danger" element="div" />
+
                             </div>
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example13">User name</label>
 
                                 <form:input type="text" id="form1Example13" class="form-control form-control-lg" path="username"/>
+                                <form:errors path="username" cssClass="alert alert-danger" element="div" />
+
                             </div>
 
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example23">Password</label>
 
                                 <form:input type="password" id="form1Example23" class="form-control form-control-lg" path="password"/>
+                                <form:errors path="password" cssClass="alert alert-danger" element="div" />
+
                             </div>
 
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example123">Confirm Password</label>
 
                                 <form:input type="password" id="form1Example123" class="form-control form-control-lg" path="confirmPassword"/>
+                                <form:errors path="confirmPassword" cssClass="alert alert-danger" element="div" />
+                                <c:if test="${errMsg != null}">
+                                    <div class="alert alert-danger">
+                                        ${errMsg}
+                                    </div>
+                                </c:if>
                             </div>
 
 
@@ -74,18 +84,24 @@
                                 <label class="form-label" for="email">Email</label>
 
                                 <form:input type="text" id="email" class="form-control form-control-lg" path="email"/>
+                                <form:errors path="email" cssClass="alert alert-danger" element="div" />
+
                             </div>
 
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="phone">Phone</label>
 
                                 <form:input type="text" id="phone" class="form-control form-control-lg" path="phone"/>
+                                <form:errors path="phone" cssClass="alert alert-danger" element="div" />
+
                             </div>
 
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example12356">Avatar</label>
 
                                 <form:input type="file" id="form1Example12356" class="form-control form-control-lg" path="file"/>
+                                <form:errors path="file" cssClass="alert alert-danger" element="div" />
+
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-lg btn-block btn-in-login">Register</button>

@@ -123,4 +123,40 @@ public class UserRepositoryImpl implements UserRepository {
         return q.getResultList();
     }
 
+    @Override
+    public List<User> checkPhone(String phone) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        predicates.add(builder.equal(root.get("phone").as(String.class), phone));
+
+        query = query.where(predicates.toArray(new Predicate[] {}));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<User> checkEmail(String email) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        predicates.add(builder.equal(root.get("email").as(String.class), email));
+
+        query = query.where(predicates.toArray(new Predicate[] {}));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
 }

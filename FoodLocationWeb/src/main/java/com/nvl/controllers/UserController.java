@@ -6,11 +6,16 @@ package com.nvl.controllers;
 
 import com.nvl.pojo.User;
 import com.nvl.service.UserService;
+import com.nvl.validator.RegisterValidator;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +29,13 @@ public class UserController {
 
     @Autowired
     private UserService userDetailsService;
+    @Autowired
+    private RegisterValidator registerValidator;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(registerValidator);
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -42,16 +54,18 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(Model model, @ModelAttribute(value = "user") User user) {
-        if (user.getPassword().isEmpty()
-                || !user.getPassword().equals(user.getConfirmPassword())) {
-            model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
-        } else {
-            if (this.userDetailsService.addUser(user) == true) {
-                return "redirect:/login";
-            }
+    public String register(Model model, @ModelAttribute(value = "user") @Valid User user, BindingResult result) {
+        if (!result.hasErrors()) {
+            if (user.getPassword().isEmpty()
+                    || !user.getPassword().equals(user.getConfirmPassword())) {
+                model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
+            } else {
+                if (this.userDetailsService.addUser(user) == true) {
+                    return "redirect:/login";
+                }
 
-            model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
+                model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
+            }
         }
 
         return "register";
@@ -64,16 +78,20 @@ public class UserController {
     }
 
     @PostMapping("/register-store")
-    public String registerStore(Model model, @ModelAttribute(value = "user") User user) {
-        if (user.getPassword().isEmpty()
-                || !user.getPassword().equals(user.getConfirmPassword())) {
-            model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
-        } else {
-            if (this.userDetailsService.addUserStore(user) == true) {
-                return "redirect:/login";
-            }
+    public String registerStore(Model model, @ModelAttribute(value = "user") @Valid User user, BindingResult result) {
+        if (!result.hasErrors()) {
+            if (user.getPassword().isEmpty()
+                    || !user.getPassword().equals(user.getConfirmPassword())) {
+                model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
+            } else if (user.getAddress().isEmpty()) {
+                model.addAttribute("errMsgAddress", "Ban phai dien dia chi chinh xac");
+            } else {
+                if (this.userDetailsService.addUserStore(user) == true) {
+                    return "redirect:/login";
+                }
 
-            model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
+                model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
+            }
         }
 
         return "registerStore";

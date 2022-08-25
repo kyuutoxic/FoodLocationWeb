@@ -164,4 +164,14 @@ public class UserServiceImpl implements UserService {
 
         return false;
     }
+
+    @Override
+    public List<User> checkPhone(String phone) {
+        return this.userRepository.checkPhone(phone);
+    }
+
+    @Override
+    public List<User> checkEmail(String email) {
+        return this.userRepository.checkEmail(email);
+    }
 }

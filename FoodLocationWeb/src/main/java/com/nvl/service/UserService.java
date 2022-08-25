@@ -30,4 +30,8 @@ public interface UserService extends UserDetailsService {
 
     boolean updateUser(int idUser, User user);
 
+    List<User> checkPhone(String phone);
+
+    List<User> checkEmail(String email);
+
 }

@@ -25,4 +25,7 @@ public interface UserRepository {
 
     List<User> getUserStore();
 
+    List<User> checkPhone(String phone);
+    List<User> checkEmail(String email);
+
 }
