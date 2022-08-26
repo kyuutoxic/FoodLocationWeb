@@ -5,9 +5,13 @@
 package com.nvl.controllers;
 
 
+import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.User;
 import com.nvl.service.MailService;
+import com.nvl.service.OrderService;
 import com.nvl.service.UserService;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +32,18 @@ public class MailController {
     
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private OrderService orderService;
 
     @PostMapping("/sendmail")
     public void sendMail(HttpSession session, @RequestBody Map<String, String> params) {
         
         String email = this.userService.getUserById(Integer.parseInt(params.get("idUser"))).getEmail();
         int type = Integer.parseInt(params.get("type"));
+        List<MenuOrder> m = this.orderService.getOrderById(Integer.parseInt(params.get("idOrder")));
 
-        this.mailService.sendEmail(type, email);
+        this.mailService.sendEmail(type, email, m);
     }
 
 }

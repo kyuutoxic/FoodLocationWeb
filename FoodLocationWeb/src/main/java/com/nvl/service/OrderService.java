@@ -8,6 +8,7 @@ package com.nvl.service;
 import com.nvl.pojo.Cart;
 import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.User;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,4 +17,6 @@ import java.util.Map;
  */
 public interface OrderService {
     MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total);
+    List<MenuOrder> getOrderById(int idOrder);
+    List<MenuOrder> getOrderByIdOrderDetail(int idOrderDetail);
 }

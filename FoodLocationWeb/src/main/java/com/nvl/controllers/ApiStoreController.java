@@ -4,9 +4,11 @@
  */
 package com.nvl.controllers;
 
+import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.OrderDetail;
 import com.nvl.pojo.User;
 import com.nvl.service.OrderDetailService;
+import com.nvl.service.OrderService;
 import com.nvl.service.UserService;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -31,6 +33,9 @@ public class ApiStoreController {
     @Autowired
     private OrderDetailService orderDetailService;
     
+    @Autowired
+    private OrderService orderService;
+    
     @GetMapping("/store")
     public ResponseEntity<List<User>> getStore() {
         return new ResponseEntity<>(this.userDetailsService.getUserStore(), HttpStatus.OK);
@@ -48,7 +53,13 @@ public class ApiStoreController {
     }
     
     @GetMapping("/store/deny/{idOrderDetail}")
-    public boolean denyOrderDetail(@PathVariable(value = "idOrderDetail") int idOrderDetail) {
-        return this.orderDetailService.denyOrder(idOrderDetail);
+    public ResponseEntity<List<MenuOrder>> denyOrderDetail(@PathVariable(value = "idOrderDetail") int idOrderDetail) {
+        
+        List<MenuOrder> m = this.orderService.getOrderByIdOrderDetail(idOrderDetail);
+                
+        if( this.orderDetailService.denyOrder(idOrderDetail) == true){
+            return new ResponseEntity<>(m, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 }

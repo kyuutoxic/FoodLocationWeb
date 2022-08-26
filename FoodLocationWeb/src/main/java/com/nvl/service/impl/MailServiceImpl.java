@@ -7,6 +7,8 @@ import com.nvl.service.MailService;
 import com.nvl.service.UserService;
 
 import freemarker.template.Configuration;
+import java.util.List;
+import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import org.hibernate.Session;
@@ -30,7 +32,7 @@ public class MailServiceImpl implements MailService {
     private Configuration freemarkerConfiguration;
 
     @Override
-    public void sendEmail(final int type, final String email) {
+    public void sendEmail(final int type, final String email, final List<MenuOrder> order) {
 
         MimeMessagePreparator preparator = new MimeMessagePreparator() 
         {
@@ -54,15 +56,15 @@ public class MailServiceImpl implements MailService {
         }
     }
     
-    public String geFreeMarkerTemplateContent(int type, Model model) {
+    public String geFreeMarkerTemplateContent(int type, final List<MenuOrder> order) {
         StringBuffer content = new StringBuffer();
         try {
             switch (type){
                 case 1:
-                    content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("ThanksEmail.html"), model));
+                    content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("ThanksEmail.html"), order));
                     break;
                 case 2:
-                    content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("SorryEmail.html"), model));
+                    content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("SorryEmail.html"), order));
                     break;
             }
             return content.toString();

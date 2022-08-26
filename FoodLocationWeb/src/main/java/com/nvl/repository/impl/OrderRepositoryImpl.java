@@ -35,6 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author duonghuuthanh
  */
 @Repository
+@Transactional
 public class OrderRepositoryImpl implements OrderRepository {
 
     @Autowired
@@ -131,6 +132,22 @@ public class OrderRepositoryImpl implements OrderRepository {
 //
 //        return query.getResultList();
         return null;
+    }
+
+    @Override
+    public List<MenuOrder> getOrderByIdOrderDetail(int idOrderDetail) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<MenuOrder> query = builder.createQuery(MenuOrder.class);
+        Root rO = query.from(MenuOrder.class);
+        Root rD = query.from(OrderDetail.class);
+        query = query.select(rO);
+
+        query = query.where(builder.equal(rD.get("idOrderDetail"), idOrderDetail),
+                            builder.equal(rO.get("idOrder"), rD.get("idOrder")));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
 
 }

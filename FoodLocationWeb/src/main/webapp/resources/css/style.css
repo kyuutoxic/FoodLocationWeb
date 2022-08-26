@@ -664,6 +664,12 @@
     margin-right: 5px;
 }
 
+.cart p, .cart span{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .myModal{
     position: fixed;
     padding: 180px 0 0 0;

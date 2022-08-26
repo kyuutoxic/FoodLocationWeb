@@ -67,6 +67,14 @@ function loadMenu(endpoint, idmenu) {
 }
 
 function loadStoreInCart() {
+    $('body').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+            <h1>loading...</h1>
+            <div class="spinner-border text-warning" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+        </div>
+    `);
     fetch(`http://localhost:8080/FoodLocationWeb/api/storeInCart`).then(function (res) {
         return res.json();
     }).then(function (data) {
@@ -79,6 +87,7 @@ function loadStoreInCart() {
                 <span>${e.shipPrice}</span>
                 <span>&nbsp;VNÐ</span>
             `;
+            $('.loading-page').remove();
         });
     });
 }
@@ -91,36 +100,35 @@ function loadStoreByMenuId(id) {
     });
 }
 
-function manageOrderDetail(idOrderDetail, type, idUser){
+function manageOrderDetail(idOrderDetail, type, idUser) {
     $('#btn-orderDetail' + idOrderDetail).html(`
         <div class="spinner-border text-warning" role="status">
             <span class="visually-hidden"></span>
         </div>
     `);
-    fetch(`http://localhost:8080/FoodLocationWeb/api/store/${type}/${idOrderDetail}`).then(function(res){
-        return res;
-    }).then(function(data){
-        if(data.status === 200){
-            if(type==="deny"){
-                fetch(`/FoodLocationWeb/sendmail`,{
+    fetch(`http://localhost:8080/FoodLocationWeb/api/store/${type}/${idOrderDetail}`).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        console.log(data);
+        if (type === "deny") {
+            fetch(`/FoodLocationWeb/sendmail`, {
                 method: 'post',
-                body:   JSON.stringify({
-                        "idUser": idUser,
-                        "type": 2
+                body: JSON.stringify({
+                    "idUser": data[0].idUser.idUser,
+                    "type": 2,
+                    "idOrder": data[0].idOrder
                 }),
                 headers: {
-                        "Content-Type": "application/json"
+                    "Content-Type": "application/json"
                 }
-            }).then(function(){
+            }).then(function () {
                 loadOrderDetailByStoreId();
             });
-            }
-            loadOrderDetailByStoreId();
         }
     });
 }
 
-function loadOrderDetailByStoreId(){
+function loadOrderDetailByStoreId() {
     fetch(`http://localhost:8080/FoodLocationWeb/api/store/order`).then(function (res) {
         return res.json();
     }).then(function (data) {
@@ -128,7 +136,7 @@ function loadOrderDetailByStoreId(){
         $('#order-check-area').text('');
         data.forEach(e => {
             $('#order-check-area').append(
-            `<tr id="orderDetail${e[0]}">
+                    `<tr id="orderDetail${e[0]}">
                 <td class="text-center text-muted">${++id}</td>
                 <td>${e[2].menuName}</td>
                 <td class="text-center">${e[1].idUser.address}</td>
@@ -340,48 +348,63 @@ function loadMiniCart() {
 
 function pay() {
     if (confirm("Ban chac chan thanh toan?") === true) {
+        $('body').append(`
+            <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+                <h1>loading...</h1>
+                <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden"></span>
+                </div>
+            </div>
+        `);
         let total = $('#total').text();
         fetch(`/FoodLocationWeb/api/pay/${total}`, {
             method: "post"
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
-            console.log(data);
-            fetch(`/FoodLocationWeb/sendmail`,{
+            fetch(`/FoodLocationWeb/sendmail`, {
                 method: 'post',
-                body:   JSON.stringify({
-                        "idUser": data[0].idUser.idUser,
-                        "type": 1
+                body: JSON.stringify({
+                    "idUser": data[0].idUser.idUser,
+                    "type": 1,
+                    "idOrder": data[0].idOrder
                 }),
                 headers: {
-                        "Content-Type": "application/json"
+                    "Content-Type": "application/json"
                 }
-            }).then(function(){window.location.replace("/FoodLocationWeb/");});
+            }).then(function () {
+                $('.loading-page').html(`<h1>YOUR PURCHASE IS SUCCESS<br>PLEASE CHECK YOUR MAIL FOR DETAIL</h1>`);
+                setTimeout(function(){
+                    window.location.replace("/FoodLocationWeb/");
+                },5000);
+            });
         });
     }
 }
 
 function addComment(productId, userId) {
-    if(userId == undefined)  {alert('Please sign in before comment!!')}  else {
-    fetch("/FoodLocationWeb/api/add-comment", {
-        method: 'post',
-        body: JSON.stringify({
-            "content": document.getElementById("message-text").value,
-            "storeId": productId
-        }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).then(function (res) {
-        console.info(res)
-        return res.json()
-    }).then(function (data) {
-        console.info(data);
-        console.info("THANH CONG");
+    if (userId == undefined) {
+        alert('Please sign in before comment!!')
+    } else {
+        fetch("/FoodLocationWeb/api/add-comment", {
+            method: 'post',
+            body: JSON.stringify({
+                "content": document.getElementById("message-text").value,
+                "storeId": productId
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (res) {
+            console.info(res)
+            return res.json()
+        }).then(function (data) {
+            console.info(data);
+            console.info("THANH CONG");
 
-        let area = document.getElementById("list-cmt");
+            let area = document.getElementById("list-cmt");
 //        
-        area.innerHTML = `
+            area.innerHTML = `
             <div class="cmt-list">
                         <div class="info-comment">
                             <div class="info-comment-info">
@@ -408,5 +431,7 @@ function addComment(productId, userId) {
                         </div>
                     </div>  
         ` + area.innerHTML
-    })};
+        })
+    }
+    ;
 }

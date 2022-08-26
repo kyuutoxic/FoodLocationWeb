@@ -18,9 +18,6 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0 pe-4">
                 <a href="<c:url value="/"/>" class="nav-item nav-link active">Home</a>
-                <c:if test="${currentUser.username != null}">
-                    <button type="nav-item nav-link" onclick="sendMail()">Send mail</button>
-                </c:if>
                 <a href="#" class="nav-item nav-link">About</a>
                 <a href="#" class="nav-item nav-link">Service</a>
                 <a href="<c:url value="/menu"/>" class="nav-item nav-link">Menu</a>
@@ -81,11 +78,11 @@
                                                                         class="img-fluid rounded-3" alt="Cotton T-shirt">
                                                                 </div>
                                                                 <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
-                                                                    <p class="lead mb-2" style="width: 100%">${m.value.menuName}</p>
-                                                                    <p><span class="text-muted">Quantity: </span>${m.value.quantity}</p>
+                                                                    <p class="lead mb-2" style="width: 100%" title="${m.value.menuName}">${m.value.menuName}</p>
+                                                                    <p title="${m.value.quantity}"><span class="text-muted">Quantity: </span>${m.value.quantity}</p>
                                                                 </div>
                                                                 <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                                                                    <span class="mb-0" style="width: 100%">${m.value.price}</span>
+                                                                    <span class="mb-0" style="width: 100%" title="${m.value.price}">${m.value.price}</span>
                                                                 </div>
                                                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
                                                                     <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg" onclick="deleteCart(${m.value.menuId})"></i></a>
@@ -95,11 +92,14 @@
                                                     </div>
                                                 </c:forEach>
                                             </c:if>
+                                            <c:if test="${cart == null}">
+                                                <h1>Chua co san pham trong gio hang</h1>
+                                            </c:if>
                                         </div>
 
                                         <div class="card">
                                             <div class="card-body "style="margin: auto">
-                                                <button type="button" class="btn btn-warning btn-block btn-lg" >Proceed to Pay</button>
+                                                <a href="<c:url value="/cart"/>"><button type="button" class="btn btn-warning btn-block btn-lg" >Proceed to Pay</button></a>
                                             </div>
                                         </div>
 
@@ -141,8 +141,7 @@
                                         <div id="minicart2">
                                             <c:if test="${cart != null}">
                                                 <c:forEach items="${cart}" var="m">
-
-                                                    <div class="card rounded-3 mb-4" id="product2${m.value.menuId}">
+                                                    <div class="card rounded-3 mb-4" id="product1${m.value.menuId}">
                                                         <div class="card-body p-4">
                                                             <div class="row d-flex justify-content-between align-items-center">
                                                                 <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
@@ -151,14 +150,14 @@
                                                                         class="img-fluid rounded-3" alt="Cotton T-shirt">
                                                                 </div>
                                                                 <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
-                                                                    <p class="lead mb-2" style="width: 100%">${m.value.menuName}</p>
-                                                                    <p><span class="text-muted">Quantity: </span>${m.value.quantity}</p>
+                                                                    <p class="lead mb-2" style="width: 100%" title="${m.value.menuName}">${m.value.menuName}</p>
+                                                                    <p title="${m.value.quantity}"><span class="text-muted">Quantity: </span>${m.value.quantity}</p>
                                                                 </div>
                                                                 <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                                                                    <span class="mb-0" style="width: 100%">${m.value.price}</span>
+                                                                    <span class="mb-0" style="width: 100%" title="${m.value.price}">${m.value.price}</span>
                                                                 </div>
                                                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
-                                                                    <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                                                                    <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg" onclick="deleteCart(${m.value.menuId})"></i></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -173,7 +172,7 @@
 
                                         <div class="card">
                                             <div class="card-body "style="margin: auto">
-                                                <button type="button" class="btn btn-warning btn-block btn-lg" >Proceed to Pay</button>
+                                                <a href="<c:url value="/cart"/>"><button type="button" class="btn btn-warning btn-block btn-lg" >Proceed to Pay</button></a>
                                             </div>
                                         </div>
 

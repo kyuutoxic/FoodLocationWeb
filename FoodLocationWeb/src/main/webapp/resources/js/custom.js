@@ -1,7 +1,4 @@
 /* global bootstrap */
-function sendMail(){
-    fetch("http://localhost:8080/FoodLocationWeb/sendmail", {method: 'post'});
-}
 $(window).scroll(function () {
     if ($(this).scrollTop() > 50) {
         $('.navbar').addClass('sticky-top shadow-sm');

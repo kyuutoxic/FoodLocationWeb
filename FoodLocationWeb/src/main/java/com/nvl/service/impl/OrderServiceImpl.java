@@ -11,6 +11,7 @@ import com.nvl.pojo.User;
 import com.nvl.repository.OrderRepository;
 import com.nvl.repository.UserRepository;
 import com.nvl.service.OrderService;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total) {
         return this.orderRepository.addReceipt(cart,user,total);
+    }
+
+    @Override
+    public List<MenuOrder> getOrderById(int idOrder) {
+        return this.orderRepository.getOrder(idOrder);
+    }
+
+    @Override
+    public List<MenuOrder> getOrderByIdOrderDetail(int idOrderDetail) {
+        return this.orderRepository.getOrderByIdOrderDetail(idOrderDetail);
     }
 
 }
