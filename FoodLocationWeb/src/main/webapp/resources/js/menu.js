@@ -1,4 +1,3 @@
-
 function loadAdminMenu(endpoint, menudetail) {
     fetch(endpoint).then(function (res) {
         return res.json();
@@ -33,7 +32,6 @@ function loadMenu(endpoint, idmenu) {
     fetch(endpoint).then(function (res) {
         return res.json();
     }).then(function (data) {
-        console.log(data);
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             msg += `
@@ -93,7 +91,7 @@ function loadStoreByMenuId(id) {
     });
 }
 
-function manageOrderDetail(idOrderDetail, type){
+function manageOrderDetail(idOrderDetail, type, idUser){
     $('#btn-orderDetail' + idOrderDetail).html(`
         <div class="spinner-border text-warning" role="status">
             <span class="visually-hidden"></span>
@@ -102,9 +100,22 @@ function manageOrderDetail(idOrderDetail, type){
     fetch(`http://localhost:8080/FoodLocationWeb/api/store/${type}/${idOrderDetail}`).then(function(res){
         return res;
     }).then(function(data){
-        if(data.status == 200){
+        if(data.status === 200){
+            if(type==="deny"){
+                fetch(`/FoodLocationWeb/sendmail`,{
+                method: 'post',
+                body:   JSON.stringify({
+                        "idUser": idUser,
+                        "type": 2
+                }),
+                headers: {
+                        "Content-Type": "application/json"
+                }
+            }).then(function(){
+                loadOrderDetailByStoreId();
+            });
+            }
             loadOrderDetailByStoreId();
-//            $('#orderDetail' + idOrderDetail).attr("style", "display: none !important");
         }
     });
 }
@@ -124,8 +135,8 @@ function loadOrderDetailByStoreId(){
                 <td class="text-center">${e[1].idUser.phone}</td>  
                 <td class="text-center">Uncheck</td> 
                 <td id="btn-orderDetail${e[0]}" class="text-center">
-                    <button class="btn btn-success" onclick="manageOrderDetail(${e[0]}, 'accept')">Accept Order</button>
-                    <button class="btn btn-danger" onclick="manageOrderDetail(${e[0]}, 'deny')">Deny Order</button>
+                    <button class="btn btn-success" onclick="manageOrderDetail(${e[0]}, 'accept', ${e[1].idUser.idUser})">Accept Order</button>
+                    <button class="btn btn-danger" onclick="manageOrderDetail(${e[0]}, 'deny', ${e[1].idUser.idUser})">Deny Order</button>
                 </td>
             </tr>`);
         });
@@ -220,7 +231,6 @@ $(".input-number").keydown(function (e) {
 
 function addToCart(id, name, price) {
     event.preventDefault();
-    console.log("hihi");
     fetch("/FoodLocationWeb/api/cart", {
         method: 'post',
         body: JSON.stringify({
@@ -298,7 +308,6 @@ function loadMiniCart() {
             result.push(data[key]);
         }
         for (let i = 0; i < result.length; i++) {
-            console.log("NGU");
             msg += `
             <div class="card rounded-3 mb-4" id="product${result[i].menuId}">
                 <div class="card-body p-4">
@@ -330,17 +339,25 @@ function loadMiniCart() {
 }
 
 function pay() {
-    if (confirm("Ban chac chan thanh toan?") == true) {
+    if (confirm("Ban chac chan thanh toan?") === true) {
         let total = $('#total').text();
-        total = total.slice(0, total.indexOf(' '));
-        console.log(total);
         fetch(`/FoodLocationWeb/api/pay/${total}`, {
             method: "post"
         }).then(function (res) {
             return res.json();
-        }).then(function (code) {
-            location.reload();
-        })
+        }).then(function (data) {
+            console.log(data);
+            fetch(`/FoodLocationWeb/sendmail`,{
+                method: 'post',
+                body:   JSON.stringify({
+                        "idUser": data[0].idUser.idUser,
+                        "type": 1
+                }),
+                headers: {
+                        "Content-Type": "application/json"
+                }
+            }).then(function(){window.location.replace("/FoodLocationWeb/");});
+        });
     }
 }
 

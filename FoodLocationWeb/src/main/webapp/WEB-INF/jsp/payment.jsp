@@ -83,9 +83,9 @@
 </div>
 <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
 <script>
-                    $(document).ready(function () {
-                        loadStoreInCart();
-                    });
+    $(document).ready(function () {
+        loadStoreInCart();
+    });
 </script>
 
 

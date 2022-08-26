@@ -6,6 +6,7 @@ package com.nvl.controllers;
 
 import com.nvl.pojo.Cart;
 import com.nvl.pojo.Menu;
+import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.User;
 import com.nvl.service.MenuService;
 import com.nvl.service.OrderService;
@@ -42,14 +43,17 @@ public class PaymentApiController {
     private MenuService menuService;
     
     @PostMapping("/pay/{total}")
-    public HttpStatus pay(HttpSession session, @PathVariable(value = "total") float total) {
+    public ResponseEntity<List<MenuOrder>> pay(HttpSession session, @PathVariable(value = "total") float total) {
+        List<MenuOrder> menuOrder = new ArrayList<>();
         User u = (User) session.getAttribute("currentUser");
-        if (this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total) == true) {
+        MenuOrder m = (MenuOrder)this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total);
+        if (m != null) {
+            menuOrder.add(m);
             session.removeAttribute("cart");
-            return HttpStatus.OK;
+            return new ResponseEntity<>(menuOrder, HttpStatus.OK);
         }
         
-        return HttpStatus.BAD_REQUEST;
+        return new ResponseEntity<>(menuOrder, HttpStatus.BAD_REQUEST);
     }
     
     @GetMapping("/storeInCart")

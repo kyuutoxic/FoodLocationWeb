@@ -149,8 +149,8 @@
                                 </tr>
                             </thead>
                             <tbody id="order-check-area">
-                                <c:forEach var="u" items="${userStore}">
-                                <tr>
+                                <%--<c:forEach var="u" items="${userStore}">--%>
+<!--                                <tr>
                                     <td class="text-center text-muted">${u.idUser}</td>
                                     <td>
                                         <div class="widget-content p-0">
@@ -171,8 +171,8 @@
                                     <td class="text-center">
                                         <div class="badge badge-warning">Pending</div>
                                     </td>
-                                </tr>
-                                </c:forEach>
+                                </tr>-->
+                                <%--</c:forEach>--%>
 
                             </tbody>
                         </table>

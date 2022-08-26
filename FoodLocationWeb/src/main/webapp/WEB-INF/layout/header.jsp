@@ -18,6 +18,9 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0 pe-4">
                 <a href="<c:url value="/"/>" class="nav-item nav-link active">Home</a>
+                <c:if test="${currentUser.username != null}">
+                    <button type="nav-item nav-link" onclick="sendMail()">Send mail</button>
+                </c:if>
                 <a href="#" class="nav-item nav-link">About</a>
                 <a href="#" class="nav-item nav-link">Service</a>
                 <a href="<c:url value="/menu"/>" class="nav-item nav-link">Menu</a>

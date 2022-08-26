@@ -44,7 +44,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public boolean addReceipt(Map<Integer, Cart> cart, User user, float total) {
+    public MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total) {
         try {
             Session session = this.sessionFactory.getObject().getCurrentSession();
 
@@ -61,16 +61,17 @@ public class OrderRepositoryImpl implements OrderRepository {
                 d.setIdMenu(this.menuRepository.getMenuById(c.getMenuId()));
                 d.setUnitPrice(c.getPrice());
                 d.setQuantity(c.getQuantity());
+                d.setStatusOrder((short)2);
 
                 session.save(d);
             }
 
-            return true;
+            return order;
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
 
-        return false;
+        return null;
     }
 
 //    @Override

@@ -6,6 +6,7 @@
 package com.nvl.service.impl;
 
 import com.nvl.pojo.Cart;
+import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.User;
 import com.nvl.repository.OrderRepository;
 import com.nvl.repository.UserRepository;
@@ -24,11 +25,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Override
-    public boolean addReceipt(Map<Integer, Cart> cart, User user, float total) {
-        if (cart != null)
-            return this.orderRepository.addReceipt(cart,user,total);
-        
-        return false;
+    public MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total) {
+        return this.orderRepository.addReceipt(cart,user,total);
     }
 
 }
