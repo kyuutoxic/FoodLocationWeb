@@ -24,4 +24,8 @@ public interface MenuRepository {
     Menu getMenuById(int idMenu);
 
     int countMenu(String kw);
+    
+    List<Object> frequency(int quarter, int month, int idStore, int year);
+    
+    List<Object> total(int quarter, int month, int idStore, int year);
 }

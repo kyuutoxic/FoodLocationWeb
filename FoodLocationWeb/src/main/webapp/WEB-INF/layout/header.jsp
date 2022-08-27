@@ -39,7 +39,7 @@
                             <a href="<c:url value="/admin"/>" class="dropdown-item">Admin Page</a>
                         </c:if>
                         <c:if test="${currentUser.userRole == 'ROLE_USER'}">
-                            <a href="<c:url value="/account-user/${currentUser.idUser}"/>" class="dropdown-item">User Account</a>
+                            <a href="<c:url value="/account-user/"/>" class="dropdown-item">User Account</a>
                         </c:if>
                         <a href="<c:url value="/logout"/>" class="py-2 px-4">LogOut</a>
                     </div>

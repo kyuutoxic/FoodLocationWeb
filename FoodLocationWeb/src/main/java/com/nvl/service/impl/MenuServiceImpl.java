@@ -79,4 +79,14 @@ public class MenuServiceImpl implements MenuService {
         return this.menuRepository.getMenuByIdStore(idStore);
     }
 
+    @Override
+    public List<Object> frequency(int quarter, int month, int idStore, int year) {
+        return this.menuRepository.frequency(quarter, month, idStore, year);
+    }
+
+    @Override
+    public List<Object> total(int quarter, int month, int idStore, int year) {
+        return this.menuRepository.total(quarter, month, idStore, year);
+    }
+
 }

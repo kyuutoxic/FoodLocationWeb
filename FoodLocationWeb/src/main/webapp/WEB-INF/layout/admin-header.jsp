@@ -3,7 +3,7 @@
 
 <div class="app-header header-shadow">
     <div class="app-header__logo">
-        <a href="<c:url value="/store"/>"><div class="logo-src"></div></a>
+        <a href="<c:url value="/admin"/>"><div class="logo-src"></div></a>
         <div class="header__pane ml-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -42,7 +42,7 @@
             </div>
             <ul class="header-menu nav">
                 <li class="nav-item">
-                    <a href="javascript:void(0);" class="nav-link">
+                    <a href="<c:url value="/admin/stats"/>" class="nav-link">
                         <i class="nav-link-icon fa fa-database"> </i>
                         Statistics
                     </a>
@@ -371,7 +371,7 @@
 <div class="app-main">
     <div class="app-sidebar sidebar-shadow">
         <div class="app-header__logo">
-            <a href="<c:url value="/store"/>"><div class="logo-src"></div></a>
+            <a href="<c:url value="/admin"/>"><div class="logo-src"></div></a>
             <div class="header__pane ml-auto">
                 <div>
                     <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -399,17 +399,11 @@
                     </span>
                 </button>
             </span>
-        </div>    <div class="scrollbar-sidebar">
+        </div>    
+        <div class="scrollbar-sidebar">
             <div class="app-sidebar__inner">
                 <ul class="vertical-nav-menu">
-                    <li class="app-sidebar__heading">Dashboards</li>
-                    <li>
-                        <a href="index.html" class="mm-active">
-                            <i class="metismenu-icon pe-7s-rocket"></i>
-                            Dashboard Example 1
-                        </a>
-                    </li>
-                    <li class="app-sidebar__heading">UI Components</li>
+                    <li class="app-sidebar__heading">Manage Page</li>
                     <li>
                         <a href="#">
                             <i class="metismenu-icon pe-7s-diamond"></i>
@@ -418,32 +412,17 @@
                         </a>
                         <ul>
                             <li>
-                                <a href="elements-buttons-standard.html">
+                                <a href="<c:url value="/admin/menu"/>">
                                     <i class="metismenu-icon"></i>
-                                    Buttons
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="metismenu-icon pe-7s-car"></i>
-                            Components
-                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="components-tabs.html">
-                                    <i class="metismenu-icon">
-                                    </i>Tabs
+                                    Menu
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li  >
-                        <a href="tables-regular.html">
+                        <a href="<c:url value="/admin/stats"/>">
                             <i class="metismenu-icon pe-7s-display2"></i>
-                            Tables
+                            Stats View
                         </a>
                     </li>
                 </ul>

@@ -4,10 +4,17 @@
  */
 package com.nvl.repository.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.nvl.pojo.User;
 import com.nvl.repository.UserRepository;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -30,6 +37,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
+    @Autowired
+    private Cloudinary cloudinary;
 
     @Override
     public boolean addUser(User user) {
@@ -157,6 +166,21 @@ public class UserRepositoryImpl implements UserRepository {
 
         Query q = session.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        System.out.println(user);
+        try {
+            session.update(user);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
     }
 
 }

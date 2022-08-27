@@ -17,7 +17,6 @@
                     <th scope="col">NAME</th>
                     <th scope="col">PRICE</th>
                     <th scope="col">STORE</th>
-                    <th scope="col">NOTE</th>
                     <th scope="col">FROM</th>
                     <th scope="col">TO</th>
                     <th scope="col">TYPE</th>

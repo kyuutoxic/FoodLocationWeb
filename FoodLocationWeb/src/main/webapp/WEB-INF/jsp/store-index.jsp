@@ -146,34 +146,10 @@
                                     <th class="text-center">Number</th>
                                     <th class="text-center">Status</th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="order-check-area">
-                                <%--<c:forEach var="u" items="${userStore}">--%>
-<!--                                <tr>
-                                    <td class="text-center text-muted">${u.idUser}</td>
-                                    <td>
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-3">
-                                                    <div class="widget-content-left">
-                                                        <img width="40" class="rounded-circle" src="${u.avatar}" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content-left flex2">
-                                                    <div class="widget-heading">${u.nameStore}</div>
-                                                    <div class="widget-subheading opacity-7">${u.firstName} ${u.lastName}</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">${u.address}</td>   
-                                    <td class="text-center">
-                                        <div class="badge badge-warning">Pending</div>
-                                    </td>
-                                </tr>-->
-                                <%--</c:forEach>--%>
-
                             </tbody>
                         </table>
                     </div>

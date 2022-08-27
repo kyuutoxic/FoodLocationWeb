@@ -150,23 +150,29 @@
                 <div class="list-menu row">
                     <fmt:formatDate type="time" timeStyle="short" value="<%=new java.util.Date()%>" timeZone="GMT+7" pattern="HH:mm" var="now"/>
                     <c:forEach items="${menu}" var="m">
-                        <div class="menu-list col-6">
-                            <img src="<c:url value="${m.image}"/>" alt="alt"/>
-                            <div class="menu-name">${m.menuName}</div>
-                            <c:choose>
-                                <c:when test="${m.menuStatus == true && m.menuFrom le now && m.menuTo ge now}">
-                                    <div class="menu-cost">
-                                        ${m.price}
-                                        <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price});toast();">+</button>
-                                    </div>
-                                </c:when>    
-                                <c:otherwise>
-                                    <div class="menu-cost">
-                                        ${m.price}
-                                        <p>Served from ${m.menuFrom} to ${m.menuTo}</p>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
+                        <div class="menu-list col-6 row">
+                            <div class="col-3">
+                                <img src="<c:url value="${m.image}"/>" alt="alt"/>
+                            </div>
+                            <div class="col-6">
+                                <div class="menu-name">${m.menuName}</div>
+                            </div>
+                            <div class="col-3">
+                                <c:choose>
+                                    <c:when test="${m.menuStatus == true && m.menuFrom le now && m.menuTo ge now}">
+                                        <div class="menu-cost">
+                                            ${m.price}
+                                            <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price});toast();">+</button>
+                                        </div>
+                                    </c:when>    
+                                    <c:otherwise>
+                                        <div class="menu-cost">
+                                            ${m.price}
+                                            <p>Served from ${m.menuFrom} to ${m.menuTo}</p>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                         </div>
                     </c:forEach>
                 </div>

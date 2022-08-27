@@ -16,6 +16,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -138,31 +140,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUser(int idUser, User user) {
-        User u = (User) this.userRepository.getUserById(idUser);
+        User u = this.userRepository.getUserById(idUser);
+        if (user != null && u != null) {
+            u.setFirstName(user.getFirstName());
+            u.setLastName(user.getLastName());
+            u.setEmail(user.getEmail());
+            u.setPhone(user.getPhone());
+            u.setAddress(user.getAddress());
 
-        try {
-            if (user != null) {
-                u.setFirstName(user.getFirstName());
-                u.setLastName(user.getLastName());
-                u.setEmail(user.getEmail());
-                u.setPhone(user.getPhone());
-                u.setAddress(user.getAddress());
-
-                u.setUpdateDate(new Date());
-                if (user.getFile() != null) {
-                    Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+            u.setUpdateDate(new Date());
+            if (user.getFile().getSize() > 0) {
+                Map r;
+                try {
+                    r = this.cloudinary.uploader().upload(user.getFile().getBytes(),
                             ObjectUtils.asMap("resource_type", "auto"));
                     u.setAvatar((String) r.get("secure_url"));
+                } catch (IOException ex) {
+                    Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
-            return this.userRepository.addUser(u);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
-
-        return false;
+        return this.userRepository.updateUser(u);
     }
 
     @Override

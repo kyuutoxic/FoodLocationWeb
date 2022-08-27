@@ -1,4 +1,12 @@
 function loadAdminMenu(endpoint, menudetail) {
+    $('body').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+            <h1>loading...</h1>
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+        </div>
+    `);
     fetch(endpoint).then(function (res) {
         return res.json();
     }).then(function (data) {
@@ -12,12 +20,13 @@ function loadAdminMenu(endpoint, menudetail) {
                     <td>${data[i].menuName}</td>
                     <td>${data[i].price}</td>
                     <td>${data[i].idStore.nameStore}</td>
-                    <td>${data[i].menuNote}</td>
                     <td>${data[i].menuFrom}</td>
                     <td>${data[i].menuTo}</td>
                     <td>${data[i].idType.name}</td>
                     <td>
                         <a href="${menudetail}${data[i].idMenu}"><button type="button" class="btn btn-primary">Detail</button></a>
+                    </td>
+                    <td>
                         <button type="button" class="btn btn-primary">Delete</button>
                     </td>
                 </tr>
@@ -25,6 +34,7 @@ function loadAdminMenu(endpoint, menudetail) {
         }
         let d = document.getElementById("adminProd");
         d.innerHTML = msg;
+        $('.loading-page').remove();
     })
 }
 
@@ -101,7 +111,7 @@ function loadStoreByMenuId(id) {
 }
 
 function manageOrderDetail(idOrderDetail, type, idUser) {
-    $('#btn-orderDetail' + idOrderDetail).html(`
+    $(`#btn-${type}OrderDetail` + idOrderDetail).html(`
         <div class="spinner-border text-warning" role="status">
             <span class="visually-hidden"></span>
         </div>
@@ -109,7 +119,6 @@ function manageOrderDetail(idOrderDetail, type, idUser) {
     fetch(`http://localhost:8080/FoodLocationWeb/api/store/${type}/${idOrderDetail}`).then(function (res) {
         return res.json();
     }).then(function (data) {
-        console.log(data);
         if (type === "deny") {
             fetch(`/FoodLocationWeb/sendmail`, {
                 method: 'post',
@@ -125,6 +134,7 @@ function manageOrderDetail(idOrderDetail, type, idUser) {
                 loadOrderDetailByStoreId();
             });
         }
+        loadOrderDetailByStoreId();
     });
 }
 
@@ -142,8 +152,10 @@ function loadOrderDetailByStoreId() {
                 <td class="text-center">${e[1].idUser.address}</td>
                 <td class="text-center">${e[1].idUser.phone}</td>  
                 <td class="text-center">Uncheck</td> 
-                <td id="btn-orderDetail${e[0]}" class="text-center">
+                <td id="btn-acceptOrderDetail${e[0]}" class="text-center">
                     <button class="btn btn-success" onclick="manageOrderDetail(${e[0]}, 'accept', ${e[1].idUser.idUser})">Accept Order</button>
+                </td>
+                <td id="btn-denyOrderDetail${e[0]}" class="text-center">
                     <button class="btn btn-danger" onclick="manageOrderDetail(${e[0]}, 'deny', ${e[1].idUser.idUser})">Deny Order</button>
                 </td>
             </tr>`);
@@ -396,29 +408,25 @@ function addComment(productId, userId) {
                 "Content-Type": "application/json"
             }
         }).then(function (res) {
-            console.info(res)
             return res.json()
         }).then(function (data) {
-            console.info(data);
-            console.info("THANH CONG");
+            let createdDate = moment(data.createdDate).format("YYYY/MM/DD HH:MM:SS.S");
 
-            let area = document.getElementById("list-cmt");
-//        
-            area.innerHTML = `
+            $("list-cmt").append(`
             <div class="cmt-list">
                         <div class="info-comment">
                             <div class="info-comment-info">
                                 <img src="${data.idUser.avatar}" alt="alt" class="avatar"/>
                                 <div>
                                     <div style="font-weight: 500; color: black;">${data.idUser.firstName} ${data.idUser.lastName}</div>
-                                    <div>${data.createdDate}</div>
+                                    <div>${createdDate}</div>
                                 </div>
                             </div>
                             <div class="avg-point">9.3</div>
                         </div>
                         <div class="content-comment">
                             <div class="header-content">${data.content}</div>
-<!--                            <div class="body-content">
+                            <div class="body-content">
                                 Cà phê brewing hand drip chuẩn vị Nhật nhưng hay hết món lắm, 2 loại bánh mà t thích cũng vậy (bánh bơ tỏi và việt quất). Dãy bàn ghế êm thích hợp học tập làm việc (thi thoảng có nhóm khách đi đông thì ồn). Máy cà thẻ đôi khi hay bị hư nên khá bất tiện cho người ko có Momo và tiền mặt (dạo này hình như đỡ rồi).
                                 PS. Hình chụp em mèo ko biết của quán hay sao nữa
                             </div>
@@ -430,7 +438,7 @@ function addComment(productId, userId) {
                             <i class="bi bi-exclamation-triangle-fill">Report</i>
                         </div>
                     </div>  
-        ` + area.innerHTML
+        `);
         })
     }
     ;

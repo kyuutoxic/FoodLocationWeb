@@ -49,6 +49,7 @@
         <script src="<c:url value="/resources/lib/tempusdominus/js/moment.min.js" />"></script>
         <script src="<c:url value="/resources/lib/tempusdominus/js/moment-timezone.min.js" />"></script>
         <script src="<c:url value="/resources/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js" />"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
     </head>
     <body>

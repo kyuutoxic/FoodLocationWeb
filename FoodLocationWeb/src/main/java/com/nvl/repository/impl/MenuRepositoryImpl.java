@@ -5,9 +5,12 @@
 package com.nvl.repository.impl;
 
 import com.nvl.pojo.Menu;
+import com.nvl.pojo.MenuOrder;
+import com.nvl.pojo.OrderDetail;
 import com.nvl.pojo.Type;
 import com.nvl.pojo.User;
 import com.nvl.repository.MenuRepository;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +72,7 @@ public class MenuRepositoryImpl implements MenuRepository {
             Predicate p = b.or(b.like(rM.get("menuName").as(String.class), String.format("%%%s%%", kw))
                     ,b.like(rM.get("price").as(String.class), String.format("%%%s%%", kw))
                     ,b.and(b.like(rS.get("nameStore").as(String.class), String.format("%%%s%%", kw))
-                    ,b.equal(rS.get("idUser"),rM.get("idStore")))
+                           ,b.equal(rS.get("idUser"),rM.get("idStore")))
                 );
             predicates.add(p);
         }
@@ -152,6 +155,72 @@ public class MenuRepositoryImpl implements MenuRepository {
 
         Query q = session.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public List<Object> frequency(int quarter, int month, int idStore, int year) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root rM = q.from(Menu.class);
+        Root rD = q.from(OrderDetail.class);
+        Root rO = q.from(MenuOrder.class);
+        
+        List<Predicate> predicates = new ArrayList<>();
+        
+        Predicate rootPredicates = b.and(b.equal(rD.get("idMenu"), rM.get("idMenu")),
+                                         b.equal(rD.get("idOrder"), rO.get("idOrder")));
+        
+        predicates.add(rootPredicates);
+        
+        if (quarter > 0 && quarter <= 4) {
+            Predicate p = b.equal(b.function("QUARTER", Integer.class, rO.get("createdDate")), quarter);
+            predicates.add(p);
+        }else if (month > 0 && month <= 12) {
+            Predicate p = b.equal(b.function("MONTH", Integer.class, rO.get("createdDate")), month);
+            predicates.add(p);
+        }
+                     
+        if (year > 1900 && year <= Year.now().getValue()) {
+            Predicate p = b.equal(b.function("YEAR", Integer.class, rO.get("createdDate")), year);
+            predicates.add(p);
+        }
+        
+        if (idStore > 0) {
+            Predicate p = b.equal(rM.get("idStore"), idStore);
+            predicates.add(p);
+        }
+
+        q.where(predicates.toArray(Predicate[]::new));
+        
+        q.multiselect(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))));
+        
+        Query revenueQuery = session.createQuery(q);
+        
+        String revenueText = revenueQuery.getSingleResult().toString();
+
+        int revenue = Integer.parseInt(revenueText.substring(0, revenueText.indexOf('.')));
+        
+        System.out.println(revenue);
+
+        q.multiselect(rM.get("idMenu"), 
+                      rM.get("menuName"), 
+                      b.count(rD.get("idOrderDetail")), 
+                      b.sum(b.prod(rD.get("unitPrice"), 
+                      rD.get("quantity"))), 
+                      b.quot(b.prod(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))),100), revenue));
+        q.groupBy(rD.get("idMenu"));
+        q.orderBy(b.asc(rD.get("idMenu")));
+
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object> total(int quarter, int month, int idStore, int year) {
+        List<Object> haha = new ArrayList<>();
+        return haha;
     }
 
 }

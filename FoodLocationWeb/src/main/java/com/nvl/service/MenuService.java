@@ -25,5 +25,9 @@ public interface MenuService {
     boolean addMenu(Menu menu, User user);
 
     List<Menu> getMenuByIdStore(int idStore);
+    
+    List<Object> frequency(int quarter, int month, int idStore, int year);
+    
+    List<Object> total(int quarter, int month, int idStore, int year);
 
 }

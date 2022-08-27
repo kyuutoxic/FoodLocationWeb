@@ -20,7 +20,9 @@
         <title>
             <tiles:insertAttribute name="title" />
         </title>
-
+        
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        
         <!-- Template Stylesheet -->
         <link href="<c:url value="/css/admin.css" />" rel="stylesheet">
 

@@ -97,21 +97,23 @@ public class UserController {
         return "registerStore";
     }
 
-    @GetMapping("/account-user/{idUser}")
-    public String myAccountView(Model model, @PathVariable(value = "idUser") int idUser, HttpSession session) {
+    @GetMapping("/account-user/")
+    public String myAccountView(Model model, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
         model.addAttribute("user", u);
         return "accountUser";
     }
 
-    @PostMapping("/account-user/{idUser}")
-    public String myAccount(Model model, @PathVariable(value = "idUser") int idUser, HttpSession session) {
-        User u = (User) session.getAttribute("user");
-        if (this.userDetailsService.updateUser(idUser, u) == true) {
+    @PostMapping("/account-user/")
+    public String myAccount(Model model, @ModelAttribute(value = "user") User user, HttpSession session) {
+        User u = (User) session.getAttribute("currentUser");
+        
+        if (this.userDetailsService.updateUser(u.getIdUser(), user) == true) {
+            session.setAttribute("currentUser", this.userDetailsService.getUserById(u.getIdUser()));
             return "redirect:/";
         }
-
-        return "accountUser";
+        
+        return "redirect:/account-user/";
     }
 
 }
