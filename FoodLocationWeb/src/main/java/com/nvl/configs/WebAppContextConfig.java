@@ -6,6 +6,10 @@ package com.nvl.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.nvl.validator.RegisterValidator;
+import com.nvl.validator.WebAppValidator;
+import java.util.HashSet;
+import java.util.Set;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -87,13 +91,25 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         return validator();
     }
     
-    @Bean
-    public Validator validator() {
-        LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
-        v.setValidationMessageSource(messageSource());
-        
-        return v;
+    @Bean(name = "validator")
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
+        localValidatorFactoryBean.setValidationMessageSource(messageSource());
+
+        return localValidatorFactoryBean;
     }
+    
+    @Bean
+    public WebAppValidator registerValidator() {
+        Set<Validator> springValidators = new HashSet<>();
+        springValidators.add(new RegisterValidator());
+
+        WebAppValidator webAppValidator = new WebAppValidator();
+        webAppValidator.setValidators(springValidators);
+
+        return webAppValidator;
+    }
+    
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource m = new ResourceBundleMessageSource();

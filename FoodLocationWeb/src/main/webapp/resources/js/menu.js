@@ -1,3 +1,27 @@
+function addFollow(idStore, idUser) {
+    event.preventDefault();
+    if (idUser == null) {
+        alert('ban chua dang nhap')
+        window.location.replace("/FoodLocationWeb/login");
+    } else {
+        fetch("/FoodLocationWeb/api/follow", {
+            method: 'post',
+            body: JSON.stringify({
+                "storeId": idStore
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (res) {
+            return res;
+        }).then(function (data) {
+            console.log(data);
+            let i = document.getElementById(`follow${idStore}`)
+            i.style.display = "none"
+        });
+    }
+}
+
 function loadAdminMenu(endpoint, menudetail) {
     $('body').append(`
         <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
@@ -38,10 +62,11 @@ function loadAdminMenu(endpoint, menudetail) {
     })
 }
 
-function loadMenu(endpoint, idmenu) {
+function loadMenu(endpoint, idmenu, userId) {
     fetch(endpoint).then(function (res) {
         return res.json();
     }).then(function (data) {
+        console.log("data")
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             msg += `
@@ -62,8 +87,8 @@ function loadMenu(endpoint, idmenu) {
                                 <i class="bi bi-camera-fill"></i>
                                 <span>12</span>
                             </a>
-                            <a style="float: right; margin-right: 20px;">
-                                <i class="bi bi-bookmark-fill"></i> Luu
+                            <a style="float: right; margin-right: 20px;" id="follow${data[i].idUser}">
+                                <i class="bi bi-bookmark-fill" onclick="addFollow(${data[i].idUser}, ${userId})"></i> Luu
                             </a>
                         </div>    
                     </div>
@@ -73,7 +98,21 @@ function loadMenu(endpoint, idmenu) {
         }
         let d = document.getElementById("listmenu");
         d.innerHTML = msg;
+        loadFollowed();
     });
+}
+
+function loadFollowed() {
+    fetch("/FoodLocationWeb/api/check-follow").then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        console.log(data);
+        for (let i = 0; i < data.length; i++) {
+            `follow${data[i].idStore.idUser}`
+            let d = document.getElementById(`follow${data[i].idStore.idUser}`);
+            d.style.display = "none"
+        }
+    })
 }
 
 function loadStoreInCart() {
@@ -179,12 +218,10 @@ function comparison(currentVal, id) {
 
 $('.btn-number').click(function (e) {
     e.preventDefault();
-
     fieldName = $(this).attr('data-field');
     type = $(this).attr('data-type');
     let input = $("#" + fieldName);
     let currentVal = parseInt(input.val());
-
     if (!isNaN(currentVal)) {
         if (type == 'minus') {
 
@@ -216,7 +253,6 @@ $('.input-number').change(function () {
     minValue = parseInt($(this).attr('min'));
     maxValue = parseInt($(this).attr('max'));
     valueCurrent = parseInt($(this).val());
-
     name = $(this).attr('name');
     if (valueCurrent >= minValue) {
         $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
@@ -234,7 +270,7 @@ $('.input-number').change(function () {
 
 });
 $(".input-number").keydown(function (e) {
-    // Allow: backspace, delete, tab, escape, enter and .
+// Allow: backspace, delete, tab, escape, enter and .
     if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
             // Allow: Ctrl+A
                     (e.keyCode == 65 && e.ctrlKey === true) ||
@@ -248,7 +284,6 @@ $(".input-number").keydown(function (e) {
                 e.preventDefault();
             }
         });
-
 function addToCart(id, name, price) {
     event.preventDefault();
     fetch("/FoodLocationWeb/api/cart", {
@@ -318,10 +353,8 @@ function loadMiniCart() {
     }).then(function (data) {
         let d = document.getElementById("minicart");
         let c = document.getElementById("minicart2");
-
         d.innerHTML = "";
         c.innerHTML = "";
-
         let msg = "";
         let result = [];
         for (var key in data) {
@@ -354,7 +387,6 @@ function loadMiniCart() {
         }
         d.innerHTML += msg;
         c.innerHTML += msg;
-
     })
 }
 
@@ -386,9 +418,9 @@ function pay() {
                 }
             }).then(function () {
                 $('.loading-page').html(`<h1>YOUR PURCHASE IS SUCCESS<br>PLEASE CHECK YOUR MAIL FOR DETAIL</h1>`);
-                setTimeout(function(){
+                setTimeout(function () {
                     window.location.replace("/FoodLocationWeb/");
-                },5000);
+                }, 5000);
             });
         });
     }
@@ -411,7 +443,6 @@ function addComment(productId, userId) {
             return res.json()
         }).then(function (data) {
             let createdDate = moment(data.createdDate).format("YYYY/MM/DD HH:MM:SS.S");
-
             $("list-cmt").append(`
             <div class="cmt-list">
                         <div class="info-comment">

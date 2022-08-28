@@ -684,9 +684,10 @@
     <c:url value="/api/store" var="endpoint" />
     <c:url value="/storec/" var="idmenu" />
 
-
     window.onload = function () {
-        loadMenu('${endpoint}', '${idmenu}');
+        loadMenu('${endpoint}', '${idmenu}', '${currentUser.idUser}');
     }
+
+
 </script>
 
