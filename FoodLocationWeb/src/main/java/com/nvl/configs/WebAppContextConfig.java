@@ -6,6 +6,7 @@ package com.nvl.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.nvl.validator.MenuValidator;
 import com.nvl.validator.RegisterValidator;
 import com.nvl.validator.WebAppValidator;
 import java.util.HashSet;
@@ -99,10 +100,21 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         return localValidatorFactoryBean;
     }
     
-    @Bean
+    @Bean("registerValidator")
     public WebAppValidator registerValidator() {
         Set<Validator> springValidators = new HashSet<>();
         springValidators.add(new RegisterValidator());
+
+        WebAppValidator webAppValidator = new WebAppValidator();
+        webAppValidator.setValidators(springValidators);
+
+        return webAppValidator;
+    }
+    
+    @Bean("menuValidator")
+    public WebAppValidator menuValidator() {
+        Set<Validator> springValidators = new HashSet<>();
+        springValidators.add(new MenuValidator());
 
         WebAppValidator webAppValidator = new WebAppValidator();
         webAppValidator.setValidators(springValidators);

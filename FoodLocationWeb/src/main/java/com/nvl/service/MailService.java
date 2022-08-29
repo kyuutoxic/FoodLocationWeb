@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface MailService
 {
-	public void sendEmail(final int type, final String email, final List<MenuOrder> order);
+	public void sendEmail(final int type, final String email, final Map<String, Object> object);
 }

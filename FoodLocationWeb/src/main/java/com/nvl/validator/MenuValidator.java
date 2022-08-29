@@ -5,6 +5,7 @@
 package com.nvl.validator;
 
 import com.nvl.pojo.Menu;
+import com.nvl.pojo.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -18,12 +19,12 @@ public class MenuValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return Menu.class.isAssignableFrom(clazz);
+        return Menu.class.isAssignableFrom(clazz) || User.class.isAssignableFrom(clazz);
     }
 
     @Override
-    public void validate(Object target, Errors errors) {
-        Menu menu = (Menu) target;
+    public void validate(Object o, Errors errors) {
+        Menu menu = (Menu) o;
 
         if (menu.getMenuName().isEmpty()) {
             errors.rejectValue("menuName", "Menu.menuName.Err");

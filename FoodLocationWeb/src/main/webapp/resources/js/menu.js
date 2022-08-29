@@ -468,12 +468,13 @@ function pay() {
 
 function addComment(productId, userId, id) {
     let content;
-    if(id === null){
+    console.log(id);
+    if(id === undefined){
         content = $("#message-text").val();
     }else{
         content = $('#'+id).val();
     }
-    if (userId == undefined) {
+    if (userId === undefined) {
         alert('Please sign in before comment!!')
     } else {
         fetch("/FoodLocationWeb/api/add-comment", {

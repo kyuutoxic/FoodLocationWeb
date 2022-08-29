@@ -9,8 +9,6 @@
 <div class="app-main__outer">
     <div class="app-main__inner">  
         <c:forEach items="${statsStore}" var="s">
-            <h1></h1>
-            <h1></h1>
         <div class="row">
             <div class="col-md-6 col-xl-4">
                 <div class="card mb-3 widget-content bg-midnight-bloom">
@@ -49,7 +47,7 @@
                             <div class="widget-subheading">People Interested</div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span>${s[2]}</span></div>
+                            <div class="widget-numbers text-white"><span><fmt:formatNumber type="number" value="${s[2]}" maxFractionDigits="2" />%</span></div>
                         </div>
                     </div>
                 </div>

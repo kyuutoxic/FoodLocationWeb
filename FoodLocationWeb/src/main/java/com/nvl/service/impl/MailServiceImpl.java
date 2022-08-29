@@ -32,7 +32,7 @@ public class MailServiceImpl implements MailService {
     private Configuration freemarkerConfiguration;
 
     @Override
-    public void sendEmail(final int type, final String email, final List<MenuOrder> order) {
+    public void sendEmail(final int type, final String email, final Map<String, Object> object) {
 
         MimeMessagePreparator preparator = new MimeMessagePreparator() 
         {
@@ -44,7 +44,7 @@ public class MailServiceImpl implements MailService {
                 else if(type == 2) helper.setSubject("Sorry for deny order");
                 else if(type == 3) helper.setSubject("Your follow store have new menu");
 //                helper.setText(message);
-                String text = geFreeMarkerTemplateContent(type, null);
+                String text = geFreeMarkerTemplateContent(type, object);
                 helper.getMimeMessage().setContent(text, "text/html;charset=utf-8");
             }
         };
@@ -57,18 +57,18 @@ public class MailServiceImpl implements MailService {
         }
     }
     
-    public String geFreeMarkerTemplateContent(int type, final List<MenuOrder> order) {
+    public String geFreeMarkerTemplateContent(int type, final Map<String, Object> object) {
         StringBuffer content = new StringBuffer();
         try {
             switch (type){
                 case 1:
-                    content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("ThanksEmail.html"), order));
+                    content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("ThanksEmail.html"), object));
                     break;
                 case 2:
-                    content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("SorryEmail.html"), order));
+                    content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("SorryEmail.html"), object));
                     break;
                 case 3:
-                    content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("NewMenu.html"), order));
+                    content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("NewMenu.html"), object));
                     break;
             }
             return content.toString();

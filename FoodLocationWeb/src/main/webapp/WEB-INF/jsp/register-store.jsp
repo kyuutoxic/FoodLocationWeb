@@ -35,7 +35,6 @@
                         <c:url value="/register-store" var="action" />
 
                         <form:form method="post" action="${action}" modelAttribute="user" enctype="multipart/form-data">
-                            <form:errors path="*" cssClass="alert alert-danger" element="div" />
 
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="form1Example1234">First name</label>

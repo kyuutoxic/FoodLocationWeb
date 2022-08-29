@@ -312,7 +312,7 @@ public class MenuRepositoryImpl implements MenuRepository {
         Query queryFollow = session.createQuery(countFollow);
         Object follow = queryFollow.getSingleResult();
         String followText;
-        int followValue;
+        double followValue;
         if(follow != null){
             followText = follow.toString();
             followValue = Integer.parseInt(followText);
@@ -323,23 +323,24 @@ public class MenuRepositoryImpl implements MenuRepository {
 //        user purchase history
         CriteriaQuery<Object[]> countUser = b.createQuery(Object[].class);
         Root menuOrder = countUser.from(MenuOrder.class);
-        countFollow.multiselect(b.count(menuOrder.get("idUser")));
-        Query queryUser = session.createQuery(countFollow);
+        countUser.multiselect(b.count(menuOrder.get("idUser")));
+        countUser.groupBy(menuOrder.get("idUser"));
+        Query queryUser = session.createQuery(countUser);
         List<Object> user = queryUser.getResultList();
-        int userValue;
+        double userValue;
         if(user != null){
             userValue = user.size();
         }else{
             userValue = 0;
         }
-        System.out.println(userValue);
-
+//        use 
+//        sql = "select id from hii where id=:id"
+//        Query query = session.createQuery(sql)
+//        query.setParameter("id",id)
         q.multiselect(b.sum(rD.get("quantity")), 
                       b.sum(b.prod(rD.get("unitPrice"),rD.get("quantity"))),
-                      b.sum(b.diff(rD.get("quantity"), rD.get("quantity")), 
-                            b.quot(b.prod(b.sum(b.diff(rD.get("quantity"), rD.get("quantity")),followValue), 100), userValue)));
+                      b.quot(b.prod(b.sum(b.diff(rD.get("quantity"), rD.get("quantity")),followValue), 100), userValue));
         q.groupBy(rM.get("idStore"));
-
         Query query = session.createQuery(q);
         return query.getResultList();
     }

@@ -7,6 +7,7 @@ package com.nvl.configs.handlers;
 import com.nvl.pojo.User;
 import com.nvl.service.UserService;
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,14 +28,14 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
        User user = this.userDetailsService.getUser(a.getName()).get(0);
        if(user.getActive() == Boolean.TRUE){
            request.getSession().setAttribute("currentUser", user);
-           response.sendRedirect("/FoodLocationWeb");
-//           if(user.getUserRole() == "ROLE_ADMIN"){
-//               response.sendRedirect("/FoodLocationWeb/admin");
-//           } else if (user.getUserRole() == "ROLE_STORE"){
-//               response.sendRedirect("/FoodLocationWeb/store");
-//           } else if (user.getUserRole() == "ROLE_USER") {
-//               response.sendRedirect("/FoodLocationWeb");
-//           }
+//           response.sendRedirect("/FoodLocationWeb");
+           if(Objects.equals(user.getUserRole(), "ROLE_ADMIN")){
+               response.sendRedirect("/FoodLocationWeb/admin/");
+           } else if (Objects.equals(user.getUserRole(),"ROLE_STORE")){
+               response.sendRedirect("/FoodLocationWeb/store/");
+           } else if (Objects.equals(user.getUserRole(), "ROLE_USER")) {
+               response.sendRedirect("/FoodLocationWeb/");
+           }
        } else {
            response.sendRedirect("/FoodLocationWeb/login?error");
        }

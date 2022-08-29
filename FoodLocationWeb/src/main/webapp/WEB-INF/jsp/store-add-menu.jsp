@@ -9,8 +9,8 @@
 <div class="app-main__outer">
     <div class="app-main__inner">
         <h5 class="card-title">Controls Types</h5>
-        <c:url value="/store/add-menu" var="a" />
-        <form:form method="post" action="${a}" modelAttribute="menu" enctype="multipart/form-data">
+        <c:url value="/store/add-menu" var="action" />
+        <form:form method="post" action="${action}" modelAttribute="menu" enctype="multipart/form-data">
             <div class="position-relative form-group">
                 <label for="name" class="">Name</label>
                 <form:input id="name" type="text" class="form-control" path="menuName" />
@@ -20,12 +20,11 @@
                 <form:input id="price" type="text" class="form-control" path="price" />
             </div>  
             <div class="position-relative form-group">
-                <label for="exampleText" class="">Note</label>
+                <label for="note" class="">Note</label>
                 <form:textarea id="note" class="form-control" path="menuNote"/>
             </div>
             <div class="position-relative form-group">
-                <label for="typeMenu" class="">Type Menu</label>
-
+                <label for="typeId" class="">Type Menu</label>
                 <form:select class="form-control" path="typeId" id="typeId">
                     <c:forEach var="t" items="${type}">
                         <form:option value="${t.id}">${t.name}</form:option>
@@ -43,7 +42,7 @@
             
 
             <div class="position-relative form-group">
-            <label for="image" class="">Image</label>
+            <label for="file" class="">Image</label>
             <form:input type="file" class="form-control-file" path="file" />
             </div>
             <button type="submit" class="btn btn-primary btn-lg btn-block btn-in-login">Them</button>

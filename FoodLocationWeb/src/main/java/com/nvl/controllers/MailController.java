@@ -41,7 +41,8 @@ public class MailController {
         
         String email = this.userService.getUserById(Integer.parseInt(params.get("idUser"))).getEmail();
         int type = Integer.parseInt(params.get("type"));
-        List<MenuOrder> m = this.orderService.getOrderById(Integer.parseInt(params.get("idOrder")));
+        Map<String, Object> m = new HashMap<>();
+        m.put("order", this.orderService.getOrderById(Integer.parseInt(params.get("idOrder"))));
 
         this.mailService.sendEmail(type, email, m);
     }

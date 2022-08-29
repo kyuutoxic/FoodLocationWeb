@@ -12,12 +12,17 @@ import com.nvl.service.MailService;
 import com.nvl.service.MenuService;
 import com.nvl.service.TypeService;
 import com.nvl.service.UserService;
+import com.nvl.validator.WebAppValidator;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +49,14 @@ public class StoreController {
     @Autowired
     private FollowService followService;
     
+    @Autowired
+    private WebAppValidator menuValidator;
+    
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(menuValidator);
+    }
+    
     @GetMapping("/store")
     public String storeView(Model model, HttpSession session) {
         User store = (User)session.getAttribute("currentUser");
@@ -65,18 +78,19 @@ public class StoreController {
         return "storeAddMenuView";
     }
 
-    @PostMapping(value = "/store/add-menu")
-    public String addMenu(@ModelAttribute(value = "menu") Menu menu, HttpSession session) {
+    @PostMapping("/store/add-menu")
+    public String addMenu(Model model, @ModelAttribute(value = "menu") @Valid Menu menu, HttpSession session, BindingResult result) {
         User u = (User) session.getAttribute("currentUser");
-        if (this.menuService.addMenu(menu, u) == true) {
-            List<Follow> follow = this.followService.getFollowByIdStore(u);
-            follow.forEach(f -> {
-                this.mailService.sendEmail(3, f.getIdUser().getEmail(), null);
-                System.out.println(f.getIdUser().getEmail());
-            });
-            return "redirect:/store/menu";
+        if (!result.hasErrors()){
+            if (this.menuService.addMenu(menu, u) == true) {
+                List<Follow> follow = this.followService.getFollowByIdStore(u);
+                follow.forEach(f -> {
+                    this.mailService.sendEmail(3, f.getIdUser().getEmail(), null);
+                    System.out.println(f.getIdUser().getEmail());
+                });
+                return "redirect:/store/menu";
+            }
         }
-
         return "storeAddMenuView";
     }
     
@@ -88,7 +102,7 @@ public class StoreController {
         return "storeDetailMenu";
     }
 
-    @PostMapping(value = "/store/detail-menu/{idMenu}")
+    @PostMapping("/store/detail-menu/{idMenu}")
     public String detailMenu(Model model, @PathVariable(value = "idMenu") int idMenu, HttpSession session) {
 //        User u = (User) session.getAttribute("currentUser");
 //        if (this.menuService.addMenu(menu, u) == true) {
