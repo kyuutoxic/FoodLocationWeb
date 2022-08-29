@@ -7,7 +7,6 @@ package com.nvl.controllers;
 import com.nvl.pojo.User;
 import com.nvl.service.UserService;
 import com.nvl.validator.RegisterValidator;
-import com.nvl.validator.WebAppValidator;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -31,7 +29,7 @@ public class UserController {
     @Autowired
     private UserService userDetailsService;
     @Autowired
-    private WebAppValidator registerValidator;
+    private RegisterValidator registerValidator;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
