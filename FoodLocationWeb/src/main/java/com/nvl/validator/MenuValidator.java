@@ -19,8 +19,9 @@ public class MenuValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return Menu.class.isAssignableFrom(clazz) || User.class.isAssignableFrom(clazz);
+        return Menu.class.isAssignableFrom(clazz);
     }
+//     || User.class.isAssignableFrom(clazz)
 
     @Override
     public void validate(Object o, Errors errors) {

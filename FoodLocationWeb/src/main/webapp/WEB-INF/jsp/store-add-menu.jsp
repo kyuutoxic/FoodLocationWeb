@@ -14,10 +14,12 @@
             <div class="position-relative form-group">
                 <label for="name" class="">Name</label>
                 <form:input id="name" type="text" class="form-control" path="menuName" />
+                <form:errors path="menuName" cssClass="alert alert-danger" element="div" />
             </div>
             <div class="position-relative form-group">
                 <label for="price" class="">Price</label>
-                <form:input id="price" type="text" class="form-control" path="price" />
+                <form:input id="price" type="number" class="form-control" path="price" />
+                <form:errors path="price" cssClass="alert alert-danger" element="div" />
             </div>  
             <div class="position-relative form-group">
                 <label for="note" class="">Note</label>
@@ -39,11 +41,10 @@
                 <label for="to" class="">To</label>
                 <form:input id="to" type="time" class="form-control" path="menuTo" />
             </div>
-            
-
             <div class="position-relative form-group">
-            <label for="file" class="">Image</label>
-            <form:input type="file" class="form-control-file" path="file" />
+                <label for="file" class="">Image</label>
+                <form:input type="file" class="form-control-file" path="file" />
+                <form:errors path="file" cssClass="alert alert-danger" element="div" />
             </div>
             <button type="submit" class="btn btn-primary btn-lg btn-block btn-in-login">Them</button>
 

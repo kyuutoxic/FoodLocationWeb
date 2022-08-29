@@ -79,7 +79,7 @@ public class StoreController {
     }
 
     @PostMapping("/store/add-menu")
-    public String addMenu(Model model, @ModelAttribute(value = "menu") @Valid Menu menu, HttpSession session, BindingResult result) {
+    public String addMenu(Model model, @ModelAttribute(value = "menu") @Valid Menu menu, BindingResult result, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
         if (!result.hasErrors()){
             if (this.menuService.addMenu(menu, u) == true) {
