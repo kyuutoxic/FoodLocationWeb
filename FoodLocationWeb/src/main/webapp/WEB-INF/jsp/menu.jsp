@@ -90,13 +90,25 @@
                 <div class="card card-span rounded-3"><img class="img-fluid rounded-3 " src="${p.image}" alt="...">
                     <div class="card-body ps-0" style="min-height: 130px">
                         <h5 class="fw-bold text-1000 text-truncate mb-1" title="${p.menuName}">${p.menuName}</h5>
-                        <a href="<c:url value="/storec/${p.idStore.idUser}" />"><div><span class="text-warning me-2"><i class="fas fa-map-marker-alt"></i></span><span class="text-primary">${p.idStore.nameStore}</span></div><span class="text-1000 fw-bold">${p.price}</span></a>
+                        <a href="<c:url value="/storec/${p.idStore.idUser}" />">
+                            <div>
+                                <span class="text-warning me-2">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </span>
+                                <span class="text-primary">${p.idStore.nameStore}
+                                </span>
+                            </div>
+                            <span class="text-1000 fw-bold">
+                                <fmt:formatNumber type="number" value="${p.price}" maxFractionDigits="2" />
+                            </span>
+                            <span>&nbsp;VND</span>
+                        </a>
                     </div>
                 </div>
                 <c:choose>
                     <c:when test="${p.menuStatus == true && p.menuFrom le now && p.menuTo ge now}">
                         <div class="d-grid gap-2">
-                            <a class="btn btn-lg btn-danger menu-order" href="#!" role="button">Order now</a>
+                            <a class="btn btn-lg btn-danger menu-order" href="#" role="button" onclick="addToCart(${p.idMenu}, '${p.menuName}', ${p.price}, '${p.image}');toast('Add to cart success','You can check your cart and manage cart','${p.image}');">Order now</a>
                         </div>
                     </c:when>    
                     <c:otherwise>
@@ -110,7 +122,7 @@
         <ul class="pagination">
             <c:forEach begin="1" end="${Math.ceil(productCounter/9)}" var="page">
                 <li class="page-item"><a class="page-link" href onclick="addPageParameter(${page}); return false;">${page}</a></li>
-                </c:forEach>
+            </c:forEach>
         </ul>
     </div>
 </div>

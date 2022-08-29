@@ -89,4 +89,9 @@ public class MenuServiceImpl implements MenuService {
         return this.menuRepository.total(quarter, month, idStore, year);
     }
 
+    @Override
+    public List<Object> statsStore(int idStore) {
+        return this.menuRepository.statsStore(idStore);
+    }
+
 }

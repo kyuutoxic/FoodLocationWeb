@@ -36,7 +36,7 @@ $(".cart").mouseleave(function () {
 //    $(this).scrollTop(0);
 //});
 
-function toast() {
+function toast(type, content, img) {
     const main = document.getElementById("toast-container");
     if (main) {
         const toast = document.createElement("div");
@@ -62,15 +62,30 @@ function toast() {
         toast.style.cursor = `pointer`;
 
         toast.style.backgroundColor = `white`;
+        
+        let image;
+        
+        if(img === ''){
+            image = `
+                    <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/alnsmmtf.json"
+                        trigger="loop"
+                        colors="primary:#4be1ec,secondary:#cb5eee"
+                        style="width:100px;height:100px">
+                    </lord-icon>`
+        }else{
+            image = `<img src="${img}" class="rounded me-2" alt="...">`
+        }
 
         toast.innerHTML = `
         <div class="toast-header">
-            <img src="..." class="rounded me-2" alt="...">
-            <strong class="me-auto">Bootstrap</strong>
+            ${image}
+            <strong class="me-auto">${type}</strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
-            Hello, world! This is a toast message.
+            ${content}
         </div>`;
         main.appendChild(toast);
     }
@@ -90,9 +105,9 @@ function toast() {
 //    $('#quantity').val(quantity);
 //});
 
-$('.showModal').click((event) => {
+$('.showModal').click(function(event){
     event.preventDefault();
-    let target = $('.showModal').attr('datatarget');
+    let target = $(this).attr('datatarget');
     $('#' + target).attr("style", "display: block !important");
 });
 

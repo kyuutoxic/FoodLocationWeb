@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="<c:url value="/js/menu.js" />"></script>
 <div class="container-xxl py-5">
@@ -45,9 +46,9 @@
                 <tr id="product${c.menuId}">
                     <th scope="row">${c.menuName}</td>
                     <td id="store${c.menuId}"></td>
-                    <td>${c.price} VNÐ</td>
+                    <td><fmt:formatNumber type="number" value="${c.price}" maxFractionDigits="2" />&nbsp;VND</td>
                     <td>${c.quantity}</td>
-                    <td>${c.price * c.quantity} VNÐ</td>
+                    <td><fmt:formatNumber type="number" value="${c.price * c.quantity}" maxFractionDigits="2" />&nbsp;VND</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -55,7 +56,7 @@
         <div class="row" style="padding: 0 50px; margin: 20px 0;">
             <div class="col">
                 <strong>SUBTOTAL:&nbsp;</strong>
-                <div>${cartStats.amount} VNÐ</div>
+                <div><fmt:formatNumber type="number" value="${cartStats.amount}" maxFractionDigits="2" />&nbsp;VND</div>
             </div>
             <div class="col" style="text-align: center">
                 <strong>SHIP:&nbsp;</strong>
@@ -65,7 +66,7 @@
                 <strong>TOTAL:&nbsp;</strong>
                 <div >
                     <span id="total">${cartStats.amount}</span>
-                    <span>&nbsp;VNÐ</span>
+                    <span>&nbsp;VND</span>
                 </div>
             </div>
         </div>

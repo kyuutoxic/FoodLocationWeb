@@ -679,6 +679,7 @@
     </div>
 </div>
 <!-- Testimonial End -->
+<script src="<c:url value="/js/custom.js" />"></script>
 <script src="<c:url value="/js/menu.js" />"></script>
 <script>
     <c:url value="/api/store" var="endpoint" />

@@ -4,6 +4,7 @@
  */
 package com.nvl.repository.impl;
 
+import com.nvl.pojo.Follow;
 import com.nvl.pojo.Menu;
 import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.OrderDetail;
@@ -198,9 +199,18 @@ public class MenuRepositoryImpl implements MenuRepository {
         
         Query revenueQuery = session.createQuery(q);
         
-        String revenueText = revenueQuery.getSingleResult().toString();
-
-        int revenue = Integer.parseInt(revenueText.substring(0, revenueText.indexOf('.')));
+        Object revenue = revenueQuery.getSingleResult();
+        
+        String revenueText;
+        
+        int revenueValue;
+        
+        if(revenue != null){
+            revenueText = revenue.toString();
+            revenueValue = Integer.parseInt(revenueText.substring(0, revenueText.indexOf('.')));
+        }else{
+            revenueValue = 1;
+        }
         
         System.out.println(revenue);
 
@@ -209,7 +219,7 @@ public class MenuRepositoryImpl implements MenuRepository {
                       b.count(rD.get("idOrderDetail")), 
                       b.sum(b.prod(rD.get("unitPrice"), 
                       rD.get("quantity"))), 
-                      b.quot(b.prod(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))),100), revenue));
+                      b.quot(b.prod(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))),100), revenueValue));
         q.groupBy(rD.get("idMenu"));
         q.orderBy(b.asc(rD.get("idMenu")));
 
@@ -219,8 +229,119 @@ public class MenuRepositoryImpl implements MenuRepository {
 
     @Override
     public List<Object> total(int quarter, int month, int idStore, int year) {
-        List<Object> haha = new ArrayList<>();
-        return haha;
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root rM = q.from(Menu.class);
+        Root rD = q.from(OrderDetail.class);
+        Root rO = q.from(MenuOrder.class);
+        
+        List<Predicate> predicates = new ArrayList<>();
+        
+        Predicate rootPredicates = b.and(b.equal(rD.get("idMenu"), rM.get("idMenu")),
+                                         b.equal(rD.get("idOrder"), rO.get("idOrder")),
+                                         b.equal(rM.get("idStore"), idStore));
+        
+        predicates.add(rootPredicates);
+        
+        if (quarter > 0 && quarter <= 4) {
+            Predicate p = b.equal(b.function("QUARTER", Integer.class, rO.get("createdDate")), quarter);
+            predicates.add(p);
+        }else if (month > 0 && month <= 12) {
+            Predicate p = b.equal(b.function("MONTH", Integer.class, rO.get("createdDate")), month);
+            predicates.add(p);
+        }
+        System.out.println(year);
+        if (year > 1900 && year <= Year.now().getValue()) {
+            Predicate p = b.equal(b.function("YEAR", Integer.class, rO.get("createdDate")), year);
+            predicates.add(p);
+        }
+
+        q.where(predicates.toArray(Predicate[]::new));
+        
+        q.multiselect(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))));
+        
+        Query revenueQuery = session.createQuery(q);
+        
+        Object revenue = revenueQuery.getSingleResult();
+        
+        String revenueText;
+        
+        int revenueValue;
+        
+        if(revenue != null){
+            revenueText = revenue.toString();
+            revenueValue = Integer.parseInt(revenueText.substring(0, revenueText.indexOf('.')));
+        }else{
+            revenueValue = 1;
+        }
+
+        q.multiselect(rM.get("idMenu"), 
+                      rM.get("menuName"), 
+                      b.count(rD.get("idOrderDetail")), 
+                      b.sum(b.prod(rD.get("unitPrice"), 
+                      rD.get("quantity"))), 
+                      b.quot(b.prod(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))),100), revenueValue));
+        q.groupBy(rD.get("idMenu"));
+        q.orderBy(b.asc(rD.get("idMenu")));
+
+        Query query = session.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Object> statsStore(int idStore) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root rM = q.from(Menu.class);
+        Root rD = q.from(OrderDetail.class);
+        Root rO = q.from(MenuOrder.class);
+
+        q.where(b.equal(rD.get("idMenu"), rM.get("idMenu")),
+                        b.equal(rD.get("idOrder"), rO.get("idOrder")),
+                        b.equal(rM.get("idStore"), idStore));
+        
+//        follow of store
+        CriteriaQuery<Object[]> countFollow = b.createQuery(Object[].class);
+        Root rF = countFollow.from(Follow.class);
+        countFollow.where(b.equal(rF.get("idStore"), idStore));
+        countFollow.multiselect(b.count(rF.get("idUser")));
+        Query queryFollow = session.createQuery(countFollow);
+        Object follow = queryFollow.getSingleResult();
+        String followText;
+        int followValue;
+        if(follow != null){
+            followText = follow.toString();
+            followValue = Integer.parseInt(followText);
+        }else{
+            followValue = 0;
+        }
+        
+//        user purchase history
+        CriteriaQuery<Object[]> countUser = b.createQuery(Object[].class);
+        Root menuOrder = countUser.from(MenuOrder.class);
+        countFollow.multiselect(b.count(menuOrder.get("idUser")));
+        Query queryUser = session.createQuery(countFollow);
+        List<Object> user = queryUser.getResultList();
+        int userValue;
+        if(user != null){
+            userValue = user.size();
+        }else{
+            userValue = 0;
+        }
+        System.out.println(userValue);
+
+        q.multiselect(b.sum(rD.get("quantity")), 
+                      b.sum(b.prod(rD.get("unitPrice"),rD.get("quantity"))),
+                      b.sum(b.diff(rD.get("quantity"), rD.get("quantity")), 
+                            b.quot(b.prod(b.sum(b.diff(rD.get("quantity"), rD.get("quantity")),followValue), 100), userValue)));
+        q.groupBy(rM.get("idStore"));
+
+        Query query = session.createQuery(q);
+        return query.getResultList();
     }
 
 }

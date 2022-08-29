@@ -147,6 +147,8 @@ public class UserServiceImpl implements UserService {
             u.setEmail(user.getEmail());
             u.setPhone(user.getPhone());
             u.setAddress(user.getAddress());
+            u.setNameStore(user.getNameStore());
+            u.setShipPrice(user.getShipPrice());
 
             u.setUpdateDate(new Date());
             if (user.getFile().getSize() > 0) {

@@ -116,5 +116,13 @@ and open the template in the editor.
         <put-attribute name="title" value="DETAIL MENU" />
         <put-attribute name="store-content" value="/WEB-INF/jsp/detail-menu.jsp" />
     </definition>
+    <definition name="accountStore" extends="storeBaseLayout">
+        <put-attribute name="title" value="ACCOUNT PAGE" />
+        <put-attribute name="store-content" value="/WEB-INF/jsp/account-store.jsp" />
+    </definition>
+    <definition name="storeStats" extends="storeBaseLayout">
+        <put-attribute name="title" value="STORE STATS" />
+        <put-attribute name="store-content" value="/WEB-INF/jsp/store-stats-view.jsp" />
+    </definition>
 
 </tiles-definitions>

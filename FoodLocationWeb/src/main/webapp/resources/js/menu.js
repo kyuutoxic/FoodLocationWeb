@@ -1,4 +1,9 @@
 function addFollow(idStore, idUser) {
+    $(`#follow${idStore}`).html(`
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden"></span>
+        </div>
+    `);
     event.preventDefault();
     if (idUser == null) {
         alert('ban chua dang nhap')
@@ -13,11 +18,10 @@ function addFollow(idStore, idUser) {
                 "Content-Type": "application/json"
             }
         }).then(function (res) {
+            $(`#follow${idStore}`).remove();
+            $('.loading-page').remove();
+            toast('Follow success', 'You can manage your follow in your page','');
             return res;
-        }).then(function (data) {
-            console.log(data);
-            let i = document.getElementById(`follow${idStore}`)
-            i.style.display = "none"
         });
     }
 }
@@ -62,11 +66,19 @@ function loadAdminMenu(endpoint, menudetail) {
     })
 }
 
+function showModal(type, target){
+    event.preventDefault();
+    if(type === 'close'){
+        $('#'+target).attr('style', 'display: none');
+    }else{
+        $('#'+target).attr('style', 'display: block !important');
+    }
+}
+
 function loadMenu(endpoint, idmenu, userId) {
     fetch(endpoint).then(function (res) {
         return res.json();
     }).then(function (data) {
-        console.log("data")
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             msg += `
@@ -79,7 +91,7 @@ function loadMenu(endpoint, idmenu, userId) {
                         <a href="${idmenu}${data[i].idUser}">${data[i].nameStore}</a>
                         <p>${data[i].address}</p>
                         <div style="position: absolute;bottom: 0;margin-bottom: 15px;width:100%;">
-                            <a style="margin-right: 5px;float: left;">
+                            <a href="#" onclick="showModal('','cmt-store${data[i].idUser}')" style="margin-right: 5px;float: left;">
                                 <i class="bi bi-chat-fill"></i>
                                 <span>9</span>
                             </a>
@@ -87,10 +99,32 @@ function loadMenu(endpoint, idmenu, userId) {
                                 <i class="bi bi-camera-fill"></i>
                                 <span>12</span>
                             </a>
-                            <a style="float: right; margin-right: 20px;" id="follow${data[i].idUser}">
-                                <i class="bi bi-bookmark-fill" onclick="addFollow(${data[i].idUser}, ${userId})"></i> Luu
+                            <a href="#" style="float: right; margin-right: 20px;" id="follow${data[i].idUser}" onclick="addFollow(${data[i].idUser}, ${userId})">
+                                Follow Store
                             </a>
                         </div>    
+                    </div>
+                </div>
+            </div>
+            <div class="myModal" id="cmt-store${data[i].idUser}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <button type="button" class="btn-close" aria-label="Close" onclick="showModal('close','cmt-store${data[i].idUser}')"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3" style="text-align: left">
+                                    <label for="message-text">Nhan xet:</label>
+                                    <textarea class="form-control" id="message-text${data[i].idUser}"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" onclick="showModal('close','cmt-store${data[i].idUser}')">Close</button>
+                                    <button type="button" class="btn btn-primary" onclick="addComment(${data[i].idUser}, ${userId}, 'message-text${data[i].idUser}'),showModal('close','cmt-store${data[i].idUser}')">Send</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -106,11 +140,8 @@ function loadFollowed() {
     fetch("/FoodLocationWeb/api/check-follow").then(function (res) {
         return res.json();
     }).then(function (data) {
-        console.log(data);
         for (let i = 0; i < data.length; i++) {
-            `follow${data[i].idStore.idUser}`
-            let d = document.getElementById(`follow${data[i].idStore.idUser}`);
-            d.style.display = "none"
+            $(`#follow${data[i].idStore.idUser}`).remove();
         }
     })
 }
@@ -128,16 +159,22 @@ function loadStoreInCart() {
         return res.json();
     }).then(function (data) {
         console.log(data);
+        let total = parseInt($('#total').text());
         data.forEach(function (e) {
             $('#store' + e.idUser).text(e.nameStore);
             let ship = document.getElementById('ship');
+            let shipPrice = e.shipPrice;
+            shipPrice = new Intl.NumberFormat().format(shipPrice);
             ship.innerHTML += `
                 <div>Store:&nbsp;${e.nameStore}</div>
-                <span>${e.shipPrice}</span>
-                <span>&nbsp;VNÐ</span>
+                <span>${shipPrice}</span>
+                <span>&nbsp;VND</span>
             `;
             $('.loading-page').remove();
+            total += e.shipPrice;
         });
+        total = new Intl.NumberFormat().format(total);
+        $('#total').text(total);
     });
 }
 
@@ -284,7 +321,7 @@ $(".input-number").keydown(function (e) {
                 e.preventDefault();
             }
         });
-function addToCart(id, name, price) {
+function addToCart(id, name, price, image) {
     event.preventDefault();
     fetch("/FoodLocationWeb/api/cart", {
         method: 'post',
@@ -292,7 +329,8 @@ function addToCart(id, name, price) {
             "menuId": id,
             "menuName": name,
             "price": price,
-            "quantity": 1
+            "quantity": 1,
+            "image": image
         }),
         headers: {
             "Content-Type": "application/json"
@@ -331,7 +369,8 @@ function updateCart(productId) {
             "menuId": productId,
             "menuName": "",
             "price": 0,
-            "quantity": $('#' + productId).val()
+            "quantity": $('#' + productId).val(),
+            "image": ""
         }),
         headers: {
             "Content-Type": "application/json"
@@ -367,11 +406,11 @@ function loadMiniCart() {
                     <div class="row d-flex justify-content-between align-items-center">
                         <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
                             <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                src="${result[i].image}"
                                 class="img-fluid rounded-3" alt="Cotton T-shirt">
                         </div>
                         <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
-                            <p class="lead mb-2" style="width: 100%">${result[i].menuName}</p>
+                            <p class="lead mb-2" style="width: 100%" title="${result[i].menuName}">${result[i].menuName}</p>
                             <p><span class="text-muted">Quantity: </span>${result[i].quantity}</p>
                         </div>
                         <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
@@ -399,8 +438,9 @@ function pay() {
                     <span class="visually-hidden"></span>
                 </div>
             </div>
-        `);
+//        `);
         let total = $('#total').text();
+        total = total.replaceAll(",","");
         fetch(`/FoodLocationWeb/api/pay/${total}`, {
             method: "post"
         }).then(function (res) {
@@ -417,23 +457,29 @@ function pay() {
                     "Content-Type": "application/json"
                 }
             }).then(function () {
-                $('.loading-page').html(`<h1>YOUR PURCHASE IS SUCCESS<br>PLEASE CHECK YOUR MAIL FOR DETAIL</h1>`);
+                $('.loading-page').html(`<h1 style="text-align: center">YOUR PURCHASE IS SUCCESS<br>PLEASE CHECK YOUR MAIL FOR DETAIL</h1>`);
                 setTimeout(function () {
                     window.location.replace("/FoodLocationWeb/");
-                }, 5000);
+                }, 3000);
             });
         });
     }
 }
 
-function addComment(productId, userId) {
+function addComment(productId, userId, id) {
+    let content;
+    if(id === null){
+        content = $("#message-text").val();
+    }else{
+        content = $('#'+id).val();
+    }
     if (userId == undefined) {
         alert('Please sign in before comment!!')
     } else {
         fetch("/FoodLocationWeb/api/add-comment", {
             method: 'post',
             body: JSON.stringify({
-                "content": document.getElementById("message-text").value,
+                "content": content,
                 "storeId": productId
             }),
             headers: {
@@ -443,7 +489,7 @@ function addComment(productId, userId) {
             return res.json()
         }).then(function (data) {
             let createdDate = moment(data.createdDate).format("YYYY/MM/DD HH:MM:SS.S");
-            $("list-cmt").append(`
+            $("#list-cmt").append(`  
             <div class="cmt-list">
                         <div class="info-comment">
                             <div class="info-comment-info">
@@ -457,9 +503,9 @@ function addComment(productId, userId) {
                         </div>
                         <div class="content-comment">
                             <div class="header-content">${data.content}</div>
-                            <div class="body-content">
-                                Cà phê brewing hand drip chuẩn vị Nhật nhưng hay hết món lắm, 2 loại bánh mà t thích cũng vậy (bánh bơ tỏi và việt quất). Dãy bàn ghế êm thích hợp học tập làm việc (thi thoảng có nhóm khách đi đông thì ồn). Máy cà thẻ đôi khi hay bị hư nên khá bất tiện cho người ko có Momo và tiền mặt (dạo này hình như đỡ rồi).
-                                PS. Hình chụp em mèo ko biết của quán hay sao nữa
+                            <div class="media-content">
+                                <img src="http://localhost:8080/FoodLocationWeb/resources/img/menu-1.png" alt="alt"/>
+                                <img src="http://localhost:8080/FoodLocationWeb/resources/img/menu-1.png" alt="alt"/>
                             </div>
                             
                         </div>

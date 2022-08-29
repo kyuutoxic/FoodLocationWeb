@@ -12,7 +12,7 @@ function checkMonth(){
         $(`#monthRevenue`).attr('style', 'pointer-events: none;');
         $(`.monthRevenue`).attr('style', 'cursor: not-allowed;');
     } else {
-        $(`#monthRevenue`).attr('style', '');
+        $(`#monthRevenue`).attr('style', ''); 
         $(`.monthRevenue`).attr('style', '');
     }
 }
@@ -23,16 +23,13 @@ $(document).ready(function () {
         $(`#quarterRevenue option[value=0]`).attr('selected', 'selected');
         $(`#monthRevenue option[value=0]`).attr('selected', 'selected');
         $(`#idStoreRevenue option[value=0]`).attr('selected', 'selected');
+        $(`#yearStoreRevenue`).val(null);
         window.location.replace("/admin/stats");
     });
     $(`#idStoreRevenue option[value=${urlParams.get('idStore')}]`).attr('selected', 'selected');
     $(`#monthRevenue option[value=${urlParams.get('month')}]`).attr('selected', 'selected');
     $(`#quarterRevenue option[value=${urlParams.get('quarter')}]`).attr('selected', 'selected');
-    if(`${urlParams.get('year')}` !== 'null'){
-        $(`#yearStoreRevenue`).val(`${urlParams.get('year')}`);
-    }else{
-        $(`#yearStoreRevenue`).val(new Date().getFullYear());
-    }
+    $(`#yearStoreRevenue`).val(`${urlParams.get('year')}`);
     checkMonth();
     $(`#monthRevenue, #quarterRevenue`).change(function(){checkMonth()});
 });

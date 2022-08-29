@@ -16,7 +16,7 @@
                         <th>Percentage</th>
                         <th>Revenue/(VND)</th>
                     </tr>
-                    <c:forEach items="${frequency}" var="f">
+                    <c:forEach items="${revenuStats}" var="f">
                         <tr>
                             <td>${f[0]}</td>
                             <td>${f[1]}</td>
@@ -32,17 +32,8 @@
                 </table>
             </div>
             <div class="col-md-6 col-xs-12">
-                <c:url value="/admin/stats" var="action" />
+                <c:url value="/store/stats" var="action" />
                 <form action="${action}">
-                    <div class="mb-3">
-                        <label class="col-form-label" for="idStoreRevenue">Store</label>
-                        <select class="form-control" name="idStore" id="idStoreRevenue">
-                            <option value="0"></option>
-                            <c:forEach var="s" items="${store}">
-                                <option value="${s.idUser}">${s.nameStore}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
                     <div class="mb-3 monthRevenue">
                         <label class="col-form-label" for="idStoreRevenue">Month</label>
                         <select class="form-control" name="month" id="monthRevenue">
@@ -82,7 +73,7 @@
         let data = [];
         let labels = [];
 
-    <c:forEach items="${frequency}" var="f">
+    <c:forEach items="${revenuStats}" var="f">
         data.push(${f[3]});
         labels.push('${f[1]}');
     </c:forEach>

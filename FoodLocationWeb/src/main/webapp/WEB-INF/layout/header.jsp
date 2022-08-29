@@ -74,7 +74,7 @@
                                                             <div class="row d-flex justify-content-between align-items-center">
                                                                 <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
                                                                     <img
-                                                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                                                        src="${m.value.image}"
                                                                         class="img-fluid rounded-3" alt="Cotton T-shirt">
                                                                 </div>
                                                                 <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">
@@ -112,7 +112,7 @@
             </div>    
         </div>        
         <div class="container-fluid d-flex" id="nav-nd" style="display: none !important;">
-            <a href="" class="navbar-brand p-3" style="margin-right: 4%" id="brand-nd">
+            <a href="<c:url value="/"/>" class="navbar-brand p-3" style="margin-right: 4%" id="brand-nd">
                 <h2 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h2>
             </a>
             <form class="d-flex bg-white p-0  w-50" action="<c:url value="/menu" />">
@@ -146,7 +146,7 @@
                                                             <div class="row d-flex justify-content-between align-items-center">
                                                                 <div class="col-md-2 col-lg-2 col-xl-2 m-0 p-0">
                                                                     <img
-                                                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                                                        src="${m.value.image}"
                                                                         class="img-fluid rounded-3" alt="Cotton T-shirt">
                                                                 </div>
                                                                 <div class="col-md-4 col-lg-4 col-xl-4 m-0 p-2">

@@ -41,7 +41,8 @@ public class MailServiceImpl implements MailService {
                 MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
                 helper.setTo(email);
                 if(type == 1) helper.setSubject("Thanks for your purchase"); 
-                else  helper.setSubject("Sorry for deny order");
+                else if(type == 2) helper.setSubject("Sorry for deny order");
+                else if(type == 3) helper.setSubject("Your follow store have new menu");
 //                helper.setText(message);
                 String text = geFreeMarkerTemplateContent(type, null);
                 helper.getMimeMessage().setContent(text, "text/html;charset=utf-8");
@@ -65,6 +66,9 @@ public class MailServiceImpl implements MailService {
                     break;
                 case 2:
                     content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("SorryEmail.html"), order));
+                    break;
+                case 3:
+                    content.append(FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfiguration.getTemplate("NewMenu.html"), order));
                     break;
             }
             return content.toString();

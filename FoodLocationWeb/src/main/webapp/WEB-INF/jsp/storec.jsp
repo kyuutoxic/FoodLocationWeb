@@ -161,8 +161,8 @@
                                 <c:choose>
                                     <c:when test="${m.menuStatus == true && m.menuFrom le now && m.menuTo ge now}">
                                         <div class="menu-cost">
-                                            ${m.price}
-                                            <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price});toast();">+</button>
+                                            <span><fmt:formatNumber type="number" value="${m.price}" maxFractionDigits="2" /></span>
+                                            <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price}, '${m.image}');toast('Add to cart success','You can check your cart and manage cart','${m.image}');">+</button>
                                         </div>
                                     </c:when>    
                                     <c:otherwise>
@@ -257,7 +257,6 @@
             </div>
             <div id="list-cmt" >
                 <c:forEach items="${comments}" var="comment">
-
                     <div class="cmt-list">
                         <div class="info-comment">
                             <div class="info-comment-info">

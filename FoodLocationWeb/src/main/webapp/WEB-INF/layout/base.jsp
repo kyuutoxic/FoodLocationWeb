@@ -37,6 +37,7 @@
 
         <!-- Template Stylesheet -->
         <link href="<c:url value="/css/style.css" />" rel="stylesheet">
+        <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
         
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -68,9 +69,8 @@
 
         <!-- Template Javascript -->
         <script src="<c:url value="/js/main.js" />"></script>
-        <script src="<c:url value="/js/menu.js" />"></script>
         <script src="<c:url value="/js/custom.js" />"></script>
-
-
+        <script src="<c:url value="/js/menu.js" />"></script>
+        
     </body>
 </html>

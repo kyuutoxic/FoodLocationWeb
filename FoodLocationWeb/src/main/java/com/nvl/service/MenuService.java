@@ -29,5 +29,7 @@ public interface MenuService {
     List<Object> frequency(int quarter, int month, int idStore, int year);
     
     List<Object> total(int quarter, int month, int idStore, int year);
+    
+    List<Object> statsStore(int idStore);
 
 }

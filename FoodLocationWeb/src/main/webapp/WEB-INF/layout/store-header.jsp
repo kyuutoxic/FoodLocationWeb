@@ -42,7 +42,7 @@
             </div>
             <ul class="header-menu nav">
                 <li class="nav-item">
-                    <a href="javascript:void(0);" class="nav-link">
+                    <a href="<c:url value="/store/stats"/>" class="nav-link">
                         <i class="nav-link-icon fa fa-database"> </i>
                         Statistics
                     </a>
@@ -65,7 +65,7 @@
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                    <a href="#" class="dropdown-item">User Account</a>
+                                    <a href="<c:url value="/store/account-store/"/>" class="dropdown-item">User Account</a>
                                     <a href="<c:url value="/logout"/>" class="py-2 px-4">LogOut</a>
                                 </div>
                             </div>
@@ -412,7 +412,7 @@
                     </li>
                     <li class="app-sidebar__heading">Statistic</li>
                     <li>
-                        <a href="#">
+                        <a href="<c:url value="/store/stats"/>">
                             <i class="metismenu-icon pe-7s-graph2">
                             </i>Revenue by Day/Month/Year
                         </a>

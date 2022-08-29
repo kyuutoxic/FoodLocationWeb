@@ -14,6 +14,7 @@ public class Cart {
     private String menuName;
     private Long price;
     private int quantity;
+    private String image;
 
     /**
      * @return the menuId
@@ -69,5 +70,19 @@ public class Cart {
      */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    /**
+     * @return the image
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(String image) {
+        this.image = image;
     }
 }
