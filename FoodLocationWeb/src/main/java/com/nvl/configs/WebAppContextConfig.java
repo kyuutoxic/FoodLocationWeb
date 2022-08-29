@@ -6,14 +6,11 @@ package com.nvl.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-<<<<<<< HEAD
 import com.nvl.validator.MenuValidator;
 import com.nvl.validator.RegisterValidator;
 import com.nvl.validator.WebAppValidator;
 import java.util.HashSet;
 import java.util.Set;
-=======
->>>>>>> 93f483c0ffbaf3f5a17d6a9587d9abdbe8473081
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -41,7 +38,8 @@ import org.springframework.web.servlet.view.JstlView;
     "com.nvl.controllers",
     "com.nvl.repository",
     "com.nvl.service",
-    "com.nvl.validator",})
+    "com.nvl.validator"
+})
 public class WebAppContextConfig implements WebMvcConfigurer {
 
     @Override
@@ -88,20 +86,12 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 
         return resolver;
     }
-
-    @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource m = new ResourceBundleMessageSource();
-        m.setBasenames("messages");
-
-        return m;
-    }
-
+    
     @Override
     public Validator getValidator() {
         return validator();
     }
-
+    
     @Bean(name = "validator")
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
@@ -109,7 +99,6 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 
         return localValidatorFactoryBean;
     }
-<<<<<<< HEAD
     
     @Bean("registerValidator")
     public WebAppValidator registerValidator() {
@@ -140,28 +129,5 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         
         return m;
     }
-=======
->>>>>>> 93f483c0ffbaf3f5a17d6a9587d9abdbe8473081
 
-//    @Bean
-//    public WebAppValidator registerValidator() {
-//        Set<Validator> springValidators = new HashSet<>();
-//        springValidators.add(new RegisterValidator());
-//
-//        WebAppValidator webAppValidator = new WebAppValidator();
-//        webAppValidator.setValidators(springValidators);
-//
-//        return webAppValidator;
-//    }
-//
-//    @Bean
-//    public WebAppValidator menuValidator() {
-//        Set<Validator> springValidators = new HashSet<>();
-//        springValidators.add(new MenuValidator());
-//
-//        WebAppValidator webAppValidator = new WebAppValidator();
-//        webAppValidator.setValidators(springValidators);
-//
-//        return webAppValidator;
-//    }
 }
