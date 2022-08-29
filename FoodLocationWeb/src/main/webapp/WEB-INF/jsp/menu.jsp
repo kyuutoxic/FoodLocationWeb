@@ -108,7 +108,7 @@
                 <c:choose>
                     <c:when test="${p.menuStatus == true && p.menuFrom le now && p.menuTo ge now}">
                         <div class="d-grid gap-2">
-                            <a class="btn btn-lg btn-danger menu-order" href="#" role="button" onclick="addToCart(${p.idMenu}, '${p.menuName}', ${p.price}, '${p.image}');toast('Add to cart success','You can check your cart and manage cart','${p.image}');">Order now</a>
+                            <a class="btn btn-lg btn-danger menu-order" href="#" role="button" onclick="addToCart(${p.idMenu}, '${p.menuName}', ${p.price}, '${p.image}');toast('Add to cart success', 'You can check your cart and manage cart', '${p.image}');">Order now</a>
                         </div>
                     </c:when>    
                     <c:otherwise>
@@ -121,8 +121,9 @@
         </c:forEach>
         <ul class="pagination">
             <c:forEach begin="1" end="${Math.ceil(productCounter/9)}" var="page">
-                <li class="page-item"><a class="page-link" href onclick="addPageParameter(${page}); return false;">${page}</a></li>
-            </c:forEach>
+                <li class="page-item"><a class="page-link" href onclick="addPageParameter(${page});
+                        return false;">${page}</a></li>
+                </c:forEach>
         </ul>
     </div>
 </div>
