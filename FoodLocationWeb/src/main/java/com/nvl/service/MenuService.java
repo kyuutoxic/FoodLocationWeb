@@ -5,10 +5,8 @@
 package com.nvl.service;
 
 import com.nvl.pojo.Menu;
-import com.nvl.pojo.Type;
 import com.nvl.pojo.User;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -25,11 +23,14 @@ public interface MenuService {
     boolean addMenu(Menu menu, User user);
 
     List<Menu> getMenuByIdStore(int idStore);
-    
+
     List<Object> frequency(int quarter, int month, int idStore, int year);
-    
+
     List<Object> total(int quarter, int month, int idStore, int year);
-    
+
     List<Object> statsStore(int idStore);
 
+    boolean updateMenu(int idMenu, Menu menu);
+    
+    boolean checkStoreByMenuId(int idMenu, User user);
 }

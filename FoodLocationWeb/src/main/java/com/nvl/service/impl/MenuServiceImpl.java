@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -94,4 +96,37 @@ public class MenuServiceImpl implements MenuService {
         return this.menuRepository.statsStore(idStore);
     }
 
+    @Override
+    public boolean updateMenu(int idMenu, Menu menu) {
+        Menu m = this.menuRepository.getMenuById(idMenu);
+        Type t = this.typeRepository.getTypeById(menu.getTypeId());
+
+        System.out.println("hihihihhihihihihihihihihi" + menu);
+        if (m != null && menu != null) {
+            m.setMenuName(menu.getMenuName());
+            m.setPrice(menu.getPrice());
+            m.setMenuNote(menu.getMenuNote());
+            m.setMenuStatus(menu.getMenuStatus());
+            m.setIdType(t);
+            m.setMenuFrom(menu.getMenuFrom());
+            m.setMenuTo(menu.getMenuTo());
+            if (menu.getFile().getSize() > 0) {
+                Map r;
+                try {
+                    r = this.cloudinary.uploader().upload(menu.getFile().getBytes(),
+                            ObjectUtils.asMap("resource_type", "auto"));
+                    m.setImage((String) r.get("secure_url"));
+
+                } catch (IOException ex) {
+                    Logger.getLogger(MenuServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return this.menuRepository.updateMenu(m);
+    }
+
+    @Override
+    public boolean checkStoreByMenuId(int idMenu, User user) {
+        return this.menuRepository.checkStoreByMenuId(idMenu, user);
+    }
 }

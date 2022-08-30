@@ -14,13 +14,12 @@ import com.nvl.repository.MenuRepository;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -66,58 +65,58 @@ public class MenuRepositoryImpl implements MenuRepository {
         Root rS = q.from(User.class);
         Root rT = q.from(Type.class);
         q.select(rM);
-        
+
         List<Predicate> predicates = new ArrayList<>();
 
         if (kw != null) {
-            Predicate p = b.or(b.like(rM.get("menuName").as(String.class), String.format("%%%s%%", kw))
-                    ,b.like(rM.get("price").as(String.class), String.format("%%%s%%", kw))
-                    ,b.and(b.like(rS.get("nameStore").as(String.class), String.format("%%%s%%", kw))
-                           ,b.equal(rS.get("idUser"),rM.get("idStore")))
-                );
+            Predicate p = b.or(b.like(rM.get("menuName").as(String.class), String.format("%%%s%%", kw)),
+                    b.like(rM.get("price").as(String.class), String.format("%%%s%%", kw)),
+                    b.and(b.like(rS.get("nameStore").as(String.class), String.format("%%%s%%", kw)),
+                            b.equal(rS.get("idUser"), rM.get("idStore")))
+            );
             predicates.add(p);
         }
-        
+
         if (type != null) {
-            switch ( type ) {
-                case  "All day":
-                    Predicate pd = b.and(b.equal(rT.get("name"), type)
-                          ,b.equal(rT.get("name"), "All day")
-                          ,b.equal(rM.get("idType"), rT.get("id"))
-                        );
+            switch (type) {
+                case "All day":
+                    Predicate pd = b.and(b.equal(rT.get("name"), type),
+                            b.equal(rT.get("name"), "All day"),
+                            b.equal(rM.get("idType"), rT.get("id"))
+                    );
                     predicates.add(pd);
                     break;
-                case  "Night":
-                    Predicate pr = b.and(b.equal(rT.get("name"), type)
-                          ,b.equal(rM.get("idType"), rT.get("id"))
-                        );
+                case "Night":
+                    Predicate pr = b.and(b.equal(rT.get("name"), type),
+                            b.equal(rM.get("idType"), rT.get("id"))
+                    );
                     predicates.add(pr);
                     break;
                 default:
-                    Predicate pre = b.or(b.and(b.equal(rT.get("name"), type),b.equal(rM.get("idType"), rT.get("id")))
-                                        ,b.and(b.equal(rT.get("name"), "All day"),b.equal(rM.get("idType"), rT.get("id")))
-                                        );
+                    Predicate pre = b.or(b.and(b.equal(rT.get("name"), type), b.equal(rM.get("idType"), rT.get("id"))),
+                            b.and(b.equal(rT.get("name"), "All day"), b.equal(rM.get("idType"), rT.get("id")))
+                    );
                     predicates.add(pre);
             }
         }
-        
+
         q.where(predicates.toArray(Predicate[]::new));
-        
+
         q.groupBy(rM.get("idMenu"));
-        
+
         if (sort != null) {
             if (sort.equals("asc")) {
                 q.orderBy(b.asc(rM.get("price")));
             }
 
-            if (sort.equals("desc")){
+            if (sort.equals("desc")) {
                 q.orderBy(b.desc(rM.get("price")));
             }
         }
 //        q.multiselect(rM.get("idMenu"),rM.get("menuName"),rM.get("price"),rM.get("menuStatus"),rM.get("image"),rM.get("idStore"),rM.get("menuStatus"));
 
         Query query = session.createQuery(q);
-        
+
         if (page > 0) {
             int size = Integer.parseInt(env.getProperty("page.size").toString());
             int start = (page - 1) * size;
@@ -167,59 +166,59 @@ public class MenuRepositoryImpl implements MenuRepository {
         Root rM = q.from(Menu.class);
         Root rD = q.from(OrderDetail.class);
         Root rO = q.from(MenuOrder.class);
-        
+
         List<Predicate> predicates = new ArrayList<>();
-        
+
         Predicate rootPredicates = b.and(b.equal(rD.get("idMenu"), rM.get("idMenu")),
-                                         b.equal(rD.get("idOrder"), rO.get("idOrder")));
-        
+                b.equal(rD.get("idOrder"), rO.get("idOrder")));
+
         predicates.add(rootPredicates);
-        
+
         if (quarter > 0 && quarter <= 4) {
             Predicate p = b.equal(b.function("QUARTER", Integer.class, rO.get("createdDate")), quarter);
             predicates.add(p);
-        }else if (month > 0 && month <= 12) {
+        } else if (month > 0 && month <= 12) {
             Predicate p = b.equal(b.function("MONTH", Integer.class, rO.get("createdDate")), month);
             predicates.add(p);
         }
-                     
+
         if (year > 1900 && year <= Year.now().getValue()) {
             Predicate p = b.equal(b.function("YEAR", Integer.class, rO.get("createdDate")), year);
             predicates.add(p);
         }
-        
+
         if (idStore > 0) {
             Predicate p = b.equal(rM.get("idStore"), idStore);
             predicates.add(p);
         }
 
         q.where(predicates.toArray(Predicate[]::new));
-        
+
         q.multiselect(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))));
-        
+
         Query revenueQuery = session.createQuery(q);
-        
+
         Object revenue = revenueQuery.getSingleResult();
-        
+
         String revenueText;
-        
+
         int revenueValue;
-        
-        if(revenue != null){
+
+        if (revenue != null) {
             revenueText = revenue.toString();
             revenueValue = Integer.parseInt(revenueText.substring(0, revenueText.indexOf('.')));
-        }else{
+        } else {
             revenueValue = 1;
         }
-        
+
         System.out.println(revenue);
 
-        q.multiselect(rM.get("idMenu"), 
-                      rM.get("menuName"), 
-                      b.count(rD.get("idOrderDetail")), 
-                      b.sum(b.prod(rD.get("unitPrice"), 
-                      rD.get("quantity"))), 
-                      b.quot(b.prod(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))),100), revenueValue));
+        q.multiselect(rM.get("idMenu"),
+                rM.get("menuName"),
+                b.count(rD.get("idOrderDetail")),
+                b.sum(b.prod(rD.get("unitPrice"),
+                        rD.get("quantity"))),
+                b.quot(b.prod(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))), 100), revenueValue));
         q.groupBy(rD.get("idMenu"));
         q.orderBy(b.asc(rD.get("idMenu")));
 
@@ -236,19 +235,19 @@ public class MenuRepositoryImpl implements MenuRepository {
         Root rM = q.from(Menu.class);
         Root rD = q.from(OrderDetail.class);
         Root rO = q.from(MenuOrder.class);
-        
+
         List<Predicate> predicates = new ArrayList<>();
-        
+
         Predicate rootPredicates = b.and(b.equal(rD.get("idMenu"), rM.get("idMenu")),
-                                         b.equal(rD.get("idOrder"), rO.get("idOrder")),
-                                         b.equal(rM.get("idStore"), idStore));
-        
+                b.equal(rD.get("idOrder"), rO.get("idOrder")),
+                b.equal(rM.get("idStore"), idStore));
+
         predicates.add(rootPredicates);
-        
+
         if (quarter > 0 && quarter <= 4) {
             Predicate p = b.equal(b.function("QUARTER", Integer.class, rO.get("createdDate")), quarter);
             predicates.add(p);
-        }else if (month > 0 && month <= 12) {
+        } else if (month > 0 && month <= 12) {
             Predicate p = b.equal(b.function("MONTH", Integer.class, rO.get("createdDate")), month);
             predicates.add(p);
         }
@@ -259,30 +258,30 @@ public class MenuRepositoryImpl implements MenuRepository {
         }
 
         q.where(predicates.toArray(Predicate[]::new));
-        
+
         q.multiselect(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))));
-        
+
         Query revenueQuery = session.createQuery(q);
-        
+
         Object revenue = revenueQuery.getSingleResult();
-        
+
         String revenueText;
-        
+
         int revenueValue;
-        
-        if(revenue != null){
+
+        if (revenue != null) {
             revenueText = revenue.toString();
             revenueValue = Integer.parseInt(revenueText.substring(0, revenueText.indexOf('.')));
-        }else{
+        } else {
             revenueValue = 1;
         }
 
-        q.multiselect(rM.get("idMenu"), 
-                      rM.get("menuName"), 
-                      b.count(rD.get("idOrderDetail")), 
-                      b.sum(b.prod(rD.get("unitPrice"), 
-                      rD.get("quantity"))), 
-                      b.quot(b.prod(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))),100), revenueValue));
+        q.multiselect(rM.get("idMenu"),
+                rM.get("menuName"),
+                b.count(rD.get("idOrderDetail")),
+                b.sum(b.prod(rD.get("unitPrice"),
+                        rD.get("quantity"))),
+                b.quot(b.prod(b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))), 100), revenueValue));
         q.groupBy(rD.get("idMenu"));
         q.orderBy(b.asc(rD.get("idMenu")));
 
@@ -301,9 +300,9 @@ public class MenuRepositoryImpl implements MenuRepository {
         Root rO = q.from(MenuOrder.class);
 
         q.where(b.equal(rD.get("idMenu"), rM.get("idMenu")),
-                        b.equal(rD.get("idOrder"), rO.get("idOrder")),
-                        b.equal(rM.get("idStore"), idStore));
-        
+                b.equal(rD.get("idOrder"), rO.get("idOrder")),
+                b.equal(rM.get("idStore"), idStore));
+
 //        follow of store
         CriteriaQuery<Object[]> countFollow = b.createQuery(Object[].class);
         Root rF = countFollow.from(Follow.class);
@@ -313,13 +312,13 @@ public class MenuRepositoryImpl implements MenuRepository {
         Object follow = queryFollow.getSingleResult();
         String followText;
         double followValue;
-        if(follow != null){
+        if (follow != null) {
             followText = follow.toString();
             followValue = Integer.parseInt(followText);
-        }else{
+        } else {
             followValue = 0;
         }
-        
+
 //        user purchase history
         CriteriaQuery<Object[]> countUser = b.createQuery(Object[].class);
         Root menuOrder = countUser.from(MenuOrder.class);
@@ -328,21 +327,46 @@ public class MenuRepositoryImpl implements MenuRepository {
         Query queryUser = session.createQuery(countUser);
         List<Object> user = queryUser.getResultList();
         double userValue;
-        if(user != null){
+        if (user != null) {
             userValue = user.size();
-        }else{
+        } else {
             userValue = 0;
         }
 //        use 
 //        sql = "select id from hii where id=:id"
 //        Query query = session.createQuery(sql)
 //        query.setParameter("id",id)
-        q.multiselect(b.sum(rD.get("quantity")), 
-                      b.sum(b.prod(rD.get("unitPrice"),rD.get("quantity"))),
-                      b.quot(b.prod(b.sum(b.diff(rD.get("quantity"), rD.get("quantity")),followValue), 100), userValue));
+        q.multiselect(b.sum(rD.get("quantity")),
+                b.sum(b.prod(rD.get("unitPrice"), rD.get("quantity"))),
+                b.quot(b.prod(b.sum(b.diff(rD.get("quantity"), rD.get("quantity")), followValue), 100), userValue));
         q.groupBy(rM.get("idStore"));
         Query query = session.createQuery(q);
         return query.getResultList();
+    }
+
+    @Override
+    public boolean updateMenu(Menu menu) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        System.out.println(menu);
+        try {
+            session.update(menu);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean checkStoreByMenuId(int idMenu, User user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Menu menu = session.get(Menu.class, idMenu);
+        if (menu.getIdStore().equals(user)) {
+            return true;
+        }
+        return false;
     }
 
 }

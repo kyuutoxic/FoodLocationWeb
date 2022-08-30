@@ -10,7 +10,6 @@ import com.nvl.pojo.User;
 import com.nvl.service.FollowService;
 import com.nvl.service.MailService;
 import com.nvl.service.MenuService;
-import com.nvl.service.TypeService;
 import com.nvl.service.UserService;
 import com.nvl.validator.WebAppValidator;
 import java.util.List;
@@ -33,47 +32,42 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class StoreController {
-    
+
     @Autowired
     private UserService userDetailsService;
-    
-    @Autowired
-    private TypeService typeService;
-    
     @Autowired
     private MenuService menuService;
-    
+
     @Autowired
     private MailService mailService;
-    
+
     @Autowired
     private FollowService followService;
-    
+
     @Autowired
     private WebAppValidator menuValidator;
-    
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(menuValidator);
     }
-    
+
     @GetMapping("/store")
     public String storeView(Model model, HttpSession session) {
-        User store = (User)session.getAttribute("currentUser");
+        User store = (User) session.getAttribute("currentUser");
         model.addAttribute("userStore", this.userDetailsService.getUserStoreNotActive());
         model.addAttribute("statsStore", this.menuService.statsStore(store.getIdUser()));
         return "store";
     }
-    
+
     @GetMapping("/store/menu")
     public String storeMenuView() {
         return "storeMenuView";
     }
-    
+
     @GetMapping("/store/add-menu")
     public String addMenuView(Model model) {
         model.addAttribute("menu", new Menu());
-        model.addAttribute("type", this.typeService.getType());
 
         return "storeAddMenuView";
     }
@@ -81,7 +75,7 @@ public class StoreController {
     @PostMapping("/store/add-menu")
     public String addMenu(Model model, @ModelAttribute(value = "menu") @Valid Menu menu, BindingResult result, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
-        if (!result.hasErrors()){
+        if (!result.hasErrors()) {
             if (this.menuService.addMenu(menu, u) == true) {
                 List<Follow> follow = this.followService.getFollowByIdStore(u);
                 follow.forEach(f -> {
@@ -93,27 +87,29 @@ public class StoreController {
         }
         return "storeAddMenuView";
     }
-    
+
     @GetMapping("/store/detail-menu/{idMenu}")
-    public String detailMenuView(Model model, @PathVariable(value = "idMenu") int idMenu) {
-//        khuc nay phai chan thang store nay coi store khac(lay cai idMenu ma trung voi id menu cua store hien tai moi cho vao)
-        model.addAttribute("menu", this.menuService.getMenuById(idMenu));
-        model.addAttribute("type", this.typeService.getType());
-        return "storeDetailMenu";
+    public String detailMenuView(Model model, @PathVariable(value = "idMenu") int idMenu, HttpSession session) {
+        User u = (User) session.getAttribute("currentUser");
+
+        if (this.menuService.checkStoreByMenuId(idMenu, u) == true) {
+            model.addAttribute("menu", this.menuService.getMenuById(idMenu));
+            return "storeDetailMenu";
+
+        }
+        return "redirect:/store/menu";
+
     }
 
     @PostMapping("/store/detail-menu/{idMenu}")
-    public String detailMenu(Model model, @PathVariable(value = "idMenu") int idMenu, HttpSession session) {
-//        User u = (User) session.getAttribute("currentUser");
-//        if (this.menuService.addMenu(menu, u) == true) {
-//            return "redirect:/admin/menu";
-//        }
+    public String detailMenu(@ModelAttribute(value = "menu") Menu menu) {
+        if (this.menuService.updateMenu(menu.getIdMenu(), menu) == true) {
+            return "redirect:/store/menu";
+        }
 
         return "storeDetailMenu";
     }
-    
-    
-    
+
     @GetMapping("/store/account-store/")
     public String storeAccountView(Model model, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
@@ -124,13 +120,13 @@ public class StoreController {
     @PostMapping("/store/account-store/")
     public String storeAccount(Model model, @ModelAttribute(value = "user") User user, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
-        
+
         if (this.userDetailsService.updateUser(u.getIdUser(), user) == true) {
             session.setAttribute("currentUser", this.userDetailsService.getUserById(u.getIdUser()));
             return "redirect:/store";
         }
-        
+
         return "redirect:/account-store/";
     }
-    
+
 }

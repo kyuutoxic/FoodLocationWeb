@@ -30,4 +30,9 @@ public interface MenuRepository {
     List<Object> total(int quarter, int month, int idStore, int year);
     
     List<Object> statsStore(int idStore);
+
+    boolean updateMenu(Menu menu);
+    
+    boolean checkStoreByMenuId(int idMenu, User user);
+
 }
