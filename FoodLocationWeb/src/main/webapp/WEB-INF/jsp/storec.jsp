@@ -74,6 +74,13 @@
             </div>
         </div>
     </div>
+    <h1 onclick="addRating(1,${store.idUser},${currentUser.idUser})">1</h1>
+    <h1 onclick="addRating(2,${store.idUser},${currentUser.idUser})">2</h1>
+    <h1 onclick="addRating(3,${store.idUser},${currentUser.idUser})">3</h1>
+    <h1 onclick="addRating(4,${store.idUser},${currentUser.idUser})">4</h1>
+    <h1 onclick="addRating(5,${store.idUser},${currentUser.idUser})">5</h1>
+
+
     <div class="row">
         <div class="col-3">
             <div class="list-group store-info-scroll" id="list-tab">
@@ -162,7 +169,7 @@
                                     <c:when test="${m.menuStatus == true && m.menuFrom le now && m.menuTo ge now}">
                                         <div class="menu-cost">
                                             <span><fmt:formatNumber type="number" value="${m.price}" maxFractionDigits="2" /></span>
-                                            <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price}, '${m.image}');toast('Add to cart success','You can check your cart and manage cart','${m.image}');">+</button>
+                                            <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price}, '${m.image}');toast('Add to cart success', 'You can check your cart and manage cart', '${m.image}');">+</button>
                                         </div>
                                     </c:when>    
                                     <c:otherwise>

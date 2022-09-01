@@ -150,6 +150,12 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private Collection<Follow> followCollection1;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore")
+    private Collection<Rating> ratingCollection;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
+    private Collection<Rating> ratingCollection1;
 
     public User() {
     }
@@ -385,6 +391,24 @@ public class User implements Serializable {
 
     public void setFollowCollection1(Collection<Follow> followCollection1) {
         this.followCollection1 = followCollection1;
+    }
+
+    @XmlTransient
+    public Collection<Rating> getRatingCollection() {
+        return ratingCollection;
+    }
+
+    public void setRatingCollection(Collection<Rating> ratingCollection) {
+        this.ratingCollection = ratingCollection;
+    }
+
+    @XmlTransient
+    public Collection<Rating> getRatingCollection1() {
+        return ratingCollection1;
+    }
+
+    public void setRatingCollection1(Collection<Rating> ratingCollection1) {
+        this.ratingCollection1 = ratingCollection1;
     }
 
 }

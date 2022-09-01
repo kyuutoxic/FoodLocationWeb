@@ -20,7 +20,7 @@ function addFollow(idStore, idUser) {
         }).then(function (res) {
             $(`#follow${idStore}`).remove();
             $('.loading-page').remove();
-            toast('Follow success', 'You can manage your follow in your page','');
+            toast('Follow success', 'You can manage your follow in your page', '');
             return res;
         });
     }
@@ -66,12 +66,12 @@ function loadAdminMenu(endpoint, menudetail) {
     })
 }
 
-function showModal(type, target){
+function showModal(type, target) {
     event.preventDefault();
-    if(type === 'close'){
-        $('#'+target).attr('style', 'display: none');
-    }else{
-        $('#'+target).attr('style', 'display: block !important');
+    if (type === 'close') {
+        $('#' + target).attr('style', 'display: none');
+    } else {
+        $('#' + target).attr('style', 'display: block !important');
     }
 }
 
@@ -440,52 +440,52 @@ function pay() {
             </div>
 //        `);
         let total = $('#total').text();
-        total = total.replaceAll(",","");
+        total = total.replaceAll(",", "");
         let type = $('#type').text();
-        if(type === "Momo"){
+        if (type === "Momo") {
             fetch("/FoodLocationWeb/api/momo", {
-            method: "post",
-            body: JSON.stringify({
-                "total": total
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(function (res) {
-            return res.json();
-        }).then(function (data) {
-            window.location.replace(data.payUrl);
-        });
-        }else{
-            fetch("/FoodLocationWeb/api/pay/", {
-            method: "post",
-            body: JSON.stringify({
-                "total": total
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(function (res) {
-            return res.json();
-        }).then(function (data) {
-            console.log(data);
-            fetch(`/FoodLocationWeb/sendmail`, {
-                method: 'post',
+                method: "post",
                 body: JSON.stringify({
-                    "idUser": data[0].idUser.idUser,
-                    "type": 1,
-                    "idOrder": data[0].idOrder
+                    "total": total
                 }),
                 headers: {
                     "Content-Type": "application/json"
                 }
-            }).then(function () {
-                $('.loading-page').html(`<h1 style="text-align: center">YOUR PURCHASE IS SUCCESS<br>PLEASE CHECK YOUR MAIL FOR DETAIL</h1>`);
-                setTimeout(function () {
-                    window.location.replace("/FoodLocationWeb/");
-                }, 3000);
+            }).then(function (res) {
+                return res.json();
+            }).then(function (data) {
+                window.location.replace(data.payUrl);
             });
-        });
+        } else {
+            fetch("/FoodLocationWeb/api/pay/", {
+                method: "post",
+                body: JSON.stringify({
+                    "total": total
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function (res) {
+                return res.json();
+            }).then(function (data) {
+                console.log(data);
+                fetch(`/FoodLocationWeb/sendmail`, {
+                    method: 'post',
+                    body: JSON.stringify({
+                        "idUser": data[0].idUser.idUser,
+                        "type": 1,
+                        "idOrder": data[0].idOrder
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(function () {
+                    $('.loading-page').html(`<h1 style="text-align: center">YOUR PURCHASE IS SUCCESS<br>PLEASE CHECK YOUR MAIL FOR DETAIL</h1>`);
+                    setTimeout(function () {
+                        window.location.replace("/FoodLocationWeb/");
+                    }, 3000);
+                });
+            });
         }
     }
 }
@@ -493,10 +493,10 @@ function pay() {
 function addComment(productId, userId, id) {
     let content;
     console.log(id);
-    if(id === undefined){
+    if (id === undefined) {
         content = $("#message-text").val();
-    }else{
-        content = $('#'+id).val();
+    } else {
+        content = $('#' + id).val();
     }
     if (userId === undefined) {
         alert('Please sign in before comment!!')
@@ -544,4 +544,27 @@ function addComment(productId, userId, id) {
         })
     }
     ;
+}
+function addRating(rate, storeId, userId) {
+    if (userId == null) {
+        alert('ban chua dang nhap')
+        window.location.replace("/FoodLocationWeb/login");
+    } else {
+        if (confirm('Ban chac chan danh gia') == true) {
+            fetch("/FoodLocationWeb/api/add-rating", {
+                method: 'post',
+                body: JSON.stringify({
+                    "rate": rate,
+                    "storeId": storeId
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function (res) {
+                console.log("Rating thanh cong");
+                console.log(res);
+                return res;
+            });
+        }
+    }
 }
