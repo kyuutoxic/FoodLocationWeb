@@ -6,6 +6,7 @@ package com.nvl.service;
 
 import com.nvl.pojo.Rating;
 import com.nvl.pojo.User;
+import java.util.Map;
 
 /**
  *
@@ -13,9 +14,9 @@ import com.nvl.pojo.User;
  */
 public interface RatingService {
 
-    boolean addRating(int rate, User user, int idStore);
+    boolean addRating(Map<String, String> rate, User user, int idStore);
 
-    boolean updateRating(User user, int idStore, int rate);
+    boolean updateRating(User user, int idStore, Map<String, String> rate);
     
     Rating getRatingByUserAndUserStoreId(User user, int idStore);
 

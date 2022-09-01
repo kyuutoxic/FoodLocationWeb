@@ -402,13 +402,4 @@ public class User implements Serializable {
         this.ratingCollection = ratingCollection;
     }
 
-    @XmlTransient
-    public Collection<Rating> getRatingCollection1() {
-        return ratingCollection1;
-    }
-
-    public void setRatingCollection1(Collection<Rating> ratingCollection1) {
-        this.ratingCollection1 = ratingCollection1;
-    }
-
 }

@@ -545,7 +545,7 @@ function addComment(productId, userId, id) {
     }
     ;
 }
-function addRating(rate, storeId, userId) {
+function addRating(storeId, userId) {
     if (userId == null) {
         alert('ban chua dang nhap')
         window.location.replace("/FoodLocationWeb/login");
@@ -554,15 +554,21 @@ function addRating(rate, storeId, userId) {
             fetch("/FoodLocationWeb/api/add-rating", {
                 method: 'post',
                 body: JSON.stringify({
-                    "rate": rate,
+                    "rateQuality": $('input[name="rateQuality"]:checked').val(),
+                    "rateService": $('input[name="rateService"]:checked').val(),
+                    "rateSpace": $('input[name="rateSpace"]:checked').val(),
+                    "ratePrice": $('input[name="ratePrice"]:checked').val(),
+                    "rateLocation": $('input[name="rateLocation"]:checked').val(),
                     "storeId": storeId
                 }),
                 headers: {
                     "Content-Type": "application/json"
                 }
             }).then(function (res) {
-                console.log("Rating thanh cong");
-                console.log(res);
+                if(res.code === 200){
+                    console.log("Rating thanh cong");
+                    console.log(res);
+                }
                 return res;
             });
         }

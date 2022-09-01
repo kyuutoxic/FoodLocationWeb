@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author kyuut
+ * @author Copeoshihi
  */
 @Entity
 @Table(name = "rating")
@@ -32,8 +32,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Rating.findAll", query = "SELECT r FROM Rating r"),
     @NamedQuery(name = "Rating.findByIdRating", query = "SELECT r FROM Rating r WHERE r.idRating = :idRating"),
-    @NamedQuery(name = "Rating.findByRate", query = "SELECT r FROM Rating r WHERE r.rate = :rate"),
-    @NamedQuery(name = "Rating.findByCreatedDate", query = "SELECT r FROM Rating r WHERE r.createdDate = :createdDate")})
+    @NamedQuery(name = "Rating.findByRateQuality", query = "SELECT r FROM Rating r WHERE r.rateQuality = :rateQuality"),
+    @NamedQuery(name = "Rating.findByRateService", query = "SELECT r FROM Rating r WHERE r.rateService = :rateService"),
+    @NamedQuery(name = "Rating.findByRateSpace", query = "SELECT r FROM Rating r WHERE r.rateSpace = :rateSpace"),
+    @NamedQuery(name = "Rating.findByRatePrice", query = "SELECT r FROM Rating r WHERE r.ratePrice = :ratePrice"),
+    @NamedQuery(name = "Rating.findByRateLocation", query = "SELECT r FROM Rating r WHERE r.rateLocation = :rateLocation"),
+    @NamedQuery(name = "Rating.findByCreatedDate", query = "SELECT r FROM Rating r WHERE r.createdDate = :createdDate"),
+    @NamedQuery(name = "Rating.findByUpdateDate", query = "SELECT r FROM Rating r WHERE r.updateDate = :updateDate")})
 public class Rating implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,13 +49,34 @@ public class Rating implements Serializable {
     private Integer idRating;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "rate")
-    private Integer rate;
+    @Column(name = "rate_quality")
+    private int rateQuality;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "rate_service")
+    private int rateService;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "rate_space")
+    private int rateSpace;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "rate_price")
+    private int ratePrice;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "rate_location")
+    private int rateLocation;
     @Basic(optional = false)
     @NotNull
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "update_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updateDate;
     @JoinColumn(name = "id_store", referencedColumnName = "id_user")
     @ManyToOne(optional = false)
     private User idStore;
@@ -65,10 +91,15 @@ public class Rating implements Serializable {
         this.idRating = idRating;
     }
 
-    public Rating(Integer idRating, Integer rate, Date createdDate) {
+    public Rating(Integer idRating, int rateQuality, int rateService, int rateSpace, int ratePrice, int rateLocation, Date createdDate, Date updateDate) {
         this.idRating = idRating;
-        this.rate = rate;
+        this.rateQuality = rateQuality;
+        this.rateService = rateService;
+        this.rateSpace = rateSpace;
+        this.ratePrice = ratePrice;
+        this.rateLocation = rateLocation;
         this.createdDate = createdDate;
+        this.updateDate = updateDate;
     }
 
     public Integer getIdRating() {
@@ -79,12 +110,44 @@ public class Rating implements Serializable {
         this.idRating = idRating;
     }
 
-    public Integer getRate() {
-        return rate;
+    public int getRateQuality() {
+        return rateQuality;
     }
 
-    public void setRate(Integer rate) {
-        this.rate = rate;
+    public void setRateQuality(int rateQuality) {
+        this.rateQuality = rateQuality;
+    }
+
+    public int getRateService() {
+        return rateService;
+    }
+
+    public void setRateService(int rateService) {
+        this.rateService = rateService;
+    }
+
+    public int getRateSpace() {
+        return rateSpace;
+    }
+
+    public void setRateSpace(int rateSpace) {
+        this.rateSpace = rateSpace;
+    }
+
+    public int getRatePrice() {
+        return ratePrice;
+    }
+
+    public void setRatePrice(int ratePrice) {
+        this.ratePrice = ratePrice;
+    }
+
+    public int getRateLocation() {
+        return rateLocation;
+    }
+
+    public void setRateLocation(int rateLocation) {
+        this.rateLocation = rateLocation;
     }
 
     public Date getCreatedDate() {
@@ -93,6 +156,14 @@ public class Rating implements Serializable {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
     public User getIdStore() {

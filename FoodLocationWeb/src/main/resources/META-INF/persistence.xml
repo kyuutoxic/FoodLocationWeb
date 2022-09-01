@@ -13,6 +13,7 @@
     <class>com.nvl.pojo.Type</class>
     <class>com.nvl.pojo.MenuOrder</class>
     <class>com.nvl.pojo.Follow</class>
+    <class>com.nvl.pojo.Rating_1</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/foodmapdb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

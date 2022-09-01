@@ -7,6 +7,7 @@ package com.nvl.controllers;
 import com.nvl.pojo.Rating;
 import com.nvl.pojo.User;
 import com.nvl.service.RatingService;
+import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,12 @@ public class ApiRatingController {
     public ResponseEntity<Rating> addComment(@RequestBody Map<String, String> params, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
         if (u != null) {
-            int rate = Integer.parseInt(params.get("rate"));
+            Map<String, String> rate = new HashMap<>();
+            rate.put("rateQuality", params.get("rateQuality"));
+            rate.put("rateService", params.get("rateService"));
+            rate.put("rateSpace", params.get("rateSpace"));
+            rate.put("ratePrice", params.get("ratePrice"));
+            rate.put("rateLocation", params.get("rateLocation"));   
             int storeId = Integer.parseInt(params.get("storeId"));
             System.out.println(this.ratingService.getRatingByUserAndUserStoreId(u, storeId));
 

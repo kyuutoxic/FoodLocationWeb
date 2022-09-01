@@ -74,13 +74,6 @@
             </div>
         </div>
     </div>
-    <h1 onclick="addRating(1,${store.idUser},${currentUser.idUser})">1</h1>
-    <h1 onclick="addRating(2,${store.idUser},${currentUser.idUser})">2</h1>
-    <h1 onclick="addRating(3,${store.idUser},${currentUser.idUser})">3</h1>
-    <h1 onclick="addRating(4,${store.idUser},${currentUser.idUser})">4</h1>
-    <h1 onclick="addRating(5,${store.idUser},${currentUser.idUser})">5</h1>
-
-
     <div class="row">
         <div class="col-3">
             <div class="list-group store-info-scroll" id="list-tab">
@@ -93,22 +86,22 @@
         </div>
         <div class="col-9">
             <div class="row store-info-contact">
-                <div class="col-2">
+                <div class="col">
                     <a href="#">
                         <span class="fa fa-phone-alt"></span>
-                        <span>Gọi điện thoại</span>
+                        <span>Call</span>
                     </a>
                 </div>
-                <div class="col-4">
+                <div class="col">
                     <a href="#">
                         <span class="fa fa-bookmark"></span>
-                        <span>Lưu vào Bộ sưu tập (52)</span>
+                        <span>Save</span>
                     </a>
                 </div>
-                <div class="col-2">
+                <div class="col">
                     <a href="#" class="showModal" datatarget="add-cmt-form">
                         <span class="fa fa-comment"></span>
-                        <span>Bình luận</span>
+                        <span>Comment</span>
                     </a>
                 </div>
                 <div class="myModal" id="add-cmt-form">
@@ -120,10 +113,6 @@
                             </div>
                             <div class="modal-body">
                                 <form>
-                                    <!--                                    <div class="mb-3" style="text-align: left">
-                                                                            <label for="recipient-name">Nhan xet chung:</label>
-                                                                            <input type="text" class="form-control" id="recipient-name">
-                                                                        </div>-->
                                     <div class="mb-3" style="text-align: left">
                                         <label for="message-text">Nhan xet:</label>
                                         <textarea class="form-control" id="message-text"></textarea>
@@ -138,17 +127,108 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-2">
-                    <a href="#">
-                        <span class="fa fa-camera"></span>
-                        <span>Hình ảnh</span>
+                <div class="col">
+                    <a href="#" class="showModal" datatarget="add-rating-form">
+                        <span class="bi bi-star-fill"></span>
+                        <span>Rating</span>
                     </a>
                 </div>
-                <div class="col-2">
+                <div class="myModal" id="add-rating-form">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                <button type="button" class="btn-close" aria-label="Close" datatarget="add-rating-form" dataaction="close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div>Rate for quality:</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="starrating risingstar d-flex flex-row-reverse justify-content-end">
+                                            <input type="radio" id="rateQuality5" name="rateQuality" value="5" /><label for="rateQuality5" title="5 star"></label>
+                                            <input type="radio" id="rateQuality4" name="rateQuality" value="4" /><label for="rateQuality4" title="4 star"></label>
+                                            <input type="radio" id="rateQuality3" name="rateQuality" value="3" /><label for="rateQuality3" title="3 star"></label>
+                                            <input type="radio" id="rateQuality2" name="rateQuality" value="2" checked/><label for="rateQuality2" title="2 star"></label>
+                                            <input type="radio" id="rateQuality1" name="rateQuality" value="1" /><label for="rateQuality1" title="1 star"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div>Rate for service:</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="starrating risingstar d-flex flex-row-reverse justify-content-end">
+                                            <input type="radio" id="rateService5" name="rateService" value="5" /><label for="rateService5" title="5 star"></label>
+                                            <input type="radio" id="rateService4" name="rateService" value="4" /><label for="rateService4" title="4 star"></label>
+                                            <input type="radio" id="rateService3" name="rateService" value="3" /><label for="rateService3" title="3 star"></label>
+                                            <input type="radio" id="rateService2" name="rateService" value="2" checked/><label for="rateService2" title="2 star"></label>
+                                            <input type="radio" id="rateService1" name="rateService" value="1" /><label for="rateService1" title="1 star"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div>Rate for space:</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="starrating risingstar d-flex flex-row-reverse justify-content-end">
+                                            <input type="radio" id="rateSpace5" name="rateSpace" value="5" /><label for="rateSpace5" title="5 star"></label>
+                                            <input type="radio" id="rateSpace4" name="rateSpace" value="4" /><label for="rateSpace4" title="4 star"></label>
+                                            <input type="radio" id="rateSpace3" name="rateSpace" value="3" /><label for="rateSpace3" title="3 star"></label>
+                                            <input type="radio" id="rateSpace2" name="rateSpace" value="2" checked/><label for="rateSpace2" title="2 star"></label>
+                                            <input type="radio" id="rateSpace1" name="rateSpace" value="1" /><label for="rateSpace1" title="1 star"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div>Rate for price:</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="starrating risingstar d-flex flex-row-reverse justify-content-end">
+                                            <input type="radio" id="ratePrice5" name="ratePrice" value="5" /><label for="ratePrice5" title="5 star"></label>
+                                            <input type="radio" id="ratePrice4" name="ratePrice" value="4" /><label for="ratePrice4" title="4 star"></label>
+                                            <input type="radio" id="ratePrice3" name="ratePrice" value="3" /><label for="ratePrice3" title="3 star"></label>
+                                            <input type="radio" id="ratePrice2" name="ratePrice" value="2" checked/><label for="ratePrice2" title="2 star"></label>
+                                            <input type="radio" id="ratePrice1" name="ratePrice" value="1" /><label for="ratePrice1" title="1 star"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div>Rate for location:</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="starrating risingstar d-flex flex-row-reverse justify-content-end">
+                                            <input type="radio" id="rateLocation5" name="rateLocation" value="5" /><label for="rateLocation5" title="5 star"></label>
+                                            <input type="radio" id="rateLocation4" name="rateLocation" value="4" /><label for="rateLocation4" title="4 star"></label>
+                                            <input type="radio" id="rateLocation3" name="rateLocation" value="3" /><label for="rateLocation3" title="3 star"></label>
+                                            <input type="radio" id="rateLocation2" name="rateLocation" value="2" checked/><label for="rateLocation2" title="2 star"></label>
+                                            <input type="radio" id="rateLocation1" name="rateLocation" value="1" /><label for="rateLocation1" title="1 star"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" datatarget="add-rating-form" dataaction="close">Close</button>
+                                <button type="button" class="btn btn-primary" datatarget="add-rating-form" dataaction="send" onclick="addRating(${store.idUser},${currentUser.idUser})">Send Rating</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                            
+                <div class="col">
+                    <a href="#">
+                        <span class="fa fa-camera"></span>
+                        <span>Picture</span>
+                    </a>
+                </div>
+                <div class="col">
                     <a href="#">
                         <span class="fa fa-share-alt"></span>
-                        <span>Chia sẻ</span>
+                        <span>Share</span>
                     </a>
                 </div>
             </div>
