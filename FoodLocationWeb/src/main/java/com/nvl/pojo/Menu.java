@@ -87,17 +87,14 @@ public class Menu implements Serializable {
     @Column(name = "menu_to")
     private String menuTo;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "update_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
     @Basic(optional = false)
-    @NotNull
     @Lob
     @Size(min = 1, max = 2147483647)
     @Column(name = "image")

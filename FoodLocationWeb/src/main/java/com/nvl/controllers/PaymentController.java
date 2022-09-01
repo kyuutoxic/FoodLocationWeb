@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class PaymentController {
-    @GetMapping("/payment")
-    public String cart(Model model, HttpSession session) {
+    @GetMapping("/payment/{type}")
+    public String cart(Model model, HttpSession session, @PathVariable(value = "type") String type) {
         Map<Integer, Cart> cart = (Map<Integer, Cart>) session.getAttribute("cart");
         if (cart != null)
             model.addAttribute("carts", cart.values());
@@ -27,6 +28,7 @@ public class PaymentController {
             model.addAttribute("carts", null);
         
         model.addAttribute("cartStats", Utils.cartStats(cart));
+        model.addAttribute("type", type);
         
         return "payment";
     }

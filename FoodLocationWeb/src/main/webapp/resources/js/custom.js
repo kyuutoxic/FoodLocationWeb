@@ -30,8 +30,6 @@ $(".cart").mouseleave(function () {
     $(".cart-detail").fadeOut();
 });
 
-
-
 //$(document).ready(function () {
 //    $(this).scrollTop(0);
 //});

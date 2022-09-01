@@ -46,7 +46,7 @@
                 <form:input type="file" class="form-control-file" path="file" />
                 <form:errors path="file" cssClass="alert alert-danger" element="div" />
             </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block btn-in-login">Them</button>
+            <button id="submit" type="submit" class="btn btn-primary btn-lg btn-block btn-in-login">Them</button>
 
         </form:form>
     </div>
@@ -93,6 +93,16 @@
         setTime();
         $('#typeId').change(function(){
             setTime();
+        });
+        $('#submit').click(function(){
+            $('body').append(`
+                <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+                    <h1>loading...</h1>
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden"></span>
+                    </div>
+                </div>
+            `);
         });
     });    
 </script>

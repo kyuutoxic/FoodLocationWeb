@@ -79,7 +79,7 @@
                 <label for="image" class="">Image</label>
                 <form:input value="" type="file" class="form-control-file" path="file" />
             </div>
-            <button type="submit" class="btn btn-primary btn-lg mb-3">Cap nhat</button>
+            <button id="submit" type="submit" class="btn btn-primary btn-lg mb-3">Cap nhat</button>
 
         </form:form>
         <a href="<c:url value="/admin"/>"><button type="button" class="btn btn-danger btn-lg mb-3">Thoat</button></a>
@@ -88,7 +88,6 @@
 <script>
     function setTime() {
         let time = $('#typeId').find(":selected").val();
-        console.log(time);
         switch (time) {
             case "1":
                 $('#from').val("07:00");
@@ -127,6 +126,16 @@
         setTime();
         $('#typeId').change(function () {
             setTime();
+        });
+        $('#submit').click(function(){
+            $('body').append(`
+                <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+                    <h1>loading...</h1>
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden"></span>
+                    </div>
+                </div>
+            `);
         });
     });
 </script>

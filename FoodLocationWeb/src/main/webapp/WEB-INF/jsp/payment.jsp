@@ -70,6 +70,7 @@
                 </div>
             </div>
         </div>
+        <em id="type">${type}</em>
         <div class="payment-field" style="justify-content: flex-end;">
             <c:if test="${currentUser != null}">
                 <button class="btn-pay" onclick="pay()">Pay</button>

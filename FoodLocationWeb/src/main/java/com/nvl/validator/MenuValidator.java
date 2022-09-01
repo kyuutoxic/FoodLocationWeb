@@ -30,13 +30,13 @@ public class MenuValidator implements Validator {
         if (menu.getMenuName().isEmpty()) {
             errors.rejectValue("menuName", "Menu.menuName.Err");
         }
-        if (menu.getPrice() == (float) menu.getPrice()) {
+        if (menu.getPrice() == 0.0) {
             errors.rejectValue("price", "Menu.price.Err");
         }
         if (menu.getFile().isEmpty()) {
             errors.rejectValue("file", "Menu.file.Err");
         }
-
+        
     }
 
 }

@@ -42,8 +42,9 @@ public class PaymentApiController {
     @Autowired
     private MenuService menuService;
     
-    @PostMapping("/pay/{total}")
-    public ResponseEntity<List<MenuOrder>> pay(HttpSession session, @PathVariable(value = "total") float total) {
+    @PostMapping("/pay")
+    public ResponseEntity<List<MenuOrder>> pay(HttpSession session, @RequestBody Map<String, String> params) {
+        float total = Float.parseFloat(params.get("total"));
         List<MenuOrder> menuOrder = new ArrayList<>();
         User u = (User) session.getAttribute("currentUser");
         MenuOrder m = (MenuOrder)this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total);

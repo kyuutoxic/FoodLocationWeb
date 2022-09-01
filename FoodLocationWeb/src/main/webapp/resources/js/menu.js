@@ -441,11 +441,34 @@ function pay() {
 //        `);
         let total = $('#total').text();
         total = total.replaceAll(",","");
-        fetch(`/FoodLocationWeb/api/pay/${total}`, {
-            method: "post"
+        let type = $('#type').text();
+        if(type === "Momo"){
+            fetch("/FoodLocationWeb/api/momo", {
+            method: "post",
+            body: JSON.stringify({
+                "total": total
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
+            window.location.replace(data.payUrl);
+        });
+        }else{
+            fetch("/FoodLocationWeb/api/pay/", {
+            method: "post",
+            body: JSON.stringify({
+                "total": total
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (res) {
+            return res.json();
+        }).then(function (data) {
+            console.log(data);
             fetch(`/FoodLocationWeb/sendmail`, {
                 method: 'post',
                 body: JSON.stringify({
@@ -463,6 +486,7 @@ function pay() {
                 }, 3000);
             });
         });
+        }
     }
 }
 

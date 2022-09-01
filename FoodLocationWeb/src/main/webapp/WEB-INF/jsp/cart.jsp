@@ -68,7 +68,7 @@
             <div class="payment-field">
                 <div style="display: flex"><h1>Total:&nbsp;&nbsp;</h1><h1 id="amountCart">${cartStats.amount}</h1><h1>&nbsp;VNÐ</h1></div>
                         <c:if test="${currentUser != null}">
-                    <a href="<c:url value="/payment" />"><button class="btn-pay">Continue to Pay</button></a>
+                    <a href="#" class="showModal" datatarget="choose-type-payment"><button class="btn-pay">Continue to Pay</button></a>
                 </c:if>
                 <c:if test="${currentUser == null}">
                     <h4><a href="<c:url value="/login" />">Vui long dang nhap</a></h4>
@@ -77,7 +77,36 @@
         </c:if>
 
     </section>
-
+    <div class="myModal" id="choose-type-payment">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" aria-label="Close" datatarget="choose-type-payment" dataaction="close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+                        <a href="<c:url value="/payment/Momo" />">
+                            <div>
+                                Continue to Pay with Momo Wallet
+                            </div>
+                        </a>
+                    </div>
+                    <div class="">
+                        <a href="<c:url value="/payment/Offline" />">
+                            <div>
+                                Continue to Pay with COD
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" datatarget="choose-type-payment" dataaction="close">Close</button>
+                    <button type="button" class="btn btn-primary" datatarget="choose-type-payment" dataaction="send">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
 
