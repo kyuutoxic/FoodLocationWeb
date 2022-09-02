@@ -127,7 +127,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col" id="check-rating">
                     <a href="#" class="showModal" datatarget="add-rating-form">
                         <span class="bi bi-star-fill"></span>
                         <span>Rating</span>
@@ -376,14 +376,21 @@
             </div>
             <div id="list-map">
                 <h1>Map</h1>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9356596756443!2d106.67562481485712!3d10.81623586141513!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528e19559e523%3A0x8e4133bdb1373cc9!2zTmd1eeG7hW4gS2nhu4dtLCBQaMaw4budbmcgMywgR8OyIFbhuqVwLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1660459258471!5m2!1svi!2s" 
-                        width="700" height="450" style="border:0;" 
-                        allowfullscreen="true" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                ${store.userIframe}
+                <!--                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9356596756443!2d106.67562481485712!3d10.81623586141513!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528e19559e523%3A0x8e4133bdb1373cc9!2zTmd1eeG7hW4gS2nhu4dtLCBQaMaw4budbmcgMywgR8OyIFbhuqVwLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1660459258471!5m2!1svi!2s" 
+                                        width="700" height="450" style="border:0;" 
+                                        allowfullscreen="true" 
+                                        loading="lazy" 
+                                        referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>-->
             </div>
         </div>
     </div>
 </div>
 <script src="<c:url value="/js/menu.js" />"></script>
+<script>
+    window.onload = function () {
+        checkRating(${store.idUser});
+    }
+
+</script>

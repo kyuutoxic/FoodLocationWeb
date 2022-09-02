@@ -123,6 +123,8 @@ public class User implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ship_price")
     private Float shipPrice;
+    @Column(name = "user_iframe")
+    private String userIframe;
     @Transient
     @JsonIgnore
     private MultipartFile file;
@@ -144,10 +146,10 @@ public class User implements Serializable {
     private Collection<Comment> commentCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private Collection<MenuOrder> menuOrderCollection;
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idStore")
     private Collection<Follow> followCollection;
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private Collection<Follow> followCollection1;
     @JsonIgnore
@@ -285,6 +287,20 @@ public class User implements Serializable {
 
     public void setShipPrice(Float shipPrice) {
         this.shipPrice = shipPrice;
+    }
+
+    /**
+     * @return the userIframe
+     */
+    public String getUserIframe() {
+        return userIframe;
+    }
+
+    /**
+     * @param userIframe the userIframe to set
+     */
+    public void setUserIframe(String userIframe) {
+        this.userIframe = userIframe;
     }
 
     @XmlTransient

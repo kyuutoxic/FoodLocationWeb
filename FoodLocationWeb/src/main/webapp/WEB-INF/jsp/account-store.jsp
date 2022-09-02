@@ -59,9 +59,16 @@
                     </div>
                     <div class="col-md-6">
                         <div class="position-relative form-group">
+                            <label class="form-label" for="iframe">Iframe GG MAP</label>
+                            <form:input type="text" id="iframe" class="form-control form-control-lg" path="userIframe"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="position-relative form-group">
                             <img src="${user.avatar}" alt="alt" style="max-height: 25%;max-width: 25%" />
                         </div>
                     </div>
+
                 </div>
                 <button type="submit" class="mt-2 btn btn-primary">Update</button>
             </form:form>

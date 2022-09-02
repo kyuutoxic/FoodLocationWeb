@@ -104,4 +104,25 @@ public class FollowRepositoryImpl implements FollowRepository {
         }
     }
 
+    @Override
+    public boolean deleteFollow(Follow f) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.delete(f);
+
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public Follow getFollowById(int idFollow) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        return session.get(Follow.class, idFollow);
+    }
+
 }

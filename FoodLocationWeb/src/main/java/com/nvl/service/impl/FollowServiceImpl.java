@@ -55,4 +55,10 @@ public class FollowServiceImpl implements FollowService {
         return this.followRepository.checkFollow(customer, u);
     }
 
+    @Override
+    public boolean deleteFollow(int idFollow) {
+        Follow f = (Follow) this.followRepository.getFollowById(idFollow);
+        return this.followRepository.deleteFollow(f);
+    }
+
 }

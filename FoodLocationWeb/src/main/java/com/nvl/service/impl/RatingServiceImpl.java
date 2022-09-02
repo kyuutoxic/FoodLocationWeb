@@ -64,4 +64,10 @@ public class RatingServiceImpl implements RatingService {
         return this.ratingRepository.getRatingByUserAndUserStoreId(user.getIdUser(), idStore);
     }
 
+    @Override
+    public boolean checkOrderForRating(int idUser, int idStore) {
+        return this.ratingRepository.checkOrderForRating(idUser, idStore);
+    }
+
+
 }

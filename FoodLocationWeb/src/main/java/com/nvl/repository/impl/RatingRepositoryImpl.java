@@ -4,7 +4,11 @@
  */
 package com.nvl.repository.impl;
 
+import com.nvl.pojo.Menu;
+import com.nvl.pojo.MenuOrder;
+import com.nvl.pojo.OrderDetail;
 import com.nvl.pojo.Rating;
+import com.nvl.pojo.User;
 import com.nvl.repository.RatingRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +80,34 @@ public class RatingRepositoryImpl implements RatingRepository {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean checkOrderForRating(int idUser, int idStore) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Rating> q = b.createQuery(Rating.class);
+        Root rM = q.from(Menu.class);
+        Root rD = q.from(OrderDetail.class);
+        Root rO = q.from(MenuOrder.class);
+        Root rU = q.from(User.class);
+
+        q.where(b.equal(rD.get("idOrder"), rO.get("idOrder")),
+                b.equal(rD.get("idMenu"), rM.get("idMenu")),
+                b.equal(rO.get("idUser"), idUser),
+                b.equal(rM.get("idStore"), idStore));
+
+        q.multiselect(rO.get("idUser"));
+
+        q.groupBy(rO.get("idUser"));
+
+        Object user = session.createQuery(q).getSingleResult();
+
+        if(user != null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

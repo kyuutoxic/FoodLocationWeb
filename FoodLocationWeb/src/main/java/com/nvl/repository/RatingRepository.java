@@ -15,7 +15,9 @@ public interface RatingRepository {
     boolean addRating(Rating rating);
 
     boolean updateRating(Rating rating);
-    
+
     Rating getRatingByUserAndUserStoreId(int idUser, int idStore);
+
+    boolean checkOrderForRating(int idUser, int idStore);
 
 }

@@ -4,6 +4,7 @@
  */
 package com.nvl.pojo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -36,9 +37,11 @@ public class Follow implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_follow")
     private Integer idFollow;
+    @JsonManagedReference
     @JoinColumn(name = "id_store", referencedColumnName = "id_user")
     @ManyToOne(optional = false)
     private User idStore;
+    @JsonManagedReference
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     @ManyToOne(optional = false)
     private User idUser;
@@ -98,5 +101,5 @@ public class Follow implements Serializable {
     public String toString() {
         return "com.nvl.pojo.Follow[ idFollow=" + idFollow + " ]";
     }
-    
+
 }

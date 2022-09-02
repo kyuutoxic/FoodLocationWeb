@@ -441,6 +441,8 @@ function pay() {
 //        `);
         let total = $('#total').text();
         total = total.replaceAll(",", "");
+        total = total.replaceAll(".", "");
+
         let type = $('#type').text();
         if (type === "Momo") {
             fetch("/FoodLocationWeb/api/momo", {
@@ -565,7 +567,7 @@ function addRating(storeId, userId) {
                     "Content-Type": "application/json"
                 }
             }).then(function (res) {
-                if(res.code === 200){
+                if (res.code === 200) {
                     console.log("Rating thanh cong");
                     console.log(res);
                 }
@@ -573,4 +575,65 @@ function addRating(storeId, userId) {
             });
         }
     }
+}
+
+
+function deleteFollow(idFollow) {
+    if (confirm("Ban chac chan huy follow khong?") == true) {
+        fetch(`/FoodLocationWeb/api/follow/${idFollow}`, {
+            method: "delete"
+        }).then(function (res) {
+            console.log(res);
+
+            $('#followID' + idFollow).attr('style', 'display: none !important');
+        })
+    }
+}
+
+function loadFollowByUser(idmenu, userId) {
+    fetch("/FoodLocationWeb/api/check-follow").then(function (res) {
+        return res.json()
+    }).then(function (data) {
+        let msg = "";
+        for (let i = 0; i < data.length; i++) {
+            msg += `
+            <div class="col-3" id="followID${data[i].idFollow}">
+                <div class="card mb-5">
+                    <a href="${idmenu}${data[i].idStore.idUser}">
+                        <img class="card-img-top" src="${data[i].idStore.avatar}" alt="Card image cap">
+                    </a>
+                    <div class="card-body" style="height: 168px; max-height: 168px;">
+                        <a href="${idmenu}${data[i].idStore.idUser}">${data[i].idStore.nameStore}</a>
+                        <p>${data[i].idStore.address}</p>
+                        <div style="position: absolute;bottom: 0;margin-bottom: 15px;width:100%;">
+                            <a href="#" onclick="showModal('','cmt-store${data[i].idStore.idUser}')" style="margin-right: 5px;float: left;">
+                                <i class="bi bi-chat-fill"></i>
+                                <span>9</span>
+                            </a>
+                            <a style="margin-right: 5px;float: left;">
+                                <i class="bi bi-camera-fill"></i>
+                                <span>12</span>
+                            </a>
+                            <a href="#" style="float: right; margin-right: 20px;" id="follow${data[i].idStore.idUser}" onclick="deleteFollow(${data[i].idFollow})">
+                                UnFollow
+                            </a>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+        let d = document.getElementById("listfollow");
+        d.innerHTML = msg;
+    });
+}
+
+
+function checkRating(idStore) {
+    fetch(`/FoodLocationWeb/api/checkrating/${idStore}`).then(function (res) {
+        console.log(res);
+        if (res.status === 404) {
+            $('#check-rating').attr('style', 'display: none !important');
+        }
+    })
 }

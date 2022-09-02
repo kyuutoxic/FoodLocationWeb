@@ -21,4 +21,7 @@ public interface FollowService {
     List<Follow> getFollowByIdUser(User user);
 
     List<Follow> getFollowByIdStore(User user);
+
+    boolean deleteFollow(int idFollow);
+
 }

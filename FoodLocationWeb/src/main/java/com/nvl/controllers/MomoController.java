@@ -33,55 +33,69 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class MomoController {
-    
+
     @Autowired
     private MomoService momoService;
-    
+
     @Autowired
     private OrderService orderService;
-    
+
     @Autowired
     private MailService mailService;
-    
+
     @PostMapping("/api/momo")
     public ResponseEntity<Map<String, String>> momo(HttpSession session, @RequestBody Map<String, String> params) {
         Map<Integer, Cart> cart = (Map<Integer, Cart>) session.getAttribute("cart");
         long total = Long.parseLong(params.get("total"));
         Map<String, String> result = new HashMap<>();
+        Map<String, String> momoSession = new HashMap<>();
         JSONObject data = this.momoService.payment(total, cart);
+        result.put("payUrl", data.get("payUrl").toString());
         Iterator<String> temp = data.keys();
         while (temp.hasNext()) {
             String key = temp.next();
-            result.put(key, data.get(key).toString());
+            momoSession.put(key, data.get(key).toString());
         }
-        if(data != null){
+        session.setAttribute("momoSession", momoSession);
+        if (data != null) {
             System.out.println(result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
-    
+
     @GetMapping("/returnmomo")
     public String returnMomo(Model model, HttpSession session, @RequestParam Map<String, String> params) {
-        float total = Float.parseFloat(params.get("amount"));
         String resultCode = params.get("resultCode");
-        model.addAttribute("message", params.get("message"));
-        if(resultCode == "0"){
-            List<MenuOrder> menuOrder = new ArrayList<>();
-            User u = (User) session.getAttribute("currentUser");
-            MenuOrder m = (MenuOrder)this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total);
-            Map<String, Object> object = new HashMap<>();
-            object.put("order", m);
-            if (m != null) {
-                menuOrder.add(m);
-                this.mailService.sendEmail(1, u.getEmail(), object);
-                session.removeAttribute("cart");
-                return "returnMomo";
+        Map<String, String> momoSession = (Map<String, String>) session.getAttribute("momoSession");
+        if (resultCode.equals("0") && 
+            params.get("partnerCode").equals(momoSession.get("partnerCode")) &&
+            params.get("requestId").equals(momoSession.get("requestId")) &&
+            params.get("orderId").equals(momoSession.get("orderId")) &&
+            params.get("amount").equals(momoSession.get("amount")) &&
+            params.get("signature").equals(momoSession.get("signature"))) {
+            try {
+                float total = Float.parseFloat(params.get("amount"));
+                model.addAttribute("message", params.get("message"));
+                User u = (User) session.getAttribute("currentUser");
+                MenuOrder m = (MenuOrder) this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total);
+                List<MenuOrder> menuOrder = new ArrayList<>();
+                Map<String, Object> object = new HashMap<>();
+                object.put("order", m);
+                if (m != null) {
+                    menuOrder.add(m);
+                    this.mailService.sendEmail(1, u.getEmail(), object);
+                    session.removeAttribute("cart");
+                    session.removeAttribute("momoSession");
+                    return "returnMomo";
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
         return "returnMomo";
     }
-    
+
     @GetMapping("/notimomo")
     public String notiMomo() {
         return "notiMomo";

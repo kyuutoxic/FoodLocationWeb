@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,13 +41,13 @@ public class ApiRatingController {
             rate.put("rateService", params.get("rateService"));
             rate.put("rateSpace", params.get("rateSpace"));
             rate.put("ratePrice", params.get("ratePrice"));
-            rate.put("rateLocation", params.get("rateLocation"));   
+            rate.put("rateLocation", params.get("rateLocation"));
             int storeId = Integer.parseInt(params.get("storeId"));
             System.out.println(this.ratingService.getRatingByUserAndUserStoreId(u, storeId));
 
             if (this.ratingService.getRatingByUserAndUserStoreId(u, storeId) == null) {
                 this.ratingService.addRating(rate, u, storeId);
-            }else{
+            } else {
                 this.ratingService.updateRating(u, storeId, rate);
             }
 
@@ -53,6 +55,16 @@ public class ApiRatingController {
 
         }
 
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping(path = "/api/checkrating/${idStore}")
+    public ResponseEntity<Boolean> checkRating(@PathVariable(value = "idStore") int idStore, HttpSession session) {
+        User u = (User) session.getAttribute("currentUser");
+        System.out.println(this.ratingService.checkOrderForRating(u.getIdUser(), idStore) + "NGUNGUNGUNGUNGUNGUGNUGNGUNGUNU");
+        if (this.ratingService.checkOrderForRating(u.getIdUser(), idStore) == true) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

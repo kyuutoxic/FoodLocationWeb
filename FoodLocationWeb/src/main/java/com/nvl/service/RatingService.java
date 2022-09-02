@@ -20,4 +20,5 @@ public interface RatingService {
     
     Rating getRatingByUserAndUserStoreId(User user, int idStore);
 
+    boolean checkOrderForRating(int idUser, int idStore);
 }

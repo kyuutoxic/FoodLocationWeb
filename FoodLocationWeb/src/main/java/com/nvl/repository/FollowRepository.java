@@ -21,5 +21,9 @@ public interface FollowRepository {
     List<Follow> getFollowByIdUser(User userId);
 
     List<Follow> getFollowByIdStore(User storeId);
+    
+    Follow getFollowById(int idFollow);
+
+    boolean deleteFollow(Follow f);
 
 }
