@@ -27,34 +27,50 @@
                 <div>- Món Việt</div>
                 <div>- Gia đình</div>
             </div>
-            <div class="point row">
-                <div class="col">
-                    <div>9.7</div>
-                </div>
-                <div class="col">
-                    <div>10.0</div>
-                    <div>Chất lượng</div>
-                </div>
-                <div class="col">
-                    <div>10.0</div>
-                    <div>Phục vụ</div>
-                </div>
-                <div class="col">
-                    <div>10.0</div>
-                    <div>Không gian</div>
-                </div>
-                <div class="col">
-                    <div>10.0</div>
-                    <div>Giá cả</div>
-                </div>
-                <div class="col">
-                    <div>10.0</div>
-                    <div>Vị trí</div>
-                </div>
-                <div class="col">
-                    <div>10</div>
-                    <div>Bình luận</div>
-                </div>
+            <c:set var="cC" value="${countComments}"/>
+            <c:set var="cR" value="${countRatings}"/>
+            <div class="point row" style="text-align: center" ratings='${cR[0][0]}' comments='${cC[0]}'>
+                <c:choose>
+                    <c:when test="${cR[0][0] == 0 && cC[0] == 0}">
+                        <div class="d-grid gap-2 col">
+                            <h4>Store haven't had any ratings and comments</h4>
+                        </div>
+                    </c:when>
+                    <c:when test="${cR[0][0] == 0}">
+                        <div class="d-grid gap-2 col">
+                            <h4>Store have ${cC[0]} comments</h4>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="col">
+                            <div id='ratingAmount'>${cR[0][0]}<p>Ratings</p></div>
+                        </div>
+                        <div class="col">
+                            <div id='ratingsQuality'>${cR[0][1]}</div>
+                            <div>Chất lượng</div>
+                        </div>
+                        <div class="col">
+                            <div id='ratingsService'>${cR[0][2]}</div>
+                            <div>Phục vụ</div>
+                        </div>
+                        <div class="col">
+                            <div id='ratingsSpace'>${cR[0][3]}</div>
+                            <div>Không gian</div>
+                        </div>
+                        <div class="col">
+                            <div id='ratingsPrice'>${cR[0][4]}</div>
+                            <div>Giá cả</div>
+                        </div>
+                        <div class="col">
+                            <div id='ratingsLocation'>${cR[0][5]}</div>
+                            <div>Vị trí</div>
+                        </div>
+                        <div class="col">
+                            <div id='commentAmount'>${cC[0]}</div>
+                            <div>Comments</div>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="info-store">
                 <div>
@@ -92,8 +108,8 @@
                         <span>Call</span>
                     </a>
                 </div>
-                <div class="col">
-                    <a href="#">
+                <div id="follow${store.idUser}" class="col">
+                    <a href="#" onclick="addFollow(${store.idUser}, ${currentUser.idUser})">
                         <span class="fa fa-bookmark"></span>
                         <span>Save</span>
                     </a>
@@ -353,7 +369,6 @@
                                     <div>${comment.createdDate}</div>
                                 </div>
                             </div>
-                            <div class="avg-point">9.3</div>
                         </div>
                         <div class="content-comment">
                             <div class="header-content">${comment.content}</div>
@@ -389,8 +404,8 @@
 </div>
 <script src="<c:url value="/js/menu.js" />"></script>
 <script>
-    window.onload = function () {
+    $(document).ready(function () {
         checkRating(${store.idUser});
-    }
-
+        loadFollowed();
+    });
 </script>

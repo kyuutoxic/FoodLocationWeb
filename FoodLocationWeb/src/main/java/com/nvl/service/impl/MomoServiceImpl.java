@@ -120,7 +120,6 @@ public class MomoServiceImpl implements MomoService {
                     response.append(responseLine.trim());
                 }
                 JSONObject res = new JSONObject(response.toString());
-                res.put("signature", signature);
                 con.disconnect();         
                 return res;
             }

@@ -7,17 +7,21 @@ package com.nvl.controllers;
 import com.nvl.pojo.Rating;
 import com.nvl.pojo.User;
 import com.nvl.service.RatingService;
+import com.nvl.service.UserService;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,15 +29,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @author kyuut
  */
 @RestController
+@RequestMapping("/api")
 public class ApiRatingController {
 
     @Autowired
     private RatingService ratingService;
+    
+    @Autowired
+    private UserService userDetailsService;
 
-    @PostMapping(path = "/api/add-rating", produces = {
+    @PostMapping(path = "/add-rating", produces = {
         MediaType.APPLICATION_JSON_VALUE
     })
-    public ResponseEntity<Rating> addComment(@RequestBody Map<String, String> params, HttpSession session) {
+    public ResponseEntity<List<Object>> addRating(@RequestBody Map<String, String> params, HttpSession session) {
         User u = (User) session.getAttribute("currentUser");
         if (u != null) {
             Map<String, String> rate = new HashMap<>();
@@ -47,23 +55,24 @@ public class ApiRatingController {
 
             if (this.ratingService.getRatingByUserAndUserStoreId(u, storeId) == null) {
                 this.ratingService.addRating(rate, u, storeId);
+                return new ResponseEntity<>(this.userDetailsService.countRatings(storeId), HttpStatus.OK);
             } else {
                 this.ratingService.updateRating(u, storeId, rate);
+                return new ResponseEntity<>(this.userDetailsService.countRatings(storeId), HttpStatus.OK);
             }
-
-            return new ResponseEntity<>(HttpStatus.CREATED);
-
         }
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(path = "/api/checkrating/${idStore}")
-    public ResponseEntity<Boolean> checkRating(@PathVariable(value = "idStore") int idStore, HttpSession session) {
-        User u = (User) session.getAttribute("currentUser");
-        System.out.println(this.ratingService.checkOrderForRating(u.getIdUser(), idStore) + "NGUNGUNGUNGUNGUNGUGNUGNGUNGUNU");
-        if (this.ratingService.checkOrderForRating(u.getIdUser(), idStore) == true) {
-            return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/check-rating/{idStore}")
+    public ResponseEntity<Rating> checkRating(@PathVariable(value = "idStore") int idStore, HttpSession session) {
+        try {
+            User u = (User) session.getAttribute("currentUser");
+            if (this.ratingService.checkOrderForRating(u.getIdUser(), idStore) == true) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+        } catch (Exception ex) {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

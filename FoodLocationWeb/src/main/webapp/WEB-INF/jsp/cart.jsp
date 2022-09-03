@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="container-xxl py-5">
 
     <section style="margin: 50px 0;">
@@ -29,7 +30,7 @@
                         <tr id="cart${c.menuId}">
                             <th scope="row">1</th>
                             <td>${c.menuName}</td>
-                            <td>${c.price} VNÐ</td>
+                            <td><fmt:formatNumber type="number" value="${c.price}" maxFractionDigits="2" />&nbsp;VND</td>
                             <td style="text-align: center">
                                 <!--                                <button class="btn-minus-quantity">-</button>
                                                                 <input type="text" value="${c.quantity}" id="quantity">
@@ -66,7 +67,7 @@
                 </tbody>
             </table>
             <div class="payment-field">
-                <div style="display: flex"><h1>Total:&nbsp;&nbsp;</h1><h1 id="amountCart">${cartStats.amount}</h1><h1>&nbsp;VNÐ</h1></div>
+                <div style="display: flex"><h1>Total:&nbsp;&nbsp;</h1><h1 id="amountCart"><fmt:formatNumber type="number" value="${cartStats.amount}" maxFractionDigits="2" /></h1><h1>&nbsp;VND</h1></div>
                         <c:if test="${currentUser != null}">
                     <a href="#" class="showModal" datatarget="choose-type-payment"><button class="btn-pay">Continue to Pay</button></a>
                 </c:if>
@@ -85,24 +86,20 @@
                     <button type="button" class="btn-close" aria-label="Close" datatarget="choose-type-payment" dataaction="close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="">
+                    <div class="btn-momo-payment">
                         <a href="<c:url value="/payment/Momo" />">
                             <div>
                                 Continue to Pay with Momo Wallet
                             </div>
                         </a>
                     </div>
-                    <div class="">
+                    <div class="btn-offline-payment">
                         <a href="<c:url value="/payment/Offline" />">
                             <div>
                                 Continue to Pay with COD
                             </div>
                         </a>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" datatarget="choose-type-payment" dataaction="close">Close</button>
-                    <button type="button" class="btn btn-primary" datatarget="choose-type-payment" dataaction="send">Send</button>
                 </div>
             </div>
         </div>

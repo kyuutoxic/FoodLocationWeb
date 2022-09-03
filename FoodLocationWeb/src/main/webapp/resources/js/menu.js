@@ -381,7 +381,7 @@ function updateCart(productId) {
         console.log(data)
         $('#cartCounter1').attr('value', data.counter);
         $('#cartCounter2').attr('value', data.counter);
-        $("#amountCart").html(data.amount);
+        $("#amountCart").html(Intl.NumberFormat().format(data.amount));
         loadMiniCart();
     })
 }
@@ -492,9 +492,8 @@ function pay() {
     }
 }
 
-function addComment(productId, userId, id) {
+function addComment(storeId, userId, id) {
     let content;
-    console.log(id);
     if (id === undefined) {
         content = $("#message-text").val();
     } else {
@@ -507,7 +506,7 @@ function addComment(productId, userId, id) {
             method: 'post',
             body: JSON.stringify({
                 "content": content,
-                "storeId": productId
+                "storeId": storeId
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -526,7 +525,6 @@ function addComment(productId, userId, id) {
                                     <div>${createdDate}</div>
                                 </div>
                             </div>
-                            <div class="avg-point">9.3</div>
                         </div>
                         <div class="content-comment">
                             <div class="header-content">${data.content}</div>
@@ -543,6 +541,11 @@ function addComment(productId, userId, id) {
                         </div>
                     </div>  
         `);
+            fetch(`/FoodLocationWeb/api/count-comments/${storeId}`).then(function (res) {
+                return res.json()
+            }).then(function (data) {
+                $('#commentAmount').text(`${data[0]}`);
+            })
         })
     }
     ;
@@ -567,12 +570,16 @@ function addRating(storeId, userId) {
                     "Content-Type": "application/json"
                 }
             }).then(function (res) {
-                if (res.code === 200) {
-                    console.log("Rating thanh cong");
-                    console.log(res);
-                }
-                return res;
-            });
+                return res.json();
+            }).then(function (data) {
+                console.log(data);
+                $('#ratingAmount').html(`${parseFloat(data[0][0])}<p>Ratings</p>`);
+                $('#ratingsQuality').text(`${parseFloat(data[0][1])}`);
+                $('#ratingsService').text(`${parseFloat(data[0][2])}`);
+                $('#ratingsSpace').text(`${parseFloat(data[0][3])}`);
+                $('#ratingsPrice').text(`${parseFloat(data[0][4])}`);
+                $('#ratingsLocation').text(`${parseFloat(data[0][5])}`);
+            })
         }
     }
 }
@@ -606,14 +613,6 @@ function loadFollowByUser(idmenu, userId) {
                         <a href="${idmenu}${data[i].idStore.idUser}">${data[i].idStore.nameStore}</a>
                         <p>${data[i].idStore.address}</p>
                         <div style="position: absolute;bottom: 0;margin-bottom: 15px;width:100%;">
-                            <a href="#" onclick="showModal('','cmt-store${data[i].idStore.idUser}')" style="margin-right: 5px;float: left;">
-                                <i class="bi bi-chat-fill"></i>
-                                <span>9</span>
-                            </a>
-                            <a style="margin-right: 5px;float: left;">
-                                <i class="bi bi-camera-fill"></i>
-                                <span>12</span>
-                            </a>
                             <a href="#" style="float: right; margin-right: 20px;" id="follow${data[i].idStore.idUser}" onclick="deleteFollow(${data[i].idFollow})">
                                 UnFollow
                             </a>
@@ -628,12 +627,11 @@ function loadFollowByUser(idmenu, userId) {
     });
 }
 
-
 function checkRating(idStore) {
-    fetch(`/FoodLocationWeb/api/checkrating/${idStore}`).then(function (res) {
-        console.log(res);
-        if (res.status === 404) {
-            $('#check-rating').attr('style', 'display: none !important');
+    $('#check-rating').attr('style', 'display: none !important');
+    fetch(`/FoodLocationWeb/api/check-rating/${idStore}`).then(function (res) {
+        if (res.ok) {
+            $('#check-rating').attr('style', '');
         }
-    })
+    });
 }

@@ -56,6 +56,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(Model model, @ModelAttribute(value = "user") @Valid User user, BindingResult result) {
+        System.out.println(result.getAllErrors());
         if (!result.hasErrors()) {
             if (user.getPassword().isEmpty()
                     || !user.getPassword().equals(user.getConfirmPassword())) {

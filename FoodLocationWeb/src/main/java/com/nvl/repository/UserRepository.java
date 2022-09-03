@@ -30,5 +30,9 @@ public interface UserRepository {
     List<User> checkEmail(String email);
     
     boolean updateUser(User user);
+    
+    List<Object> countRatings(int idStore);
+    
+    List<Object> countComments(int idStore);
 
 }

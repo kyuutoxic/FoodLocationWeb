@@ -175,4 +175,14 @@ public class UserServiceImpl implements UserService {
     public List<User> checkEmail(String email) {
         return this.userRepository.checkEmail(email);
     }
+
+    @Override
+    public List<Object> countRatings(int idStore) {
+        return this.userRepository.countRatings(idStore);
+    }
+
+    @Override
+    public List<Object> countComments(int idStore) {
+        return this.userRepository.countComments(idStore);
+    }
 }

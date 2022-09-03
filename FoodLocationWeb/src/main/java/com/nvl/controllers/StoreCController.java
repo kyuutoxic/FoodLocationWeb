@@ -26,6 +26,8 @@ public class StoreCController {
         model.addAttribute("store", this.userDetailsService.getUserById(idStore));
         model.addAttribute("menu", this.menuService.getMenuByIdStore(idStore));
         model.addAttribute("comments", this.commentRepository.getCommentByStoreId(idStore));
+        model.addAttribute("countComments", this.userDetailsService.countComments(idStore));
+        model.addAttribute("countRatings", this.userDetailsService.countRatings(idStore));
 
         return "storec";
     }

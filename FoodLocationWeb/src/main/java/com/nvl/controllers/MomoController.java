@@ -72,8 +72,7 @@ public class MomoController {
             params.get("partnerCode").equals(momoSession.get("partnerCode")) &&
             params.get("requestId").equals(momoSession.get("requestId")) &&
             params.get("orderId").equals(momoSession.get("orderId")) &&
-            params.get("amount").equals(momoSession.get("amount")) &&
-            params.get("signature").equals(momoSession.get("signature"))) {
+            params.get("amount").equals(momoSession.get("amount"))) {
             try {
                 float total = Float.parseFloat(params.get("amount"));
                 model.addAttribute("message", params.get("message"));

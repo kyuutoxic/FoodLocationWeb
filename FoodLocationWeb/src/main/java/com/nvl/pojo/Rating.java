@@ -50,23 +50,23 @@ public class Rating implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "rate_quality")
-    private int rateQuality;
+    private float rateQuality;
     @Basic(optional = false)
     @NotNull
     @Column(name = "rate_service")
-    private int rateService;
+    private float rateService;
     @Basic(optional = false)
     @NotNull
     @Column(name = "rate_space")
-    private int rateSpace;
+    private float rateSpace;
     @Basic(optional = false)
     @NotNull
     @Column(name = "rate_price")
-    private int ratePrice;
+    private float ratePrice;
     @Basic(optional = false)
     @NotNull
     @Column(name = "rate_location")
-    private int rateLocation;
+    private float rateLocation;
     @Basic(optional = false)
     @NotNull
     @Column(name = "created_date")
@@ -110,7 +110,7 @@ public class Rating implements Serializable {
         this.idRating = idRating;
     }
 
-    public int getRateQuality() {
+    public float getRateQuality() {
         return rateQuality;
     }
 
@@ -118,7 +118,7 @@ public class Rating implements Serializable {
         this.rateQuality = rateQuality;
     }
 
-    public int getRateService() {
+    public float getRateService() {
         return rateService;
     }
 
@@ -126,7 +126,7 @@ public class Rating implements Serializable {
         this.rateService = rateService;
     }
 
-    public int getRateSpace() {
+    public float getRateSpace() {
         return rateSpace;
     }
 
@@ -134,7 +134,7 @@ public class Rating implements Serializable {
         this.rateSpace = rateSpace;
     }
 
-    public int getRatePrice() {
+    public float getRatePrice() {
         return ratePrice;
     }
 
@@ -142,7 +142,7 @@ public class Rating implements Serializable {
         this.ratePrice = ratePrice;
     }
 
-    public int getRateLocation() {
+    public float getRateLocation() {
         return rateLocation;
     }
 

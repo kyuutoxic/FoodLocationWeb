@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -29,15 +30,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @author duonghuuthanh
  */
 @RestController
+@RequestMapping("/api")
 public class ApiCartController {
 
-    @GetMapping("/api/cart")
+    @GetMapping("/cart")
     public ResponseEntity<Map<Integer, Cart>> getCart(HttpSession session) {
         Map<Integer, Cart> cart = (Map<Integer, Cart>) session.getAttribute("cart");
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
-    @PostMapping("/api/cart")
+    @PostMapping("/cart")
     public int addToCart(@RequestBody Cart params, HttpSession session) {
         Map<Integer, Cart> cart = (Map<Integer, Cart>) session.getAttribute("cart");
         if (cart == null) {
@@ -55,7 +57,7 @@ public class ApiCartController {
         return Utils.countCart(cart);
     }
 
-    @PutMapping("/api/cart")
+    @PutMapping("/cart")
     public ResponseEntity<Map<String, String>> updateCartItem(@RequestBody Cart params, HttpSession session) {
         Map<Integer, Cart> cart = (Map<Integer, Cart>) session.getAttribute("cart");
         if (cart == null) {
@@ -74,7 +76,7 @@ public class ApiCartController {
     }
 //    
 
-    @DeleteMapping("/api/cart/{menuId}")
+    @DeleteMapping("/cart/{menuId}")
     public ResponseEntity<Map<String, String>> deleteCartItem(@PathVariable(value = "menuId") int menuId,
             HttpSession session) {
         Map<Integer, Cart> cart = (Map<Integer, Cart>) session.getAttribute("cart");

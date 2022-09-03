@@ -7,6 +7,7 @@ package com.nvl.validator;
 import com.nvl.pojo.User;
 import com.nvl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -16,10 +17,11 @@ import org.springframework.validation.Validator;
  * @author kyuut
  */
 @Component
+@ComponentScan(basePackages = {"com.nvl.service"})
 public class RegisterValidator implements Validator{
 
     @Autowired
-    private UserService userService;
+    private UserService userDetailsService;
     
     @Override
     public boolean supports(Class<?> type) {
@@ -29,7 +31,7 @@ public class RegisterValidator implements Validator{
     @Override
     public void validate(Object o, Errors errors) {
         User u = (User) o;
-        if( !u.getUsername().isEmpty() && !this.userService.getUser(u.getUsername()).isEmpty()){
+        if( !u.getUsername().isEmpty() && !this.userDetailsService.getUser(u.getUsername()).isEmpty()){
             errors.rejectValue("username", "user.userName.Err");
         }
         if(u.getUsername().isEmpty()){
@@ -44,10 +46,10 @@ public class RegisterValidator implements Validator{
         if(u.getLastName().isEmpty()){
             errors.rejectValue("lastName", "user.lastName.Err");
         }
-        if(!u.getPhone().isEmpty() && !this.userService.checkPhone(u.getPhone()).isEmpty()){
+        if(!u.getPhone().isEmpty() && !this.userDetailsService.checkPhone(u.getPhone()).isEmpty()){
             errors.rejectValue("phone", "user.phone.Err");
         }
-        if(!u.getEmail().isEmpty() && !this.userService.checkEmail(u.getEmail()).isEmpty()){
+        if(!u.getEmail().isEmpty() && !this.userDetailsService.checkEmail(u.getEmail()).isEmpty()){
             errors.rejectValue("email", "user.email.Err");
         }
         if(u.getPhone().isEmpty()){

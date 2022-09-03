@@ -1,5 +1,10 @@
 /********** Template CSS **********/
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+button:hover, a:hover{
+    filter: brightness(85%);
+}
+
 :root {
     --primary: #FEA116;
     --light: #F1F8FF;
@@ -709,9 +714,8 @@
     background-color: #0f172b;
     color: #FEA116;
     text-align: center;
-    height: 50px;
-    width: 50px;
-    padding: 14px 0;
+    height: 58px;
+    width: 58px;
     font-weight: bolder;
 }
 
@@ -885,6 +889,39 @@
     margin: 0 5px;
 }
 
+.btn-momo-payment, .btn-offline-payment{
+    text-align: center;
+    padding: 30px;
+    height: 100px;
+    width: 100%;
+}
+
+.btn-momo-payment > a, .btn-offline-payment > a{
+    text-align: center;
+    font-weight: 500;
+    font-size: large;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-momo-payment > a > div, .btn-offline-payment > a > div{
+    padding: 6px 0;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-momo-payment > a > div{
+    border-radius: 10px;
+    background-color: #a50064;
+    border-color: #a50064;
+}
+
+.btn-offline-payment > a > div{
+    border-radius: 10px;
+    background-color: #FEA116;
+    border-color: #ff9900;
+}
+
 /*Rating*/
 
 .starrating > input {display: none;}  /* Remove radio buttons */
@@ -907,3 +944,8 @@
 
 .starrating > input:hover ~ label
 { color: #ffca08 ;  } /* Set yellow color when star hover */
+
+/*Custom card*/
+#listmenu img{
+    height: 171px;
+}

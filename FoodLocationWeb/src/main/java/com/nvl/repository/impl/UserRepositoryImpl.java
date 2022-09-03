@@ -6,6 +6,8 @@ package com.nvl.repository.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.nvl.pojo.Comment;
+import com.nvl.pojo.Rating;
 import com.nvl.pojo.User;
 import com.nvl.repository.UserRepository;
 import java.io.IOException;
@@ -181,6 +183,41 @@ public class UserRepositoryImpl implements UserRepository {
         }
 
         return false;
+    }
+
+    @Override
+    public List<Object> countRatings(int idStore) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = b.createQuery(Object[].class);
+        Root rR = query.from(Rating.class);
+
+        query = query.where(b.equal(rR.get("idStore"), idStore));
+        
+        query.multiselect(b.count(rR.get("idRating")),
+                          b.avg(rR.get("rateQuality")),
+                          b.avg(rR.get("rateService")),
+                          b.avg(rR.get("rateSpace")),
+                          b.avg(rR.get("ratePrice")),
+                          b.avg(rR.get("rateLocation")));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Object> countComments(int idStore) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = b.createQuery(Object[].class);
+        Root rC = query.from(Comment.class);
+
+        query = query.where(b.equal(rC.get("idStore"), idStore));
+        
+        query.multiselect(b.count(rC.get("idComment")));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
 
 }

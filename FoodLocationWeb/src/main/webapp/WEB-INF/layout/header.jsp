@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Navbar & Hero Start -->
 <div class="container-xxl position-relative p-0">
@@ -82,7 +83,7 @@
                                                                     <p title="${m.value.quantity}"><span class="text-muted">Quantity: </span>${m.value.quantity}</p>
                                                                 </div>
                                                                 <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                                                                    <span class="mb-0" style="width: 100%" title="${m.value.price}">${m.value.price}</span>
+                                                                    <span class="mb-0" style="width: 100%" title="<fmt:formatNumber type="number" value="${m.value.price}" maxFractionDigits="2" />&nbsp;VND"><fmt:formatNumber type="number" value="${m.value.price}" maxFractionDigits="2" />&nbsp;VND</span>
                                                                 </div>
                                                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
                                                                     <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg" onclick="deleteCart(${m.value.menuId})"></i></a>
@@ -154,7 +155,7 @@
                                                                     <p title="${m.value.quantity}"><span class="text-muted">Quantity: </span>${m.value.quantity}</p>
                                                                 </div>
                                                                 <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                                                                    <span class="mb-0" style="width: 100%" title="${m.value.price}">${m.value.price}</span>
+                                                                    <span class="mb-0" style="width: 100%" title="<fmt:formatNumber type="number" value="${m.value.price}" maxFractionDigits="2" />&nbsp;VND"><fmt:formatNumber type="number" value="${m.value.price}" maxFractionDigits="2" />&nbsp;VND</span>
                                                                 </div>
                                                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
                                                                     <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg" onclick="deleteCart(${m.value.menuId})"></i></a>

@@ -33,5 +33,9 @@ public interface UserService extends UserDetailsService {
     List<User> checkPhone(String phone);
 
     List<User> checkEmail(String email);
+    
+    List<Object> countRatings(int idStore);
+    
+    List<Object> countComments(int idStore);
 
 }
