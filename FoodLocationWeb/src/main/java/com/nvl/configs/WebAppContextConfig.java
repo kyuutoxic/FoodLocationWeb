@@ -6,11 +6,13 @@ package com.nvl.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.nvl.service.UserService;
 import com.nvl.validator.MenuValidator;
 import com.nvl.validator.RegisterValidator;
 import com.nvl.validator.WebAppValidator;
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -41,6 +43,9 @@ import org.springframework.web.servlet.view.JstlView;
     "com.nvl.validator"
 })
 public class WebAppContextConfig implements WebMvcConfigurer {
+    
+    @Autowired
+    private UserService userDetailsService;
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conf) {
@@ -103,7 +108,7 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     @Bean("registerValidator")
     public WebAppValidator registerValidator() {
         Set<Validator> springValidators = new HashSet<>();
-        springValidators.add(new RegisterValidator());
+        springValidators.add(new RegisterValidator(userDetailsService));
 
         WebAppValidator webAppValidator = new WebAppValidator();
         webAppValidator.setValidators(springValidators);

@@ -7,7 +7,6 @@ package com.nvl.validator;
 import com.nvl.pojo.User;
 import com.nvl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -17,11 +16,13 @@ import org.springframework.validation.Validator;
  * @author kyuut
  */
 @Component
-@ComponentScan(basePackages = {"com.nvl.service"})
 public class RegisterValidator implements Validator{
 
-    @Autowired
-    private UserService userDetailsService;
+    private final UserService userDetailsService;
+    
+    public RegisterValidator(UserService userService){
+        this.userDetailsService = userService;
+    }
     
     @Override
     public boolean supports(Class<?> type) {

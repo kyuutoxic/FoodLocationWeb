@@ -19,6 +19,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <link href="resources/css/login.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     </head>
     <body>
@@ -26,22 +27,14 @@
             <div class="container py-5 h-100">
                 <div class="row d-flex align-items-center justify-content-center h-100">
                     <div class="col-md-8 col-lg-7 col-xl-6">
+                        <a href="<c:url value="/"/>" style="position: absolute;top: 50px;font-size: xx-large;"><i class="bi bi-arrow-90deg-left"></i>&nbsp;Home</a>
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
                              class="img-fluid" alt="Phone image">
                     </div>
                     <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                        <c:if test="${params.error != null}">
-                            <div class="alert alert-danger">
-                                Da co loi xay ra
-                            </div>
-                        </c:if>
-                        <c:if test="${params.accessDenied != null}">
-                            <div class="alert alert-danger">
-                                Khong co quuyen truy cap
-                            </div>
-                        </c:if>
+                        <div id="err-msg">
+                        </div>
                         <c:url value="/login" var="action" />
-
                         <form action="${action}" method="post">
                             <!-- Email input -->
                             <div class="form-outline mb-4">
@@ -117,3 +110,18 @@
         <script src="<c:url value="/js/login.js" />"></script>
     </body>
 </html>
+<script>
+    $(document).ready(function(){
+        let searchParams = new URLSearchParams(window.location.search);
+        if(searchParams.has('error')){
+            $('#err-msg').addClass("alert alert-danger");
+            $('#err-msg').text('Username or Password wrong');
+        }else if(searchParams.has('accessDenied')){
+            $('#err-msg').addClass("alert alert-danger");
+            $('#err-msg').text('Access denied, please log in with an authorized account or register for an account');
+        }else{
+            $('#err-msg').removeClass("alert alert-danger");
+            $('#err-msg').text('');
+        }
+    });
+</script>

@@ -65,7 +65,6 @@
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                    <a href="#" class="dropdown-item">User Account</a>
                                     <a href="<c:url value="/logout"/>" class="py-2 px-4">LogOut</a>
                                 </div>
                             </div>
@@ -415,6 +414,18 @@
                                 <a href="<c:url value="/admin/menu"/>">
                                     <i class="metismenu-icon"></i>
                                     Menu
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<c:url value="/admin/menu"/>">
+                                    <i class="metismenu-icon"></i>
+                                    Store
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<c:url value="/admin/menu"/>">
+                                    <i class="metismenu-icon"></i>
+                                    Time Type
                                 </a>
                             </li>
                         </ul>

@@ -101,7 +101,6 @@ public class User implements Serializable {
     @Column(name = "address")
     private String address;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "user_role")
     private String userRole;

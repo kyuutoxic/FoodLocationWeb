@@ -36,7 +36,7 @@ public class MenuValidator implements Validator {
         if (menu.getFile().isEmpty()) {
             errors.rejectValue("file", "Menu.file.Err");
         }
-        
+
     }
 
 }

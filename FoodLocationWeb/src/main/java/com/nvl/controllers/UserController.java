@@ -8,6 +8,7 @@ import com.nvl.pojo.User;
 import com.nvl.service.UserService;
 import com.nvl.validator.RegisterValidator;
 import com.nvl.validator.WebAppValidator;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,5 +118,4 @@ public class UserController {
         
         return "redirect:/account-user/";
     }
-
 }

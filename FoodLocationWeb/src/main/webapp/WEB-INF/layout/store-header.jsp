@@ -416,10 +416,6 @@
                             <i class="metismenu-icon pe-7s-graph2">
                             </i>Revenue by Day/Month/Year
                         </a>
-                        <a href="#">
-                            <i class="metismenu-icon pe-7s-graph2">
-                            </i>Top Food
-                        </a>
                     </li>
                 </ul>
             </div>
