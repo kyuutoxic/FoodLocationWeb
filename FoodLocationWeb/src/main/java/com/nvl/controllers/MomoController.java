@@ -68,16 +68,17 @@ public class MomoController {
     public String returnMomo(Model model, HttpSession session, @RequestParam Map<String, String> params) {
         String resultCode = params.get("resultCode");
         Map<String, String> momoSession = (Map<String, String>) session.getAttribute("momoSession");
-        if (resultCode.equals("0") && 
-            params.get("partnerCode").equals(momoSession.get("partnerCode")) &&
-            params.get("requestId").equals(momoSession.get("requestId")) &&
-            params.get("orderId").equals(momoSession.get("orderId")) &&
-            params.get("amount").equals(momoSession.get("amount"))) {
+        if (resultCode.equals("0")
+                && params.get("partnerCode").equals(momoSession.get("partnerCode"))
+                && params.get("requestId").equals(momoSession.get("requestId"))
+                && params.get("orderId").equals(momoSession.get("orderId"))
+                && params.get("amount").equals(momoSession.get("amount"))) {
             try {
                 float total = Float.parseFloat(params.get("amount"));
+                String typePayment = (String) params.get("type");
                 model.addAttribute("message", params.get("message"));
                 User u = (User) session.getAttribute("currentUser");
-                MenuOrder m = (MenuOrder) this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total);
+                MenuOrder m = (MenuOrder) this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total, typePayment);
                 List<MenuOrder> menuOrder = new ArrayList<>();
                 Map<String, Object> object = new HashMap<>();
                 object.put("order", m);

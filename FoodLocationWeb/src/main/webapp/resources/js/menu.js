@@ -448,7 +448,8 @@ function pay() {
             fetch("/FoodLocationWeb/api/momo", {
                 method: "post",
                 body: JSON.stringify({
-                    "total": total
+                    "total": total,
+                    "type": "Momo"
                 }),
                 headers: {
                     "Content-Type": "application/json"
@@ -462,7 +463,8 @@ function pay() {
             fetch("/FoodLocationWeb/api/pay/", {
                 method: "post",
                 body: JSON.stringify({
-                    "total": total
+                    "total": total,  
+                    "type": "Offline"
                 }),
                 headers: {
                     "Content-Type": "application/json"

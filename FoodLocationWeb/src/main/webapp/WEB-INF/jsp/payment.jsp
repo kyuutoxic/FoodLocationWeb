@@ -10,6 +10,7 @@
 <script src="<c:url value="/js/menu.js" />"></script>
 <div class="container-xxl py-5">
     <section style="margin: 50px 0;">
+        <h1>${type}</h1>
         <h1 style="margin: 50px 0;">PAYMENT INFO</h1>
         <div>
             <h3>CUSTOMER INFO</h3>

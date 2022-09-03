@@ -45,7 +45,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total) {
+    public MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total, String type) {
         try {
             Session session = this.sessionFactory.getObject().getCurrentSession();
 
@@ -53,6 +53,7 @@ public class OrderRepositoryImpl implements OrderRepository {
             order.setIdUser(user);
             order.setCreatedDate(new Date());
             order.setTotal(total);
+            order.setTypePayment(type);
 
             session.save(order);
 

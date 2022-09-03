@@ -16,7 +16,7 @@ import java.util.Map;
  * @author duonghuuthanh
  */
 public interface OrderService {
-    MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total);
+    MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total, String type);
     List<MenuOrder> getOrderById(int idOrder);
     List<MenuOrder> getOrderByIdOrderDetail(int idOrderDetail);
 }

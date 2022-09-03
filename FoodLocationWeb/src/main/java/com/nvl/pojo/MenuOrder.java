@@ -64,6 +64,8 @@ public class MenuOrder implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
+    @Column(name = "type_payment")
+    private String typePayment;
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     @ManyToOne(optional = false)
     @JsonManagedReference
@@ -125,6 +127,20 @@ public class MenuOrder implements Serializable {
         this.idUser = idUser;
     }
 
+    /**
+     * @return the typePayment
+     */
+    public String getTypePayment() {
+        return typePayment;
+    }
+
+    /**
+     * @param typePayment the typePayment to set
+     */
+    public void setTypePayment(String typePayment) {
+        this.typePayment = typePayment;
+    }
+
     @XmlTransient
     public Collection<OrderDetail> getOrderDetailCollection() {
         return orderDetailCollection;
@@ -158,5 +174,5 @@ public class MenuOrder implements Serializable {
     public String toString() {
         return "com.nvl.pojo.MenuOrder[ idOrder=" + idOrder + " ]";
     }
-    
+
 }

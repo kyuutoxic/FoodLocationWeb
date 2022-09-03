@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public interface OrderRepository {
 
-    MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total);
+    MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total, String type);
 
     List<MenuOrder> getOrder(int storeId);
     

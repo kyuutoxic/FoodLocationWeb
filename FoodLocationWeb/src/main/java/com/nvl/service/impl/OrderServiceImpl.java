@@ -26,8 +26,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Override
-    public MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total) {
-        return this.orderRepository.addReceipt(cart,user,total);
+    public MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total, String type) {
+        return this.orderRepository.addReceipt(cart,user,total,type);
     }
 
     @Override

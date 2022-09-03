@@ -33,46 +33,50 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ApiPaymentController {
+
     @Autowired
     private OrderService orderService;
-    
+
     @Autowired
     private UserService userDetailsService;
-    
+
     @Autowired
     private MenuService menuService;
-    
+
     @PostMapping("/pay")
     public ResponseEntity<List<MenuOrder>> pay(HttpSession session, @RequestBody Map<String, String> params) {
         float total = Float.parseFloat(params.get("total"));
+        String typePayment = (String) params.get("type");
+
         List<MenuOrder> menuOrder = new ArrayList<>();
         User u = (User) session.getAttribute("currentUser");
-        MenuOrder m = (MenuOrder)this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total);
+        MenuOrder m = (MenuOrder) this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total, typePayment);
         if (m != null) {
             menuOrder.add(m);
             session.removeAttribute("cart");
+            System.out.println(typePayment + "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
             return new ResponseEntity<>(menuOrder, HttpStatus.OK);
         }
-        
+
         return new ResponseEntity<>(menuOrder, HttpStatus.BAD_REQUEST);
     }
-    
+
     @GetMapping("/storeInCart")
-    public ResponseEntity<List<User>> storeInCart(HttpSession session){
+    public ResponseEntity<List<User>> storeInCart(HttpSession session) {
         Map<Integer, Cart> cart = (Map<Integer, Cart>) session.getAttribute("cart");
         List<User> store = new ArrayList<>();
-        cart.forEach((k,v) -> {
+        cart.forEach((k, v) -> {
             Menu m = this.menuService.getMenuById(v.getMenuId());
             User u = this.userDetailsService.getUserById(m.getIdStore().getIdUser());
-            if(!store.contains(u)){
+            if (!store.contains(u)) {
                 store.add(u);
             }
         });
         return new ResponseEntity<>(store, HttpStatus.OK);
     }
-    
+
     @GetMapping("/storeByMenuID/{idMenu}")
-    public ResponseEntity<List<User>> storeByMenuID(HttpSession session,  @PathVariable(value = "idMenu") int idMenu){
+    public ResponseEntity<List<User>> storeByMenuID(HttpSession session, @PathVariable(value = "idMenu") int idMenu) {
         List<User> store = new ArrayList<>();
         Menu m = this.menuService.getMenuById(idMenu);
         User u = this.userDetailsService.getUserById(m.getIdStore().getIdUser());
