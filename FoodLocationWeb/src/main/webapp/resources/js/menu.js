@@ -26,6 +26,66 @@ function addFollow(idStore, idUser) {
     }
 }
 
+function changeDelete(idMenu) {
+    event.preventDefault();
+
+    fetch(`/FoodLocationWeb/api/change-delete/${idMenu}`, {
+        method: 'post'
+    }).then(function (res) {
+        let a = $('#btndelete' + idMenu).text();
+        if (a == 'Delete') {
+            $('#btndelete' + idMenu).text('Undelete');
+            $('#delete' + idMenu).text('true');
+
+        } else {
+            $('#btndelete' + idMenu).text('Delete');
+            $('#delete' + idMenu).text('false');
+
+        }
+        return res;
+    });
+}
+
+function changeDeleteUser(idUser) {
+    event.preventDefault();
+
+    fetch(`/FoodLocationWeb/api/change-delete-user/${idUser}`, {
+        method: 'post'
+    }).then(function (res) {
+        let a = $('#btndeleteuser' + idUser).text();
+        if (a == 'Delete') {
+            $('#btndeleteuser' + idUser).text('Undelete');
+            $('#deleteuser' + idUser).text('true');
+
+        } else {
+            $('#btndeleteuser' + idUser).text('Delete');
+            $('#deleteuser' + idUser).text('false');
+
+        }
+        return res;
+    });
+}
+
+function changeDeleteStore(idUser) {
+    event.preventDefault();
+
+    fetch(`/FoodLocationWeb/api/change-delete-user/${idUser}`, {
+        method: 'post'
+    }).then(function (res) {
+        let a = $('#btndeletestore' + idUser).text();
+        if (a == 'Delete') {
+            $('#btndeletestore' + idUser).text('Undelete');
+            $('#deletestore' + idUser).text('true');
+
+        } else {
+            $('#btndeletestore' + idUser).text('Delete');
+            $('#deletestore' + idUser).text('false');
+
+        }
+        return res;
+    });
+}
+
 function loadAdminMenu(endpoint, menudetail) {
     $('body').append(`
         <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
@@ -41,6 +101,14 @@ function loadAdminMenu(endpoint, menudetail) {
         console.log(data);
         let msg = "";
         for (let i = 0; i < data.length; i++) {
+            let msg1 = `<td>
+                        <button id="btndelete${data[i].idMenu}" type="button" class="btn btn-primary" onclick="changeDelete(${data[i].idMenu})" >Delete</button>
+                    </td>
+                </tr>`
+            let msg2 = `<td>
+                        <button id="btndelete${data[i].idMenu}" type="button" class="btn btn-primary" onclick="changeDelete(${data[i].idMenu})" >Undelete</button>
+                    </td>
+                </tr>`
             msg += `
             <tr>
                     <th scope="row">${i}</th>
@@ -50,17 +118,182 @@ function loadAdminMenu(endpoint, menudetail) {
                     <td>${data[i].idStore.nameStore}</td>
                     <td>${data[i].menuFrom}</td>
                     <td>${data[i].menuTo}</td>
-                    <td>${data[i].idType.name}</td>
+                    <td id="delete${data[i].idMenu}">${data[i].isDelete}</td>
                     <td>
                         <a href="${menudetail}${data[i].idMenu}"><button type="button" class="btn btn-primary">Detail</button></a>
                     </td>
-                    <td>
-                        <button type="button" class="btn btn-primary">Delete</button>
-                    </td>
-                </tr>
+                    
+                    
             `;
+            if (data[i].isDelete == true) {
+                msg += msg2
+            } else {
+                msg += msg1
+            }
+
         }
         let d = document.getElementById("adminProd");
+        d.innerHTML = msg;
+        $('.loading-page').remove();
+    })
+}
+
+function loadAdminOrderDetail() {
+    $('body').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+            <h1>loading...</h1>
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+        </div>
+    `);
+    fetch("/FoodLocationWeb/api/admin/orderdetail/").then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        console.log(data);
+        let msg = "";
+        for (let i = 0; i < data.length; i++) {
+            msg += `
+            <tr>
+                    <th scope="row">${i}</th>
+                    <td>${data[i].idOrderDetail}</td>
+                    <td>${data[i].quantity}</td>
+                    <td>${data[i].unitPrice}</td>
+                    <td>${data[i].idMenu.menuName}</td>
+                    <td>${data[i].idOrder.idOrder}</td>
+             </tr>       
+            `;
+        }
+        let d = document.getElementById("adminOrderDetail");
+        d.innerHTML = msg;
+        $('.loading-page').remove();
+    })
+}
+
+function loadAdminOrder() {
+    $('body').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+            <h1>loading...</h1>
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+        </div>
+    `);
+    fetch("/FoodLocationWeb/api/admin/order/").then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        console.log(data);
+        let msg = "";
+        for (let i = 0; i < data.length; i++) {
+            msg += `
+            <tr>
+                    <th scope="row">${i}</th>
+                    <td>${data[i].idOrder}</td>
+                    <td>${data[i].total}</td>
+                    <td>${data[i].note}</td>
+                    <td>${data[i].typePayment}</td>
+                    <td>${data[i].idUser.firstName} ${data[i].idUser.lastName}</td>
+             </tr>       
+            `;
+        }
+        let d = document.getElementById("adminOrder");
+        d.innerHTML = msg;
+        $('.loading-page').remove();
+    })
+}
+
+function loadAdminUser() {
+    $('body').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+            <h1>loading...</h1>
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+        </div>
+    `);
+    fetch("/FoodLocationWeb/api/admin/users/").then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        let msg = "";
+        for (let i = 0; i < data.length; i++) {
+            let msg1 = `<td>
+                        <button id="btndeleteuser${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeDeleteUser(${data[i].idUser})" >Delete</button>
+                    </td>
+                </tr>`
+            let msg2 = `<td>
+                        <button id="btndeleteuser${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeDeleteUser(${data[i].idUser})" >Undelete</button>
+                    </td>
+                </tr>`
+            msg += `
+            <tr>
+                    <th scope="row">${i}</th>
+                    <td>${data[i].idUser}</td>
+                    <td>${data[i].username}</td>
+                    <td>${data[i].firstName} ${data[i].lastName}</td>
+                    <td>${data[i].phone}</td>
+                    <td>${data[i].email}</td>
+                    <td id="deleteuser${data[i].idUser}">${data[i].isDelete}</td>
+                    
+                    
+            `;
+            if (data[i].isDelete == true) {
+                msg += msg2
+            } else {
+                msg += msg1
+            }
+
+        }
+        let d = document.getElementById("adminUsers");
+        d.innerHTML = msg;
+        $('.loading-page').remove();
+    })
+}
+
+function loadAdminStore() {
+    $('body').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+            <h1>loading...</h1>
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+        </div>
+    `);
+    fetch("/FoodLocationWeb/api/admin/store/").then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        let msg = "";
+        for (let i = 0; i < data.length; i++) {
+            let msg1 = `<td>
+                        <button id="btndeletestore${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeDeleteStore(${data[i].idUser})" >Delete</button>
+                    </td>
+                </tr>`
+            let msg2 = `<td>
+                        <button id="btndeletestore${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeDeleteStore(${data[i].idUser})" >Undelete</button>
+                    </td>
+                </tr>`
+            msg += `
+            <tr>
+                    <th scope="row">${i}</th>
+                    <td>${data[i].idUser}</td>
+                    <td>${data[i].username}</td>
+                    <td>${data[i].nameStore}</td>
+                    <td>${data[i].phone}</td>
+                    <td>${data[i].email}</td>
+                    <td>${data[i].address}</td>
+                    <td>${data[i].active}</td>
+
+                    <td id="deletestore${data[i].idUser}">${data[i].isDelete}</td>
+                    
+                    
+            `;
+            if (data[i].isDelete == true) {
+                msg += msg2
+            } else {
+                msg += msg1
+            }
+
+        }
+        let d = document.getElementById("adminStore");
         d.innerHTML = msg;
         $('.loading-page').remove();
     })

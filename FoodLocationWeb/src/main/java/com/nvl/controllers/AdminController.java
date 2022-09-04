@@ -48,4 +48,24 @@ public class AdminController {
         }
         return "activeUserStore";
     }
+
+    @GetMapping("/admin/order-detail")
+    public String orderDetailView() {
+        return "adminOrderDetails";
+    }
+
+    @GetMapping("/admin/order")
+    public String orderView() {
+        return "adminOrders";
+    }
+    
+    @GetMapping("/admin/user")
+    public String usersView() {
+        return "adminUser";
+    }
+    
+    @GetMapping("/admin/store")
+    public String storeView() {
+        return "adminStore";
+    }
 }

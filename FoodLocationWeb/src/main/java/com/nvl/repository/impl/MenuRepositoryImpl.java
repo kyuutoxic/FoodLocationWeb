@@ -382,6 +382,7 @@ public class MenuRepositoryImpl implements MenuRepository {
             Menu menu = session.get(Menu.class, idMenu);
             menu.setIsDelete(!menu.getIsDelete());
             session.update(menu);
+            return true;
         }catch(Exception ex){
             ex.printStackTrace();
         }
