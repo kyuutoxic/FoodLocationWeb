@@ -185,4 +185,19 @@ public class UserServiceImpl implements UserService {
     public List<Object> countComments(int idStore) {
         return this.userRepository.countComments(idStore);
     }
+
+    @Override
+    public List<User> manageStore() {
+        return this.userRepository.manageStore();
+    }
+
+    @Override
+    public List<User> manageUser() {
+        return this.userRepository.manageUser();
+    }
+
+    @Override
+    public boolean changeIsDelete(int idUser) {
+        return this.userRepository.changeIsDelete(idUser);
+    }
 }

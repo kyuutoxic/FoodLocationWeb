@@ -140,6 +140,9 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "active")
     private boolean active;
+    @Basic(optional = false)
+    @Column(name = "is_delete")
+    private boolean isDelete;
     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private Collection<Comment> commentCollection;
@@ -415,6 +418,14 @@ public class User implements Serializable {
 
     public void setRatingCollection(Collection<Rating> ratingCollection) {
         this.ratingCollection = ratingCollection;
+    }
+
+    public boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(boolean isDelete) {
+        this.isDelete = isDelete;
     }
 
 }

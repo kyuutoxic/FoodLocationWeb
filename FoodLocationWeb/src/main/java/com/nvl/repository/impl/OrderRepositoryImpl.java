@@ -75,48 +75,9 @@ public class OrderRepositoryImpl implements OrderRepository {
 
         return null;
     }
-
-//    @Override
-//    @Transactional
-//    public List<Object[]> stats(Date fromDate, Date toDate) {
-//        Session session = this.sessionFactory.getObject().getCurrentSession();
-//
-//        CriteriaBuilder builder = session.getCriteriaBuilder();
-//        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
-//        Root rootO = query.from(SaleOrder.class);
-//        Root rootD = query.from(OrderDetail.class);
-//        Root rootP = query.from(Product.class);
-//
-//        List<Predicate> pre = new ArrayList<>();
-//        pre.add(builder.equal(rootD.get("orderId"), rootO.get("id")));
-//        pre.add(builder.equal(rootD.get("product"), rootP.get("id")));
-//    //        query.where(builder.equal(rootD.get("orderId"), rootO.get("id"))).where(builder.equal(rootD.get("product"), rootP.get("id")));
-//        query.multiselect(rootP.get("id"), 
-//                rootP.get("name").as(String.class), 
-//                builder.sum(builder.prod(rootD.get("unitPrice"), rootD.get("num"))));
-//
-//        if (fromDate != null && toDate != null) {
-//            Predicate p1 = builder.greaterThanOrEqualTo(rootO.get("createdDate").as(Date.class), fromDate);
-//            Predicate p2 = builder.lessThanOrEqualTo(rootO.get("createdDate").as(Date.class), toDate);
-//    //            query = query.where(p1, p2);
-//    //            query.where(p1, p2);
-//            pre.add(p1);
-//            pre.add(p2);
-//        }
-//
-//        query = query.where(pre.toArray(new Predicate[] {}));
-//
-//        query = query.groupBy(rootP.get("id"));
-//
-//        //loc
-//
-//        Query q = session.createQuery(query);
-//
-//        return q.getResultList();
-//
-//    }
+    
     @Override
-    public List<MenuOrder> getOrder(int storeId) {
+    public List<MenuOrder> getOrderByIdStore(int storeId) {
 //        Session session = this.sessionFactory.getObject().getCurrentSession();
 //        CriteriaBuilder b = session.getCriteriaBuilder();
 //        CriteriaQuery<Menu> q = b.createQuery(Menu.class);
@@ -146,6 +107,18 @@ public class OrderRepositoryImpl implements OrderRepository {
 
         query = query.where(builder.equal(rD.get("idOrderDetail"), idOrderDetail),
                             builder.equal(rO.get("idOrder"), rD.get("idOrder")));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<MenuOrder> getOrder() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<MenuOrder> query = builder.createQuery(MenuOrder.class);
+        Root rO = query.from(MenuOrder.class);
+        query = query.select(rO);
 
         Query q = session.createQuery(query);
         return q.getResultList();

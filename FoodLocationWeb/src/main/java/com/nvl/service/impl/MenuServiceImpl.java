@@ -129,4 +129,14 @@ public class MenuServiceImpl implements MenuService {
     public boolean checkStoreByMenuId(int idMenu, User user) {
         return this.menuRepository.checkStoreByMenuId(idMenu, user);
     }
+
+    @Override
+    public boolean changeMenuIsDelete(int idMenu) {
+        return this.menuRepository.changeMenuIsDelete(idMenu);
+    }
+
+    @Override
+    public List<Menu> manageMenu() {
+        return this.menuRepository.manageMenu();
+    }
 }

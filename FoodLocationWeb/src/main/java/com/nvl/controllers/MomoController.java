@@ -75,7 +75,7 @@ public class MomoController {
                 && params.get("amount").equals(momoSession.get("amount"))) {
             try {
                 float total = Float.parseFloat(params.get("amount"));
-                String typePayment = (String) params.get("type");
+                String typePayment = "Momo";
                 model.addAttribute("message", params.get("message"));
                 User u = (User) session.getAttribute("currentUser");
                 MenuOrder m = (MenuOrder) this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total, typePayment);

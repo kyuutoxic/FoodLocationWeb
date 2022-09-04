@@ -116,6 +116,8 @@ public class Menu implements Serializable {
     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMenu", fetch=FetchType.EAGER)
     private Collection<OrderDetail> orderDetailCollection;
+    @Column(name = "is_delete")
+    private Boolean isDelete;
 
     public Menu() {
     }
@@ -292,6 +294,14 @@ public class Menu implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
     
 }

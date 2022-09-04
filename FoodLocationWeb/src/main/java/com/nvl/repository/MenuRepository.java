@@ -34,5 +34,9 @@ public interface MenuRepository {
     boolean updateMenu(Menu menu);
     
     boolean checkStoreByMenuId(int idMenu, User user);
+    
+    boolean changeMenuIsDelete(int idMenu);
+    
+    List<Menu> manageMenu();
 
 }

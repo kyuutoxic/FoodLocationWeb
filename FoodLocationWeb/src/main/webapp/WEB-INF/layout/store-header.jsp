@@ -405,10 +405,25 @@
                 <ul class="vertical-nav-menu">
                     <li class="app-sidebar__heading">Store</li>
                     <li>
-                        <a href="<c:url value="/store/menu"/>" class="mm-active">
-                            <i class="metismenu-icon pe-7s-rocket"></i>
-                            Manage Menu
+                        <a href="#">
+                            <i class="metismenu-icon pe-7s-diamond"></i>
+                            Elements
+                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                         </a>
+                        <ul>
+                            <li>
+                                <a href="<c:url value="/store/menu"/>">
+                                    <i class="metismenu-icon"></i>
+                                    Manage Menu
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<c:url value="/store/order"/>">
+                                    <i class="metismenu-icon"></i>
+                                    Order
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="app-sidebar__heading">Statistic</li>
                     <li>

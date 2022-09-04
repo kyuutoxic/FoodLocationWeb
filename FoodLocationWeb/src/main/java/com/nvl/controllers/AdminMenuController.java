@@ -34,24 +34,6 @@ public class AdminMenuController {
     public String adminMenuView() {
         return "adminMenuView";
     }
-    
-    @GetMapping("/admin/add-menu")
-    public String addMenuView(Model model) {
-        model.addAttribute("menu", new Menu());
-        model.addAttribute("type", this.typeService.getType());
-
-        return "adminAddMenuView";
-    }
-
-    @PostMapping(value = "/admin/add-menu")
-    public String addMenu(@ModelAttribute(value = "menu") Menu menu, HttpSession session) {
-        User u = (User) session.getAttribute("currentUser");
-        if (this.menuService.addMenu(menu, u) == true) {
-            return "redirect:/admin/menu";
-        }
-
-        return "adminAddMenuView";
-    }
 
     @GetMapping("/admin/detail-menu/{idMenu}")
     public String detailMenuView(Model model, @PathVariable(value = "idMenu") int idMenu) {

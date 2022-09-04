@@ -6,6 +6,7 @@ package com.nvl.repository.impl;
 
 import com.nvl.pojo.Menu;
 import com.nvl.pojo.OrderDetail;
+import com.nvl.pojo.User;
 import com.nvl.repository.OrderDetailRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,24 +29,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class OrderDetailRepositoryImpl implements OrderDetailRepository {
-    
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
-    
+
     @Override
-    public List<Object[]> getOrderDetailByIdStore(int idStore){
+    public List<Object[]> getOrderDetailByIdStore(int idStore) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
-        
+
         Root rO = query.from(OrderDetail.class);
         Root rM = query.from(Menu.class);
-        
-        query.where(builder.equal(rO.get("idMenu"), rM.get("idMenu")), 
-                    builder.equal(rM.get("idStore"), idStore),
-                    builder.equal(rO.get("statusOrder"), 2));
+
+        query.where(builder.equal(rO.get("idMenu"), rM.get("idMenu")),
+                builder.equal(rM.get("idStore"), idStore),
+                builder.equal(rO.get("statusOrder"), 2));
         query.multiselect(rO.get("idOrderDetail"), rO.get("idOrder"), rO.get("idMenu"), rO.get("quantity"), rO.get("unitPrice"), rO.get("statusOrder"));
-        
+
         Query q = session.createQuery(query);
         return q.getResultList();
     }
@@ -53,33 +54,55 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository {
     @Override
     public boolean acceptOrder(int idOrderDetail) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
-        try{
+
+        try {
             OrderDetail o = session.get(OrderDetail.class, idOrderDetail);
-            o.setStatusOrder((short)1);
+            o.setStatusOrder((short) 1);
             session.save(o);
             return true;
-        }catch (HibernateException ex) {
+        } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
         }
 
         return false;
-        
+
     }
 
     @Override
     public boolean denyOrder(int idOrderDetail) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
-        try{
+
+        try {
             OrderDetail o = session.get(OrderDetail.class, idOrderDetail);
-            o.setStatusOrder((short)0);
+            o.setStatusOrder((short) 0);
             session.save(o);
             return true;
-        }catch (HibernateException ex) {
+        } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
         }
 
         return false;
+    }
+
+    @Override
+    public List<OrderDetail> getOrderDetail(int idStore) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+
+        Root rD = query.from(OrderDetail.class);
+        Root rM = query.from(Menu.class);
+        
+        if (idStore >= 0) {
+            query = query.select(rD);
+            query.where(builder.equal(rD.get("idMenu"), rM.get("idMenu")),
+                    builder.equal(rM.get("idStore"), idStore));
+            Query q = session.createQuery(query);
+            return q.getResultList();
+        }
+
+        query = query.select(rD);
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
 }

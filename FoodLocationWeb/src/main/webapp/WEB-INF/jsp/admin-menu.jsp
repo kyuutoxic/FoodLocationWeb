@@ -7,7 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="app-main__outer">
     <div class="app-main__inner">
-        <a class="btn btn-primary" href="<c:url value="/admin/add-menu" />">Them mon an</a>
         
         <table class="table" style="margin-top: 20px">
             <thead>

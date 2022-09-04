@@ -18,4 +18,6 @@ public interface OrderDetailService {
     boolean acceptOrder(int idOrderDetail);
     
     boolean denyOrder(int idOrderDetail);
+    
+    List<OrderDetail> getOrderDetail(int idStore);
 }

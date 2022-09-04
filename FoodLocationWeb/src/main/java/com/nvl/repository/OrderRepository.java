@@ -19,8 +19,10 @@ public interface OrderRepository {
 
     MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total, String type);
 
-    List<MenuOrder> getOrder(int storeId);
+    List<MenuOrder> getOrderByIdStore(int storeId);
     
     List<MenuOrder> getOrderByIdOrderDetail(int idOrderDetail);
+    
+    List<MenuOrder> getOrder();
 
 }

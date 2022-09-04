@@ -31,13 +31,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<MenuOrder> getOrderById(int idOrder) {
-        return this.orderRepository.getOrder(idOrder);
+    public List<MenuOrder> getOrderByIdStore(int idOrder) {
+        return this.orderRepository.getOrderByIdStore(idOrder);
     }
 
     @Override
     public List<MenuOrder> getOrderByIdOrderDetail(int idOrderDetail) {
         return this.orderRepository.getOrderByIdOrderDetail(idOrderDetail);
+    }
+
+    @Override
+    public List<MenuOrder> getOrder() {
+        return this.orderRepository.getOrder();
     }
 
 }

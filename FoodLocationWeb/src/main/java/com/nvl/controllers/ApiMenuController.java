@@ -30,7 +30,7 @@ public class ApiMenuController {
     
     @GetMapping("/menu")
     public ResponseEntity<List<Menu>> getMenu() {
-        return new ResponseEntity<>(this.menuService.getMenus(null, 0, "asc", null), HttpStatus.OK);
+        return new ResponseEntity<>(this.menuService.manageMenu(), HttpStatus.OK);
     }
     
     @GetMapping("/store/menu")

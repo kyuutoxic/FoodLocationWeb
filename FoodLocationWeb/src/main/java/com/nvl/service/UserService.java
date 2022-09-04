@@ -37,5 +37,11 @@ public interface UserService extends UserDetailsService {
     List<Object> countRatings(int idStore);
     
     List<Object> countComments(int idStore);
+    
+    List<User> manageStore();
+    
+    List<User> manageUser();
+    
+    boolean changeIsDelete(int idUser);
 
 }

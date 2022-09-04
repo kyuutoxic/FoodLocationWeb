@@ -33,4 +33,8 @@ public interface MenuService {
     boolean updateMenu(int idMenu, Menu menu);
     
     boolean checkStoreByMenuId(int idMenu, User user);
+    
+    boolean changeMenuIsDelete(int idMenu);
+    
+    List<Menu> manageMenu();
 }

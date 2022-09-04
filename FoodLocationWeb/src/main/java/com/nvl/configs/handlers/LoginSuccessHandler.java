@@ -26,7 +26,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication a) throws IOException, ServletException {
        User user = this.userDetailsService.getUser(a.getName()).get(0);
-       if(user.getActive() == Boolean.TRUE){
+       if(user.getActive() == Boolean.TRUE && user.getIsDelete() == Boolean.FALSE){
            request.getSession().setAttribute("currentUser", user);
 //           response.sendRedirect("/FoodLocationWeb");
            if(Objects.equals(user.getUserRole(), "ROLE_ADMIN")){
@@ -37,7 +37,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
                response.sendRedirect("/FoodLocationWeb/");
            }
        } else {
-           response.sendRedirect("/FoodLocationWeb/login?error");
+           response.sendRedirect("/FoodLocationWeb/login?accessDenied");
        }
     }
     

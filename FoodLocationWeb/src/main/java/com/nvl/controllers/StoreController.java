@@ -55,7 +55,6 @@ public class StoreController {
     @GetMapping("/store")
     public String storeView(Model model, HttpSession session) {
         User store = (User) session.getAttribute("currentUser");
-        model.addAttribute("userStore", this.userDetailsService.getUserStoreNotActive());
         model.addAttribute("statsStore", this.menuService.statsStore(store.getIdUser()));
         return "store";
     }

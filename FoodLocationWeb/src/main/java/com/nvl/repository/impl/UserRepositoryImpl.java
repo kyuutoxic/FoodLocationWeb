@@ -85,6 +85,7 @@ public class UserRepositoryImpl implements UserRepository {
 
         predicates.add(builder.equal(root.get("userRole").as(String.class), "ROLE_STORE"));
         predicates.add(builder.equal(root.get("active"), Boolean.FALSE));
+        predicates.add(builder.equal(root.get("isDelete"), Boolean.FALSE));
 
         query = query.where(predicates.toArray(new Predicate[] {}));
 
@@ -127,6 +128,7 @@ public class UserRepositoryImpl implements UserRepository {
 
         predicates.add(builder.equal(root.get("userRole").as(String.class), "ROLE_STORE"));
         predicates.add(builder.equal(root.get("active"), Boolean.TRUE));
+        predicates.add(builder.equal(root.get("isDelete"), Boolean.FALSE));
 
         query = query.where(predicates.toArray(new Predicate[] {}));
 
@@ -218,6 +220,50 @@ public class UserRepositoryImpl implements UserRepository {
 
         Query q = session.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public List<User> manageStore() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query.select(root);
+
+        query.where(builder.equal(root.get("userRole").as(String.class), "ROLE_STORE"));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<User> manageUser() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query.select(root);
+
+        query.where(builder.equal(root.get("userRole").as(String.class), "ROLE_USER"));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public boolean changeIsDelete(int idUser) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            User user = session.get(User.class, idUser);
+            user.setIsDelete(!user.getIsDelete());
+            session.save(user);
+
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return false;
     }
 
 }

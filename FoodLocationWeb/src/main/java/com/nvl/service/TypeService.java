@@ -13,5 +13,6 @@ import java.util.List;
  */
 public interface TypeService {
     List<Type> getType();
+    
     Type getTypeById(int typeId);
 }

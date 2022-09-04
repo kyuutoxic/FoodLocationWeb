@@ -196,19 +196,21 @@ function manageOrderDetail(idOrderDetail, type, idUser) {
         return res.json();
     }).then(function (data) {
         if (type === "deny") {
-            fetch(`/FoodLocationWeb/sendmail`, {
-                method: 'post',
-                body: JSON.stringify({
-                    "idUser": data[0].idUser.idUser,
-                    "type": 2,
-                    "idOrder": data[0].idOrder
-                }),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }).then(function () {
-                loadOrderDetailByStoreId();
-            });
+            if (confirm("Are you sure to deny this order?") == true) {
+                fetch(`/FoodLocationWeb/sendmail`, {
+                    method: 'post',
+                    body: JSON.stringify({
+                        "idUser": data[0].idUser.idUser,
+                        "type": 2,
+                        "idOrder": data[0].idOrder
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(function () {
+                    loadOrderDetailByStoreId();
+                });
+            }
         }
         loadOrderDetailByStoreId();
     });
@@ -345,7 +347,7 @@ function addToCart(id, name, price, image) {
 }
 
 function deleteCart(productId) {
-    if (confirm("Ban chac chan xoa item nay khong?") == true) {
+    if (confirm("Are you sure to delete this item?") == true) {
         fetch(`/FoodLocationWeb/api/cart/${productId}`, {
             method: "delete"
         }).then(function (res) {
@@ -430,7 +432,7 @@ function loadMiniCart() {
 }
 
 function pay() {
-    if (confirm("Ban chac chan thanh toan?") === true) {
+    if (confirm("Are you sure to continue pay this bill?") === true) {
         $('body').append(`
             <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
                 <h1>loading...</h1>
@@ -448,8 +450,7 @@ function pay() {
             fetch("/FoodLocationWeb/api/momo", {
                 method: "post",
                 body: JSON.stringify({
-                    "total": total,
-                    "type": "Momo"
+                    "total": total
                 }),
                 headers: {
                     "Content-Type": "application/json"
@@ -463,7 +464,7 @@ function pay() {
             fetch("/FoodLocationWeb/api/pay/", {
                 method: "post",
                 body: JSON.stringify({
-                    "total": total,  
+                    "total": total,
                     "type": "Offline"
                 }),
                 headers: {
@@ -557,7 +558,7 @@ function addRating(storeId, userId) {
         alert('ban chua dang nhap')
         window.location.replace("/FoodLocationWeb/login");
     } else {
-        if (confirm('Ban chac chan danh gia') == true) {
+        if (confirm('Are you sure to send this rating?') == true) {
             fetch("/FoodLocationWeb/api/add-rating", {
                 method: 'post',
                 body: JSON.stringify({
@@ -588,7 +589,7 @@ function addRating(storeId, userId) {
 
 
 function deleteFollow(idFollow) {
-    if (confirm("Ban chac chan huy follow khong?") == true) {
+    if (confirm("Are you sure to unfollow this store?") == true) {
         fetch(`/FoodLocationWeb/api/follow/${idFollow}`, {
             method: "delete"
         }).then(function (res) {

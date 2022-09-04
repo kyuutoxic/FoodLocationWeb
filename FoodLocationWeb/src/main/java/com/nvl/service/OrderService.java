@@ -17,6 +17,10 @@ import java.util.Map;
  */
 public interface OrderService {
     MenuOrder addReceipt(Map<Integer, Cart> cart, User user, float total, String type);
-    List<MenuOrder> getOrderById(int idOrder);
+    
+    List<MenuOrder> getOrderByIdStore(int idOrder);
+    
     List<MenuOrder> getOrderByIdOrderDetail(int idOrderDetail);
+    
+    List<MenuOrder> getOrder();
 }

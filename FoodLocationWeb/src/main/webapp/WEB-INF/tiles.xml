@@ -100,6 +100,14 @@ and open the template in the editor.
         <put-attribute name="title" value="ADMIN STATS" />
         <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-stats-view.jsp" />
     </definition>
+    <definition name="adminOrders" extends="adminBaseLayout">
+        <put-attribute name="title" value="ADMIN ORDERS" />
+        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-order.jsp" />
+    </definition>
+    <definition name="adminOrderDetails" extends="adminBaseLayout">
+        <put-attribute name="title" value="ADMIN ORDER DETAILS" />
+        <put-attribute name="admin-content" value="/WEB-INF/jsp/admin-order-detail.jsp" />
+    </definition>
     
     
     <definition name="storeBaseLayout" template="/WEB-INF/layout/store-base.jsp">
@@ -131,6 +139,10 @@ and open the template in the editor.
     <definition name="storeStats" extends="storeBaseLayout">
         <put-attribute name="title" value="STORE STATS" />
         <put-attribute name="store-content" value="/WEB-INF/jsp/store-stats-view.jsp" />
+    </definition>
+    <definition name="storeOrderDetails" extends="storeBaseLayout">
+        <put-attribute name="title" value="STORE ORDER DETAILS" />
+        <put-attribute name="store-content" value="/WEB-INF/jsp/store-order-detail.jsp" />
     </definition>
 
 </tiles-definitions>

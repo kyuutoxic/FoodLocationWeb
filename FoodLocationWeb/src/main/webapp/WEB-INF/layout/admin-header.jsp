@@ -417,15 +417,27 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="<c:url value="/admin/menu"/>">
+                                <a href="<c:url value="/admin/store"/>">
                                     <i class="metismenu-icon"></i>
                                     Store
                                 </a>
                             </li>
                             <li>
-                                <a href="<c:url value="/admin/menu"/>">
+                                <a href="<c:url value="/admin/user"/>">
                                     <i class="metismenu-icon"></i>
-                                    Time Type
+                                    User
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<c:url value="/admin/order"/>">
+                                    <i class="metismenu-icon"></i>
+                                    Order
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<c:url value="/admin/order-detail"/>">
+                                    <i class="metismenu-icon"></i>
+                                    Order Detail
                                 </a>
                             </li>
                         </ul>
