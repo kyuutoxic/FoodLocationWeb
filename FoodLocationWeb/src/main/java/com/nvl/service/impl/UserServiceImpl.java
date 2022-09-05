@@ -200,4 +200,9 @@ public class UserServiceImpl implements UserService {
     public boolean changeIsDelete(int idUser) {
         return this.userRepository.changeIsDelete(idUser);
     }
+
+    @Override
+    public boolean changeActive(int idStore) {
+        return this.userRepository.changeActive(idStore);
+    }
 }

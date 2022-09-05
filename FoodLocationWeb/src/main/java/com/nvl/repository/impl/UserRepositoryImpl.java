@@ -266,4 +266,20 @@ public class UserRepositoryImpl implements UserRepository {
         return false;
     }
 
+    @Override
+    public boolean changeActive(int idStore) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            User user = session.get(User.class, idStore);
+            user.setActive(!user.getActive());
+            session.save(user);
+
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return false;
+    }
+
 }

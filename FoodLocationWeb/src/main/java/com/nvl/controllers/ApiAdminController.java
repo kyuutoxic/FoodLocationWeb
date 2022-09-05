@@ -58,6 +58,16 @@ public class ApiAdminController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     }
+    
+    @PostMapping("/api/change-active-store/{idStore}")
+    public ResponseEntity<User> activeStore(@PathVariable(value = "idStore") int idStore, HttpSession session) {
+
+        if (this.userDetailsService.changeActive(idStore) == true) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+    }
 
     @GetMapping("/api/admin/orderdetail/")
     public ResponseEntity<List<OrderDetail>> getOrderDetail(HttpSession session) {

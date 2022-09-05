@@ -67,15 +67,19 @@ public class MenuRepositoryImpl implements MenuRepository {
         q.select(rM);
 
         List<Predicate> predicates = new ArrayList<>();
-        
-        Predicate status = b.and(b.equal(rM.get("menuStatus"), Boolean.TRUE),
-                                b.equal(rM.get("isDelete"), Boolean.FALSE));    
+
+        Predicate status = b.and(b.equal(rS.get("userRole"), "ROLE_STORE"),
+                                b.equal(rM.get("idStore"), rS.get("idUser")),
+                                b.equal(rM.get("menuStatus"), Boolean.TRUE),
+                                b.equal(rM.get("isDelete"), Boolean.FALSE),
+                                b.equal(rS.get("active"), Boolean.TRUE),
+                                b.equal(rS.get("isDelete"), Boolean.FALSE));
         predicates.add(status);
 
         if (kw != null) {
             Predicate p = b.or(b.like(rM.get("menuName").as(String.class), String.format("%%%s%%", kw)),
-                    b.like(rM.get("price").as(String.class), String.format("%%%s%%", kw)),
-                    b.and(b.like(rS.get("nameStore").as(String.class), String.format("%%%s%%", kw)),
+                            b.like(rM.get("price").as(String.class), String.format("%%%s%%", kw)),
+                            b.and(b.like(rS.get("nameStore").as(String.class), String.format("%%%s%%", kw)),
                             b.equal(rS.get("idUser"), rM.get("idStore")))
             );
             predicates.add(p);
@@ -133,10 +137,35 @@ public class MenuRepositoryImpl implements MenuRepository {
 
     @Override
     public int countMenu(String kw) {
+//        Session session = this.sessionFactory.getObject().getCurrentSession();
+//        Query q = session.createQuery("SELECT COUNT(*) FROM Menu WHERE menuStatus = 1 AND isDelete = 0");
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("SELECT COUNT(*) FROM Menu WHERE menuStatus = 1 AND isDelete = 0");
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object> q = b.createQuery(Object.class);
+        Root rM = q.from(Menu.class);
+        Root rS = q.from(User.class);
+        List<Predicate> predicates = new ArrayList<>();
 
-        return Integer.parseInt(q.getSingleResult().toString());
+        Predicate status = b.and(b.equal(rS.get("userRole"), "ROLE_STORE"),
+                                b.equal(rM.get("idStore"), rS.get("idUser")),
+                                b.equal(rM.get("menuStatus"), Boolean.TRUE),
+                                b.equal(rM.get("isDelete"), Boolean.FALSE),
+                                b.equal(rS.get("active"), Boolean.TRUE),
+                                b.equal(rS.get("isDelete"), Boolean.FALSE));
+        predicates.add(status);
+        if (kw != null) {
+            Predicate p = b.or(b.like(rM.get("menuName").as(String.class), String.format("%%%s%%", kw)),
+                    b.like(rM.get("price").as(String.class), String.format("%%%s%%", kw)),
+                    b.and(b.like(rS.get("nameStore").as(String.class), String.format("%%%s%%", kw)),
+                            b.equal(rS.get("idUser"), rM.get("idStore")))
+            );
+            predicates.add(p);
+        }
+        q.where(predicates.toArray(Predicate[]::new));
+        q.multiselect(b.count(rM.get("idMenu")));
+        Query query = session.createQuery(q);
+
+        return Integer.parseInt(query.getSingleResult().toString());
     }
 
     @Override
@@ -155,7 +184,7 @@ public class MenuRepositoryImpl implements MenuRepository {
         query = query.select(root);
 
         query = query.where(builder.equal(root.get("isDelete"), Boolean.FALSE),
-                            builder.equal(root.get("idStore"), idStore));
+                builder.equal(root.get("idStore"), idStore));
 
         Query q = session.createQuery(query);
         return q.getResultList();
@@ -174,8 +203,8 @@ public class MenuRepositoryImpl implements MenuRepository {
         List<Predicate> predicates = new ArrayList<>();
 
         Predicate rootPredicates = b.and(b.equal(rD.get("idMenu"), rM.get("idMenu")),
-                                        b.equal(rD.get("idOrder"), rO.get("idOrder")),
-                                        b.equal(rM.get("isDelete"), Boolean.FALSE));
+                b.equal(rD.get("idOrder"), rO.get("idOrder")),
+                b.equal(rM.get("isDelete"), Boolean.FALSE));
 
         predicates.add(rootPredicates);
 
@@ -244,9 +273,9 @@ public class MenuRepositoryImpl implements MenuRepository {
         List<Predicate> predicates = new ArrayList<>();
 
         Predicate rootPredicates = b.and(b.equal(rD.get("idMenu"), rM.get("idMenu")),
-                                        b.equal(rD.get("idOrder"), rO.get("idOrder")),
-                                        b.equal(rM.get("idStore"), idStore),
-                                        b.equal(rM.get("isDelete"), Boolean.FALSE));
+                b.equal(rD.get("idOrder"), rO.get("idOrder")),
+                b.equal(rM.get("idStore"), idStore),
+                b.equal(rM.get("isDelete"), Boolean.FALSE));
 
         predicates.add(rootPredicates);
 
@@ -378,12 +407,12 @@ public class MenuRepositoryImpl implements MenuRepository {
     @Override
     public boolean changeMenuIsDelete(int idMenu) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        try{
+        try {
             Menu menu = session.get(Menu.class, idMenu);
             menu.setIsDelete(!menu.getIsDelete());
             session.update(menu);
             return true;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;

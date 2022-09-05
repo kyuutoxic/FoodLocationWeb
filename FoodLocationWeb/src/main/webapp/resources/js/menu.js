@@ -86,6 +86,26 @@ function changeDeleteStore(idUser) {
     });
 }
 
+function changeActiveStore(idUser) {
+    event.preventDefault();
+
+    fetch(`/FoodLocationWeb/api/change-active-store/${idUser}`, {
+        method: 'post'
+    }).then(function (res) {
+        let a = $('#btn-active-store' + idUser).text();
+        if (a == 'Unactive') {
+            $('#btn-active-store' + idUser).text('Active');
+            $('#active-store' + idUser).text('false');
+
+        } else {
+            $('#btn-active-store' + idUser).text('Unactive');
+            $('#active-store' + idUser).text('true');
+
+        }
+        return res;
+    });
+}
+
 function loadAdminMenu(endpoint, menudetail) {
     $('body').append(`
         <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
@@ -263,14 +283,28 @@ function loadAdminStore() {
     }).then(function (data) {
         let msg = "";
         for (let i = 0; i < data.length; i++) {
-            let msg1 = `<td>
+            let msg1 = null;
+            if (data[i].isDelete == true) {
+                msg1 += `<td>
                         <button id="btndeletestore${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeDeleteStore(${data[i].idUser})" >Delete</button>
                     </td>
                 </tr>`
-            let msg2 = `<td>
+            } else {
+                msg1 += `<td>
                         <button id="btndeletestore${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeDeleteStore(${data[i].idUser})" >Undelete</button>
                     </td>
                 </tr>`
+            }
+            let msg2 = null;
+            if (data[i].active == true){
+                msg2 += `<td>
+                        <button id="btn-active-store${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeActiveStore(${data[i].idUser})" >Unactive</button>
+                    </td>`
+            }else{
+                msg2 += `<td>
+                        <button id="btn-active-store${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeActiveStore(${data[i].idUser})" >Active</button>
+                    </td>`
+            }
             msg += `
             <tr>
                     <th scope="row">${i}</th>
@@ -280,18 +314,9 @@ function loadAdminStore() {
                     <td>${data[i].phone}</td>
                     <td>${data[i].email}</td>
                     <td>${data[i].address}</td>
-                    <td>${data[i].active}</td>
-
+                    <td id="active-store${data[i].idUser}">${data[i].active}</td>
                     <td id="deletestore${data[i].idUser}">${data[i].isDelete}</td>
-                    
-                    
-            `;
-            if (data[i].isDelete == true) {
-                msg += msg2
-            } else {
-                msg += msg1
-            }
-
+            ` + msg2 + msg1;
         }
         let d = document.getElementById("adminStore");
         d.innerHTML = msg;

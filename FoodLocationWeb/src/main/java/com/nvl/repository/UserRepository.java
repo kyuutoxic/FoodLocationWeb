@@ -40,5 +40,7 @@ public interface UserRepository {
     List<User> manageUser();
     
     boolean changeIsDelete(int idUser);
+    
+    boolean changeActive(int idStore);
 
 }

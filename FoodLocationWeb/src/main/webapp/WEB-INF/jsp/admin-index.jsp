@@ -48,7 +48,7 @@
                                         <div class="badge badge-warning">Pending</div>
                                     </td>
                                     <td class="text-center">
-                                        <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm"><a href="<c:url value="/admin/active-user-store/${u.idUser}"/>">Details</a></button>
+                                        <a href="<c:url value="/admin/active-user-store/${u.idUser}"/>" ><button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm" style="color: white">Active</button></a>
                                     </td>
                                 </tr>
                                 </c:forEach>
