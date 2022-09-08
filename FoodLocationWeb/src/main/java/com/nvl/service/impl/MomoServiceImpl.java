@@ -37,27 +37,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MomoServiceImpl implements MomoService {
-
-    @Override
-    public JSONObject payment(long total, Map<Integer, Cart> cart) {
-        Random rand = new Random();
-        float requestID=rand.nextFloat();
-        float orderID=rand.nextFloat();
-        String endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-        String partnerCode = "MOMOBKUN20180529";
-        String accessKey = "klm05TvNBzhg7h7j";
-        String secretKey = "at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa";
-        String orderInfo = "Pay the order";
-        String redirectUrl = "http://localhost:8080/FoodLocationWeb/returnmomo";
-        String ipnUrl = "http://localhost:8080/FoodLocationWeb/notimomo";
-        String amount = String.valueOf(total);
-        String orderId = String.valueOf(orderID);
-        String requestId = String.valueOf(requestID);
-        String requestType = "captureWallet";
-        String extraData = "";
-        String rawSignature = "accessKey=" + accessKey + "&amount=" + amount + "&extraData=" + extraData + "&ipnUrl=" + ipnUrl + "&orderId=" + orderId + "&orderInfo=" + orderInfo + "&partnerCode=" + partnerCode + "&redirectUrl=" + redirectUrl + "&requestId=" + requestId + "&requestType=" + requestType;
+    
+    private String hashCode(String secretKey, String rawSignature){
         Mac hasher;
-        String signature = null;
         try {
             byte[] signa = null;
             hasher = Mac.getInstance("HmacSHA256");
@@ -68,12 +50,34 @@ public class MomoServiceImpl implements MomoService {
             for (byte b : signa) {
                 formatter.format("%02x", b);
             }
-            signature = sb.toString();
+            return sb.toString();
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(MomoServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvalidKeyException ex) {
             Logger.getLogger(MomoServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
+    }
+
+    @Override
+    public JSONObject payment(long total, Map<Integer, Cart> cart) {
+        Random rand = new Random();
+        String requestID = hashCode("requestID", String.valueOf(rand.nextFloat()));
+        String orderID = hashCode("orderID", String.valueOf(rand.nextFloat()));
+        String endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+        String partnerCode = "MOMOIHQ620220908";
+        String accessKey = "gMyOktFxyoSzeqnq";
+        String secretKey = "41asyLiB3YF6ePKBLAmXz4T4Hy5QxZKD";
+        String orderInfo = "Pay the order";
+        String redirectUrl = "http://localhost:8080/FoodLocationWeb/returnmomo";
+        String ipnUrl = "http://localhost:8080/FoodLocationWeb/notimomo";
+        String amount = String.valueOf(total);
+        String orderId = String.valueOf(orderID);
+        String requestId = String.valueOf(requestID);
+        String requestType = "captureWallet";
+        String extraData = "";
+        String rawSignature = "accessKey=" + accessKey + "&amount=" + amount + "&extraData=" + extraData + "&ipnUrl=" + ipnUrl + "&orderId=" + orderId + "&orderInfo=" + orderInfo + "&partnerCode=" + partnerCode + "&redirectUrl=" + redirectUrl + "&requestId=" + requestId + "&requestType=" + requestType;
+        String signature = hashCode(secretKey, rawSignature);
         JSONObject data = new JSONObject();
         data.put("partnerCode", partnerCode);
         data.put("partnerName", "Test");
@@ -99,7 +103,6 @@ public class MomoServiceImpl implements MomoService {
             data.append("items", item);
         }
         String clen = String.valueOf(data.length());
-        System.out.println("HIHIHIHIHI"+data);
         try {
             URL url = new URL(endpoint);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -120,6 +123,7 @@ public class MomoServiceImpl implements MomoService {
                     response.append(responseLine.trim());
                 }
                 JSONObject res = new JSONObject(response.toString());
+                res.put("momoSession", data);
                 con.disconnect();         
                 return res;
             }

@@ -55,14 +55,13 @@ public class MomoController {
         Map<String, String> momoSession = new HashMap<>();
         JSONObject data = this.momoService.payment(total, cart);
         result.put("payUrl", data.get("payUrl").toString());
-        Iterator<String> temp = data.keys();
+        Iterator<String> temp = data.getJSONObject("momoSession").keys();
         while (temp.hasNext()) {
             String key = temp.next();
-            momoSession.put(key, data.get(key).toString());
+            momoSession.put(key, data.getJSONObject("momoSession").get(key).toString());
         }
         session.setAttribute("momoSession", momoSession);
         if (data != null) {
-            System.out.println(result);
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -80,7 +79,6 @@ public class MomoController {
             try {
                 float total = Float.parseFloat(params.get("amount"));
                 String typePayment = "Momo";
-                model.addAttribute("message", params.get("message"));
                 User u = (User) session.getAttribute("currentUser");
                 MenuOrder m = (MenuOrder) this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total, typePayment);
                 if (m != null) {
@@ -89,17 +87,20 @@ public class MomoController {
                     this.mailService.sendEmail(1, u.getEmail(), object);
                     session.removeAttribute("cart");
                     session.removeAttribute("momoSession");
-                    return "returnMomo";
+                    return "redirect:/";
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
+        session.removeAttribute("momoSession");
+        model.addAttribute("message", params.get("message"));
+        model.addAttribute("errMsg", "Something went wrong, please come back later!!!");
         return "returnMomo";
     }
 
     @GetMapping("/notimomo")
-    public String notiMomo() {
+    public String notiMomo(HttpSession session, @RequestParam Map<String, String> params) {
         return "notiMomo";
     }
 }

@@ -61,13 +61,13 @@ public class UserController {
         if (!result.hasErrors()) {
             if (user.getPassword().isEmpty()
                     || !user.getPassword().equals(user.getConfirmPassword())) {
-                model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
+                model.addAttribute("errMsg", "Password is not valid!!!");
             } else {
                 if (this.userDetailsService.addUser(user) == true) {
                     return "redirect:/login";
                 }
 
-                model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
+                model.addAttribute("errMsg", "Something went wrong, please come back later!!!");
             }
         }
 
@@ -85,15 +85,15 @@ public class UserController {
         if (!result.hasErrors()) {
             if (user.getPassword().isEmpty()
                     || !user.getPassword().equals(user.getConfirmPassword())) {
-                model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
+                model.addAttribute("errMsg", "Password is note valid!!!");
             } else if (user.getAddress().isEmpty()) {
-                model.addAttribute("errMsgAddress", "Ban phai dien dia chi chinh xac");
+                model.addAttribute("errMsgAddress", "You must enter the address");
             } else {
                 if (this.userDetailsService.addUserStore(user) == true) {
                     return "redirect:/login";
                 }
 
-                model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
+                model.addAttribute("errMsg", "Something went wrong, please come back later!!!");
             }
         }
 
