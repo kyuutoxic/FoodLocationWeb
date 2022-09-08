@@ -33,16 +33,15 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public void sendEmail(final int type, final String email, final Map<String, Object> object) {
-
         MimeMessagePreparator preparator = new MimeMessagePreparator() 
         {
             public void prepare(MimeMessage mimeMessage) throws Exception {
                 
                 MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
                 helper.setTo(email);
-                if(type == 1) helper.setSubject("Thanks for your purchase"); 
-                else if(type == 2) helper.setSubject("Sorry for deny order");
-                else if(type == 3) helper.setSubject("Your follow store have new menu");
+                if(type == 1) helper.setSubject("THASNK FOR YOUR PURCHASE"); 
+                else if(type == 2) helper.setSubject("SORRY FOR DENY ORDER");
+                else if(type == 3) helper.setSubject("YOUR FOLLOW STORE HAVE NEW MENU");
 //                helper.setText(message);
                 String text = geFreeMarkerTemplateContent(type, object);
                 helper.getMimeMessage().setContent(text, "text/html;charset=utf-8");

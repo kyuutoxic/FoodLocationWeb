@@ -8,10 +8,13 @@ import com.nvl.pojo.Cart;
 import com.nvl.pojo.Menu;
 import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.User;
+import com.nvl.service.MailService;
 import com.nvl.service.MenuService;
+import com.nvl.service.OrderDetailService;
 import com.nvl.service.OrderService;
 import com.nvl.service.UserService;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -36,29 +39,35 @@ public class ApiPaymentController {
 
     @Autowired
     private OrderService orderService;
+    
+    @Autowired
+    private OrderDetailService orderDetailService;
 
     @Autowired
     private UserService userDetailsService;
 
     @Autowired
     private MenuService menuService;
+    
+    @Autowired
+    private MailService mailService;
 
     @PostMapping("/pay")
     public ResponseEntity<List<MenuOrder>> pay(HttpSession session, @RequestBody Map<String, String> params) {
         float total = Float.parseFloat(params.get("total"));
         String typePayment = (String) params.get("type");
 
-        List<MenuOrder> menuOrder = new ArrayList<>();
         User u = (User) session.getAttribute("currentUser");
         MenuOrder m = (MenuOrder) this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total, typePayment);
         if (m != null) {
-            menuOrder.add(m);
             session.removeAttribute("cart");
-            System.out.println(typePayment + "HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
-            return new ResponseEntity<>(menuOrder, HttpStatus.OK);
+            Map<String, Object> object = new HashMap<>();
+            object.put("order", this.orderDetailService.getOrderDetailByIdOrder(m.getIdOrder()));
+            this.mailService.sendEmail(1, u.getEmail(), object);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(menuOrder, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/storeInCart")

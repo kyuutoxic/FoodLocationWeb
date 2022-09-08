@@ -9,6 +9,7 @@ import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.User;
 import com.nvl.service.MailService;
 import com.nvl.service.MomoService;
+import com.nvl.service.OrderDetailService;
 import com.nvl.service.OrderService;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +40,9 @@ public class MomoController {
 
     @Autowired
     private OrderService orderService;
+    
+    @Autowired
+    private OrderDetailService orderDetailService;
 
     @Autowired
     private MailService mailService;
@@ -79,11 +83,9 @@ public class MomoController {
                 model.addAttribute("message", params.get("message"));
                 User u = (User) session.getAttribute("currentUser");
                 MenuOrder m = (MenuOrder) this.orderService.addReceipt((Map<Integer, Cart>) session.getAttribute("cart"), u, total, typePayment);
-                List<MenuOrder> menuOrder = new ArrayList<>();
-                Map<String, Object> object = new HashMap<>();
-                object.put("order", m);
                 if (m != null) {
-                    menuOrder.add(m);
+                    Map<String, Object> object = new HashMap<>();
+                    object.put("order", this.orderDetailService.getOrderDetailByIdOrder(m.getIdOrder()));
                     this.mailService.sendEmail(1, u.getEmail(), object);
                     session.removeAttribute("cart");
                     session.removeAttribute("momoSession");

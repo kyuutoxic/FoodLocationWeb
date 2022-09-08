@@ -111,7 +111,7 @@ public class MenuRepositoryImpl implements MenuRepository {
         q.where(predicates.toArray(Predicate[]::new));
 
         q.groupBy(rM.get("idMenu"));
-
+        
         if (sort != null) {
             if (sort.equals("asc")) {
                 q.orderBy(b.asc(rM.get("price")));
@@ -120,6 +120,8 @@ public class MenuRepositoryImpl implements MenuRepository {
             if (sort.equals("desc")) {
                 q.orderBy(b.desc(rM.get("price")));
             }
+        } else {
+            q.orderBy(b.asc(rM.get("idMenu")));
         }
 //        q.multiselect(rM.get("idMenu"),rM.get("menuName"),rM.get("price"),rM.get("menuStatus"),rM.get("image"),rM.get("idStore"),rM.get("menuStatus"));
 
@@ -203,8 +205,7 @@ public class MenuRepositoryImpl implements MenuRepository {
         List<Predicate> predicates = new ArrayList<>();
 
         Predicate rootPredicates = b.and(b.equal(rD.get("idMenu"), rM.get("idMenu")),
-                b.equal(rD.get("idOrder"), rO.get("idOrder")),
-                b.equal(rM.get("isDelete"), Boolean.FALSE));
+                b.equal(rD.get("idOrder"), rO.get("idOrder")));
 
         predicates.add(rootPredicates);
 
@@ -274,8 +275,7 @@ public class MenuRepositoryImpl implements MenuRepository {
 
         Predicate rootPredicates = b.and(b.equal(rD.get("idMenu"), rM.get("idMenu")),
                 b.equal(rD.get("idOrder"), rO.get("idOrder")),
-                b.equal(rM.get("idStore"), idStore),
-                b.equal(rM.get("isDelete"), Boolean.FALSE));
+                b.equal(rM.get("idStore"), idStore));
 
         predicates.add(rootPredicates);
 
@@ -336,7 +336,8 @@ public class MenuRepositoryImpl implements MenuRepository {
 
         q.where(b.equal(rD.get("idMenu"), rM.get("idMenu")),
                 b.equal(rD.get("idOrder"), rO.get("idOrder")),
-                b.equal(rM.get("idStore"), idStore));
+                b.equal(rM.get("idStore"), idStore),
+                b.equal(rD.get("statusOrder"), (short)1));
 
 //        follow of store
         CriteriaQuery<Object[]> countFollow = b.createQuery(Object[].class);

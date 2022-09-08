@@ -17,8 +17,10 @@ public interface OrderDetailRepository {
     
     boolean acceptOrder(int idOrderDetail);
     
-    boolean denyOrder(int idOrderDetail);
+    OrderDetail denyOrder(int idOrderDetail);
     
     List<OrderDetail> getOrderDetail(int idStore);
+    
+    List<OrderDetail> getOrderDetailByIdOrder(int idOrder);
     
 }

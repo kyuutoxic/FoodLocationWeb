@@ -57,6 +57,7 @@ public class MenuServiceImpl implements MenuService {
             menu.setUpdateDate(new Date());
             menu.setIdType(t);
             menu.setIdStore(user);
+            menu.setIsDelete(Boolean.FALSE);
 
             Map r = this.cloudinary.uploader().upload(menu.getFile().getBytes(),
                     ObjectUtils.asMap("resource_type", "auto"));

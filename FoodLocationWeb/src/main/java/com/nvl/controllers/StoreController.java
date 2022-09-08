@@ -12,7 +12,9 @@ import com.nvl.service.MailService;
 import com.nvl.service.MenuService;
 import com.nvl.service.UserService;
 import com.nvl.validator.WebAppValidator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,8 +79,10 @@ public class StoreController {
         if (!result.hasErrors()) {
             if (this.menuService.addMenu(menu, u) == true) {
                 List<Follow> follow = this.followService.getFollowByIdStore(u);
+                Map<String, Object> object = new HashMap<>();
+                object.put("menu", menu);
                 follow.forEach(f -> {
-                    this.mailService.sendEmail(3, f.getIdUser().getEmail(), null);
+                    this.mailService.sendEmail(3, f.getIdUser().getEmail(), object);
                     System.out.println(f.getIdUser().getEmail());
                 });
                 return "redirect:/store/menu";

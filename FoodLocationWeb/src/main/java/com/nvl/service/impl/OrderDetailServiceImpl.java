@@ -32,13 +32,18 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public boolean denyOrder(int idOrderDetail) {
+    public OrderDetail denyOrder(int idOrderDetail) {
         return this.orderDetailRepository.denyOrder(idOrderDetail);
     }
 
     @Override
     public List<OrderDetail> getOrderDetail(int idStore) {
         return this.orderDetailRepository.getOrderDetail(idStore);
+    }
+
+    @Override
+    public List<OrderDetail> getOrderDetailByIdOrder(int idOrder) {
+        return this.orderDetailRepository.getOrderDetailByIdOrder(idOrder);
     }
     
 }

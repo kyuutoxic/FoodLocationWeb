@@ -7,10 +7,13 @@ package com.nvl.controllers;
 import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.OrderDetail;
 import com.nvl.pojo.User;
+import com.nvl.service.MailService;
 import com.nvl.service.OrderDetailService;
 import com.nvl.service.OrderService;
 import com.nvl.service.UserService;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +37,7 @@ public class ApiStoreController {
     private OrderDetailService orderDetailService;
     
     @Autowired
-    private OrderService orderService;
+    private MailService mailService;
     
     @GetMapping("/store")
     public ResponseEntity<List<User>> getStore() {
@@ -54,12 +57,15 @@ public class ApiStoreController {
     
     @GetMapping("/store/deny/{idOrderDetail}")
     public ResponseEntity<List<MenuOrder>> denyOrderDetail(@PathVariable(value = "idOrderDetail") int idOrderDetail) {
-        
-        List<MenuOrder> m = this.orderService.getOrderByIdOrderDetail(idOrderDetail);
+
+        OrderDetail m = this.orderDetailService.denyOrder(idOrderDetail);
                 
-        if( this.orderDetailService.denyOrder(idOrderDetail) == true){
-            return new ResponseEntity<>(m, HttpStatus.OK);
+        if(m != null){
+            Map<String, Object> object = new HashMap<>();
+            object.put("order", m);
+            this.mailService.sendEmail(2, m.getIdOrder().getIdUser().getEmail(), object);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

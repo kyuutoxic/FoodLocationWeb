@@ -450,28 +450,18 @@ function manageOrderDetail(idOrderDetail, type, idUser) {
             <span class="visually-hidden"></span>
         </div>
     `);
-    fetch(`http://localhost:8080/FoodLocationWeb/api/store/${type}/${idOrderDetail}`).then(function (res) {
-        return res.json();
-    }).then(function (data) {
-        if (type === "deny") {
-            if (confirm("Are you sure to deny this order?") == true) {
-                fetch(`/FoodLocationWeb/sendmail`, {
-                    method: 'post',
-                    body: JSON.stringify({
-                        "idUser": data[0].idUser.idUser,
-                        "type": 2,
-                        "idOrder": data[0].idOrder
-                    }),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }).then(function () {
-                    loadOrderDetailByStoreId();
-                });
-            }
+    if (type === "deny") {
+        if (confirm("Are you sure to deny this order?") == true) {
+            fetch(`http://localhost:8080/FoodLocationWeb/api/store/${type}/${idOrderDetail}`).then(function (res) {
+                loadOrderDetailByStoreId();
+            });
         }
-        loadOrderDetailByStoreId();
-    });
+    }
+    if (type === 'accept'){
+        fetch(`http://localhost:8080/FoodLocationWeb/api/store/${type}/${idOrderDetail}`).then(function (res) {
+            loadOrderDetailByStoreId();
+        });
+    }
 }
 
 function loadOrderDetailByStoreId() {
@@ -729,25 +719,10 @@ function pay() {
                     "Content-Type": "application/json"
                 }
             }).then(function (res) {
-                return res.json();
-            }).then(function (data) {
-                console.log(data);
-                fetch(`/FoodLocationWeb/sendmail`, {
-                    method: 'post',
-                    body: JSON.stringify({
-                        "idUser": data[0].idUser.idUser,
-                        "type": 1,
-                        "idOrder": data[0].idOrder
-                    }),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }).then(function () {
-                    $('.loading-page').html(`<h1 style="text-align: center">YOUR PURCHASE IS SUCCESS<br>PLEASE CHECK YOUR MAIL FOR DETAIL</h1>`);
+                $('.loading-page').html(`<h1 style="text-align: center">YOUR PURCHASE IS SUCCESS<br>PLEASE CHECK YOUR MAIL FOR DETAIL</h1>`);
                     setTimeout(function () {
                         window.location.replace("/FoodLocationWeb/");
                     }, 3000);
-                });
             });
         }
     }

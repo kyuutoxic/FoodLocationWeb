@@ -69,19 +69,19 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository {
     }
 
     @Override
-    public boolean denyOrder(int idOrderDetail) {
+    public OrderDetail denyOrder(int idOrderDetail) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
 
         try {
             OrderDetail o = session.get(OrderDetail.class, idOrderDetail);
             o.setStatusOrder((short) 0);
             session.save(o);
-            return true;
+            return o;
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
         }
 
-        return false;
+        return null;
     }
 
     @Override
@@ -104,5 +104,23 @@ public class OrderDetailRepositoryImpl implements OrderDetailRepository {
         query = query.select(rD);
         Query q = session.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public List<OrderDetail> getOrderDetailByIdOrder(int idOrder) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+
+        Root rD = query.from(OrderDetail.class);
+        try{
+        query = query.select(rD);
+        query.where(builder.equal(rD.get("idOrder"), idOrder));
+        Query q = session.createQuery(query);
+        return q.getResultList();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
     }
 }

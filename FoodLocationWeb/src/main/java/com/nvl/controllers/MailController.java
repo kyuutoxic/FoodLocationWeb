@@ -6,8 +6,10 @@ package com.nvl.controllers;
 
 
 import com.nvl.pojo.MenuOrder;
+import com.nvl.pojo.OrderDetail;
 import com.nvl.pojo.User;
 import com.nvl.service.MailService;
+import com.nvl.service.OrderDetailService;
 import com.nvl.service.OrderService;
 import com.nvl.service.UserService;
 import java.util.HashMap;
@@ -15,6 +17,9 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,25 +31,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class MailController {
-
-    @Autowired
-    private MailService mailService;
     
     @Autowired
-    private UserService userService;
-    
-    @Autowired
-    private OrderService orderService;
+    private OrderDetailService orderDetailService;
 
-    @PostMapping("/sendmail")
-    public void sendMail(HttpSession session, @RequestBody Map<String, String> params) {
-        
-        String email = this.userService.getUserById(Integer.parseInt(params.get("idUser"))).getEmail();
-        int type = Integer.parseInt(params.get("type"));
-        Map<String, Object> m = new HashMap<>();
-        m.put("order", this.orderService.getOrderByIdStore(Integer.parseInt(params.get("idOrder"))));
-
-        this.mailService.sendEmail(type, email, m);
+    @GetMapping("/orderDetail/{idOrder}")
+    public ResponseEntity<List<OrderDetail>> getOrder(@PathVariable(value = "idOrder") int idOrder) {
+        return new ResponseEntity<>(this.orderDetailService.getOrderDetailByIdOrder(idOrder), HttpStatus.OK);
     }
 
 }
