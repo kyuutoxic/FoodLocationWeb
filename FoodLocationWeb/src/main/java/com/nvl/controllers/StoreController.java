@@ -131,5 +131,10 @@ public class StoreController {
 
         return "redirect:/account-store/";
     }
+    
+    @GetMapping("/store/chat")
+    public String chatView() {
+        return "storeChat";
+    }
 
 }

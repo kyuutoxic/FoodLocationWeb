@@ -116,6 +116,9 @@ function loadAdminMenu(endpoint, menudetail) {
         </div>
     `);
     fetch(endpoint).then(function (res) {
+        setTimeout(function () {
+            $('.loading-page').remove();
+        }, 3000);
         return res.json();
     }).then(function (data) {
         console.log(data);
@@ -154,7 +157,6 @@ function loadAdminMenu(endpoint, menudetail) {
         }
         let d = document.getElementById("adminProd");
         d.innerHTML = msg;
-        $('.loading-page').remove();
     })
 }
 
@@ -296,11 +298,11 @@ function loadAdminStore() {
                 </tr>`
             }
             let msg2 = null;
-            if (data[i].active == true){
+            if (data[i].active == true) {
                 msg2 += `<td>
                         <button id="btn-active-store${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeActiveStore(${data[i].idUser})" >Unactive</button>
                     </td>`
-            }else{
+            } else {
                 msg2 += `<td>
                         <button id="btn-active-store${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeActiveStore(${data[i].idUser})" >Active</button>
                     </td>`
@@ -405,13 +407,10 @@ function loadFollowed() {
 }
 
 function loadStoreInCart() {
-    $('body').append(`
-        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
-            <h1>loading...</h1>
+    $('#btn-pay').attr('style', 'cursor: context-menu;').attr('disabled', 'disabled').click(false).html(`
             <div class="spinner-border text-warning" role="status">
                 <span class="visually-hidden"></span>
             </div>
-        </div>
     `);
     fetch(`http://localhost:8080/FoodLocationWeb/api/storeInCart`).then(function (res) {
         return res.json();
@@ -428,11 +427,11 @@ function loadStoreInCart() {
                 <span>${shipPrice}</span>
                 <span>&nbsp;VND</span>
             `;
-            $('.loading-page').remove();
             total += e.shipPrice;
         });
         total = new Intl.NumberFormat().format(total);
         $('#total').text(total);
+        $('#btn-pay').attr('style', '').removeAttr('disabled').html('Pay');
     });
 }
 
@@ -457,7 +456,7 @@ function manageOrderDetail(idOrderDetail, type, idUser) {
             });
         }
     }
-    if (type === 'accept'){
+    if (type === 'accept') {
         fetch(`http://localhost:8080/FoodLocationWeb/api/store/${type}/${idOrderDetail}`).then(function (res) {
             loadOrderDetailByStoreId();
         });
@@ -465,6 +464,14 @@ function manageOrderDetail(idOrderDetail, type, idUser) {
 }
 
 function loadOrderDetailByStoreId() {
+    $('#order-check-area').html(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: white;">
+            <h1>loading...</h1>
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+        </div>
+    `);
     fetch(`http://localhost:8080/FoodLocationWeb/api/store/order`).then(function (res) {
         return res.json();
     }).then(function (data) {
@@ -503,76 +510,9 @@ function comparison(currentVal, id) {
     }
 }
 
-$('.btn-number').click(function (e) {
-    e.preventDefault();
-    fieldName = $(this).attr('data-field');
-    type = $(this).attr('data-type');
-    let input = $("#" + fieldName);
-    let currentVal = parseInt(input.val());
-    if (!isNaN(currentVal)) {
-        if (type == 'minus') {
-
-            if (currentVal > input.attr('min')) {
-                currentVal--;
-                input.val(currentVal);
-            }
-            comparison(currentVal, fieldName);
-        } else if (type == 'plus') {
-
-            if (currentVal < input.attr('max')) {
-                currentVal++;
-                input.val(currentVal);
-            }
-            comparison(currentVal, fieldName);
-        }
-
-        console.log(currentVal);
-        updateCart(fieldName);
-    } else {
-        input.val(0);
-    }
-});
-$('.input-number').focusin(function () {
-    $(this).data('oldValue', $(this).val());
-});
-$('.input-number').change(function () {
-
-    minValue = parseInt($(this).attr('min'));
-    maxValue = parseInt($(this).attr('max'));
-    valueCurrent = parseInt($(this).val());
-    name = $(this).attr('name');
-    if (valueCurrent >= minValue) {
-        $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
-    } else {
-        alert('Sorry, the minimum value was reached');
-        $(this).val($(this).data('oldValue'));
-    }
-    if (valueCurrent <= maxValue) {
-        $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
-    } else {
-        alert('Sorry, the maximum value was reached');
-        $(this).val($(this).data('oldValue'));
-    }
-
-
-});
-$(".input-number").keydown(function (e) {
-// Allow: backspace, delete, tab, escape, enter and .
-    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
-            // Allow: Ctrl+A
-                    (e.keyCode == 65 && e.ctrlKey === true) ||
-                    // Allow: home, end, left, right
-                            (e.keyCode >= 35 && e.keyCode <= 39)) {
-                // let it happen, don't do anything
-                return;
-            }
-            // Ensure that it is a number and stop the keypress
-            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                e.preventDefault();
-            }
-        });
 function addToCart(id, name, price, image) {
     event.preventDefault();
+    toast('Your cart is loading', 'Please a second', '');
     fetch("/FoodLocationWeb/api/cart", {
         method: 'post',
         body: JSON.stringify({
@@ -591,10 +531,12 @@ function addToCart(id, name, price, image) {
         $('#cartCounter1').attr('value', data);
         $('#cartCounter2').attr('value', data);
         loadMiniCart();
+        toast('Add to cart success', 'You can check your cart and manage cart', `${image}`);
     });
 }
 
 function deleteCart(productId) {
+    toast('Your cart is loading', 'Please a second', '');
     if (confirm("Are you sure to delete this item?") == true) {
         fetch(`/FoodLocationWeb/api/cart/${productId}`, {
             method: "delete"
@@ -608,7 +550,8 @@ function deleteCart(productId) {
             $('#product1' + productId).attr('style', 'display: none');
             $('#product2' + productId).attr('style', 'display: none');
             loadMiniCart();
-        })
+            toast('Delete item in cart success', 'You can check your cart and manage cart', ``);
+        });
     }
 }
 
@@ -664,7 +607,7 @@ function loadMiniCart() {
                             <p><span class="text-muted">Quantity: </span>${result[i].quantity}</p>
                         </div>
                         <div class="col-md-4 col-lg-3 col-xl-3 offset-lg-1 m-0 p-0">
-                            <span class="mb-0" style="width: 100%">${result[i].price}</span>
+                            <span class="mb-0" style="width: 100%">${Intl.NumberFormat().format(result[i].price)}&nbsp;VND</span>
                         </div>
                         <div class="col-md-1 col-lg-1 col-xl-1 text-end m-0 p-0">
                             <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg" onclick="deleteCart(${result[i].menuId})"></i></a>
@@ -681,14 +624,11 @@ function loadMiniCart() {
 
 function pay() {
     if (confirm("Are you sure to continue pay this bill?") === true) {
-        $('body').append(`
-            <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
-                <h1>loading...</h1>
-                <div class="spinner-border text-warning" role="status">
-                    <span class="visually-hidden"></span>
-                </div>
+        $('#btn-pay').attr('style', 'cursor: context-menu;').attr('disabled', 'disabled').click(false).html(`
+            <div class="spinner-border text-warning" role="status">
+                <span class="visually-hidden"></span>
             </div>
-//        `);
+        `);
         let total = $('#total').text();
         total = total.replaceAll(",", "");
         total = total.replaceAll(".", "");
@@ -719,10 +659,10 @@ function pay() {
                     "Content-Type": "application/json"
                 }
             }).then(function (res) {
-                $('.loading-page').html(`<h1 style="text-align: center">YOUR PURCHASE IS SUCCESS<br>PLEASE CHECK YOUR MAIL FOR DETAIL</h1>`);
-                    setTimeout(function () {
-                        window.location.replace("/FoodLocationWeb/");
-                    }, 3000);
+                toast('Payment success', 'You can check your email for more detail', '');
+                setTimeout(function () {
+                    window.location.replace("/FoodLocationWeb/");
+                }, 4000);
             });
         }
     }
@@ -866,8 +806,241 @@ function loadFollowByUser(idmenu, userId) {
 function checkRating(idStore) {
     $('#check-rating').attr('style', 'display: none !important');
     fetch(`/FoodLocationWeb/api/check-rating/${idStore}`).then(function (res) {
-        if (res.ok) {
+        if (res.ok || res.status === 400) {
             $('#check-rating').attr('style', '');
+            return null;
+        } else {
+            return res.json();
+        }
+    }).then(function (data) {
+        if (data !== null) {
+            console.log(data.errMsg);
         }
     });
+}
+
+$(document).ready(function () {
+
+    $('.btn-number').click(function (e) {
+        e.preventDefault();
+        fieldName = $(this).attr('data-field');
+        type = $(this).attr('data-type');
+        let input = $("#" + fieldName);
+        let currentVal = parseInt(input.val());
+        if (!isNaN(currentVal)) {
+            if (type == 'minus') {
+
+                if (currentVal > input.attr('min')) {
+                    currentVal--;
+                    input.val(currentVal);
+                }
+                comparison(currentVal, fieldName);
+            } else if (type == 'plus') {
+
+                if (currentVal < input.attr('max')) {
+                    currentVal++;
+                    input.val(currentVal);
+                }
+                comparison(currentVal, fieldName);
+            }
+
+            console.log(currentVal);
+            updateCart(fieldName);
+        } else {
+            input.val(0);
+        }
+    });
+    $('.input-number').focusin(function () {
+        $(this).data('oldValue', $(this).val());
+    });
+    $('.input-number').change(function () {
+
+        minValue = parseInt($(this).attr('min'));
+        maxValue = parseInt($(this).attr('max'));
+        valueCurrent = parseInt($(this).val());
+        name = $(this).attr('name');
+        if (valueCurrent >= minValue) {
+            $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
+        } else {
+            alert('Sorry, the minimum value was reached');
+            $(this).val($(this).data('oldValue'));
+        }
+        if (valueCurrent <= maxValue) {
+            $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
+        } else {
+            alert('Sorry, the maximum value was reached');
+            $(this).val($(this).data('oldValue'));
+        }
+
+
+    });
+    $(".input-number").keydown(function (e) {
+// Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                // Allow: Ctrl+A
+                        (e.keyCode == 65 && e.ctrlKey === true) ||
+                        // Allow: home, end, left, right
+                                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+    $("#closeChat").click(function () {
+        $('.table-chat-list').html('');
+        $('.table-content-chat').html('');
+        $(".table-chat").attr('style', 'display: none');
+        $(".table-chat-content").attr('style', '');
+        $(".table-chat-list").attr('style', '');
+        $("#unColapseChat").attr('style', 'display: none;');
+        $("#colapseChat").attr('style', 'display: block;');
+    });
+
+    $("#colapseChat").click(function () {
+        $(".table-chat-content").attr('style', 'right: -165px; position: absolute;');
+        $(".table-chat").attr('style', 'width: 165px;  display: block;');
+        $(".table-chat-list").attr('style', 'width: 165px;');
+        $(".list-chat").attr('style', 'width: 50%');
+        $(this).attr('style', 'display: none;');
+        $("#unColapseChat").attr('style', 'display: block;');
+
+    });
+
+    $("#unColapseChat").click(function () {
+        $(".table-chat-content").attr('style', '');
+        $(".table-chat").attr('style', 'display: block');
+        $(".table-chat-list").attr('style', '');
+        $(".list-chat").attr('style', '');
+        $(this).attr('style', 'display: none;');
+        $("#colapseChat").attr('style', 'display: block;');
+        $("#box-chat").focus();
+    });
+});
+
+var firebaseConfig = {
+    apiKey: "AIzaSyDrVn3SF-6T5DPh1tiyWCD3fhHWfCnIQwA",
+    authDomain: "foodlocationweb.firebaseapp.com",
+    databaseURL: "https://foodlocationweb-default-rtdb.firebaseio.com",
+    projectId: "foodlocationweb",
+    storageBucket: "foodlocationweb.appspot.com",
+    messagingSenderId: "1020827400329",
+    appId: "1:1020827400329:web:63c5c8c89780f3b179ee58",
+    measurementId: "G-8ESHVMH06K"
+};
+
+if (!window.firebase.apps.length) {
+    window.firebase.initializeApp(firebaseConfig);
+    window.firebase.analytics();
+} else {
+    window.firebase.app(); // if already initialized, use that one
+}
+
+function createRoom(id1, id2, userName, otherName, avatar, imgStore) {
+    event.preventDefault();
+    $(".table-chat").attr('style', 'display: block');
+    $("#box-chat").focus();
+
+    let roomName = "";
+    if (id1 < id2)
+        roomName = id1 + "-" + id2;
+    else
+        roomName = id2 + "-" + id1;
+
+    const listChats = window.firebase.database().ref('room/' + id2).orderByChild("name").equalTo(id1).on("value", function (snapshot) {
+        if (snapshot.exists() === true) {
+            joinRoom(roomName, userName, otherName, imgStore);
+        } else {
+            window.firebase.database().ref('room/' + id1).push().set({
+                "avatar": imgStore,
+                "name": id2,
+                "roomName": roomName,
+                "otherPersonName": otherName
+            });
+            window.firebase.database().ref('room/' + id2).push().set({
+                "avatar": avatar,
+                "name": id1,
+                "roomName": roomName,
+                "otherPersonName": userName
+            });
+        }
+    });
+}
+
+function joinRoom(roomName, userName, otherName, imgStore) {
+    window.firebase.database().ref('chats/').off("child_added");
+    $('.table-content-chat').html('');
+    if($(`#${roomName}`).length > 0){
+        var mess = Array.from(document.getElementsByClassName('list-chat'));
+            mess.forEach(e => {
+                e.style = '';
+        });
+        $(`#${roomName}`).attr('style', 'background-color: rgba(30, 209, 185, 0.3);');
+    }else{
+        $('.table-chat-list').append(`
+            <div class="list-chat" id="${roomName}" style="background-color: rgba(30, 209, 185, 0.3);"><img src="${imgStore}" alt="hihi"></div>
+        `);
+    }
+
+    const db = window.firebase.database().ref('chats/' + roomName);
+    let scrollValue = 0;
+    db.on("child_added", (snapshot) => {
+        const data = snapshot.val();
+        if (data.from === userName)
+            $('.table-content-chat').append(
+                    `<div class="d-flex justify-content-end mb-4 msg">
+                        <div class="msg_cotainer_send">
+                          ${data.content}
+                        </div>
+                    </div>
+                `);
+        else
+            $('.table-content-chat').append(
+                    `<div class="d-flex justify-content-start mb-4 msg">
+                        <div class="msg_cotainer">
+                          ${data.content}
+                        </div>
+                    </div>
+                `);
+        scrollValue += 1000;
+    });
+    $('.table-content-chat').scrollTop(10000);
+    console.log(roomName);
+    $('#btn-send-chat').click(function () {
+        sendMsg(`${userName}`, `${otherName}`, `${roomName}`);
+    });
+}
+
+function sendMsg(yourName, otherName, roomName) {
+    console.log(roomName);
+    window.firebase.database().ref('chats/' + roomName).push().set({
+        "content": $('#box-chat').val(),
+        "from": yourName,
+        "to": otherName
+    });
+    $('#box-chat').val('');
+    $('#box-chat').focus();
+}
+
+function initPage(username,userId) {
+    
+    $('.table-chat-list').html('');
+    $('.table-content-chat').html('');
+    
+    $(".table-chat").attr('style', 'display: block');
+    $("#box-chat").focus();
+
+    const listChats = firebase.database().ref('room/' + userId);
+
+    listChats.on("child_added", (snapshot) => {
+        const data = snapshot.val();
+        $('.table-chat-list').append(`
+            <div class="list-chat" id="${data.roomName}" onclick="joinRoom('${data.roomName}', '${username}', '${data.otherPersonName}', '${data.avatar}');"><img src="${data.avatar}" alt="hihi"></div>
+        `);
+    });
+    $('.table-chat-list').scrollTop();
+
 }

@@ -79,7 +79,28 @@
             </div>
         </div>
     </div>
-<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <!--Chat button-->
+<div class="chat btn-chat chat-text pb-2" onclick="initPage('${currentUser.username}',${currentUser.idUser});"><i class="bi bi-chat-right-dots-fill"></i>&nbsp;Chat</div>
+<div class="chat table-chat pb-2">
+    <div class="d-flex bd-highlight chat-text">
+        <div class="p-2 flex-grow-1 bd-highlight">Chat</div>
+        <div class="p-2 bd-highlight" role="button" id="colapseChat"><i class="bi bi-arrow-right-square"></i></div>
+        <div class="p-2 bd-highlight" role="button" id="unColapseChat" style="display: none;"><i class="bi bi-arrow-left-square"></i></div>
+        <div class="p-2 bd-highlight" role="button" id="closeChat"><i class="bi bi-x-square"></i></div>
+    </div>
+    <div class="row table-chat-container">
+        <div class="col-3 table-chat-list">
+            <!--<div class="list-chat"><img src="${currentUser.avatar}" alt="hihi"></div>-->
+        </div>
+        <div class="col-9 table-chat-content">
+            <div class="table-content-chat"></div>
+            <div class="table-box-chat">
+                <input type="text" id="box-chat">
+                <button class="btn btn-primary" type="button" id="btn-send-chat">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="<c:url value="/js/menu.js" />"></script>
 <script>
     $(document).ready(function(){

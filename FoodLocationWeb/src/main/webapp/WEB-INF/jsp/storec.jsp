@@ -102,12 +102,14 @@
         </div>
         <div class="col-9">
             <div class="row store-info-contact">
+                <c:if test="${currentUser != null}">
                 <div class="col">
-                    <a href="#">
-                        <span class="fa fa-phone-alt"></span>
-                        <span>Call</span>
+                        <a href="javascript:;" onclick="createRoom('${currentUser.idUser}', '${store.idUser}', '${currentUser.username}', '${store.nameStore}', '${currentUser.avatar}', '${store.avatar}');initPage(${currentUser.idUser});">
+                        <span class="bi bi-chat-left-dots-fill"></span>
+                        <span>Chat</span>
                     </a>
                 </div>
+                </c:if>
                 <div id="follow${store.idUser}" class="col">
                     <a href="#" onclick="addFollow(${store.idUser}, ${currentUser.idUser})">
                         <span class="fa fa-bookmark"></span>
@@ -265,7 +267,7 @@
                                     <c:when test="${m.menuStatus == true && m.menuFrom le now && m.menuTo ge now}">
                                         <div class="menu-cost">
                                             <span><fmt:formatNumber type="number" value="${m.price}" maxFractionDigits="2" /></span>
-                                            <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price}, '${m.image}');toast('Add to cart success', 'You can check your cart and manage cart', '${m.image}');">+</button>
+                                            <button class="menu-order" onclick="addToCart(${m.idMenu}, '${m.menuName}', ${m.price}, '${m.image}');">+</button>
                                         </div>
                                     </c:when>    
                                     <c:otherwise>

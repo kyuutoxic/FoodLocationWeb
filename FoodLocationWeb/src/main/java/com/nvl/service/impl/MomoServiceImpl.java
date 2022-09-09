@@ -115,6 +115,7 @@ public class MomoServiceImpl implements MomoService {
                 byte[] input = data.toString().getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
+            System.out.println(con.getOutputStream().toString());
             try ( BufferedReader br = new BufferedReader(
                     new InputStreamReader(con.getInputStream(), "utf-8"))) {
                 String responseLine = null;

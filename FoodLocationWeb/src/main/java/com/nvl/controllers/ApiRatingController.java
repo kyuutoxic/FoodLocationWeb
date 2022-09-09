@@ -66,14 +66,16 @@ public class ApiRatingController {
     }
 
     @GetMapping("/check-rating/{idStore}")
-    public ResponseEntity<Rating> checkRating(@PathVariable(value = "idStore") int idStore, HttpSession session) {
-        try {
-            User u = (User) session.getAttribute("currentUser");
+    public ResponseEntity<Map<String, String>> checkRating(@PathVariable(value = "idStore") int idStore, HttpSession session) {
+        Map<String, String> res = new HashMap<>();
+        res.put("errMsg", "Something went wrong, maybe not login yet!");
+        User u = (User) session.getAttribute("currentUser");
+        if(u != null){
             if (this.ratingService.checkOrderForRating(u.getIdUser(), idStore) == true) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
-        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(res, HttpStatus.NOT_FOUND);
     }
 }

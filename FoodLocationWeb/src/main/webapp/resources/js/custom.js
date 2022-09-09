@@ -42,14 +42,14 @@ function toast(type, content, img) {
         // Auto remove toast
         const autoRemoveId = setTimeout(function () {
             main.removeChild(toast);
-        }, 6000);
+        }, 4000);
 
         // Remove toast when clicked
         toast.onclick = function () {
             main.removeChild(toast);
             clearTimeout(autoRemoveId);
         };
-        const delay = (6000 / 1000).toFixed(2);
+        const delay = (4000 / 1000).toFixed(2);
 
         toast.classList.add(`toast--success`);
 

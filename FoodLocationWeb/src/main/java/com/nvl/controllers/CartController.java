@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CartController {
     @GetMapping("/cart")
     public String cart(Model model, HttpSession session) {
+        try{
         Map<Integer, Cart> cart = (Map<Integer, Cart>) session.getAttribute("cart");
         if (cart != null)
             model.addAttribute("carts", cart.values());
@@ -30,5 +31,7 @@ public class CartController {
         model.addAttribute("cartStats", Utils.cartStats(cart));
         
         return "cart";
+        }catch(Exception ex){ex.printStackTrace();}
+        return "redirect:/";
     }
 }

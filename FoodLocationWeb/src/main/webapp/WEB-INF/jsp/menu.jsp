@@ -108,7 +108,7 @@
                 <c:choose>
                     <c:when test="${p.menuStatus == true && p.menuFrom le now && p.menuTo ge now}">
                         <div class="d-grid gap-2">
-                            <a class="btn btn-lg btn-danger menu-order" href="#" role="button" onclick="addToCart(${p.idMenu}, '${p.menuName}', ${p.price}, '${p.image}');toast('Add to cart success','You can check your cart and manage cart','${p.image}');">Order now</a>
+                            <a class="btn btn-lg btn-danger menu-order" href="#" role="button" onclick="addToCart(${p.idMenu}, '${p.menuName}', ${p.price}, '${p.image}');">Order now</a>
                         </div>
                     </c:when>    
                     <c:otherwise>

@@ -418,9 +418,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="<c:url value="/store/order"/>">
+                                <a href="<c:url value="/store/chat"/>">
                                     <i class="metismenu-icon"></i>
-                                    Order
+                                    Chat
                                 </a>
                             </li>
                         </ul>

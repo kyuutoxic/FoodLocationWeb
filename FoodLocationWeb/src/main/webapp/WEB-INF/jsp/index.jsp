@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Service Start -->
-<div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000"></div>
+<div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 100"></div>
 <div class="container-xxl py-5 bg-dark hero-header mb-5" id="banner-home">
     <div class="container my-5 py-5">
         <div class="row align-items-center g-5">

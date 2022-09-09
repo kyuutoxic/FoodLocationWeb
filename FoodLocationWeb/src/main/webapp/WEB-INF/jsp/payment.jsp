@@ -8,6 +8,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="<c:url value="/js/menu.js" />"></script>
+<div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000"></div>
 <div class="container-xxl py-5">
     <section style="margin: 50px 0;">
         <h1>${type}</h1>
@@ -74,7 +75,7 @@
         <em id="type">${type}</em>
         <div class="payment-field" style="justify-content: flex-end;">
             <c:if test="${currentUser != null}">
-                <button class="btn-pay" onclick="pay()">Pay</button>
+                <button class="btn-pay" id="btn-pay" onclick="pay()">Pay</button>
             </c:if>
             <c:if test="${currentUser == null}">
                 <h4><a href="<c:url value="/login" />">Vui long dang nhap</a></h4>

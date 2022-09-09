@@ -16,7 +16,7 @@
             <tiles:insertAttribute name="title" />
         </title>
         <!-- Favicon -->
-        <link href="resources/img/favicon.ico" rel="icon">
+        <link href="https://res.cloudinary.com/djgexdpxq/image/upload/v1662702867/Screenshot_2022-09-08_131936_negolj.png" rel="icon" type="image/icon type">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +51,9 @@
         <script src="<c:url value="/resources/lib/tempusdominus/js/moment-timezone.min.js" />"></script>
         <script src="<c:url value="/resources/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js" />"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
 
     </head>
     <body>

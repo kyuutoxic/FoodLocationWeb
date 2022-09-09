@@ -148,9 +148,9 @@ and open the template in the editor.
         <put-attribute name="title" value="STORE STATS" />
         <put-attribute name="store-content" value="/WEB-INF/jsp/store-stats-view.jsp" />
     </definition>
-    <definition name="storeOrderDetails" extends="storeBaseLayout">
-        <put-attribute name="title" value="STORE ORDER DETAILS" />
-        <put-attribute name="store-content" value="/WEB-INF/jsp/store-order-detail.jsp" />
+    <definition name="storeChat" extends="storeBaseLayout">
+        <put-attribute name="title" value="STORE CHAT" />
+        <put-attribute name="store-content" value="/WEB-INF/jsp/store-chat.jsp" />
     </definition>
 
 </tiles-definitions>
