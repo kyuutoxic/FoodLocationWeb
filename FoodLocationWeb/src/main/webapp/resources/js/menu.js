@@ -28,10 +28,16 @@ function addFollow(idStore, idUser) {
 
 function changeDelete(idMenu) {
     event.preventDefault();
+    $(`#btndelete${idMenu}`).html(
+        `<div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden"></span>
+        </div>`
+    );
 
     fetch(`/FoodLocationWeb/api/change-delete/${idMenu}`, {
         method: 'post'
     }).then(function (res) {
+        $(`#btndelete${idMenu}`).html('');
         let a = $('#btndelete' + idMenu).text();
         if (a == 'Delete') {
             $('#btndelete' + idMenu).text('Undelete');
@@ -122,8 +128,8 @@ function changeActiveStore(idUser) {
 }
 
 function loadAdminMenu(endpoint, menudetail) {
-    $('body').append(`
-        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+    $('#adminProd').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: white;">
             <h1>loading...</h1>
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden"></span>
@@ -176,8 +182,8 @@ function loadAdminMenu(endpoint, menudetail) {
 }
 
 function loadStoreMenu(endpoint, menudetail) {
-    $('body').append(`
-        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+    $('#storeProd').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: white;">
             <h1>loading...</h1>
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden"></span>
@@ -190,7 +196,6 @@ function loadStoreMenu(endpoint, menudetail) {
         }, 3000);
         return res.json();
     }).then(function (data) {
-        console.log(data);
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             msg += `
@@ -218,8 +223,8 @@ function loadStoreMenu(endpoint, menudetail) {
 }
 
 function loadAdminOrderDetail() {
-    $('body').append(`
-        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+    $('#adminOrderDetail').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: white;">
             <h1>loading...</h1>
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden"></span>
@@ -229,7 +234,10 @@ function loadAdminOrderDetail() {
     fetch("/FoodLocationWeb/api/admin/orderdetail/").then(function (res) {
         return res.json();
     }).then(function (data) {
-        console.log(data);
+        setTimeout(function () {
+            $('.loading-page').remove();
+        }, 3000);
+        return res.json();
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             msg += `
@@ -245,13 +253,12 @@ function loadAdminOrderDetail() {
         }
         let d = document.getElementById("adminOrderDetail");
         d.innerHTML = msg;
-        $('.loading-page').remove();
     })
 }
 
 function loadAdminOrder() {
-    $('body').append(`
-        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+    $('#adminOrder').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: white;">
             <h1>loading...</h1>
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden"></span>
@@ -261,7 +268,10 @@ function loadAdminOrder() {
     fetch("/FoodLocationWeb/api/admin/order/").then(function (res) {
         return res.json();
     }).then(function (data) {
-        console.log(data);
+        setTimeout(function () {
+            $('.loading-page').remove();
+        }, 3000);
+        return res.json();
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             msg += `
@@ -282,8 +292,8 @@ function loadAdminOrder() {
 }
 
 function loadAdminUser() {
-    $('body').append(`
-        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+    $('#adminUsers').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: white;">
             <h1>loading...</h1>
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden"></span>
@@ -293,6 +303,10 @@ function loadAdminUser() {
     fetch("/FoodLocationWeb/api/admin/users/").then(function (res) {
         return res.json();
     }).then(function (data) {
+        setTimeout(function () {
+            $('.loading-page').remove();
+        }, 3000);
+        return res.json();
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             let msg1 = `<td>
@@ -329,8 +343,8 @@ function loadAdminUser() {
 }
 
 function loadAdminStore() {
-    $('body').append(`
-        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+    $('#adminStore').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: white;">
             <h1>loading...</h1>
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden"></span>
@@ -340,6 +354,9 @@ function loadAdminStore() {
     fetch("/FoodLocationWeb/api/admin/store/").then(function (res) {
         return res.json();
     }).then(function (data) {
+        setTimeout(function () {
+            $('.loading-page').remove();
+        }, 3000);
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             let msg1 = null;
