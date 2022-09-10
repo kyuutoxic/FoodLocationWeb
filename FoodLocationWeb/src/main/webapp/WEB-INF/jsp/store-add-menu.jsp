@@ -46,7 +46,7 @@
                 <form:input type="file" class="form-control-file" path="file" />
                 <form:errors path="file" cssClass="alert alert-danger" element="div" />
             </div>
-            <button id="submit" type="submit" class="btn btn-primary btn-lg btn-block btn-in-login">Them</button>
+            <button id="submit" type="submit" class="btn btn-primary btn-lg btn-block btn-in-login">Submit</button>
 
         </form:form>
     </div>

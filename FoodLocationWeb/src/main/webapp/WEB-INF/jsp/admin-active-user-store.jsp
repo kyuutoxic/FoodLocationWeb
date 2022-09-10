@@ -22,7 +22,7 @@
                                     <div class="position-relative form-group"><label for="exampleAddress" class="">Address</label><form:input name="address" id="exampleAddress" placeholder="1234 Main St" type="text" class="form-control" value="${userStore.address}" path="address" /></div>
                                     <div class="position-relative form-group"><label for="exampleAddress2" class="">Email</label><form:input name="address2" id="exampleAddress2" placeholder="Apartment, studio, or floor" type="text" class="form-control" value="${userStore.email}" path="email" />
                             </div>
-                            <button class="mt-2 btn btn-primary">Sign in</button>
+                            <button class="mt-2 btn btn-primary">Active</button>
                         </form:form>
                     </div>
                 </div>

@@ -46,6 +46,21 @@ function changeDelete(idMenu) {
     });
 }
 
+function deleteStoreMenu(idMenu) {
+    event.preventDefault();
+    $(`#btndelete${idMenu}`).html(`<div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
+            </div>`)
+
+    fetch(`/FoodLocationWeb/api/change-delete/${idMenu}`, {
+        method: 'post'
+    }).then(function (res) {
+        if (res.ok) {
+            $('#storeMenu' + idMenu).remove();
+        }
+    });
+}
+
 function changeDeleteUser(idUser) {
     event.preventDefault();
 
@@ -156,6 +171,48 @@ function loadAdminMenu(endpoint, menudetail) {
 
         }
         let d = document.getElementById("adminProd");
+        d.innerHTML = msg;
+    })
+}
+
+function loadStoreMenu(endpoint, menudetail) {
+    $('body').append(`
+        <div class="loading-page" style="display: flex; justify-content: center; align-items: center; position: fixed; z-index: 1100; width: 100%; height: 100%; top:0; left: 0; background-color: white; opacity: 0.8;">
+            <h1>loading...</h1>
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+        </div>
+    `);
+    fetch(endpoint).then(function (res) {
+        setTimeout(function () {
+            $('.loading-page').remove();
+        }, 3000);
+        return res.json();
+    }).then(function (data) {
+        console.log(data);
+        let msg = "";
+        for (let i = 0; i < data.length; i++) {
+            msg += `
+            <tr id="storeMenu${data[i].idMenu}">
+                    <th scope="row">${i}</th>
+                    <td>${data[i].idMenu}</td>
+                    <td>${data[i].menuName}</td>
+                    <td>${data[i].price}</td>
+                    <td>${data[i].idStore.nameStore}</td>
+                    <td>${data[i].menuFrom}</td>
+                    <td>${data[i].menuTo}</td>
+                    <td id="delete${data[i].idMenu}">${data[i].menuStatus}</td>
+                    <td>
+                        <a href="${menudetail}${data[i].idMenu}"><button type="button" class="btn btn-primary">Detail</button></a>
+                    </td>
+                    <td>
+                        <button id="btndelete${data[i].idMenu}" type="button" class="btn btn-primary" onclick="deleteStoreMenu(${data[i].idMenu})" >Delete</button>
+                    </td>
+            </tr>
+            `;
+        }
+        let d = document.getElementById("storeProd");
         d.innerHTML = msg;
     })
 }
@@ -288,12 +345,12 @@ function loadAdminStore() {
             let msg1 = null;
             if (data[i].isDelete == true) {
                 msg1 += `<td>
-                        <button id="btndeletestore${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeDeleteStore(${data[i].idUser})" >Delete</button>
+                        <button id="btndeletestore${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeDeleteStore(${data[i].idUser})" >Undelete</button>
                     </td>
                 </tr>`
             } else {
                 msg1 += `<td>
-                        <button id="btndeletestore${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeDeleteStore(${data[i].idUser})" >Undelete</button>
+                        <button id="btndeletestore${data[i].idUser}" type="button" class="btn btn-primary" onclick="changeDeleteStore(${data[i].idUser})" >Delete</button>
                     </td>
                 </tr>`
             }
@@ -973,13 +1030,13 @@ function createRoom(id1, id2, userName, otherName, avatar, imgStore) {
 function joinRoom(roomName, userName, otherName, imgStore) {
     window.firebase.database().ref('chats/').off("child_added");
     $('.table-content-chat').html('');
-    if($(`#${roomName}`).length > 0){
+    if ($(`#${roomName}`).length > 0) {
         var mess = Array.from(document.getElementsByClassName('list-chat'));
-            mess.forEach(e => {
-                e.style = '';
+        mess.forEach(e => {
+            e.style = '';
         });
         $(`#${roomName}`).attr('style', 'background-color: rgba(30, 209, 185, 0.3);');
-    }else{
+    } else {
         $('.table-chat-list').append(`
             <div class="list-chat" id="${roomName}" style="background-color: rgba(30, 209, 185, 0.3);"><img src="${imgStore}" alt="hihi"></div>
         `);
@@ -1025,11 +1082,11 @@ function sendMsg(yourName, otherName, roomName) {
     $('#box-chat').focus();
 }
 
-function initPage(username,userId) {
-    
+function initPage(username, userId) {
+
     $('.table-chat-list').html('');
     $('.table-content-chat').html('');
-    
+
     $(".table-chat").attr('style', 'display: block');
     $("#box-chat").focus();
 

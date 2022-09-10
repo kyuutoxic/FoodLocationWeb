@@ -20,45 +20,51 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Copeoshihi
  */
 @Controller
-public class StatsController {    
-    
+public class StatsController {
+
     @Autowired
     private MenuService menuService;
-    
+
     @Autowired
     private UserService userService;
-    
+
     @GetMapping("/admin/stats")
-    public String adminStats(Model model, @RequestParam Map<String,String> params) {
-    
+    public String adminStats(Model model, @RequestParam Map<String, String> params) {
+
         int quarter = Integer.parseInt(params.getOrDefault("quarter", "0"));
         int month = Integer.parseInt(params.getOrDefault("month", "0"));
         int idStore = Integer.parseInt(params.getOrDefault("idStore", "0"));
-        int year = Integer.parseInt(params.getOrDefault("year", "0"));
-             
+        String yearText = params.getOrDefault("year", "0");
+        int yearValue;
+        if (yearText == "") {
+            yearValue = 0;
+        } else {
+            yearValue = Integer.parseInt(yearText);
+        }
+
         model.addAttribute("store", this.userService.getUserStore());
-        model.addAttribute("frequency", this.menuService.frequency(quarter, month, idStore, year));
-        
+        model.addAttribute("frequency", this.menuService.frequency(quarter, month, idStore, yearValue));
+
         return "adminStats";
     }
-    
+
     @GetMapping("/store/stats")
-    public String storeStats(Model model, @RequestParam Map<String,String> params, HttpSession session) {
-    
+    public String storeStats(Model model, @RequestParam Map<String, String> params, HttpSession session) {
+
         int quarter = Integer.parseInt(params.getOrDefault("quarter", "0"));
         int month = Integer.parseInt(params.getOrDefault("month", "0"));
-        User store = (User)session.getAttribute("currentUser");
+        User store = (User) session.getAttribute("currentUser");
         int idStore = store.getIdUser();
         String yearText = params.getOrDefault("year", "0");
         int yearValue;
-        if(yearText == ""){
+        if (yearText == "") {
             yearValue = 0;
-        }else{
+        } else {
             yearValue = Integer.parseInt(yearText);
         }
-             
+
         model.addAttribute("revenuStats", this.menuService.total(quarter, month, idStore, yearValue));
-        
+
         return "storeStats";
     }
 }

@@ -69,17 +69,17 @@ public class MenuRepositoryImpl implements MenuRepository {
         List<Predicate> predicates = new ArrayList<>();
 
         Predicate status = b.and(b.equal(rS.get("userRole"), "ROLE_STORE"),
-                                b.equal(rM.get("idStore"), rS.get("idUser")),
-                                b.equal(rM.get("menuStatus"), Boolean.TRUE),
-                                b.equal(rM.get("isDelete"), Boolean.FALSE),
-                                b.equal(rS.get("active"), Boolean.TRUE),
-                                b.equal(rS.get("isDelete"), Boolean.FALSE));
+                b.equal(rM.get("idStore"), rS.get("idUser")),
+                b.equal(rM.get("menuStatus"), Boolean.TRUE),
+                b.equal(rM.get("isDelete"), Boolean.FALSE),
+                b.equal(rS.get("active"), Boolean.TRUE),
+                b.equal(rS.get("isDelete"), Boolean.FALSE));
         predicates.add(status);
 
         if (kw != null) {
             Predicate p = b.or(b.like(rM.get("menuName").as(String.class), String.format("%%%s%%", kw)),
-                            b.like(rM.get("price").as(String.class), String.format("%%%s%%", kw)),
-                            b.and(b.like(rS.get("nameStore").as(String.class), String.format("%%%s%%", kw)),
+                    b.like(rM.get("price").as(String.class), String.format("%%%s%%", kw)),
+                    b.and(b.like(rS.get("nameStore").as(String.class), String.format("%%%s%%", kw)),
                             b.equal(rS.get("idUser"), rM.get("idStore")))
             );
             predicates.add(p);
@@ -111,7 +111,7 @@ public class MenuRepositoryImpl implements MenuRepository {
         q.where(predicates.toArray(Predicate[]::new));
 
         q.groupBy(rM.get("idMenu"));
-        
+
         if (sort != null) {
             if (sort.equals("asc")) {
                 q.orderBy(b.asc(rM.get("price")));
@@ -149,11 +149,11 @@ public class MenuRepositoryImpl implements MenuRepository {
         List<Predicate> predicates = new ArrayList<>();
 
         Predicate status = b.and(b.equal(rS.get("userRole"), "ROLE_STORE"),
-                                b.equal(rM.get("idStore"), rS.get("idUser")),
-                                b.equal(rM.get("menuStatus"), Boolean.TRUE),
-                                b.equal(rM.get("isDelete"), Boolean.FALSE),
-                                b.equal(rS.get("active"), Boolean.TRUE),
-                                b.equal(rS.get("isDelete"), Boolean.FALSE));
+                b.equal(rM.get("idStore"), rS.get("idUser")),
+                b.equal(rM.get("menuStatus"), Boolean.TRUE),
+                b.equal(rM.get("isDelete"), Boolean.FALSE),
+                b.equal(rS.get("active"), Boolean.TRUE),
+                b.equal(rS.get("isDelete"), Boolean.FALSE));
         predicates.add(status);
         if (kw != null) {
             Predicate p = b.or(b.like(rM.get("menuName").as(String.class), String.format("%%%s%%", kw)),
@@ -205,8 +205,8 @@ public class MenuRepositoryImpl implements MenuRepository {
         List<Predicate> predicates = new ArrayList<>();
 
         Predicate rootPredicates = b.and(b.equal(rD.get("idMenu"), rM.get("idMenu")),
-                b.equal(rD.get("idOrder"), rO.get("idOrder")));
-
+                b.equal(rD.get("idOrder"), rO.get("idOrder")),
+                b.equal(rD.get("statusOrder"), (short) 1));
         predicates.add(rootPredicates);
 
         if (quarter > 0 && quarter <= 4) {
@@ -275,7 +275,8 @@ public class MenuRepositoryImpl implements MenuRepository {
 
         Predicate rootPredicates = b.and(b.equal(rD.get("idMenu"), rM.get("idMenu")),
                 b.equal(rD.get("idOrder"), rO.get("idOrder")),
-                b.equal(rM.get("idStore"), idStore));
+                b.equal(rM.get("idStore"), idStore),
+                b.equal(rD.get("statusOrder"), (short) 1));
 
         predicates.add(rootPredicates);
 
@@ -337,7 +338,7 @@ public class MenuRepositoryImpl implements MenuRepository {
         q.where(b.equal(rD.get("idMenu"), rM.get("idMenu")),
                 b.equal(rD.get("idOrder"), rO.get("idOrder")),
                 b.equal(rM.get("idStore"), idStore),
-                b.equal(rD.get("statusOrder"), (short)1));
+                b.equal(rD.get("statusOrder"), (short) 1));
 
 //        follow of store
         CriteriaQuery<Object[]> countFollow = b.createQuery(Object[].class);
