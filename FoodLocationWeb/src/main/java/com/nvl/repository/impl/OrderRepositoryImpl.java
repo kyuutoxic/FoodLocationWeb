@@ -6,7 +6,6 @@
 package com.nvl.repository.impl;
 
 import com.nvl.pojo.Cart;
-import com.nvl.pojo.Menu;
 import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.OrderDetail;
 import com.nvl.pojo.User;
@@ -14,14 +13,11 @@ import com.nvl.repository.MenuRepository;
 import com.nvl.repository.OrderRepository;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
-import com.nvl.utils.Utils;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

@@ -5,10 +5,8 @@
 package com.nvl.service.impl;
 
 import com.nvl.pojo.Comment;
-import com.nvl.pojo.Menu;
 import com.nvl.pojo.User;
 import com.nvl.repository.CommentRepository;
-import com.nvl.repository.MenuRepository;
 import com.nvl.repository.UserRepository;
 import com.nvl.service.CommentService;
 import java.util.Date;

@@ -7,7 +7,6 @@ package com.nvl.controllers;
 import com.nvl.pojo.Menu;
 import com.nvl.pojo.MenuOrder;
 import com.nvl.pojo.OrderDetail;
-import com.nvl.pojo.Rating;
 import com.nvl.pojo.User;
 import com.nvl.service.MenuService;
 import com.nvl.service.OrderDetailService;
@@ -48,7 +47,7 @@ public class ApiAdminController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     }
-    
+
     @PostMapping("/api/change-delete-user/{idUser}")
     public ResponseEntity<User> deteleUser(@PathVariable(value = "idUser") int idUser, HttpSession session) {
 
@@ -58,7 +57,7 @@ public class ApiAdminController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
     }
-    
+
     @PostMapping("/api/change-active-store/{idStore}")
     public ResponseEntity<User> activeStore(@PathVariable(value = "idStore") int idStore, HttpSession session) {
 
@@ -78,12 +77,12 @@ public class ApiAdminController {
     public ResponseEntity<List<MenuOrder>> getOrder(HttpSession session) {
         return new ResponseEntity<>(this.orderService.getOrder(), HttpStatus.OK);
     }
-    
+
     @GetMapping("/api/admin/users/")
     public ResponseEntity<List<User>> getUsers(HttpSession session) {
         return new ResponseEntity<>(this.userDetailsService.manageUser(), HttpStatus.OK);
     }
-    
+
     @GetMapping("/api/admin/store/")
     public ResponseEntity<List<User>> getStores(HttpSession session) {
         return new ResponseEntity<>(this.userDetailsService.manageStore(), HttpStatus.OK);

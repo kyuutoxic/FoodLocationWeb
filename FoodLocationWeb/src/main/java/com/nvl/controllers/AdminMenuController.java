@@ -5,10 +5,8 @@
 package com.nvl.controllers;
 
 import com.nvl.pojo.Menu;
-import com.nvl.pojo.User;
 import com.nvl.service.MenuService;
 import com.nvl.service.TypeService;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,12 +41,11 @@ public class AdminMenuController {
     }
 
     @PostMapping(value = "/admin/detail-menu/{idMenu}")
-    public String detailMenu(Model model, @PathVariable(value = "idMenu") int idMenu, HttpSession session) {
-//        User u = (User) session.getAttribute("currentUser");
-//        if (this.menuService.addMenu(menu, u) == true) {
-//            return "redirect:/admin/menu";
-//        }
-
+    public String detailMenu(@ModelAttribute(value = "menu") Menu menu) {
+        if (this.menuService.updateMenu(menu.getIdMenu(), menu) == true) {
+            return "redirect:/admin/menu";
+        }
         return "adminDetailMenu";
+
     }
 }

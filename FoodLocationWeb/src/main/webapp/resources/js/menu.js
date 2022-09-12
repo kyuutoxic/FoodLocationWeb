@@ -1,3 +1,4 @@
+
 function addFollow(idStore, idUser) {
     $(`#follow${idStore}`).html(`
         <div class="spinner-border text-primary" role="status">
@@ -237,7 +238,6 @@ function loadAdminOrderDetail() {
         setTimeout(function () {
             $('.loading-page').remove();
         }, 3000);
-        return res.json();
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             msg += `
@@ -271,7 +271,6 @@ function loadAdminOrder() {
         setTimeout(function () {
             $('.loading-page').remove();
         }, 3000);
-        return res.json();
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             msg += `
@@ -306,7 +305,6 @@ function loadAdminUser() {
         setTimeout(function () {
             $('.loading-page').remove();
         }, 3000);
-        return res.json();
         let msg = "";
         for (let i = 0; i < data.length; i++) {
             let msg1 = `<td>
@@ -765,7 +763,7 @@ function addComment(storeId, userId, id) {
             return res.json()
         }).then(function (data) {
             let createdDate = moment(data.createdDate).format("YYYY/MM/DD HH:MM:SS.S");
-            $("#list-cmt").append(`  
+            $("#list-cmt").prepend(`  
             <div class="cmt-list">
                         <div class="info-comment">
                             <div class="info-comment-info">

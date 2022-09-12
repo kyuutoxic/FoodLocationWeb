@@ -107,6 +107,7 @@ $('.showModal').click(function(event){
     event.preventDefault();
     let target = $(this).attr('datatarget');
     $('#' + target).attr("style", "display: block !important");
+    $('textarea').focus();
 });
 
 //example showModal
@@ -150,6 +151,7 @@ $('button').click(function () {
     if (action === 'close') {
         $('#' + target).attr("style", "");
     } else {
+        $('textarea').val("");
         $('#' + target).attr("style", ""); //send do some ajax here
     }
 });

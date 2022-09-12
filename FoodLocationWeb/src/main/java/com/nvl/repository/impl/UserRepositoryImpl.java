@@ -5,18 +5,12 @@
 package com.nvl.repository.impl;
 
 import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.nvl.pojo.Comment;
 import com.nvl.pojo.Rating;
 import com.nvl.pojo.User;
 import com.nvl.repository.UserRepository;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

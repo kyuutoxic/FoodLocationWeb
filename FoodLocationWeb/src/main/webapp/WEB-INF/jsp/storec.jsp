@@ -106,14 +106,14 @@
                 <div class="col">
                         <a href="javascript:;" onclick="createRoom('${currentUser.idUser}', '${store.idUser}', '${currentUser.username}', '${store.nameStore}', '${currentUser.avatar}', '${store.avatar}');initPage(${currentUser.idUser});">
                         <span class="bi bi-chat-left-dots-fill"></span>
-                        <span>Chat</span>
+                        <span>Chat</span>  
                     </a>
                 </div>
                 </c:if>
                 <div id="follow${store.idUser}" class="col">
                     <a href="#" onclick="addFollow(${store.idUser}, ${currentUser.idUser})">
                         <span class="fa fa-bookmark"></span>
-                        <span>Save</span>
+                        <span>Follow</span>
                     </a>
                 </div>
                 <div class="col">

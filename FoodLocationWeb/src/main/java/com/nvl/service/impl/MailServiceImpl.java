@@ -1,25 +1,17 @@
 package com.nvl.service.impl;
 
-import com.nvl.pojo.MenuOrder;
-import com.nvl.pojo.User;
-import com.nvl.repository.UserRepository;
 import com.nvl.service.MailService;
-import com.nvl.service.UserService;
 
 import freemarker.template.Configuration;
-import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
-import org.hibernate.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 @Service("mailService")

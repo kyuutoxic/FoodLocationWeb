@@ -3,13 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.nvl.service.impl;
-
-import com.google.common.hash.HashCode;
-import com.google.common.hash.Hashing;
 import com.nvl.pojo.Cart;
 import com.nvl.service.MomoService;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -21,7 +17,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;

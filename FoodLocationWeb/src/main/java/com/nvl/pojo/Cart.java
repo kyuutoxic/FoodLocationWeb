@@ -7,7 +7,7 @@ package com.nvl.pojo;
 
 /**
  *
- * @author duonghuuthanh
+ * @author kyuut
  */
 public class Cart {
     private int menuId;
